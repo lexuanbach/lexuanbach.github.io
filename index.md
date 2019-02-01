@@ -5,14 +5,13 @@ layout: default
 ## About Me
 
 <img class="profile-picture" src="me.jpg">
+Since August 2018, I has been working as Research Associate at [Department of Computer Science, University of Oxford](http://www.cs.ox.ac.uk/) with [Anthony W. Lin](https://anthonywlin.github.io/) on Algorithmic Verification Of String-Manipulating Programs. Before that, I has been taking several short-term postdoc positions under [Aquinas Hobor](https://www.comp.nus.edu.sg/~hobor/) and [Jaffar Joxan](https://www.comp.nus.edu.sg/~joxan/).
 
-Hi! I am a junior year student of B.E. Computer Science at Birla Institute of Technology and Science, Pilani.
-
-This is a jekyll based resume template. You can find the full source code on [GitHub](https://github.com/bk2dcradle/researcher)
+For a brief background, I was a NUS undergraduate student (2007-2012) studying Double-Degree Program in Computer Science and Pure Mathematics (a list of taken courses can be found  <a href="./courses.html">here</a>). After receiving two first-class bachelor's degrees in 2012, I officially (and seriously) began my research career as a CS PhD student in NUS (2013-2017) under the President Graduate Fellowship Scheme. I was very fortunate to be supervised by [Dr. Aquinas Hobor](https://www.comp.nus.edu.sg/~hobor/) and mentored by [Dr. Anthony W. Lin](https://anthonywlin.github.io/).
 
 ## Research Interest
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam finibus ipsum ac erat aliquam dapibus. Vestibulum vehicula placerat ex, a consectetur odio pharetra quis. Mauris id urna ante. Fusce pharetra diam ac nisi aliquet, vel egestas ex iaculis. Pellentesque laoreet cursus tellus sed pellentesque. Praesent a rhoncus elit. Nunc ipsum nisl, consequat sit amet pretium quis, gravida id ipsum.
+I am interested in both the practical applications and theoretical foundations of Computer Science. In particular, my research topics include (but are not limited to) developing logical frameworks/(certified) decision procedures for program verification, as well as establishing the decidability and computational complexity of the underlying logics.
 
 ## Publications
 
