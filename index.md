@@ -5,9 +5,9 @@ layout: default
 ## About Me
 
 <img class="profile-picture" src="me.jpg">
-Since August 2018, I has worked as Research Associate at [Department of Computer Science, University of Oxford](http://www.cs.ox.ac.uk/) with [Anthony W. Lin](https://anthonywlin.github.io/) on Algorithmic Verification Of String-Manipulating Programs. From September 2017 to August 2018, I took several short-term postdoc positions under [Aquinas Hobor](https://www.comp.nus.edu.sg/~hobor/) and [Jaffar Joxan](https://www.comp.nus.edu.sg/~joxan/). My CV can be found [here](./CV/lxbach.pdf).
+Since August 2018, I has worked as Research Associate at [Department of Computer Science, University of Oxford](http://www.cs.ox.ac.uk/) with [Anthony W. Lin](https://anthonywlin.github.io/) on Algorithmic Verification Of String-Manipulating Programs. From September 2017 to August 2018, I took several short-term postdoc positions under [Aquinas Hobor](https://www.comp.nus.edu.sg/~hobor/) and [Jaffar Joxan](https://www.comp.nus.edu.sg/~joxan/). My CV can be found [here](cv.pdf).
 
-For a brief background, I was a NUS undergraduate student (2007-2012) studying Double-Degree Program in Computer Science and Pure Mathematics (a list of taken courses can be found [here](./courses.html). After receiving two first-class bachelor's degrees in 2012, I officially (and seriously) began my research career as a CS PhD student in NUS (2013-2017) under the President Graduate Fellowship Scheme. During my PhD studies,I was very fortunate to be supervised by [Aquinas Hobor](https://www.comp.nus.edu.sg/~hobor/) and mentored by [Anthony W. Lin](https://anthonywlin.github.io/).
+For a brief background, I was a NUS undergraduate student (2007-2012) studying Double-Degree Program in Computer Science and Pure Mathematics (a list of taken courses can be found [here](courses.html). After receiving two first-class bachelor's degrees in 2012, I officially (and seriously) began my research career as a CS PhD student in NUS (2013-2017) under the President Graduate Fellowship Scheme. During my PhD studies,I was very fortunate to be supervised by [Aquinas Hobor](https://www.comp.nus.edu.sg/~hobor/) and mentored by [Anthony W. Lin](https://anthonywlin.github.io/).
 
 ## Research Interest
 
