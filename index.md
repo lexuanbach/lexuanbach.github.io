@@ -15,13 +15,15 @@ I am interested in both the practical applications and theoretical foundations o
 
 ## Publications
 
-1. With Aquinas: Logical Reasoning for disjoint permissions. In [ESOP 2018, (Thessaloniki, Greece)](https://www.etaps.org/index.php/2018/esop).
-2. S.Holmes, J.Watson: Consequences of living with a sociopath in London
-https://www.etaps.org/index.php/2018/esop
+1. With Aquinas Hobor & Anthony W. Lin: Complexity Analysis of Tree Share Structure. In [APLAS 2018 (Wellington, New Zealand)](http://aplas2018.org/).
+2. With Aquinas Hobor: Logical Reasoning for disjoint permissions. In [ESOP 2018 (Thessaloniki, Greece)](https://www.etaps.org/index.php/2018/esop).
+3. With Toan Nguyen Thanh & Wei Ngan Chin & Aquinas Hobor: A Certified Decision Procedure for Tree Shares. In [ICFEM 2017 (Xian, China)](http://ictt.xidian.edu.cn/icfem2017/index.html).
+4. With Aquinas Hobor & Anthony W. Lin: Decidability and Complexity of Tree Share Formulas. In [FSTTCS 2016 (Chennai, India)](https://www.fsttcs.org.in/archives/2016/).
+5. With Cristian Gherghina & Aquinas Hobor: Decision Procedures Over Sophisticated Fractional Permissions. In [APLAS 2012 (Kyoto, Japan)](http://aplas12.kuis.kyoto-u.ac.jp/).
 
 ## My personal life
 
-I usually hit the gym three times a week to maintain a healthy lifestyle. I am also a fan of hiking, cycling and swimming. I have experience in growing indoor hydroponic herb garden (sweet basil, thai basil, thyme, dill). Unfortunately, that hobby has been postponed since I moved to UK. Right now I still grow some Daikons and Shisho, but on soil not water.
+I usually hit the gym three times a week to maintain a healthy lifestyle. I am also a fan of hiking, cycling and swimming. I have experience in growing indoor hydroponic herb garden (sweet basil, thai basil, thyme, dill).
 
 Feel free to connect with me on [Facebook](https://www.facebook.com/bachdylan)!
 
