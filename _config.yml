@@ -16,8 +16,8 @@ sass:
     sass_dir: _sass
 
 nav:
- - name: "About"
-   link: "/xuanbach/"
+ - name: "Home"
+   link: "/"
  - name: "Resume"
    link: "resume.pdf"
  - name: "Contact"
