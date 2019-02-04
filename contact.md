@@ -3,24 +3,14 @@ layout: default
 is_contact: true
 ---
 
-* Email: [foo@xyz.com](mailto:foo@xyz.com)
+* Email: [lxbachcs@gmail.com](mailto:lxbachcs@gmail.com)
 
-* Phone: [+91-123123](tel:+91-123123)
+* Phone: [+44-7949-981104](tel:+44-7949-981104)
 
 ---
 
 ## Mailing Address
 
-> 221B, Baker Street
->
-> London
->
-> United Kingdom
-
----
-
-## Social
-
-1. [Facebook](#)
-2. [Twitter](#)
-3. [Google+](#)
+>Department of Computer Science
+>University of Oxford,
+>15 Parks Rd, Oxford OX1 3QD, UK
