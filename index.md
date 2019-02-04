@@ -16,8 +16,8 @@ I am interested in both the practical applications and theoretical foundations o
 ## Publications
 
 1. With Aquinas Hobor & Anthony W. Lin: Complexity Analysis of Tree Share Structure. In [APLAS 2018 (Wellington, New Zealand)](http://aplas2018.org/). [Paper](/publication/aplas18.pdf). [Slides](/slides/aplas18_slides.pdf).
-2. With Aquinas Hobor: Logical Reasoning for disjoint permissions. In [ESOP 2018 (Thessaloniki, Greece)](https://www.etaps.org/index.php/2018/esop). [Paper](/publication/esop18full.pdf). [Slides](/slides/esop18_slides.pdf).
-3. With Toan Nguyen Thanh & Wei Ngan Chin & Aquinas Hobor: A Certified Decision Procedure for Tree Shares. In [ICFEM 2017 (Xian, China)](http://ictt.xidian.edu.cn/icfem2017/index.html). [Paper](/publication/icfem17full.pdf). [Slides](/slides/icfem17_slides.pdf).
+2. With Aquinas Hobor: Logical Reasoning for disjoint permissions. In [ESOP 2018 (Thessaloniki, Greece)](https://www.etaps.org/index.php/2018/esop). [Paper](/publication/esop18full.pdf). [Slides](/slides/esop18_slides.pdf). [Tool](https://github.com/lexuanbach/share-infer).
+3. With Toan Nguyen Thanh & Wei Ngan Chin & Aquinas Hobor: A Certified Decision Procedure for Tree Shares. In [ICFEM 2017 (Xian, China)](http://ictt.xidian.edu.cn/icfem2017/index.html). [Paper](/publication/icfem17full.pdf). [Slides](/slides/icfem17_slides.pdf).[Tool](https://github.com/lexuanbach/certified-permission-procedure).
 4. With Aquinas Hobor & Anthony W. Lin: Decidability and Complexity of Tree Share Formulas. In [FSTTCS 2016 (Chennai, India)](https://www.fsttcs.org.in/archives/2016/). [Paper](/publication/fsttcs16.pdf). [Slides](/slides/fsttcs16_slides.pdf).
 5. With Cristian Gherghina & Aquinas Hobor: Decision Procedures Over Sophisticated Fractional Permissions. In [APLAS 2012 (Kyoto, Japan)](http://aplas12.kuis.kyoto-u.ac.jp/). [Paper](/publication/aplas12.pdf). [Slides](/slides/aplas12_slides.pdf).
 6. Thesis: Disjoint fractional permissions in verification: Applications, Systems and Theory. Submitted in September 2017. [Submitted version](/publication/thesis.pdf).
