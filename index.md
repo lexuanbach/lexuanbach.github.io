@@ -20,6 +20,7 @@ I am interested in both the practical applications and theoretical foundations o
 3. With Toan Nguyen Thanh & Wei Ngan Chin & Aquinas Hobor: A Certified Decision Procedure for Tree Shares. In [ICFEM 2017 (Xian, China)](http://ictt.xidian.edu.cn/icfem2017/index.html).
 4. With Aquinas Hobor & Anthony W. Lin: Decidability and Complexity of Tree Share Formulas. In [FSTTCS 2016 (Chennai, India)](https://www.fsttcs.org.in/archives/2016/).
 5. With Cristian Gherghina & Aquinas Hobor: Decision Procedures Over Sophisticated Fractional Permissions. In [APLAS 2012 (Kyoto, Japan)](http://aplas12.kuis.kyoto-u.ac.jp/).
+6. Thesis: Disjoint fractional permissions in verification: Applications, Systems and Theory. Submitted in September 2017.
 
 ## My personal life
 
