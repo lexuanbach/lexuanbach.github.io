@@ -14,9 +14,9 @@ For a brief background, I was a NUS undergraduate student (2007-2012) studying D
 I am interested in both the practical applications and theoretical foundations of Computer Science. In particular, my research topics include (but are not limited to) developing logical frameworks/(certified) decision procedures for program verification, as well as establishing the decidability and computational complexity of the underlying logics.
 
 ## Publications
-8. With Shang-Wei Lin & Sun Jun & David Sanán : A Quantum Interpreta-tion of Separating Conjunction for Local Reasoning of Quantum Programs Based on Separa-tion Logic. In POPL, 2022.[Paper](/publication/POPL2022.pdf). [Slides](/slides/POPL2022_slides.pdf)
-7. With David Sanán & Sun Jun & Shang-Wei Lin: Automatic Verification of Multi-threaded Programs by Inference of Rely-Guarantee Specifications. In ICECCS, 2020. [Paper](/publication/ICECCS2021.pdf). [Slides](/slides/ICECCS2021_slides.pdf)
-6. With Pablo Barceló & Chih-Duo Hong & Anthony W. Lin & Reino
+8. With Shang-Wei Lin & Sun Jun & David Sanan : A Quantum Interpreta-tion of Separating Conjunction for Local Reasoning of Quantum Programs Based on Separa-tion Logic. In POPL, 2022.[Paper](/publication/POPL2022.pdf). [Slides](/slides/POPL2022_slides.pdf)
+7. With David Sanan & Sun Jun & Shang-Wei Lin: Automatic Verification of Multi-threaded Programs by Inference of Rely-Guarantee Specifications. In ICECCS, 2020. [Paper](/publication/ICECCS2021.pdf). [Slides](/slides/ICECCS2021_slides.pdf)
+6. With Pablo Barcelo & Chih-Duo Hong & Anthony W. Lin & Reino
 Niskanen (alphabetical order): Monadic Decomposability of Regular Relations. In ICALP 2019. [Paper](/publication/ICALP2019.pdf)
 5. With Aquinas Hobor & Anthony W. Lin: Complexity Analysis of Tree Share Structure. In [APLAS 2018 (Wellington, New Zealand)](http://aplas2018.org/). [Paper](/publication/aplas18.pdf). [Slides](/slides/aplas18_slides.pdf).
 4. With Aquinas Hobor: Logical Reasoning for disjoint permissions. In [ESOP 2018 (Thessaloniki, Greece)](https://www.etaps.org/index.php/2018/esop). [Paper](/publication/esop18full.pdf). [Slides](/slides/esop18_slides.pdf). [Tool](https://github.com/lexuanbach/share-infer).
