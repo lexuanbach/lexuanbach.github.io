@@ -5,7 +5,7 @@ layout: default
 ## About Me
 
 <img class="profile-picture" src="me.jpg">
-My name is Xuan-Bach Le, and I am presently a postdoctoral researcher at NTU in Singapore under the supervision of Professor [Luke Ong](https://www3.ntu.edu.sg/home/luke.ong/). Additional information about my background and work can be found [here](cv.pdf).
+My name is Xuan-Bach Le, and I am presently a Lecturer at Ho Chi Minh City University of Technology, Vietnam. Before this, I was a postdoctoral researcher at NTU in Singapore under the supervision of Professor [Luke Ong](https://www3.ntu.edu.sg/home/luke.ong/). Additional information about my background and work can be found [here](cv.pdf).
 
 I studied Double-Degree Program in Computer Science and Pure Mathematics ([taken courses](courses.html)) at NUS (Singapore, 2007-2012). I then obtained my CS PhD from NUS (2013-2017) under the supervision of [Aquinas Hobor](https://www.comp.nus.edu.sg/~hobor/) and mentorship of [Anthony W. Lin](https://anthonywlin.github.io/).
 
