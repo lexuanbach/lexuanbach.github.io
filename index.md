@@ -435,7 +435,13 @@ I am interested in both the practical applications and theoretical foundations o
 <div class="publication" data-number="[11]">
     <div class="publication-authors">With Phong Chung, Kha Le-Minh & Tho Quan</div>
     <div class="publication-title">VSLIM: A Vietnamese Explicit Slot-Intent Mapping for Joint Multi-Intent Detection and Slot Filling</div>
-    <div class="publication-venue"><strong>ACIIDS 2026</strong>, Kaohsiung, Taiwan (April 2026)</div>
+    <div class="publication-venue">
+  <strong>
+    <a href="https://www.i-somet.org/aciids2026/" target="_blank">
+      ACIIDS 2026
+    </a>
+  </strong>, Kaohsiung, Taiwan (April 2026)
+</div>
     <div class="publication-tags">
         <span class="pub-tag nlp">NLP</span>
         <span class="pub-tag nlp">Intent Detection</span>
