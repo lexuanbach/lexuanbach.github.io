@@ -190,6 +190,76 @@ h2 {
     color: var(--text);
 }
 
+/* Publication Tags */
+.publication-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+.pub-tag {
+    background: rgba(26, 26, 46, 0.06);
+    color: var(--primary);
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    border: 1px solid rgba(26, 26, 46, 0.1);
+    transition: all 0.2s;
+}
+
+.pub-tag:hover {
+    background: rgba(233, 69, 96, 0.1);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* Specific tag colors by category */
+.pub-tag.nlp { 
+    background: rgba(52, 152, 219, 0.1); 
+    border-color: rgba(52, 152, 219, 0.3);
+    color: #2980b9;
+}
+
+.pub-tag.rag { 
+    background: rgba(155, 89, 182, 0.1); 
+    border-color: rgba(155, 89, 182, 0.3);
+    color: #8e44ad;
+}
+
+.pub-tag.rl { 
+    background: rgba(46, 204, 113, 0.1); 
+    border-color: rgba(46, 204, 113, 0.3);
+    color: #27ae60;
+}
+
+.pub-tag.quantum { 
+    background: rgba(230, 126, 34, 0.1); 
+    border-color: rgba(230, 126, 34, 0.3);
+    color: #d35400;
+}
+
+.pub-tag.verification { 
+    background: rgba(231, 76, 60, 0.1); 
+    border-color: rgba(231, 76, 60, 0.3);
+    color: #c0392b;
+}
+
+.pub-tag.theory { 
+    background: rgba(149, 165, 166, 0.1); 
+    border-color: rgba(149, 165, 166, 0.3);
+    color: #7f8c8d;
+}
+
+.pub-tag.logic { 
+    background: rgba(52, 73, 94, 0.1); 
+    border-color: rgba(52, 73, 94, 0.3);
+    color: #34495e;
+}
+
 .publication-links {
     display: flex;
     gap: 12px;
@@ -299,6 +369,11 @@ I am interested in both the practical applications and theoretical foundations o
     <div class="publication-authors">With Phong Chung, Kha Le-Minh & Tho Quan</div>
     <div class="publication-title">VSLIM: A Vietnamese Explicit Slot-Intent Mapping for Joint Multi-Intent Detection and Slot Filling</div>
     <div class="publication-venue"><strong>ACIIDS 2026</strong></div>
+    <div class="publication-tags">
+        <span class="pub-tag nlp">NLP</span>
+        <span class="pub-tag nlp">Intent Detection</span>
+        <span class="pub-tag nlp">Slot Filling</span>
+    </div>
     <div class="publication-links">
         <a href="/publication/ACIIDS2026b.pdf" class="pub-link" target="_blank">📄 Paper</a>
     </div>
@@ -308,6 +383,11 @@ I am interested in both the practical applications and theoretical foundations o
     <div class="publication-authors">With Khoa Phan & Tho Quan</div>
     <div class="publication-title">SBV-LawGraph: A Hybrid RAG Approach Integrating Knowledge Graph for the State Bank of Vietnam Legal Documents</div>
     <div class="publication-venue"><strong>ACIIDS 2026 (Oral)</strong></div>
+    <div class="publication-tags">
+        <span class="pub-tag rag">RAG</span>
+        <span class="pub-tag rag">Knowledge Graph</span>
+        <span class="pub-tag nlp">LLM</span>
+    </div>
     <div class="publication-links">
         <a href="/publication/ACIIDS2026a.pdf" class="pub-link" target="_blank">📄 Paper</a>
     </div>
@@ -317,6 +397,11 @@ I am interested in both the practical applications and theoretical foundations o
     <div class="publication-authors">With Dominik, Leon, Alexander & Luke Ong</div>
     <div class="publication-title">Reinforcement Learning with LTL and Omega-Regular Objectives via Optimality-Preserving Translation to Average Rewards</div>
     <div class="publication-venue"><strong>NeurIPS 2024</strong></div>
+    <div class="publication-tags">
+        <span class="pub-tag rl">Reinforcement Learning</span>
+        <span class="pub-tag logic">LTL</span>
+        <span class="pub-tag logic">Omega-Regular</span>
+    </div>
     <div class="publication-links">
         <a href="/publication/rl24.pdf" class="pub-link" target="_blank">📄 Paper</a>
     </div>
@@ -326,6 +411,11 @@ I am interested in both the practical applications and theoretical foundations o
     <div class="publication-authors">With Shang-Wei Lin, Sun Jun & David Sanan</div>
     <div class="publication-title">A Quantum Interpretation of Separating Conjunction for Local Reasoning of Quantum Programs Based on Separation Logic</div>
     <div class="publication-venue"><strong>POPL 2022</strong></div>
+    <div class="publication-tags">
+        <span class="pub-tag quantum">Quantum Computing</span>
+        <span class="pub-tag verification">Separation Logic</span>
+        <span class="pub-tag verification">Program Verification</span>
+    </div>
     <div class="publication-links">
         <a href="/publication/POPL2022.pdf" class="pub-link" target="_blank">📄 Paper</a>
         <a href="/slides/POPL2022_slides.pdf" class="pub-link" target="_blank">📊 Slides</a>
@@ -336,6 +426,11 @@ I am interested in both the practical applications and theoretical foundations o
     <div class="publication-authors">With David Sanan, Sun Jun & Shang-Wei Lin</div>
     <div class="publication-title">Automatic Verification of Multi-threaded Programs by Inference of Rely-Guarantee Specifications</div>
     <div class="publication-venue"><strong>ICECCS 2020</strong></div>
+    <div class="publication-tags">
+        <span class="pub-tag verification">Program Verification</span>
+        <span class="pub-tag verification">Concurrency</span>
+        <span class="pub-tag verification">Rely-Guarantee</span>
+    </div>
     <div class="publication-links">
         <a href="/publication/ICECCS2021.pdf" class="pub-link" target="_blank">📄 Paper</a>
         <a href="/slides/ICECCS2021_slides.pdf" class="pub-link" target="_blank">📊 Slides</a>
@@ -346,6 +441,11 @@ I am interested in both the practical applications and theoretical foundations o
     <div class="publication-authors">With Pablo Barcelo, Chih-Duo Hong, Anthony W. Lin & Reino Niskanen (alphabetical)</div>
     <div class="publication-title">Monadic Decomposability of Regular Relations</div>
     <div class="publication-venue"><strong>ICALP 2019</strong></div>
+    <div class="publication-tags">
+        <span class="pub-tag theory">Automata Theory</span>
+        <span class="pub-tag logic">Logic</span>
+        <span class="pub-tag theory">Complexity</span>
+    </div>
     <div class="publication-links">
         <a href="/publication/ICALP2019.pdf" class="pub-link" target="_blank">📄 Paper</a>
     </div>
@@ -355,6 +455,11 @@ I am interested in both the practical applications and theoretical foundations o
     <div class="publication-authors">With Aquinas Hobor & Anthony W. Lin</div>
     <div class="publication-title">Complexity Analysis of Tree Share Structure</div>
     <div class="publication-venue"><strong>APLAS 2018</strong>, Wellington, New Zealand</div>
+    <div class="publication-tags">
+        <span class="pub-tag verification">Separation Logic</span>
+        <span class="pub-tag theory">Complexity</span>
+        <span class="pub-tag verification">Fractional Permissions</span>
+    </div>
     <div class="publication-links">
         <a href="/publication/aplas18.pdf" class="pub-link" target="_blank">📄 Paper</a>
         <a href="/slides/aplas18_slides.pdf" class="pub-link" target="_blank">📊 Slides</a>
@@ -365,6 +470,11 @@ I am interested in both the practical applications and theoretical foundations o
     <div class="publication-authors">With Aquinas Hobor</div>
     <div class="publication-title">Logical Reasoning for Disjoint Permissions</div>
     <div class="publication-venue"><strong>ESOP 2018</strong>, Thessaloniki, Greece</div>
+    <div class="publication-tags">
+        <span class="pub-tag verification">Separation Logic</span>
+        <span class="pub-tag verification">Fractional Permissions</span>
+        <span class="pub-tag logic">Decision Procedures</span>
+    </div>
     <div class="publication-links">
         <a href="/publication/esop18full.pdf" class="pub-link" target="_blank">📄 Paper</a>
         <a href="/slides/esop18_slides.pdf" class="pub-link" target="_blank">📊 Slides</a>
@@ -376,6 +486,11 @@ I am interested in both the practical applications and theoretical foundations o
     <div class="publication-authors">With Thanh-Toan Nguyen, Wei-Ngan Chin & Aquinas Hobor</div>
     <div class="publication-title">A Certified Decision Procedure for Tree Shares</div>
     <div class="publication-venue"><strong>ICFEM 2017</strong>, Xi'an, China</div>
+    <div class="publication-tags">
+        <span class="pub-tag verification">Separation Logic</span>
+        <span class="pub-tag logic">Decision Procedures</span>
+        <span class="pub-tag verification">Coq</span>
+    </div>
     <div class="publication-links">
         <a href="/publication/icfem17full.pdf" class="pub-link" target="_blank">📄 Paper</a>
         <a href="/slides/icfem17_slides.pdf" class="pub-link" target="_blank">📊 Slides</a>
@@ -387,6 +502,11 @@ I am interested in both the practical applications and theoretical foundations o
     <div class="publication-authors">With Aquinas Hobor & Anthony W. Lin</div>
     <div class="publication-title">Decidability and Complexity of Tree Share Formulas</div>
     <div class="publication-venue"><strong>FSTTCS 2016</strong>, Chennai, India</div>
+    <div class="publication-tags">
+        <span class="pub-tag theory">Decidability</span>
+        <span class="pub-tag theory">Complexity</span>
+        <span class="pub-tag verification">Tree Shares</span>
+    </div>
     <div class="publication-links">
         <a href="/publication/fsttcs16.pdf" class="pub-link" target="_blank">📄 Paper</a>
         <a href="/slides/fsttcs16_slides.pdf" class="pub-link" target="_blank">📊 Slides</a>
@@ -397,6 +517,11 @@ I am interested in both the practical applications and theoretical foundations o
     <div class="publication-authors">With Cristian Gherghina & Aquinas Hobor</div>
     <div class="publication-title">Decision Procedures Over Sophisticated Fractional Permissions</div>
     <div class="publication-venue"><strong>APLAS 2012</strong>, Kyoto, Japan</div>
+    <div class="publication-tags">
+        <span class="pub-tag verification">Separation Logic</span>
+        <span class="pub-tag logic">Decision Procedures</span>
+        <span class="pub-tag verification">Fractional Permissions</span>
+    </div>
     <div class="publication-links">
         <a href="/publication/aplas12.pdf" class="pub-link" target="_blank">📄 Paper</a>
         <a href="/slides/aplas12_slides.pdf" class="pub-link" target="_blank">📊 Slides</a>
@@ -406,6 +531,11 @@ I am interested in both the practical applications and theoretical foundations o
 <div class="publication thesis-publication" data-number="[PhD]">
     <div class="publication-title">Disjoint Fractional Permissions in Verification: Applications, Systems and Theory</div>
     <div class="publication-venue">PhD Thesis, submitted September 2017</div>
+    <div class="publication-tags">
+        <span class="pub-tag verification">Separation Logic</span>
+        <span class="pub-tag verification">Program Verification</span>
+        <span class="pub-tag theory">Theory</span>
+    </div>
     <div class="publication-links">
         <a href="/publication/thesis.pdf" class="pub-link" target="_blank">📄 Thesis</a>
     </div>
