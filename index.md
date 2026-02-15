@@ -15,6 +15,8 @@ I am interested in both the practical applications and theoretical foundations o
 
 ## Publications
 
+11. With Phong Chung & Kha Le-Minh & Tho Quan: VSLIM: A Vietnamese Explicit Slot-Intent Mapping for Joint Multi-Intent Detection and Slot Filling. In ACIIDS, 2026. [Paper](/publication/ACIIDS2026b.pdf).
+10. With Khoa Phan & Tho Quan: SBV-LawGraph: A Hybrid RAG Approach Integrating Knowledge Graph for the State Bank of Vietnam Legal Documents. In ACIIDS, 2026. [Paper](/publication/ACIIDS2026a.pdf).
 9. With Dominik & Leon & Alex & Luke Ong: Reinforcement Learning with LTL and Omega-Regular
 Objectives via Optimality-Preserving Translation to Average Rewards. In NeurIPS, 2024. [Paper](/publication/rl24.pdf).
 8. With Shang-Wei Lin & Sun Jun & David Sanan : A Quantum Interpretation of Separating Conjunction for Local Reasoning of Quantum Programs Based on Separa-tion Logic. In POPL, 2022. [Paper](/publication/POPL2022.pdf). [Slides](/slides/POPL2022_slides.pdf).
