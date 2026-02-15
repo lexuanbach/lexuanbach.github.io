@@ -1,1 +1,94 @@
 
+- id: "11"
+  number: "[11]"
+  authors: "With Phong Chung, Kha Le-Minh & Tho Quan"
+  title: "VSLIM: A Vietnamese Explicit Slot-Intent Mapping for Joint Multi-Intent Detection and Slot Filling"
+  venue:
+    name: "ACIIDS 2026"
+    url: "https://aciids.pwr.edu.pl/2026/"
+    location: "Kaohsiung, Taiwan"
+    date: "April 2026"
+  tags:
+    - text: "NLP"
+      class: "nlp"
+    - text: "Intent Detection"
+      class: "nlp"
+    - text: "Slot Filling"
+      class: "nlp"
+  links:
+    - type: "paper"
+      url: "/publication/ACIIDS2026b.pdf"
+      icon: "📄"
+  abstract: "Multi-intent detection and slot filling are fundamental tasks of natural language understanding in task-oriented dialog systems. Early approaches treated them as separate tasks, which undermines the direct connection between intents and their associated slots. This limitation becomes more pronounced when multiple intents are expressed within a single utterance.<br><br>In the Vietnamese language landscape, research on this topic remains limited, largely due to its low-resource status. To address this gap, we introduce <strong>VSLIM</strong>, a joint model designed for multi-intent detection and slot filling in Vietnamese. Inspired by the SLIM framework, VSLIM builds on its foundation with a biaffine classifier that more directly captures the relationship between intents and slots. This design allows the model to better understand and represent the dependencies across sequence labels in multi-intent settings.<br><br>Experiments on the Vietnamese <strong>PhoATIS</strong> dataset and our newly introduced <strong>VPED</strong> corpus show that VSLIM outperforms strong NLU baselines, highlighting its potential for improving Vietnamese task-oriented dialog systems. Code & Data: <a href='https://github.com/dongphong543/VSLIM' target='_blank' style='color: var(--accent);'>https://github.com/dongphong543/VSLIM</a><br><br><strong>Keywords:</strong> Multi-intent detection, Slot filling, Vietnamese language understanding, Joint learning, Explicit mapping"
+
+- id: "10"
+  number: "[10]"
+  authors: "With Khoa Phan & Tho Quan"
+  title: "SBV-LawGraph: A Hybrid RAG Approach Integrating Knowledge Graph for the State Bank of Vietnam Legal Documents"
+  venue:
+    name: "ACIIDS 2026 (Oral)"
+    url: "https://aciids.pwr.edu.pl/2026/"
+    location: "Kaohsiung, Taiwan"
+    date: "April 2026"
+  tags:
+    - text: "RAG"
+      class: "rag"
+    - text: "Knowledge Graph"
+      class: "rag"
+    - text: "LLM"
+      class: "nlp"
+  links:
+    - type: "paper"
+      url: "/publication/ACIIDS2026a.pdf"
+      icon: "📄"
+  abstract: "While Retrieval-Augmented Generation (RAG) pipelines often demonstrate strong performance in general settings, they struggle with legal texts, where interpreting structure and relationships between laws is crucial. To address this, we introduce <strong>SBV-LawGraph</strong> – a dual-retrieval framework designed specifically for Vietnamese legal documents.<br><br>It combines semantic retrieval with graph-based reasoning by integrating two modules: a <strong>Legal Retrieval</strong> module using sparse–dense reranking for textual accuracy, and a <strong>Relationship Retrieval</strong> module that traverses a curated Legal Knowledge Graph to capture links such as amendments, citations, and definitions.<br><br>This design enables SBV-LawGraph to generate responses that are not only relevant but also structurally grounded, addressing limitations of standard RAG systems. Evaluations on the <strong>ALQAC2025</strong> and <strong>SBV Legal Questions</strong> datasets show it consistently outperforms strong baselines, highlighting its effectiveness for precise and explainable legal QA.<br><br><strong>Keywords:</strong> Retrieval-Augmented Generation, Knowledge Graph, Natural Language Processing, Question-Answering Systems"
+
+- id: "9"
+  number: "[9]"
+  authors: "With Dominik, Leon, Alexander & Luke Ong"
+  title: "Reinforcement Learning with LTL and Omega-Regular Objectives via Optimality-Preserving Translation to Average Rewards"
+  venue:
+    name: "NeurIPS 2024"
+    url: "https://neurips.cc/Conferences/2024"
+    location: "Vancouver, Canada"
+    date: "December 2024"
+  tags:
+    - text: "Reinforcement Learning"
+      class: "rl"
+    - text: "LTL"
+      class: "logic"
+    - text: "Omega-Regular"
+      class: "logic"
+  links:
+    - type: "paper"
+      url: "/publication/rl24.pdf"
+      icon: "📄"
+    - type: "poster"
+      url: "/slides/irl24-poster.png"
+      icon: "📊"
+  abstract: "Linear Temporal Logic (LTL) and, more generally, ω-regular objectives are alternatives to traditional discount-sum and average-reward objectives in reinforcement learning (RL), offering improved comprehensibility and explainability.<br><br>In this work, we study the relationship between these objectives. Our main result shows that each RL problem with ω-regular objectives can be reduced to a limit-average reward problem in an optimality-preserving manner via finite-memory reward machines.<br><br>Furthermore, we demonstrate the efficacy of this approach by showing that optimal policies for limit-average problems can be found asymptotically by solving a sequence of discount-sum problems approximately. Consequently, we resolve an open problem: optimal policies for LTL and ω-regular objectives can be learned asymptotically."
+
+# Add remaining publications following the same pattern...
+
+- id: "phd"
+  number: "[PhD]"
+  authors: ""
+  title: "Disjoint Fractional Permissions in Verification: Applications, Systems and Theory"
+  venue:
+    name: "PhD Thesis"
+    url: ""
+    location: "submitted September 2017"
+    date: ""
+  tags:
+    - text: "Separation Logic"
+      class: "verification"
+    - text: "Program Verification"
+      class: "verification"
+    - text: "Theory"
+      class: "theory"
+  links:
+    - type: "thesis"
+      url: "/publication/thesis.pdf"
+      icon: "📄"
+  abstract: "Fractional permissions are widely used to reason about shared resource ownership in concurrent program verification. Traditional rational models, however, weaken the disjointness principle central to Separation Logic.<br><br>This thesis investigates the <strong>tree share</strong> model, a canonical Boolean binary tree structure equipped with a join operator (⊕) and a multiplication-like operator (./), as a principled alternative that preserves disjointness while supporting infinite split-ability and scalable permission manipulation.<br><br>The work develops three pillars. First, we embed tree shares into Separation Logic to support advanced verification tasks such as bi-abduction, inductive predicates, and precision reasoning. Second, we design sound and complete decision procedures for tree-share constraints and integrate them into the HIP/SLEEK verification toolset. Third, we establish precise decidability and complexity results for fragments of the tree-share structure, revealing connections to Boolean algebras and string concatenation.<br><br>Together, these contributions provide a rigorous theoretical and practical foundation for disjoint fractional permissions in concurrent program verification."
+  is_thesis: true
