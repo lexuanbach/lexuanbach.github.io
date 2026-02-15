@@ -449,17 +449,34 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="abstract-content" id="abstract-11">
         <div class="abstract-text">
-Abstract
+            ---
+title: VSLIM
+---
+
+## Abstract
 
 Multi-intent detection and slot filling are fundamental tasks of natural language understanding in task-oriented dialog systems. Early approaches treated them as separate tasks, which undermines the direct connection between intents and their associated slots. This limitation becomes more pronounced when multiple intents are expressed within a single utterance.
 
-In the Vietnamese language landscape, research on this topic remains limited, largely due to its low-resource status. To address this gap, we introduce VSLIM, a joint model designed for multi-intent detection and slot filling in Vietnamese. Inspired by the SLIM framework [2], VSLIM builds on its foundation with a biaffine classifier that more directly captures the relationship between intents and slots. This design allows the model to better understand and represent the dependencies across sequence labels in multi-intent settings.
+In the Vietnamese language landscape, research on this topic remains limited, largely due to its low-resource status. To address this gap, we introduce **VSLIM**, a joint model designed for multi-intent detection and slot filling in Vietnamese. Inspired by the SLIM framework, VSLIM builds on its foundation with a biaffine classifier that more directly captures the relationship between intents and slots. This design allows the model to better understand and represent the dependencies across sequence labels in multi-intent settings.
 
-Experiments on the Vietnamese PhoATIS dataset and our newly introduced VPED corpus show that VSLIM outperforms strong NLU baselines, highlighting its potential for improving Vietnamese task-oriented dialog systems.
+Experiments on the Vietnamese **PhoATIS** dataset and our newly introduced **VPED** corpus show that VSLIM outperforms strong NLU baselines, highlighting its potential for improving Vietnamese task-oriented dialog systems.
 
-We publish our VSLIM implementation and VPED at: https://github.com/dongphong543/VSLIM
+---
 
-Keywords: Multi-intent detection, Slot filling, Vietnamese language understanding, Joint learning, Explicit mapping
+## Resources
+
+- 🔗 **Code & Data**:  
+  https://github.com/dongphong543/VSLIM
+
+---
+
+## Keywords
+
+- Multi-intent detection  
+- Slot filling  
+- Vietnamese language understanding  
+- Joint learning  
+- Explicit mapping  
         </div>
     </div>
 </div>
