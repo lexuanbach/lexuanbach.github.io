@@ -404,7 +404,7 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="publication-links">
         <a href="/publication/rl24.pdf" class="pub-link" target="_blank">📄 Paper</a>
-        <a href="/slides/irl24-poster.png" class="pub-link" target="_blank">📊 Poster</a>
+        <a href="/slides/rl24-poster.png" class="pub-link" target="_blank">📊 Poster</a>
     </div>
 </div>
 
