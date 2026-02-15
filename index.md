@@ -504,8 +504,16 @@ I am interested in both the practical applications and theoretical foundations o
 
 <div class="publication" data-number="[9]">
     <div class="publication-authors">With Dominik, Leon, Alexander & Luke Ong</div>
-    <div class="publication-title">Reinforcement Learning with LTL and Omega-Regular Objectives via Optimality-Preserving Translation to Average Rewards</div>
-    <div class="publication-venue"><strong>NeurIPS 2024</strong>, Vancouver, Canada (December 2024)</div>
+    <div class="publication-title">
+        Reinforcement Learning with LTL and Omega-Regular Objectives via Optimality-Preserving Translation to Average Rewards
+    </div>
+    <div class="publication-venue">
+        <strong>
+            <a href="https://neurips.cc/Conferences/2024" target="_blank">
+                NeurIPS 2024
+            </a>
+        </strong>, Vancouver, Canada (December 2024)
+    </div>
     <div class="publication-tags">
         <span class="pub-tag rl">Reinforcement Learning</span>
         <span class="pub-tag logic">LTL</span>
@@ -520,15 +528,28 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="abstract-content" id="abstract-9">
         <div class="abstract-text">
-            [Abstract to be added]
+            <strong>Abstract:</strong><br><br>
+            Linear Temporal Logic (LTL) and, more generally, ω-regular objectives are alternatives to traditional discount-sum and average-reward objectives in reinforcement learning (RL), offering improved comprehensibility and explainability.
+            <br><br>
+            In this work, we study the relationship between these objectives. Our main result shows that each RL problem with ω-regular objectives can be reduced to a limit-average reward problem in an optimality-preserving manner via finite-memory reward machines.
+            <br><br>
+            Furthermore, we demonstrate the efficacy of this approach by showing that optimal policies for limit-average problems can be found asymptotically by solving a sequence of discount-sum problems approximately. Consequently, we resolve an open problem: optimal policies for LTL and ω-regular objectives can be learned asymptotically.
         </div>
     </div>
 </div>
 
 <div class="publication" data-number="[8]">
     <div class="publication-authors">With Shang-Wei Lin, Sun Jun & David Sanan</div>
-    <div class="publication-title">A Quantum Interpretation of Separating Conjunction for Local Reasoning of Quantum Programs Based on Separation Logic</div>
-    <div class="publication-venue"><strong>POPL 2022</strong>, Philadelphia, USA (January 2022)</div>
+    <div class="publication-title">
+        A Quantum Interpretation of Separating Conjunction for Local Reasoning of Quantum Programs Based on Separation Logic
+    </div>
+    <div class="publication-venue">
+        <strong>
+            <a href="https://popl22.sigplan.org/" target="_blank">
+                POPL 2022
+            </a>
+        </strong>, Philadelphia, USA (January 2022)
+    </div>
     <div class="publication-tags">
         <span class="pub-tag quantum">Quantum Computing</span>
         <span class="pub-tag verification">Separation Logic</span>
@@ -543,7 +564,12 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="abstract-content" id="abstract-8">
         <div class="abstract-text">
-            [Abstract to be added]
+            <strong>Abstract:</strong><br><br>
+            Quantum programs are not only complicated to design but also challenging to verify, as quantum states can have exponential size and require sophisticated mathematics to encode and manipulate. To address the state-space explosion problem in quantum reasoning, we propose a Hoare-style inference framework that supports local reasoning for quantum programs.
+            <br><br>
+            By providing a quantum interpretation of the separating conjunction, we integrate separation logic into our framework and enable local reasoning via a quantum frame rule analogous to the classical frame rule.
+            <br><br>
+            For evaluation, we apply our framework to verify representative quantum programs, including Deutsch–Jozsa’s algorithm and Grover’s algorithm.
         </div>
     </div>
 </div>
