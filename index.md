@@ -685,8 +685,16 @@ I am interested in both the practical applications and theoretical foundations o
 
 <div class="publication" data-number="[4]">
     <div class="publication-authors">With Aquinas Hobor</div>
-    <div class="publication-title">Logical Reasoning for Disjoint Permissions</div>
-    <div class="publication-venue"><strong>ESOP 2018</strong>, Thessaloniki, Greece (April 2018)</div>
+    <div class="publication-title">
+        Logical Reasoning for Disjoint Permissions
+    </div>
+    <div class="publication-venue">
+        <strong>
+            <a href="https://www.etaps.org/2018/esop.html" target="_blank">
+                ESOP 2018
+            </a>
+        </strong>, Thessaloniki, Greece (April 2018)
+    </div>
     <div class="publication-tags">
         <span class="pub-tag verification">Separation Logic</span>
         <span class="pub-tag verification">Fractional Permissions</span>
@@ -702,15 +710,30 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="abstract-content" id="abstract-4">
         <div class="abstract-text">
-            [Abstract to be added]
+            <strong>Abstract:</strong><br><br>
+            Resource sharing is a fundamental phenomenon in concurrent programming, where multiple threads hold permissions to access a common resource. Verification logics must therefore capture permission ownership and transfer.
+            <br><br>
+            A common approach is to use rational numbers in $(0,1]$ as permissions, where 1 represents full permission and fractional values represent partial ownership. However, rational permissions are not a natural fit for separation logic, as they weaken its essential notion of disjointness.
+            <br><br>
+            We propose a general logical framework that supports permission reasoning in separation logic while preserving disjointness. Our framework enables sophisticated verification tasks such as induction over heap finiteness within the object logic, biabductive inference, and proofs of precision for recursive predicates within the object logic.
+            <br><br>
+            We introduce <strong>scaling separation algebras</strong>, a compositional extension of separation algebras, to model our logic and construct a concrete semantic model. We also developed the <strong>ShareInfer</strong> tool to benchmark our techniques.
         </div>
     </div>
 </div>
 
 <div class="publication" data-number="[3]">
     <div class="publication-authors">With Thanh-Toan Nguyen, Wei-Ngan Chin & Aquinas Hobor</div>
-    <div class="publication-title">A Certified Decision Procedure for Tree Shares</div>
-    <div class="publication-venue"><strong>ICFEM 2017</strong>, Xi'an, China (November 2017)</div>
+    <div class="publication-title">
+        A Certified Decision Procedure for Tree Shares
+    </div>
+    <div class="publication-venue">
+        <strong>
+            <a href="https://link.springer.com/book/10.1007/978-3-319-68690-5" target="_blank">
+                ICFEM 2017
+            </a>
+        </strong>, Xi'an, China (November 2017)
+    </div>
     <div class="publication-tags">
         <span class="pub-tag verification">Separation Logic</span>
         <span class="pub-tag logic">Decision Procedures</span>
@@ -726,6 +749,7 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="abstract-content" id="abstract-3">
         <div class="abstract-text">
+            <strong>Abstract:</strong><br><br>
             [Abstract to be added]
         </div>
     </div>
@@ -733,8 +757,16 @@ I am interested in both the practical applications and theoretical foundations o
 
 <div class="publication" data-number="[2]">
     <div class="publication-authors">With Aquinas Hobor & Anthony W. Lin</div>
-    <div class="publication-title">Decidability and Complexity of Tree Share Formulas</div>
-    <div class="publication-venue"><strong>FSTTCS 2016</strong>, Chennai, India (December 2016)</div>
+    <div class="publication-title">
+        Decidability and Complexity of Tree Share Formulas
+    </div>
+    <div class="publication-venue">
+        <strong>
+            <a href="https://www.fsttcs.org.in/archives/2016/" target="_blank">
+                FSTTCS 2016
+            </a>
+        </strong>, Chennai, India (December 2016)
+    </div>
     <div class="publication-tags">
         <span class="pub-tag theory">Decidability</span>
         <span class="pub-tag theory">Complexity</span>
@@ -749,15 +781,30 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="abstract-content" id="abstract-2">
         <div class="abstract-text">
-            [Abstract to be added]
+            <strong>Abstract:</strong><br><br>
+            Fractional share models are used to reason about how multiple actors share ownership of resources. We study the decidability and complexity of reasoning over the <em>tree share</em> model of Dockins et al. using first-order logic and its fragments.
+            <br><br>
+            We identify a connection between the basic Boolean operations on trees — union (t), intersection (u), and complement — and countable atomless Boolean algebras. This connection allows us to establish decidability results with precise complexity bounds for both the full first-order theory and its existential fragment over the tree share model with these operations.
+            <br><br>
+            We further relate the multiplication operation (bowtie) on trees to the theory of word equations, deriving decidability for its existential theory and undecidability for its full first-order theory.
+            <br><br>
+            Finally, we show that the full first-order theory over the model combining Boolean operations with restricted multiplication (./ with constants on the right-hand side) remains decidable via an embedding into tree-automatic structures.
         </div>
     </div>
 </div>
 
 <div class="publication" data-number="[1]">
     <div class="publication-authors">With Cristian Gherghina & Aquinas Hobor</div>
-    <div class="publication-title">Decision Procedures Over Sophisticated Fractional Permissions</div>
-    <div class="publication-venue"><strong>APLAS 2012</strong>, Kyoto, Japan (December 2012)</div>
+    <div class="publication-title">
+        Decision Procedures Over Sophisticated Fractional Permissions
+    </div>
+    <div class="publication-venue">
+        <strong>
+            <a href="https://link.springer.com/book/10.1007/978-3-642-35182-2" target="_blank">
+                APLAS 2012
+            </a>
+        </strong>, Kyoto, Japan (December 2012)
+    </div>
     <div class="publication-tags">
         <span class="pub-tag verification">Separation Logic</span>
         <span class="pub-tag logic">Decision Procedures</span>
@@ -772,14 +819,23 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="abstract-content" id="abstract-1">
         <div class="abstract-text">
-            [Abstract to be added]
+            <strong>Abstract:</strong><br><br>
+            Fractional permissions enable sophisticated management of resource access in both sequential and concurrent programs. Entailment checkers for separation logic formulas containing fractional permissions must therefore reason precisely about such permissions.
+            <br><br>
+            We show how entailment checkers for separation logic with fractional permissions can extract equation systems over fractional shares. We develop a set of decision procedures for equations arising from the sophisticated Boolean binary tree fractional permission model of Dockins et al.
+            <br><br>
+            We prove that our procedures are sound and complete and analyze their computational complexity. We describe our implementation, provide performance benchmarks, and detail its integration into the <strong>HIP/SLEEK</strong> verification toolset. Our results are supported by machine-checked proofs in <strong>Coq</strong>.
         </div>
     </div>
 </div>
 
 <div class="publication thesis-publication" data-number="[PhD]">
-    <div class="publication-title">Disjoint Fractional Permissions in Verification: Applications, Systems and Theory</div>
-    <div class="publication-venue">PhD Thesis, submitted September 2017</div>
+    <div class="publication-title">
+        Disjoint Fractional Permissions in Verification: Applications, Systems and Theory
+    </div>
+    <div class="publication-venue">
+        PhD Thesis, submitted September 2017
+    </div>
     <div class="publication-tags">
         <span class="pub-tag verification">Separation Logic</span>
         <span class="pub-tag verification">Program Verification</span>
@@ -793,7 +849,14 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="abstract-content" id="abstract-phd">
         <div class="abstract-text">
-            [Abstract to be added]
+            <strong>Abstract:</strong><br><br>
+            Fractional permissions are widely used to reason about shared resource ownership in concurrent program verification. Traditional rational models, however, weaken the disjointness principle central to Separation Logic.
+            <br><br>
+            This thesis investigates the <strong>tree share</strong> model, a canonical Boolean binary tree structure equipped with a join operator (⊕) and a multiplication-like operator (./), as a principled alternative that preserves disjointness while supporting infinite split-ability and scalable permission manipulation.
+            <br><br>
+            The work develops three pillars. First, we embed tree shares into Separation Logic to support advanced verification tasks such as bi-abduction, inductive predicates, and precision reasoning. Second, we design sound and complete decision procedures for tree-share constraints and integrate them into the HIP/SLEEK verification toolset. Third, we establish precise decidability and complexity results for fragments of the tree-share structure, revealing connections to Boolean algebras and string concatenation.
+            <br><br>
+            Together, these contributions provide a rigorous theoretical and practical foundation for disjoint fractional permissions in concurrent program verification.
         </div>
     </div>
 </div>
