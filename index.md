@@ -307,7 +307,7 @@ I am interested in both the practical applications and theoretical foundations o
 <div class="publication" data-number="[10]">
     <div class="publication-authors">With Khoa Phan & Tho Quan</div>
     <div class="publication-title">SBV-LawGraph: A Hybrid RAG Approach Integrating Knowledge Graph for the State Bank of Vietnam Legal Documents</div>
-    <div class="publication-venue"><strong>ACIIDS 2026</strong></div>
+    <div class="publication-venue"><strong>ACIIDS 2026 (Oral)</strong></div>
     <div class="publication-links">
         <a href="/publication/ACIIDS2026a.pdf" class="pub-link" target="_blank">📄 Paper</a>
     </div>
