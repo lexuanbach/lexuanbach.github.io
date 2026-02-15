@@ -740,7 +740,7 @@ I am interested in both the practical applications and theoretical foundations o
         <span class="pub-tag verification">Coq</span>
     </div>
     <div class="publication-links">
-        <a href="/publication/icfem17full.pdf" class="pub-link" target="_blank">📄 Paper</a>
+        <a href="/publication/icfem17.pdf" class="pub-link" target="_blank">📄 Paper</a>
         <a href="/slides/icfem17_slides.pdf" class="pub-link" target="_blank">📊 Slides</a>
         <a href="https://github.com/lexuanbach/certified-permission-procedure" class="pub-link" target="_blank">🔧 Tool</a>
         <span class="abstract-toggle" id="toggle-3" onclick="toggleAbstract('3')">
