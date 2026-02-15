@@ -368,7 +368,7 @@ I am interested in both the practical applications and theoretical foundations o
 <div class="publication" data-number="[11]">
     <div class="publication-authors">With Phong Chung, Kha Le-Minh & Tho Quan</div>
     <div class="publication-title">VSLIM: A Vietnamese Explicit Slot-Intent Mapping for Joint Multi-Intent Detection and Slot Filling</div>
-    <div class="publication-venue"><strong>ACIIDS 2026</strong></div>
+    <div class="publication-venue"><strong>ACIIDS 2026</strong>, Kaohsiung, Taiwan (April 2026)</div>
     <div class="publication-tags">
         <span class="pub-tag nlp">NLP</span>
         <span class="pub-tag nlp">Intent Detection</span>
@@ -382,7 +382,7 @@ I am interested in both the practical applications and theoretical foundations o
 <div class="publication" data-number="[10]">
     <div class="publication-authors">With Khoa Phan & Tho Quan</div>
     <div class="publication-title">SBV-LawGraph: A Hybrid RAG Approach Integrating Knowledge Graph for the State Bank of Vietnam Legal Documents</div>
-    <div class="publication-venue"><strong>ACIIDS 2026 (Oral)</strong></div>
+    <div class="publication-venue"><strong>ACIIDS 2026 (Oral)</strong>, Kaohsiung, Taiwan (April 2026)</div>
     <div class="publication-tags">
         <span class="pub-tag rag">RAG</span>
         <span class="pub-tag rag">Knowledge Graph</span>
@@ -396,7 +396,7 @@ I am interested in both the practical applications and theoretical foundations o
 <div class="publication" data-number="[9]">
     <div class="publication-authors">With Dominik, Leon, Alexander & Luke Ong</div>
     <div class="publication-title">Reinforcement Learning with LTL and Omega-Regular Objectives via Optimality-Preserving Translation to Average Rewards</div>
-    <div class="publication-venue"><strong>NeurIPS 2024</strong></div>
+    <div class="publication-venue"><strong>NeurIPS 2024</strong>, Vancouver, Canada (December 2024)</div>
     <div class="publication-tags">
         <span class="pub-tag rl">Reinforcement Learning</span>
         <span class="pub-tag logic">LTL</span>
@@ -404,13 +404,14 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="publication-links">
         <a href="/publication/rl24.pdf" class="pub-link" target="_blank">📄 Paper</a>
+        <a href="/slides/irl24-poster.png" class="pub-link" target="_blank">📊 Poster</a>
     </div>
 </div>
 
 <div class="publication" data-number="[8]">
     <div class="publication-authors">With Shang-Wei Lin, Sun Jun & David Sanan</div>
     <div class="publication-title">A Quantum Interpretation of Separating Conjunction for Local Reasoning of Quantum Programs Based on Separation Logic</div>
-    <div class="publication-venue"><strong>POPL 2022</strong></div>
+    <div class="publication-venue"><strong>POPL 2022</strong>, Philadelphia, USA (January 2022)</div>
     <div class="publication-tags">
         <span class="pub-tag quantum">Quantum Computing</span>
         <span class="pub-tag verification">Separation Logic</span>
@@ -425,7 +426,7 @@ I am interested in both the practical applications and theoretical foundations o
 <div class="publication" data-number="[7]">
     <div class="publication-authors">With David Sanan, Sun Jun & Shang-Wei Lin</div>
     <div class="publication-title">Automatic Verification of Multi-threaded Programs by Inference of Rely-Guarantee Specifications</div>
-    <div class="publication-venue"><strong>ICECCS 2020</strong></div>
+    <div class="publication-venue"><strong>ICECCS 2020</strong>, Singapore (March 2021)</div>
     <div class="publication-tags">
         <span class="pub-tag verification">Program Verification</span>
         <span class="pub-tag verification">Concurrency</span>
@@ -440,7 +441,7 @@ I am interested in both the practical applications and theoretical foundations o
 <div class="publication" data-number="[6]">
     <div class="publication-authors">With Pablo Barcelo, Chih-Duo Hong, Anthony W. Lin & Reino Niskanen (alphabetical)</div>
     <div class="publication-title">Monadic Decomposability of Regular Relations</div>
-    <div class="publication-venue"><strong>ICALP 2019</strong></div>
+    <div class="publication-venue"><strong>ICALP 2019</strong>, Patras, Greece (July 2019)</div>
     <div class="publication-tags">
         <span class="pub-tag theory">Automata Theory</span>
         <span class="pub-tag logic">Logic</span>
@@ -454,7 +455,7 @@ I am interested in both the practical applications and theoretical foundations o
 <div class="publication" data-number="[5]">
     <div class="publication-authors">With Aquinas Hobor & Anthony W. Lin</div>
     <div class="publication-title">Complexity Analysis of Tree Share Structure</div>
-    <div class="publication-venue"><strong>APLAS 2018</strong>, Wellington, New Zealand</div>
+    <div class="publication-venue"><strong>APLAS 2018</strong>, Wellington, New Zealand (Decemeber 2018)</div>
     <div class="publication-tags">
         <span class="pub-tag verification">Separation Logic</span>
         <span class="pub-tag theory">Complexity</span>
@@ -469,7 +470,7 @@ I am interested in both the practical applications and theoretical foundations o
 <div class="publication" data-number="[4]">
     <div class="publication-authors">With Aquinas Hobor</div>
     <div class="publication-title">Logical Reasoning for Disjoint Permissions</div>
-    <div class="publication-venue"><strong>ESOP 2018</strong>, Thessaloniki, Greece</div>
+    <div class="publication-venue"><strong>ESOP 2018</strong>, Thessaloniki, Greece (April 2018)</div>
     <div class="publication-tags">
         <span class="pub-tag verification">Separation Logic</span>
         <span class="pub-tag verification">Fractional Permissions</span>
@@ -485,7 +486,7 @@ I am interested in both the practical applications and theoretical foundations o
 <div class="publication" data-number="[3]">
     <div class="publication-authors">With Thanh-Toan Nguyen, Wei-Ngan Chin & Aquinas Hobor</div>
     <div class="publication-title">A Certified Decision Procedure for Tree Shares</div>
-    <div class="publication-venue"><strong>ICFEM 2017</strong>, Xi'an, China</div>
+    <div class="publication-venue"><strong>ICFEM 2017</strong>, Xi'an, China (November 2017)</div>
     <div class="publication-tags">
         <span class="pub-tag verification">Separation Logic</span>
         <span class="pub-tag logic">Decision Procedures</span>
@@ -501,7 +502,7 @@ I am interested in both the practical applications and theoretical foundations o
 <div class="publication" data-number="[2]">
     <div class="publication-authors">With Aquinas Hobor & Anthony W. Lin</div>
     <div class="publication-title">Decidability and Complexity of Tree Share Formulas</div>
-    <div class="publication-venue"><strong>FSTTCS 2016</strong>, Chennai, India</div>
+    <div class="publication-venue"><strong>FSTTCS 2016</strong>, Chennai, India (December 2016)</div>
     <div class="publication-tags">
         <span class="pub-tag theory">Decidability</span>
         <span class="pub-tag theory">Complexity</span>
@@ -516,7 +517,7 @@ I am interested in both the practical applications and theoretical foundations o
 <div class="publication" data-number="[1]">
     <div class="publication-authors">With Cristian Gherghina & Aquinas Hobor</div>
     <div class="publication-title">Decision Procedures Over Sophisticated Fractional Permissions</div>
-    <div class="publication-venue"><strong>APLAS 2012</strong>, Kyoto, Japan</div>
+    <div class="publication-venue"><strong>APLAS 2012</strong>, Kyoto, Japan (December 2012)</div>
     <div class="publication-tags">
         <span class="pub-tag verification">Separation Logic</span>
         <span class="pub-tag logic">Decision Procedures</span>
