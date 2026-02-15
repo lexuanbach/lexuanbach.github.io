@@ -437,7 +437,7 @@ I am interested in both the practical applications and theoretical foundations o
     <div class="publication-title">VSLIM: A Vietnamese Explicit Slot-Intent Mapping for Joint Multi-Intent Detection and Slot Filling</div>
     <div class="publication-venue">
   <strong>
-    <a href="https://www.i-somet.org/aciids2026/" target="_blank">
+    <a href="https://aciids.pwr.edu.pl/2026/" target="_blank">
       ACIIDS 2026
     </a>
   </strong>, Kaohsiung, Taiwan (April 2026)
@@ -473,7 +473,13 @@ I am interested in both the practical applications and theoretical foundations o
 <div class="publication" data-number="[10]">
     <div class="publication-authors">With Khoa Phan & Tho Quan</div>
     <div class="publication-title">SBV-LawGraph: A Hybrid RAG Approach Integrating Knowledge Graph for the State Bank of Vietnam Legal Documents</div>
-    <div class="publication-venue"><strong>ACIIDS 2026 (Oral)</strong>, Kaohsiung, Taiwan (April 2026)</div>
+    <div class="publication-venue">
+        <strong>
+            <a href="https://aciids.pwr.edu.pl/2026/" target="_blank">
+                ACIIDS 2026 (Oral)
+            </a>
+        </strong>, Kaohsiung, Taiwan (April 2026)
+    </div>
     <div class="publication-tags">
         <span class="pub-tag rag">RAG</span>
         <span class="pub-tag rag">Knowledge Graph</span>
@@ -487,7 +493,14 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="abstract-content" id="abstract-10">
         <div class="abstract-text">
-            [Abstract to be added]
+            <strong>Abstract:</strong><br><br>
+            While Retrieval-Augmented Generation (RAG) pipelines often demonstrate strong performance in general settings, they struggle with legal texts, where interpreting structure and relationships between laws is crucial. To address this, we introduce <strong>SBV-LawGraph</strong> – a dual-retrieval framework designed specifically for Vietnamese legal documents.
+            <br><br>
+            It combines semantic retrieval with graph-based reasoning by integrating two modules: a <strong>Legal Retrieval</strong> module using sparse–dense reranking for textual accuracy, and a <strong>Relationship Retrieval</strong> module that traverses a curated Legal Knowledge Graph to capture links such as amendments, citations, and definitions.
+            <br><br>
+            This design enables SBV-LawGraph to generate responses that are not only relevant but also structurally grounded, addressing limitations of standard RAG systems. Evaluations on the <strong>ALQAC2025</strong> and <strong>SBV Legal Questions</strong> datasets show it consistently outperforms strong baselines, highlighting its effectiveness for precise and explainable legal QA.
+            <br><br>
+            <strong>Keywords:</strong> Retrieval-Augmented Generation, Knowledge Graph, Natural Language Processing, Question-Answering Systems
         </div>
     </div>
 </div>
