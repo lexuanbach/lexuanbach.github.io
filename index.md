@@ -288,6 +288,63 @@ h2 {
     transform: translateY(-1px);
 }
 
+/* Abstract Toggle */
+.abstract-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    background: #fafafa;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 0.85em;
+    font-family: 'IBM Plex Mono', monospace;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.abstract-toggle:hover {
+    background: var(--secondary);
+    color: white;
+    border-color: var(--secondary);
+    transform: translateY(-1px);
+}
+
+.abstract-toggle .arrow {
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.abstract-toggle.active .arrow {
+    transform: rotate(180deg);
+}
+
+.abstract-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, margin-top 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+    margin-top: 0;
+}
+
+.abstract-content.show {
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 12px;
+}
+
+.abstract-text {
+    background: rgba(26, 26, 46, 0.03);
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 3px solid var(--accent);
+    font-size: 0.95em;
+    line-height: 1.6;
+    color: var(--text);
+}
+
 /* Featured publication */
 .publication.featured {
     background: linear-gradient(to right, rgba(233, 69, 96, 0.05), transparent);
@@ -336,6 +393,16 @@ h2 {
 }
 </style>
 
+<script>
+function toggleAbstract(id) {
+    const toggle = document.getElementById('toggle-' + id);
+    const content = document.getElementById('abstract-' + id);
+    
+    toggle.classList.toggle('active');
+    content.classList.toggle('show');
+}
+</script>
+
 <div class="header-section">
     <img class="profile-picture" src="me.jpg" alt="Xuan-Bach Le">
     <div class="header-content">
@@ -376,6 +443,14 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="publication-links">
         <a href="/publication/ACIIDS2026b.pdf" class="pub-link" target="_blank">📄 Paper</a>
+        <span class="abstract-toggle" id="toggle-11" onclick="toggleAbstract('11')">
+            📖 Abstract <span class="arrow">▼</span>
+        </span>
+    </div>
+    <div class="abstract-content" id="abstract-11">
+        <div class="abstract-text">
+            [Abstract to be added]
+        </div>
     </div>
 </div>
 
@@ -390,6 +465,14 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="publication-links">
         <a href="/publication/ACIIDS2026a.pdf" class="pub-link" target="_blank">📄 Paper</a>
+        <span class="abstract-toggle" id="toggle-10" onclick="toggleAbstract('10')">
+            📖 Abstract <span class="arrow">▼</span>
+        </span>
+    </div>
+    <div class="abstract-content" id="abstract-10">
+        <div class="abstract-text">
+            [Abstract to be added]
+        </div>
     </div>
 </div>
 
@@ -404,7 +487,15 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="publication-links">
         <a href="/publication/rl24.pdf" class="pub-link" target="_blank">📄 Paper</a>
-        <a href="/slides/rl24-poster.png" class="pub-link" target="_blank">📊 Poster</a>
+        <a href="/slides/irl24-poster.png" class="pub-link" target="_blank">📊 Poster</a>
+        <span class="abstract-toggle" id="toggle-9" onclick="toggleAbstract('9')">
+            📖 Abstract <span class="arrow">▼</span>
+        </span>
+    </div>
+    <div class="abstract-content" id="abstract-9">
+        <div class="abstract-text">
+            [Abstract to be added]
+        </div>
     </div>
 </div>
 
@@ -420,6 +511,14 @@ I am interested in both the practical applications and theoretical foundations o
     <div class="publication-links">
         <a href="/publication/POPL2022.pdf" class="pub-link" target="_blank">📄 Paper</a>
         <a href="/slides/POPL2022_slides.pdf" class="pub-link" target="_blank">📊 Slides</a>
+        <span class="abstract-toggle" id="toggle-8" onclick="toggleAbstract('8')">
+            📖 Abstract <span class="arrow">▼</span>
+        </span>
+    </div>
+    <div class="abstract-content" id="abstract-8">
+        <div class="abstract-text">
+            [Abstract to be added]
+        </div>
     </div>
 </div>
 
@@ -435,6 +534,14 @@ I am interested in both the practical applications and theoretical foundations o
     <div class="publication-links">
         <a href="/publication/ICECCS2021.pdf" class="pub-link" target="_blank">📄 Paper</a>
         <a href="/slides/ICECCS2021_slides.pdf" class="pub-link" target="_blank">📊 Slides</a>
+        <span class="abstract-toggle" id="toggle-7" onclick="toggleAbstract('7')">
+            📖 Abstract <span class="arrow">▼</span>
+        </span>
+    </div>
+    <div class="abstract-content" id="abstract-7">
+        <div class="abstract-text">
+            [Abstract to be added]
+        </div>
     </div>
 </div>
 
@@ -449,6 +556,14 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="publication-links">
         <a href="/publication/ICALP2019.pdf" class="pub-link" target="_blank">📄 Paper</a>
+        <span class="abstract-toggle" id="toggle-6" onclick="toggleAbstract('6')">
+            📖 Abstract <span class="arrow">▼</span>
+        </span>
+    </div>
+    <div class="abstract-content" id="abstract-6">
+        <div class="abstract-text">
+            [Abstract to be added]
+        </div>
     </div>
 </div>
 
@@ -464,6 +579,14 @@ I am interested in both the practical applications and theoretical foundations o
     <div class="publication-links">
         <a href="/publication/aplas18.pdf" class="pub-link" target="_blank">📄 Paper</a>
         <a href="/slides/aplas18_slides.pdf" class="pub-link" target="_blank">📊 Slides</a>
+        <span class="abstract-toggle" id="toggle-5" onclick="toggleAbstract('5')">
+            📖 Abstract <span class="arrow">▼</span>
+        </span>
+    </div>
+    <div class="abstract-content" id="abstract-5">
+        <div class="abstract-text">
+            [Abstract to be added]
+        </div>
     </div>
 </div>
 
@@ -480,6 +603,14 @@ I am interested in both the practical applications and theoretical foundations o
         <a href="/publication/esop18full.pdf" class="pub-link" target="_blank">📄 Paper</a>
         <a href="/slides/esop18_slides.pdf" class="pub-link" target="_blank">📊 Slides</a>
         <a href="https://github.com/lexuanbach/share-infer" class="pub-link" target="_blank">🔧 Tool</a>
+        <span class="abstract-toggle" id="toggle-4" onclick="toggleAbstract('4')">
+            📖 Abstract <span class="arrow">▼</span>
+        </span>
+    </div>
+    <div class="abstract-content" id="abstract-4">
+        <div class="abstract-text">
+            [Abstract to be added]
+        </div>
     </div>
 </div>
 
@@ -496,6 +627,14 @@ I am interested in both the practical applications and theoretical foundations o
         <a href="/publication/icfem17full.pdf" class="pub-link" target="_blank">📄 Paper</a>
         <a href="/slides/icfem17_slides.pdf" class="pub-link" target="_blank">📊 Slides</a>
         <a href="https://github.com/lexuanbach/certified-permission-procedure" class="pub-link" target="_blank">🔧 Tool</a>
+        <span class="abstract-toggle" id="toggle-3" onclick="toggleAbstract('3')">
+            📖 Abstract <span class="arrow">▼</span>
+        </span>
+    </div>
+    <div class="abstract-content" id="abstract-3">
+        <div class="abstract-text">
+            [Abstract to be added]
+        </div>
     </div>
 </div>
 
@@ -511,6 +650,14 @@ I am interested in both the practical applications and theoretical foundations o
     <div class="publication-links">
         <a href="/publication/fsttcs16.pdf" class="pub-link" target="_blank">📄 Paper</a>
         <a href="/slides/fsttcs16_slides.pdf" class="pub-link" target="_blank">📊 Slides</a>
+        <span class="abstract-toggle" id="toggle-2" onclick="toggleAbstract('2')">
+            📖 Abstract <span class="arrow">▼</span>
+        </span>
+    </div>
+    <div class="abstract-content" id="abstract-2">
+        <div class="abstract-text">
+            [Abstract to be added]
+        </div>
     </div>
 </div>
 
@@ -526,6 +673,14 @@ I am interested in both the practical applications and theoretical foundations o
     <div class="publication-links">
         <a href="/publication/aplas12.pdf" class="pub-link" target="_blank">📄 Paper</a>
         <a href="/slides/aplas12_slides.pdf" class="pub-link" target="_blank">📊 Slides</a>
+        <span class="abstract-toggle" id="toggle-1" onclick="toggleAbstract('1')">
+            📖 Abstract <span class="arrow">▼</span>
+        </span>
+    </div>
+    <div class="abstract-content" id="abstract-1">
+        <div class="abstract-text">
+            [Abstract to be added]
+        </div>
     </div>
 </div>
 
@@ -539,5 +694,13 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="publication-links">
         <a href="/publication/thesis.pdf" class="pub-link" target="_blank">📄 Thesis</a>
+        <span class="abstract-toggle" id="toggle-phd" onclick="toggleAbstract('phd')">
+            📖 Abstract <span class="arrow">▼</span>
+        </span>
+    </div>
+    <div class="abstract-content" id="abstract-phd">
+        <div class="abstract-text">
+            [Abstract to be added]
+        </div>
     </div>
 </div>
