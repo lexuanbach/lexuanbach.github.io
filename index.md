@@ -460,10 +460,7 @@ I am interested in both the practical applications and theoretical foundations o
         <br><br>
         In the Vietnamese language landscape, research on this topic remains limited, largely due to its low-resource status. To address this gap, we introduce <strong>VSLIM</strong>, a joint model designed for multi-intent detection and slot filling in Vietnamese. Inspired by the SLIM framework, VSLIM builds on its foundation with a biaffine classifier that more directly captures the relationship between intents and slots. This design allows the model to better understand and represent the dependencies across sequence labels in multi-intent settings.
         <br><br>
-        Experiments on the Vietnamese <strong>PhoATIS</strong> dataset and our newly introduced <strong>VPED</strong> corpus show that VSLIM outperforms strong NLU baselines, highlighting its potential for improving Vietnamese task-oriented dialog systems.
-        <br><br>
-        <strong>Resources:</strong><br>
-        🔗 Code & Data: <a href="https://github.com/dongphong543/VSLIM" target="_blank" style="color: var(--accent);">https://github.com/dongphong543/VSLIM</a>
+        Experiments on the Vietnamese <strong>PhoATIS</strong> dataset and our newly introduced <strong>VPED</strong> corpus show that VSLIM outperforms strong NLU baselines, highlighting its potential for improving Vietnamese task-oriented dialog systems. Code & Data: <a href="https://github.com/dongphong543/VSLIM" target="_blank" style="color: var(--accent);">https://github.com/dongphong543/VSLIM</a>
         <br><br>
         <strong>Keywords:</strong> Multi-intent detection, Slot filling, Vietnamese language understanding, Joint learning, Explicit mapping
     </div>
