@@ -576,8 +576,16 @@ I am interested in both the practical applications and theoretical foundations o
 
 <div class="publication" data-number="[7]">
     <div class="publication-authors">With David Sanan, Sun Jun & Shang-Wei Lin</div>
-    <div class="publication-title">Automatic Verification of Multi-threaded Programs by Inference of Rely-Guarantee Specifications</div>
-    <div class="publication-venue"><strong>ICECCS 2020</strong>, Singapore (March 2021)</div>
+    <div class="publication-title">
+        Automatic Verification of Multi-threaded Programs by Inference of Rely-Guarantee Specifications
+    </div>
+    <div class="publication-venue">
+        <strong>
+            <a href="https://formal-analysis.com/iceccs/2020/" target="_blank">
+                ICECCS 2020
+            </a>
+        </strong>, Singapore (March 2021)
+    </div>
     <div class="publication-tags">
         <span class="pub-tag verification">Program Verification</span>
         <span class="pub-tag verification">Concurrency</span>
@@ -592,15 +600,30 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="abstract-content" id="abstract-7">
         <div class="abstract-text">
-            [Abstract to be added]
+            <strong>Abstract:</strong><br><br>
+            Rely-Guarantee is a comprehensive technique that supports compositional reasoning for concurrent programs. However, specifying the <em>Rely</em> condition—environment interference—and the <em>Guarantee</em> condition—local transformation of thread state—remains challenging, making their construction a major bottleneck in automation.
+            <br><br>
+            To address this problem, we propose a verification framework that constructs correctness proofs for concurrent programs by automatically inferring suitable Rely-Guarantee conditions. Our framework first builds a Hoare-style sequential proof for each thread, and then applies abstraction refinement to lift these proofs into concurrent ones with appropriate Rely-Guarantee relations.
+            <br><br>
+            Experimental results demonstrate that our approach efficiently proves the correctness of multi-threaded programs.
+            <br><br>
+            <strong>Keywords:</strong> Rely-Guarantee, Concurrency, CEGAR
         </div>
     </div>
 </div>
 
 <div class="publication" data-number="[6]">
-    <div class="publication-authors">With Pablo Barcelo, Chih-Duo Hong, Anthony W. Lin & Reino Niskanen (alphabetical)</div>
-    <div class="publication-title">Monadic Decomposability of Regular Relations</div>
-    <div class="publication-venue"><strong>ICALP 2019</strong>, Patras, Greece (July 2019)</div>
+    <div class="publication-authors">With Pablo Barceló, Chih-Duo Hong, Anthony W. Lin & Reino Niskanen (alphabetical)</div>
+    <div class="publication-title">
+        Monadic Decomposability of Regular Relations
+    </div>
+    <div class="publication-venue">
+        <strong>
+            <a href="https://icalp2019.upatras.gr/" target="_blank">
+                ICALP 2019
+            </a>
+        </strong>, Patras, Greece (July 2019)
+    </div>
     <div class="publication-tags">
         <span class="pub-tag theory">Automata Theory</span>
         <span class="pub-tag logic">Logic</span>
@@ -614,15 +637,28 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="abstract-content" id="abstract-6">
         <div class="abstract-text">
-            [Abstract to be added]
+            <strong>Abstract:</strong><br><br>
+            Monadic decomposability — the ability to determine whether a formula in a given logical theory can be decomposed into a Boolean combination of monadic formulas — is a powerful tool for devising decision procedures. In this paper, we revisit a classical decision problem in automata theory: given a regular (synchronized rational) relation, determine whether it is recognizable, i.e., whether it admits a monadic decomposition as a Boolean combination of Cartesian products of regular languages.
+            <br><br>
+            Regular relations are highly expressive and, under suitable encodings, capture relations definable in Presburger Arithmetic. Their expressive power coincides with relations definable in universal automatic structures, equivalently those definable by finite set interpretations in WS1S (Weak Second Order Theory of One Successor).
+            <br><br>
+            While decidability of this problem was known (and exponential time for binary relations), its exact complexity remained open. Our main contribution is to fully settle the complexity of this decision problem by developing new techniques based on infinite Ramsey theory. We show that the problem is <strong>NLOGSPACE-complete</strong> for DFA representations and <strong>PSPACE-complete</strong> for NFA representations of regular relations.
         </div>
     </div>
 </div>
 
 <div class="publication" data-number="[5]">
     <div class="publication-authors">With Aquinas Hobor & Anthony W. Lin</div>
-    <div class="publication-title">Complexity Analysis of Tree Share Structure</div>
-    <div class="publication-venue"><strong>APLAS 2018</strong>, Wellington, New Zealand (Decemeber 2018)</div>
+    <div class="publication-title">
+        Complexity Analysis of Tree Share Structure
+    </div>
+    <div class="publication-venue">
+        <strong>
+            <a href="https://link.springer.com/book/10.1007/978-3-030-02768-1" target="_blank">
+                APLAS 2018
+            </a>
+        </strong>, Wellington, New Zealand (December 2018)
+    </div>
     <div class="publication-tags">
         <span class="pub-tag verification">Separation Logic</span>
         <span class="pub-tag theory">Complexity</span>
@@ -637,7 +673,12 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     <div class="abstract-content" id="abstract-5">
         <div class="abstract-text">
-            [Abstract to be added]
+            <strong>Abstract:</strong><br><br>
+            The tree share structure proposed by Dockins et al. provides an elegant model for tracking disjoint ownership in concurrent separation logic. However, decision procedures for tree shares are difficult to implement due to the lack of a systematic theoretical study.
+            <br><br>
+            We show that the first-order theory of the full Boolean algebra of tree shares (with all tree-share constants) is decidable and has the same complexity as the first-order theory of Countable Atomless Boolean Algebras.
+            <br><br>
+            We further prove that combining this additive structure with a constant-restricted unary multiplicative “relativization” operator yields a non-elementary lower bound. We analyze the source of this lower bound and demonstrate that it arises from the interaction between the two theories, by establishing an upper bound for a generalization of the restricted multiplicative theory in isolation.
         </div>
     </div>
 </div>
