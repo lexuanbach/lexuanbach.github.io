@@ -278,16 +278,18 @@ h2 {
 
 ## Research Interest
 
-<p>I am interested in both the practical applications and theoretical foundations of Computer Science. My research spans developing logical frameworks and certified decision procedures for program verification, establishing decidability and computational complexity of underlying logics, and more recently, Reinforcement Learning with formal specifications.</p>
+<p>
+I am interested in both the practical applications and theoretical foundations of Computer Science. My research spans the development of logical frameworks and certified decision procedures for program verification, the study of decidability and computational complexity of underlying logics, and, more recently, the integration of formal methods with modern AI systems. In particular, I explore Retrieval-Augmented Generation (RAG), large language models (LLMs), and program synthesis for reliable software engineering, as well as reinforcement learning under formal specifications.
+</p>
 
 <div class="research-tags">
+    <span class="tag">LLM agent</span>
+    <span class="tag">Program Synthesis</span>
+    <span class="tag">RAG</span>
     <span class="tag">Program Verification</span>
     <span class="tag">Formal Logic</span>
-    <span class="tag">Decision Procedures</span>
-    <span class="tag">Separation Logic</span>
     <span class="tag">Computational Complexity</span>
     <span class="tag">Reinforcement Learning</span>
-    <span class="tag">LTL & Omega-Regular</span>
     <span class="tag">Quantum Programming</span>
 </div>
 
@@ -311,8 +313,8 @@ h2 {
     </div>
 </div>
 
-<div class="publication featured" data-number="[9]">
-    <div class="publication-authors">With Dominik Klumpp, Leon Bohn, Alexander Dietsch & Luke Ong</div>
+<div class="publication" data-number="[9]">
+    <div class="publication-authors">With Dominik, Leon, Alexander & Luke Ong</div>
     <div class="publication-title">Reinforcement Learning with LTL and Omega-Regular Objectives via Optimality-Preserving Translation to Average Rewards</div>
     <div class="publication-venue"><strong>NeurIPS 2024</strong></div>
     <div class="publication-links">
@@ -371,7 +373,7 @@ h2 {
 </div>
 
 <div class="publication" data-number="[3]">
-    <div class="publication-authors">With Toan Nguyen Thanh, Wei Ngan Chin & Aquinas Hobor</div>
+    <div class="publication-authors">With Thanh-Toan Nguyen, Wei-Ngan Chin & Aquinas Hobor</div>
     <div class="publication-title">A Certified Decision Procedure for Tree Shares</div>
     <div class="publication-venue"><strong>ICFEM 2017</strong>, Xi'an, China</div>
     <div class="publication-links">
