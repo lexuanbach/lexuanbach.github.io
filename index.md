@@ -453,38 +453,21 @@ I am interested in both the practical applications and theoretical foundations o
             📖 Abstract <span class="arrow">▼</span>
         </span>
     </div>
-    <div class="abstract-content" id="abstract-11">
-        <div class="abstract-text">
-            ---
-title: VSLIM
----
-
-## Abstract
-
-Multi-intent detection and slot filling are fundamental tasks of natural language understanding in task-oriented dialog systems. Early approaches treated them as separate tasks, which undermines the direct connection between intents and their associated slots. This limitation becomes more pronounced when multiple intents are expressed within a single utterance.
-
-In the Vietnamese language landscape, research on this topic remains limited, largely due to its low-resource status. To address this gap, we introduce **VSLIM**, a joint model designed for multi-intent detection and slot filling in Vietnamese. Inspired by the SLIM framework, VSLIM builds on its foundation with a biaffine classifier that more directly captures the relationship between intents and slots. This design allows the model to better understand and represent the dependencies across sequence labels in multi-intent settings.
-
-Experiments on the Vietnamese **PhoATIS** dataset and our newly introduced **VPED** corpus show that VSLIM outperforms strong NLU baselines, highlighting its potential for improving Vietnamese task-oriented dialog systems.
-
----
-
-## Resources
-
-- 🔗 **Code & Data**:  
-  https://github.com/dongphong543/VSLIM
-
----
-
-## Keywords
-
-- Multi-intent detection  
-- Slot filling  
-- Vietnamese language understanding  
-- Joint learning  
-- Explicit mapping  
-        </div>
+<div class="abstract-content" id="abstract-11">
+    <div class="abstract-text">
+        <strong>Abstract:</strong><br><br>
+        Multi-intent detection and slot filling are fundamental tasks of natural language understanding in task-oriented dialog systems. Early approaches treated them as separate tasks, which undermines the direct connection between intents and their associated slots. This limitation becomes more pronounced when multiple intents are expressed within a single utterance.
+        <br><br>
+        In the Vietnamese language landscape, research on this topic remains limited, largely due to its low-resource status. To address this gap, we introduce <strong>VSLIM</strong>, a joint model designed for multi-intent detection and slot filling in Vietnamese. Inspired by the SLIM framework, VSLIM builds on its foundation with a biaffine classifier that more directly captures the relationship between intents and slots. This design allows the model to better understand and represent the dependencies across sequence labels in multi-intent settings.
+        <br><br>
+        Experiments on the Vietnamese <strong>PhoATIS</strong> dataset and our newly introduced <strong>VPED</strong> corpus show that VSLIM outperforms strong NLU baselines, highlighting its potential for improving Vietnamese task-oriented dialog systems.
+        <br><br>
+        <strong>Resources:</strong><br>
+        🔗 Code & Data: <a href="https://github.com/dongphong543/VSLIM" target="_blank" style="color: var(--accent);">https://github.com/dongphong543/VSLIM</a>
+        <br><br>
+        <strong>Keywords:</strong> Multi-intent detection, Slot filling, Vietnamese language understanding, Joint learning, Explicit mapping
     </div>
+</div>
 </div>
 
 <div class="publication" data-number="[10]">
