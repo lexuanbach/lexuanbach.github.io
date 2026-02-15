@@ -750,7 +750,11 @@ I am interested in both the practical applications and theoretical foundations o
     <div class="abstract-content" id="abstract-3">
         <div class="abstract-text">
             <strong>Abstract:</strong><br><br>
-            [Abstract to be added]
+            We develop a <strong>certified decision procedure</strong> for reasoning about systems of equations over the “tree share” fractional permission model of Dockins et al. Fractional permissions provide a principled way to reason about shared ownership of resources, particularly in concurrent programs.
+            <br><br>
+            We formally verified our decision procedure and integrated it into the <strong>HIP/SLEEK</strong> verification system. During integration, we discovered bugs in both the previous uncertified decision procedure and HIP/SLEEK itself.
+            <br><br>
+            Beyond certification, our new procedure improves prior work by correctly handling negative clauses and achieving better performance.
         </div>
     </div>
 </div>
