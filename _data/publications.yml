@@ -1,4 +1,3 @@
-
 - id: "11"
   number: "[11]"
   authors: "With Phong Chung, Kha Le-Minh & Tho Quan"
@@ -20,7 +19,15 @@
       url: "/publication/ACIIDS2026b.pdf"
       icon: "📄"
   abstract: "Multi-intent detection and slot filling are fundamental tasks of natural language understanding in task-oriented dialog systems. Early approaches treated them as separate tasks, which undermines the direct connection between intents and their associated slots. This limitation becomes more pronounced when multiple intents are expressed within a single utterance.<br><br>In the Vietnamese language landscape, research on this topic remains limited, largely due to its low-resource status. To address this gap, we introduce <strong>VSLIM</strong>, a joint model designed for multi-intent detection and slot filling in Vietnamese. Inspired by the SLIM framework, VSLIM builds on its foundation with a biaffine classifier that more directly captures the relationship between intents and slots. This design allows the model to better understand and represent the dependencies across sequence labels in multi-intent settings.<br><br>Experiments on the Vietnamese <strong>PhoATIS</strong> dataset and our newly introduced <strong>VPED</strong> corpus show that VSLIM outperforms strong NLU baselines, highlighting its potential for improving Vietnamese task-oriented dialog systems. Code & Data: <a href='https://github.com/dongphong543/VSLIM' target='_blank' style='color: var(--accent);'>https://github.com/dongphong543/VSLIM</a><br><br><strong>Keywords:</strong> Multi-intent detection, Slot filling, Vietnamese language understanding, Joint learning, Explicit mapping"
-
+  bibtex: |
+    @inproceedings{le2026vslim,
+      author    = {Le, Xuan-Bach and Chung, Phong and Le-Minh, Kha and Quan, Tho},
+      title     = {VSLIM: A Vietnamese Explicit Slot-Intent Mapping for Joint Multi-Intent Detection and Slot Filling},
+      booktitle = {Proceedings of the 18th Asian Conference on Intelligent Information and Database Systems (ACIIDS 2026)},
+      year      = {2026},
+      address   = {Kaohsiung, Taiwan}
+    }
+    
 - id: "10"
   number: "[10]"
   authors: "With Khoa Phan & Tho Quan"
@@ -42,7 +49,15 @@
       url: "/publication/ACIIDS2026a.pdf"
       icon: "📄"
   abstract: "While Retrieval-Augmented Generation (RAG) pipelines often demonstrate strong performance in general settings, they struggle with legal texts, where interpreting structure and relationships between laws is crucial. To address this, we introduce <strong>SBV-LawGraph</strong> – a dual-retrieval framework designed specifically for Vietnamese legal documents.<br><br>It combines semantic retrieval with graph-based reasoning by integrating two modules: a <strong>Legal Retrieval</strong> module using sparse–dense reranking for textual accuracy, and a <strong>Relationship Retrieval</strong> module that traverses a curated Legal Knowledge Graph to capture links such as amendments, citations, and definitions.<br><br>This design enables SBV-LawGraph to generate responses that are not only relevant but also structurally grounded, addressing limitations of standard RAG systems. Evaluations on the <strong>ALQAC2025</strong> and <strong>SBV Legal Questions</strong> datasets show it consistently outperforms strong baselines, highlighting its effectiveness for precise and explainable legal QA.<br><br><strong>Keywords:</strong> Retrieval-Augmented Generation, Knowledge Graph, Natural Language Processing, Question-Answering Systems"
-
+  bibtex: |
+    @inproceedings{le2026sbvlawgraph,
+      author    = {Le, Xuan-Bach and Phan, Khoa and Quan, Tho},
+      title     = {SBV-LawGraph: A Hybrid RAG Approach Integrating Knowledge Graph for the State Bank of Vietnam Legal Documents},
+      booktitle = {Proceedings of the 18th Asian Conference on Intelligent Information and Database Systems (ACIIDS 2026)},
+      year      = {2026},
+      address   = {Kaohsiung, Taiwan}
+    }
+    
 - id: "9"
   number: "[9]"
   authors: "With Dominik, Leon, Alexander & Luke Ong"
@@ -305,7 +320,17 @@
       url: "/slides/fsttcs16_slides.pdf"
       icon: "📊"
   abstract: "Fractional share models are used to reason about how multiple actors share ownership of resources. We study the decidability and complexity of reasoning over the <em>tree share</em> model of Dockins et al. using first-order logic and its fragments.<br><br>We identify a connection between the basic Boolean operations on trees — union (t), intersection (u), and complement — and countable atomless Boolean algebras. This connection allows us to establish decidability results with precise complexity bounds for both the full first-order theory and its existential fragment over the tree share model with these operations.<br><br>We further relate the multiplication operation (bowtie) on trees to the theory of word equations, deriving decidability for its existential theory and undecidability for its full first-order theory.<br><br>Finally, we show that the full first-order theory over the model combining Boolean operations with restricted multiplication (./ with constants on the right-hand side) remains decidable via an embedding into tree-automatic structures."
-
+  bibtex: |
+    @inproceedings{le2016treeshare,
+      author    = {Le, Xuan-Bach and Hobor, Aquinas and Lin, Anthony W.},
+      title     = {Decidability and Complexity of Tree Share Formulas},
+      booktitle = {36th IARCS Annual Conference on Foundations of Software Technology and Theoretical Computer Science (FSTTCS 2016)},
+      series    = {LIPIcs},
+      volume    = {65},
+      pages     = {19:1--19:14},
+      year      = {2016}
+    }
+    
 - id: "1"
   number: "[1]"
   authors: "With Cristian Gherghina & Aquinas Hobor"
@@ -330,7 +355,16 @@
       url: "/slides/aplas12_slides.pdf"
       icon: "📊"
   abstract: "Fractional permissions enable sophisticated management of resource access in both sequential and concurrent programs. Entailment checkers for separation logic formulas containing fractional permissions must therefore reason precisely about such permissions.<br><br>We show how entailment checkers for separation logic with fractional permissions can extract equation systems over fractional shares. We develop a set of decision procedures for equations arising from the sophisticated Boolean binary tree fractional permission model of Dockins et al.<br><br>We prove that our procedures are sound and complete and analyze their computational complexity. We describe our implementation, provide performance benchmarks, and detail its integration into the <strong>HIP/SLEEK</strong> verification toolset. Our results are supported by machine-checked proofs in <strong>Coq</strong>."
-
+  bibtex: |
+    @inproceedings{le2012fractional,
+      author    = {Le, Xuan-Bach and Gherghina, Cristian and Hobor, Aquinas},
+      title     = {Decision Procedures over Sophisticated Fractional Permissions},
+      booktitle = {Programming Languages and Systems (APLAS 2012)},
+      pages     = {368--385},
+      publisher = {Springer},
+      year      = {2012}
+    } 
+    
 - id: "phd"
   number: "[PhD]"
   authors: ""
@@ -353,3 +387,11 @@
       icon: "📄"
   abstract: "Fractional permissions are widely used to reason about shared resource ownership in concurrent program verification. Traditional rational models, however, weaken the disjointness principle central to Separation Logic.<br><br>This thesis investigates the <strong>tree share</strong> model, a canonical Boolean binary tree structure equipped with a join operator (⊕) and a multiplication-like operator (./), as a principled alternative that preserves disjointness while supporting infinite split-ability and scalable permission manipulation.<br><br>The work develops three pillars. First, we embed tree shares into Separation Logic to support advanced verification tasks such as bi-abduction, inductive predicates, and precision reasoning. Second, we design sound and complete decision procedures for tree-share constraints and integrate them into the HIP/SLEEK verification toolset. Third, we establish precise decidability and complexity results for fragments of the tree-share structure, revealing connections to Boolean algebras and string concatenation.<br><br>Together, these contributions provide a rigorous theoretical and practical foundation for disjoint fractional permissions in concurrent program verification."
   is_thesis: true
+  bibtex: |
+    @phdthesis{le2017phd,
+      author = {Le, Xuan-Bach},
+      title  = {Disjoint Fractional Permissions in Verification: Applications, Systems and Theory},
+      school = {National University of Singapore},
+      year   = {2017},
+      month  = {September}
+    }
