@@ -67,6 +67,14 @@
       url: "/slides/irl24-poster.png"
       icon: "📊"
   abstract: "Linear Temporal Logic (LTL) and, more generally, ω-regular objectives are alternatives to traditional discount-sum and average-reward objectives in reinforcement learning (RL), offering improved comprehensibility and explainability.<br><br>In this work, we study the relationship between these objectives. Our main result shows that each RL problem with ω-regular objectives can be reduced to a limit-average reward problem in an optimality-preserving manner via finite-memory reward machines.<br><br>Furthermore, we demonstrate the efficacy of this approach by showing that optimal policies for limit-average problems can be found asymptotically by solving a sequence of discount-sum problems approximately. Consequently, we resolve an open problem: optimal policies for LTL and ω-regular objectives can be learned asymptotically."
+  bibtex: |
+    @inproceedings{le2024ltlrl,
+      author    = {Le, Xuan-Bach and Wagner, Dominik and Witzman, Leon and Rabinovich, Alexander and Ong, Luke},
+      title     = {Reinforcement Learning with LTL and {$\omega$}-Regular Objectives via Optimality-Preserving Translation to Average Rewards},
+      booktitle = {Advances in Neural Information Processing Systems (NeurIPS 2024)},
+      year      = {2024}
+    }
+
 
 - id: "8"
   number: "[8]"
