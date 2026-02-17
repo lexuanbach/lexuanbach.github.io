@@ -288,8 +288,9 @@ h2 {
     transform: translateY(-1px);
 }
 
-/* Abstract Toggle */
-.abstract-toggle {
+/* Abstract & BibTeX Toggle */
+.abstract-toggle,
+.bibtex-toggle {
     display: inline-flex;
     align-items: center;
     gap: 4px;
@@ -312,16 +313,26 @@ h2 {
     transform: translateY(-1px);
 }
 
-.abstract-toggle .arrow {
+.bibtex-toggle:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.abstract-toggle .arrow,
+.bibtex-toggle .arrow {
     transition: transform 0.3s ease;
     display: inline-block;
 }
 
-.abstract-toggle.active .arrow {
+.abstract-toggle.active .arrow,
+.bibtex-toggle.active .arrow {
     transform: rotate(180deg);
 }
 
-.abstract-content {
+.abstract-content,
+.bibtex-content {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s ease, margin-top 0.4s ease, opacity 0.4s ease;
@@ -329,7 +340,8 @@ h2 {
     margin-top: 0;
 }
 
-.abstract-content.show {
+.abstract-content.show,
+.bibtex-content.show {
     max-height: 500px;
     opacity: 1;
     margin-top: 12px;
@@ -343,6 +355,44 @@ h2 {
     font-size: 0.95em;
     line-height: 1.6;
     color: var(--text);
+}
+
+.bibtex-text {
+    background: rgba(26, 26, 46, 0.95);
+    color: #f8f8f2;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 0.85em;
+    line-height: 1.5;
+    font-family: 'IBM Plex Mono', monospace;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    position: relative;
+}
+
+.bibtex-copy {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: white;
+    font-size: 0.75em;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.bibtex-copy:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.bibtex-copy.copied {
+    background: rgba(46, 204, 113, 0.3);
+    border-color: rgba(46, 204, 113, 0.5);
 }
 
 /* Featured publication */
@@ -400,6 +450,30 @@ function toggleAbstract(id) {
     
     toggle.classList.toggle('active');
     content.classList.toggle('show');
+}
+
+function toggleBibtex(id) {
+    const toggle = document.getElementById('bibtex-toggle-' + id);
+    const content = document.getElementById('bibtex-' + id);
+    
+    toggle.classList.toggle('active');
+    content.classList.toggle('show');
+}
+
+function copyBibtex(id) {
+    const bibtexText = document.getElementById('bibtex-text-' + id).textContent;
+    const button = document.getElementById('bibtex-copy-' + id);
+    
+    navigator.clipboard.writeText(bibtexText).then(() => {
+        const originalText = button.textContent;
+        button.textContent = '✓ Copied!';
+        button.classList.add('copied');
+        
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    });
 }
 </script>
 
@@ -466,11 +540,20 @@ I am interested in both the practical applications and theoretical foundations o
         <span class="abstract-toggle" id="toggle-{{ pub.id }}" onclick="toggleAbstract('{{ pub.id }}')">
             📖 Abstract <span class="arrow">▼</span>
         </span>
+        <span class="bibtex-toggle" id="bibtex-toggle-{{ pub.id }}" onclick="toggleBibtex('{{ pub.id }}')">
+            📋 BibTeX <span class="arrow">▼</span>
+        </span>
     </div>
     <div class="abstract-content" id="abstract-{{ pub.id }}">
         <div class="abstract-text">
             <strong>Abstract:</strong><br><br>
             {{ pub.abstract }}
+        </div>
+    </div>
+    <div class="bibtex-content" id="bibtex-{{ pub.id }}">
+        <div class="bibtex-text">
+            <button class="bibtex-copy" id="bibtex-copy-{{ pub.id }}" onclick="copyBibtex('{{ pub.id }}')">📋 Copy</button>
+            <pre id="bibtex-text-{{ pub.id }}">{{ pub.bibtex }}</pre>
         </div>
     </div>
 </div>
