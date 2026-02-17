@@ -100,7 +100,14 @@
       url: "/slides/POPL2022_slides.pdf"
       icon: "📊"
   abstract: "Quantum programs are not only complicated to design but also challenging to verify, as quantum states can have exponential size and require sophisticated mathematics to encode and manipulate. To address the state-space explosion problem in quantum reasoning, we propose a Hoare-style inference framework that supports local reasoning for quantum programs.<br><br>By providing a quantum interpretation of the separating conjunction, we integrate separation logic into our framework and enable local reasoning via a quantum frame rule analogous to the classical frame rule.<br><br>For evaluation, we apply our framework to verify representative quantum programs, including Deutsch–Jozsa's algorithm and Grover's algorithm."
-
+  bibtex: |
+    @inproceedings{le2022quantumsep,
+      author    = {Le, Xuan-Bach and Lin, Shang-Wei and Sun, Jun and Sanan, David},
+      title     = {A Quantum Interpretation of Separating Conjunction for Local Reasoning of Quantum Programs Based on Separation Logic},
+      booktitle = {Proceedings of the ACM SIGPLAN Symposium on Principles of Programming Languages (POPL 2022)},
+      year      = {2022}
+    }
+    
 - id: "7"
   number: "[7]"
   authors: "With David Sanan, Sun Jun & Shang-Wei Lin"
@@ -125,7 +132,15 @@
       url: "/slides/ICECCS2021_slides.pdf"
       icon: "📊"
   abstract: "Rely-Guarantee is a comprehensive technique that supports compositional reasoning for concurrent programs. However, specifying the <em>Rely</em> condition—environment interference—and the <em>Guarantee</em> condition—local transformation of thread state—remains challenging, making their construction a major bottleneck in automation.<br><br>To address this problem, we propose a verification framework that constructs correctness proofs for concurrent programs by automatically inferring suitable Rely-Guarantee conditions. Our framework first builds a Hoare-style sequential proof for each thread, and then applies abstraction refinement to lift these proofs into concurrent ones with appropriate Rely-Guarantee relations.<br><br>Experimental results demonstrate that our approach efficiently proves the correctness of multi-threaded programs.<br><br><strong>Keywords:</strong> Rely-Guarantee, Concurrency, CEGAR"
-
+  bibtex: |
+    @inproceedings{le2020relyguarantee,
+      author    = {Le, Xuan-Bach and Sanán, David and Sun, Jun and Lin, Shang-Wei},
+      title     = {Automatic Verification of Multi-threaded Programs by Inference of Rely-Guarantee Specifications},
+      booktitle = {Proceedings of the 25th International Conference on Engineering of Complex Computer Systems (ICECCS 2020)},
+      pages     = {43--52},
+      year      = {2020}
+    }
+    
 - id: "6"
   number: "[6]"
   authors: "With Pablo Barceló, Chih-Duo Hong, Anthony W. Lin & Reino Niskanen (alphabetical)"
@@ -147,7 +162,17 @@
       url: "/publication/ICALP2019.pdf"
       icon: "📄"
   abstract: "Monadic decomposability — the ability to determine whether a formula in a given logical theory can be decomposed into a Boolean combination of monadic formulas — is a powerful tool for devising decision procedures. In this paper, we revisit a classical decision problem in automata theory: given a regular (synchronized rational) relation, determine whether it is recognizable, i.e., whether it admits a monadic decomposition as a Boolean combination of Cartesian products of regular languages.<br><br>Regular relations are highly expressive and, under suitable encodings, capture relations definable in Presburger Arithmetic. Their expressive power coincides with relations definable in universal automatic structures, equivalently those definable by finite set interpretations in WS1S (Weak Second Order Theory of One Successor).<br><br>While decidability of this problem was known (and exponential time for binary relations), its exact complexity remained open. Our main contribution is to fully settle the complexity of this decision problem by developing new techniques based on infinite Ramsey theory. We show that the problem is <strong>NLOGSPACE-complete</strong> for DFA representations and <strong>PSPACE-complete</strong> for NFA representations of regular relations."
-
+  bibtex: |
+    @inproceedings{le2019monadic,
+      author    = {Barceló, Pablo and Hong, Chih-Duo and Le, Xuan-Bach and Lin, Anthony W. and Niskanen, Reino},
+      title     = {Monadic Decomposability of Regular Relations},
+      booktitle = {Proceedings of the 46th International Colloquium on Automata, Languages, and Programming (ICALP 2019)},
+      series    = {LIPIcs},
+      volume    = {132},
+      pages     = {103:1--103:14},
+      year      = {2019}
+    }
+    
 - id: "5"
   number: "[5]"
   authors: "With Aquinas Hobor & Anthony W. Lin"
@@ -172,7 +197,16 @@
       url: "/slides/aplas18_slides.pdf"
       icon: "📊"
   abstract: "The tree share structure proposed by Dockins et al. provides an elegant model for tracking disjoint ownership in concurrent separation logic. However, decision procedures for tree shares are difficult to implement due to the lack of a systematic theoretical study.<br><br>We show that the first-order theory of the full Boolean algebra of tree shares (with all tree-share constants) is decidable and has the same complexity as the first-order theory of Countable Atomless Boolean Algebras.<br><br>We further prove that combining this additive structure with a constant-restricted unary multiplicative \"relativization\" operator yields a non-elementary lower bound. We analyze the source of this lower bound and demonstrate that it arises from the interaction between the two theories, by establishing an upper bound for a generalization of the restricted multiplicative theory in isolation."
-
+  bibtex: |
+    @inproceedings{le2018treeshare,
+      author    = {Le, Xuan-Bach and Hobor, Aquinas and Lin, Anthony W.},
+      title     = {Complexity Analysis of Tree Share Structure},
+      booktitle = {Programming Languages and Systems (APLAS 2018)},
+      pages     = {89--108},
+      publisher = {Springer},
+      year      = {2018}
+    }
+    
 - id: "4"
   number: "[4]"
   authors: "With Aquinas Hobor"
@@ -200,7 +234,16 @@
       url: "https://github.com/lexuanbach/share-infer"
       icon: "🔧"
   abstract: "Resource sharing is a fundamental phenomenon in concurrent programming, where multiple threads hold permissions to access a common resource. Verification logics must therefore capture permission ownership and transfer.<br><br>A common approach is to use rational numbers in $(0,1]$ as permissions, where 1 represents full permission and fractional values represent partial ownership. However, rational permissions are not a natural fit for separation logic, as they weaken its essential notion of disjointness.<br><br>We propose a general logical framework that supports permission reasoning in separation logic while preserving disjointness. Our framework enables sophisticated verification tasks such as induction over heap finiteness within the object logic, biabductive inference, and proofs of precision for recursive predicates within the object logic.<br><br>We introduce <strong>scaling separation algebras</strong>, a compositional extension of separation algebras, to model our logic and construct a concrete semantic model. We also developed the <strong>ShareInfer</strong> tool to benchmark our techniques."
-
+  bibtex: |
+    @inproceedings{le2018disjoint,
+      author    = {Le, Xuan-Bach and Hobor, Aquinas},
+      title     = {Logical Reasoning for Disjoint Permissions},
+      booktitle = {Programming Languages and Systems (ESOP 2018)},
+      pages     = {385--414},
+      publisher = {Springer},
+      year      = {2018}
+    }
+    
 - id: "3"
   number: "[3]"
   authors: "With Thanh-Toan Nguyen, Wei-Ngan Chin & Aquinas Hobor"
@@ -228,7 +271,16 @@
       url: "https://github.com/lexuanbach/certified-permission-procedure"
       icon: "🔧"
   abstract: "We develop a <strong>certified decision procedure</strong> for reasoning about systems of equations over the \"tree share\" fractional permission model of Dockins et al. Fractional permissions provide a principled way to reason about shared ownership of resources, particularly in concurrent programs.<br><br>We formally verified our decision procedure and integrated it into the <strong>HIP/SLEEK</strong> verification system. During integration, we discovered bugs in both the previous uncertified decision procedure and HIP/SLEEK itself.<br><br>Beyond certification, our new procedure improves prior work by correctly handling negative clauses and achieving better performance."
-
+  bibtex: |
+    @inproceedings{le2017certified,
+      author    = {Le, Xuan-Bach and Nguyen, Thanh-Toan and Chin, Wei-Ngan and Hobor, Aquinas},
+      title     = {A Certified Decision Procedure for Tree Shares},
+      booktitle = {Formal Methods and Software Engineering (ICFEM 2017)},
+      pages     = {226--242},
+      publisher = {Springer},
+      year      = {2017}
+    }
+    
 - id: "2"
   number: "[2]"
   authors: "With Aquinas Hobor & Anthony W. Lin"
