@@ -1,3 +1,33 @@
+- id: "14"
+  number: "[14]"
+  authors: "With Hoang-Quoc-Bao Hua"
+  title: "Emerging Trends and Challenges Toward LLM Agents in Static Analysis"
+  venue:
+    name: "IEA/AIE 2026"
+    url: "https://www.i-somet.org/iea-aie2026/cfp.html"
+    location: "Kuala Lumpur, Malaysia"
+    date: "July 2026"
+  tags:
+    - text: "Static Analysis"
+      class: "verification"
+    - text: "LLM Agents"
+      class: "nlp"
+    - text: "Software Reliability"
+      class: "verification"
+  links:
+    - type: "paper"
+      url: "/publication/IEA2026c.pdf"
+      icon: "📄"
+  abstract: "Static analysis remains crucial for ensuring software reliability and security, yet it frequently struggles with false positives, rigid rule sets, and an inability to reason about semantic context.<br><br>LLM-based agents show promise as a complement to traditional approaches by bringing autonomous reasoning and verification capabilities to the analysis pipeline. This paper introduces a taxonomy that organizes these agents along four key dimensions: architecture, integration patterns, grounding mechanisms, and application domains.<br><br>Our framework captures how agents are structured, where they intervene in existing workflows, how they validate their outputs, and which tasks they address - from defect detection and code maintenance to security auditing. We examine current evaluation practices and surface major limitations around reliability and scalability.<br><br>The paper concludes by distilling lessons from recent work, highlighting open research challenges, and identifying promising directions for future investigation."
+  bibtex: |
+    @inproceedings{hua2026llmstaticanalysis,
+      author    = {Hua, Hoang-Quoc-Bao and Le, Xuan-Bach},
+      title     = {Emerging Trends and Challenges Toward LLM Agents in Static Analysis},
+      booktitle = {Proceedings of the 39th International Conference on Industrial, Engineering and Other Applications of Applied Intelligent Systems (IEA/AIE 2026)},
+      year      = {2026},
+      address   = {Kuala Lumpur, Malaysia}
+    }
+
 - id: "13"
   number: "[13]"
   authors: "With Thi-Hong-Cuc Le"
