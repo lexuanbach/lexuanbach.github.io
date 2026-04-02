@@ -1,3 +1,63 @@
+- id: "13"
+  number: "[13]"
+  authors: "With Thi-Hong-Cuc Le"
+  title: "From Black-Box to Glass-Box: Explainable AI for Applied Intelligent Software Systems Across the Software Development Life Cycle"
+  venue:
+    name: "IEA/AIE 2026"
+    url: "https://www.i-somet.org/iea-aie2026/cfp.html"
+    location: "Kuala Lumpur, Malaysia"
+    date: "July 2026"
+  tags:
+    - text: "Explainable AI"
+      class: "ai"
+    - text: "Software Engineering"
+      class: "verification"
+    - text: "LLM"
+      class: "nlp"
+  links:
+    - type: "paper"
+      url: "/publication/IEA2026a.pdf"
+      icon: "📄"
+  abstract: "Artificial intelligence (AI), particularly large language models (LLMs), is increasingly embedded across the Software Development Life Cycle (SDLC), yet the opacity of these systems limits trust, verification, and certification in software engineering (SE), especially in safety- and regulation-critical domains.<br><br>This paper presents a systematic mapping study (SMS) of explainable AI (XAI) in SE, spanning classical machine learning, deep learning, and LLM-based tools across all SDLC phases. Using an SDLC- and persona-aware taxonomy, we synthesize evidence on explanation techniques, evaluation practices, and deployment contexts.<br><br>Our analysis reveals a pronounced imbalance: XAI research focuses on implementation and testing, while requirements, design, maintenance, and operations remain underexplored. Faithfulness validation and human-centred evaluation are limited, and LLM-based explanations introduce additional risks related to over-trust and pipeline opacity.<br><br>We conclude with a research agenda centered on faithfulness-by-design, persona-aware explanations, and certification-ready XAI pipelines, outlining a path from black-box to glass-box SE in high-stakes intelligent systems."
+  bibtex: |
+    @inproceedings{le2026glassbox,
+      author    = {Le, Thi-Hong-Cuc and Le, Xuan-Bach},
+      title     = {From Black-Box to Glass-Box: Explainable AI for Applied Intelligent Software Systems Across the Software Development Life Cycle},
+      booktitle = {Proceedings of the 39th International Conference on Industrial, Engineering and Other Applications of Applied Intelligent Systems (IEA/AIE 2026)},
+      year      = {2026},
+      address   = {Kuala Lumpur, Malaysia}
+    }
+
+- id: "12"
+  number: "[12]"
+  authors: "With Thanh-Hai Tran"
+  title: "Industrial Visual Anomaly Detection in Robotics: Methods, Datasets, and Deployable System Architectures"
+  venue:
+    name: "IEA/AIE 2026"
+    url: "https://www.i-somet.org/iea-aie2026/cfp.html"
+    location: "Kuala Lumpur, Malaysia"
+    date: "July 2026"
+  tags:
+    - text: "Anomaly Detection"
+      class: "ai"
+    - text: "Robotics"
+      class: "ai"
+    - text: "Computer Vision"
+      class: "ai"
+  links:
+    - type: "paper"
+      url: "/publication/IEA2026b.pdf"
+      icon: "📄"
+  abstract: "As collaborative robots (cobots) are increasingly integrated into unstructured environments, intelligent safety systems capable of detecting hazards without relying on extensive labeled data become necessary. This survey reviews deep learning methods for Industrial Visual Anomaly Detection (IVAD), emphasizing their role in robotic safety monitoring.<br><br>Unlike static quality inspection, robotic IVAD must function in real time, handle dynamic scenes, and detect open-set anomalies. Existing approaches are categorized into reconstruction-based, embedding-based, and vision-language model (VLM) paradigms. Relevant benchmarks and robotics-specific datasets are examined, highlighting challenges such as motion, viewpoint shifts, and multimodal sensing.<br><br>Strong benchmark scores do not carry over to robotic deployments, where dynamic scenes, latency limits, and semantic risks apply. This survey treats IVAD as a safety-critical system component, one that requires edge efficiency, low latency, and integration with middleware such as ROS2. The survey closes by mapping open problems and practical design directions for practitioners."
+  bibtex: |
+    @inproceedings{tran2026ivad,
+      author    = {Tran, Thanh-Hai and Le, Xuan-Bach},
+      title     = {Industrial Visual Anomaly Detection in Robotics: Methods, Datasets, and Deployable System Architectures},
+      booktitle = {Proceedings of the 39th International Conference on Industrial, Engineering and Other Applications of Applied Intelligent Systems (IEA/AIE 2026)},
+      year      = {2026},
+      address   = {Kuala Lumpur, Malaysia}
+    }
+
 - id: "11"
   number: "[11]"
   authors: "With Phong Chung, Kha Le-Minh & Tho Quan"
