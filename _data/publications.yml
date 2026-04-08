@@ -1,3 +1,33 @@
+- id: "15"
+  number: "[15]"
+  authors: "With Dung-Cam Quang, Vinh Q. Vo & Tho Quan"
+  title: "The Paradigm Shift in Event Extraction: An In-Depth Overview with Large Language Models"
+  venue:
+    name: "IEA/AIE 2026"
+    url: "https://www.i-somet.org/iea-aie2026/cfp.html"
+    location: "Kuala Lumpur, Malaysia"
+    date: "July 2026"
+  tags:
+    - text: "Event Extraction"
+      class: "nlp"
+    - text: "Large Language Models"
+      class: "nlp"
+    - text: "Survey"
+      class: "ai"
+  links:
+    - type: "paper"
+      url: "/publication/IEA2026d.pdf"
+      icon: "📄"
+  abstract: "Large language models (LLMs) have substantially advanced event extraction, a long-standing information extraction task that has evolved from rule-based and classical machine learning systems to modern deep learning approaches.<br><br>This survey provides an up-to-date overview of LLM-based event extraction methods, organizing them around two main strategies: using LLMs for data augmentation and using prompting or fine-tuning to address the task directly.<br><br>In contrast to prior surveys, the paper also places special emphasis on datasets, covering resources across multiple languages including English, Chinese, and Vietnamese, with attention to domain-specific settings and annotation scope.<br><br>The paper concludes with a critical analysis of current challenges and outlines promising future directions for advancing event extraction with LLMs."
+  bibtex: |
+    @inproceedings{quang2026eventextractionllm,
+      author    = {Quang, Dung-Cam and Vo, Vinh Q. and Le, Xuan-Bach and Quan, Tho},
+      title     = {The Paradigm Shift in Event Extraction: An In-Depth Overview with Large Language Models},
+      booktitle = {Proceedings of the 39th International Conference on Industrial, Engineering and Other Applications of Applied Intelligent Systems (IEA/AIE 2026)},
+      year      = {2026},
+      address   = {Kuala Lumpur, Malaysia}
+    }
+
 - id: "14"
   number: "[14]"
   authors: "With Hoang-Quoc-Bao Hua"
