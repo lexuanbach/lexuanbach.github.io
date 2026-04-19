@@ -4,7 +4,7 @@
   title: "Uncertainty-Aware Forecasting and Inventory Optimization for ATM Cash Management in Vietnam"
   venue:
     name: "FLINS-ISKE 2026"
-    url: ""
+    url: "https://2026.flins.cc/"
     location: "Sydney, Australia"
     date: "July 2026"
   tags:
@@ -171,6 +171,9 @@
     - type: "paper"
       url: "/publication/ACIIDS2026b.pdf"
       icon: "📄"
+    - type: "poster"
+      url: "/slides/ACIIDS2026b_poster.pdf"
+      icon: "📊"
   abstract: "Multi-intent detection and slot filling are fundamental tasks of natural language understanding in task-oriented dialog systems. Early approaches treated them as separate tasks, which undermines the direct connection between intents and their associated slots. This limitation becomes more pronounced when multiple intents are expressed within a single utterance.<br><br>In the Vietnamese language landscape, research on this topic remains limited, largely due to its low-resource status. To address this gap, we introduce <strong>VSLIM</strong>, a joint model designed for multi-intent detection and slot filling in Vietnamese. Inspired by the SLIM framework, VSLIM builds on its foundation with a biaffine classifier that more directly captures the relationship between intents and slots. This design allows the model to better understand and represent the dependencies across sequence labels in multi-intent settings.<br><br>Experiments on the Vietnamese <strong>PhoATIS</strong> dataset and our newly introduced <strong>VPED</strong> corpus show that VSLIM outperforms strong NLU baselines, highlighting its potential for improving Vietnamese task-oriented dialog systems. Code & Data: <a href='https://github.com/dongphong543/VSLIM' target='_blank' style='color: var(--accent);'>https://github.com/dongphong543/VSLIM</a><br><br><strong>Keywords:</strong> Multi-intent detection, Slot filling, Vietnamese language understanding, Joint learning, Explicit mapping"
   bibtex: |
     @inproceedings{le2026vslim,
