@@ -1,3 +1,36 @@
+- id: "16"
+  number: "[16]"
+  authors: "With Huu-Thanh Phan & Tho Quan"
+  title: "Uncertainty-Aware Forecasting and Inventory Optimization for ATM Cash Management in Vietnam"
+  venue:
+    name: "FLINS-ISKE 2026"
+    url: ""
+    location: "Sydney, Australia"
+    date: "July 2026"
+  tags:
+    - text: "Forecasting"
+      class: "ai"
+    - text: "Inventory Optimization"
+      class: "ai"
+    - text: "Decision-Centric AI"
+      class: "ai"
+  links:
+    - type: "paper"
+      url: "/publication/FLINS2026.pdf"
+      icon: "📄"
+    - type: "slides"
+      url: "/slides/FLINS2026_slides.pdf"
+      icon: "📊"
+  abstract: "ATM networks remain essential cash-distribution infrastructure in cash-intensive economies such as Vietnam, where replenishment decisions must balance idle capital against stockout risk.<br><br>We evaluate a forecast-then-optimize framework that combines probabilistic forecasting models with a periodic-review base-stock policy using daily withdrawal data from 84 ATMs over 3.7 years. Across 30 forecasting configurations, global neural quantile models substantially outperform classical baselines in downstream inventory performance.<br><br>The results show that forecast accuracy alone is not a reliable proxy for business impact: models with similar prediction error can yield markedly different replenishment costs. The study also highlights ATM-level heterogeneity and supports a monitoring-based deployment strategy that adapts model assignments according to realized cost while maintaining high service levels."
+  bibtex: |
+    @inproceedings{phan2026atm,
+      author    = {Phan, Huu-Thanh and Le, Xuan-Bach and Quan, Tho},
+      title     = {Uncertainty-Aware Forecasting and Inventory Optimization for ATM Cash Management in Vietnam},
+      booktitle = {Proceedings of FLINS-ISKE 2026},
+      year      = {2026},
+      address   = {Sydney, Australia}
+    }
+
 - id: "15"
   number: "[15]"
   authors: "With Dung-Cam Quang, Vinh Q. Vo & Tho Quan"
@@ -168,6 +201,9 @@
     - type: "paper"
       url: "/publication/ACIIDS2026a.pdf"
       icon: "📄"
+    - type: "slides"
+      url: "/slides/ACIIDS2026a_slides.pptx"
+      icon: "📊"
   abstract: "While Retrieval-Augmented Generation (RAG) pipelines often demonstrate strong performance in general settings, they struggle with legal texts, where interpreting structure and relationships between laws is crucial. To address this, we introduce <strong>SBV-LawGraph</strong> – a dual-retrieval framework designed specifically for Vietnamese legal documents.<br><br>It combines semantic retrieval with graph-based reasoning by integrating two modules: a <strong>Legal Retrieval</strong> module using sparse–dense reranking for textual accuracy, and a <strong>Relationship Retrieval</strong> module that traverses a curated Legal Knowledge Graph to capture links such as amendments, citations, and definitions.<br><br>This design enables SBV-LawGraph to generate responses that are not only relevant but also structurally grounded, addressing limitations of standard RAG systems. Evaluations on the <strong>ALQAC2025</strong> and <strong>SBV Legal Questions</strong> datasets show it consistently outperforms strong baselines, highlighting its effectiveness for precise and explainable legal QA.<br><br><strong>Keywords:</strong> Retrieval-Augmented Generation, Knowledge Graph, Natural Language Processing, Question-Answering Systems"
   bibtex: |
     @inproceedings{le2026sbvlawgraph,
