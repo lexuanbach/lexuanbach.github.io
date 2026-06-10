@@ -198,6 +198,20 @@ h2 {
     margin-bottom: 8px;
 }
 
+.pub-award {
+    display: inline-block;
+    background: rgba(241, 196, 15, 0.12);
+    color: #b7950b;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border: 1px solid rgba(241, 196, 15, 0.4);
+    margin-bottom: 8px;
+}
+
 .pub-tag {
     background: rgba(26, 26, 46, 0.06);
     color: var(--primary);
@@ -528,6 +542,9 @@ I am interested in both the practical applications and theoretical foundations o
         ({{ pub.venue.date }})
         {% endif %}
     </div>
+    {% if pub.award != "" and pub.award %}
+    <div><span class="pub-award">🏆 {{ pub.award }}</span></div>
+    {% endif %}
     <div class="publication-tags">
         {% for tag in pub.tags %}
         <span class="pub-tag {{ tag.class }}">{{ tag.text }}</span>
