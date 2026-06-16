@@ -1,3 +1,62 @@
+- id: "18"
+  number: "[18]"
+  authors: "With Hieu Le, Surya Hanjaya & Trang Hoang"
+  title: "Examination Room Usage Optimization Via Greedy and Exact Methods: A Vietnamese University Case Study"
+  venue:
+    name: "SOMET 2026"
+    url: "https://www.i-somet.org/somet2026/"
+    location: "Kuala Lumpur, Malaysia"
+    date: "September 2026"
+  tags:
+    - text: "Optimization"
+      class: "ai"
+    - text: "Greedy & Exact Methods"
+      class: "theory"
+    - text: "Scheduling"
+      class: "ai"
+  links: []
+  abstract: "Organizing university examinations is costly, largely because many rooms must be opened for each exam session. In practice, conservative policies and course-specific constraints often fragment room usage, leaving much capacity unused.<br><br>Unlike traditional examination timetabling research, which jointly optimizes time slots and room assignments, we focus on the post-timetable problem of improving room utilization once exam schedules are already fixed. This paper studies how to reduce the number of rooms required for fixed exam sessions while respecting practical constraints such as room capacities, campus boundaries, and course-separation rules.<br><br>We consider two scenarios: improving existing assignments through post-processing and allocating rooms from scratch. For both, we propose a fast greedy heuristic based on a best-fit decreasing strategy, together with an Integer Linear Programming (ILP) model that produces optimal solutions for moderately sized instances.<br><br>Experiments on real examination data from Ho Chi Minh City University of Technology (HCMUT), a large multi-campus public university in Vietnam, show substantial room savings and illustrate the trade-off between the scalability of heuristics and the optimality of exact methods.<br><br><strong>Keywords:</strong> examination timetabling, room allocation, integer linear programming, greedy heuristic, room utilization optimization"
+  bibtex: |
+    @inproceedings{le2026examroom,
+      author    = {Le, Hieu and Hanjaya, Surya and Hoang, Trang and Le, Xuan-Bach},
+      title     = {Examination Room Usage Optimization Via Greedy and Exact Methods: A Vietnamese University Case Study},
+      booktitle = {Proceedings of the 25th International Conference on Intelligent Software Methodologies, Tools, and Techniques (SOMET 2026)},
+      series    = {Frontiers in Artificial Intelligence and Applications},
+      publisher = {IOS Press},
+      year      = {2026},
+      address   = {Kuala Lumpur, Malaysia}
+    }
+
+- id: "17"
+  number: "[17]"
+  authors: "With Phat Tran-Truong Tuan"
+  title: "Measuring the Unmeasurable: Markov Chain Reliability for LLM Agents"
+  venue:
+    name: "ISSRE 2026 (Research Track, CORE Rank A)"
+    url: "https://cyprusconferences.org/issre2026/"
+    location: "Limassol, Cyprus"
+    date: "October 2026"
+  tags:
+    - text: "Software Reliability"
+      class: "verification"
+    - text: "LLM Agents"
+      class: "nlp"
+    - text: "Markov Chain"
+      class: "theory"
+  links:
+    - type: "code"
+      url: "https://anonymous.4open.science/r/TraceToChain-EEE6"
+      icon: "💻"
+  abstract: "Large language model (LLM) agents increasingly operate as sequential software systems, but their reliability is often summarized by scalar benchmark metrics. Metrics such as pass@k, pass<sup>k</sup>, and the reliability decay curve (RDC) are useful summaries, but they do not identify the success-time distribution being estimated, test whether traces support that distribution, or quantify finite-trace uncertainty.<br><br>We present TraceToChain, a reproducible pipeline that fits agent execution traces to an absorbing discrete-time Markov chain (DTMC), M&#770;&#8201;=&#8201;(Q&#770;,&#8201;R&#770;<sub>&oplus;</sub>,&#8201;R&#770;<sub>&ominus;</sub>), with explicit diagnostics and uncertainty. The pipeline builds an automatic cluster taxonomy, estimates transitions with Laplace-smoothed maximum-likelihood estimation (MLE), checks fit with a composite Akaike information criterion (AIC) and Kolmogorov&ndash;Smirnov (KS) goodness-of-fit certificate, and reports Dirichlet-posterior credible intervals and non-parametric bootstrap intervals. We adapt classical reliability mathematics (Kemeny&ndash;Snell, Cheung, Goel&ndash;Okumoto) to agent traces.<br><br>The resulting first-passage view reconciles metrics usually reported separately: pass@k, pass<sup>k</sup>, and the RDC are projections of one success-time distribution. On seven controlled MAST-style frameworks with a strict 50/50 fit/test protocol, held-out empirical RDCs overlay their analytic counterparts with max&nbsp;L<sub>&infin;</sub><sup>RDC</sup>&nbsp;=&nbsp;0.053 (median&nbsp;0.048). A two-sample KS test on the first-passage cumulative distribution function (CDF) accepts the fitted chain with p&nbsp;&gt;&nbsp;0.05 on 7/7 frameworks (min&nbsp;p&nbsp;=&nbsp;0.78), and per-entry 95% posterior and bootstrap intervals agree to &asymp;&thinsp;0.01 at the median. The anonymous artifact is available at <a href=\"https://anonymous.4open.science/r/TraceToChain-EEE6\" target=\"_blank\">anonymous.4open.science/r/TraceToChain-EEE6</a>."
+  bibtex: |
+    @inproceedings{tran2026tracetochain,
+      author    = {Tran-Truong, Phat Tuan and Le, Xuan-Bach},
+      title     = {Measuring the Unmeasurable: Markov Chain Reliability for LLM Agents},
+      booktitle = {Proceedings of the 37th IEEE International Symposium on Software Reliability Engineering (ISSRE 2026)},
+      year      = {2026},
+      address   = {Limassol, Cyprus}
+    }
+
 - id: "16"
   number: "[16]"
   authors: "With Huu-Thanh Phan & Tho Quan"
