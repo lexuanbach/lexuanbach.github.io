@@ -310,7 +310,7 @@
   authors: "With Dominik, Leon, Alexander & Luke Ong"
   title: "Reinforcement Learning with LTL and Omega-Regular Objectives via Optimality-Preserving Translation to Average Rewards"
   venue:
-    name: "NeurIPS 2024"
+    name: "NeurIPS 2024 (CORE Rank A*)"
     url: "https://neurips.cc/Conferences/2024"
     location: "Vancouver, Canada"
     date: "December 2024"
@@ -343,7 +343,7 @@
   authors: "With Shang-Wei Lin, Sun Jun & David Sanan"
   title: "A Quantum Interpretation of Separating Conjunction for Local Reasoning of Quantum Programs Based on Separation Logic"
   venue:
-    name: "POPL 2022"
+    name: "POPL 2022 (CORE Rank A*)"
     url: "https://popl22.sigplan.org/"
     location: "Philadelphia, USA"
     date: "January 2022"
@@ -375,7 +375,7 @@
   authors: "With David Sanan, Sun Jun & Shang-Wei Lin"
   title: "Automatic Verification of Multi-threaded Programs by Inference of Rely-Guarantee Specifications"
   venue:
-    name: "ICECCS 2020"
+    name: "ICECCS 2020 (CORE Rank A)"
     url: "https://formal-analysis.com/iceccs/2020/"
     location: "Singapore"
     date: "March 2021"
@@ -408,7 +408,7 @@
   authors: "With Pablo Barceló, Chih-Duo Hong, Anthony W. Lin & Reino Niskanen (alphabetical)"
   title: "Monadic Decomposability of Regular Relations"
   venue:
-    name: "ICALP 2019"
+    name: "ICALP 2019 (CORE Rank A*)"
     url: "https://icalp2019.upatras.gr/"
     location: "Patras, Greece"
     date: "July 2019"
@@ -474,7 +474,7 @@
   authors: "With Aquinas Hobor"
   title: "Logical Reasoning for Disjoint Permissions"
   venue:
-    name: "ESOP 2018"
+    name: "ESOP 2018 (CORE Rank A)"
     url: "https://www.etaps.org/2018/esop.html"
     location: "Thessaloniki, Greece"
     date: "April 2018"
