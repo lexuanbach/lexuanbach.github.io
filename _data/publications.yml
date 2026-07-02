@@ -1,5 +1,32 @@
-- id: "19"
-  number: "[19]"
+- id: "21"
+  number: "[21]"
+  authors: "With Phat T. Tran-Truong"
+  title: "Distributional Program Analysis: Treating Large Language Models as Program Samplers"
+  venue:
+    name: "ASE 2026 (NIER Track, Acceptance Rate: 23/89, 25%)"
+    url: "https://conf.researchr.org/home/ase-2026"
+    location: "Munich, Germany"
+    date: "November 2026"
+  tags:
+    - text: "Program Analysis"
+      class: "verification"
+    - text: "LLM Sampling"
+      class: "nlp"
+    - text: "Invariant Inference"
+      class: "verification"
+  links: []
+  abstract: "A specification under-determines a program. When a large language model (LLM) is prompted with that specification, it induces a distribution over programs that satisfy it in different ways. Pipelines that generate one program and then analyze it discard the key artifact of this distribution: variation across samples. We propose distributional program analysis (DPA): analyze many LLM samples for the same task and aggregate analyzer outputs as cross-sample evidence about candidate program properties. The central statistic is an invariant's survival rate, the fraction of samples in which the analyzer infers it. Under stated sampling and analyzer assumptions, high-survival invariants mark stable intended properties; fragile invariants expose decoding noise or underspecification. We define survival, present a Python prototype, and report a HumanEval+ pilot in which high-survival invariants align with reference-solution invariants in roughly four out of five cases. Filtering samples by survival consistency also improves pass@1 at the same 20-sample budget, showing that variation is an analysis signal rather than noise to hide."
+  bibtex: |
+    @inproceedings{trantruong2026dpa,
+      author    = {Tran-Truong, Phat T. and Le, Xuan-Bach},
+      title     = {Distributional Program Analysis: Treating Large Language Models as Program Samplers},
+      booktitle = {Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering (ASE 2026), New Ideas and Emerging Results (NIER) Track},
+      year      = {2026},
+      address   = {Munich, Germany}
+    }
+
+- id: "20"
+  number: "[20]"
   authors: "With Thi-Hong-Cuc Le & Hoang-Quoc-Bao Hua"
   title: "GraphLedger: Repository-Level Vulnerability Detection via Graph-Based Compression and Assumption Validation"
   venue:
@@ -23,6 +50,39 @@
       booktitle = {Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering (ASE 2026)},
       year      = {2026},
       address   = {Munich, Germany}
+    }
+
+- id: "19"
+  number: "[19]"
+  authors: "With Dung-Cam Quang & Tho Quan"
+  title: "Towards Resource-Constrained Event Extraction: A Knowledge-Augmented Framework for Overcoming Challenges in Vietnamese NLP"
+  venue:
+    name: "International Journal of Innovative Computing (IJIC), 16(1), pp. 79-85"
+    url: "https://doi.org/10.11113/ijic.v16n1.676"
+    location: ""
+    date: "June 2026"
+  tags:
+    - text: "Event Extraction"
+      class: "nlp"
+    - text: "Vietnamese NLP"
+      class: "nlp"
+    - text: "Knowledge-Augmented Learning"
+      class: "ai"
+  links:
+    - type: "paper"
+      url: "https://doi.org/10.11113/ijic.v16n1.676"
+      icon: "📄"
+  abstract: "Event Extraction (EE) is crucial for NLP, capturing meaningful activities in documents. While recent research has applied Large Language Models to EE, their computational overhead remains problematic. Moreover, existing state-of-the-art methods predominantly focus on high-resource languages such as English and Chinese, leaving low-resource languages, like Vietnamese, largely under-explored due to unique linguistic challenges.<br><br>We propose a Small Language Model-based framework enhanced with external knowledge to address Vietnamese EE. The approach targets core difficulties including rare events, semantic ambiguity, and long-range dependencies, thereby establishing an efficient and robust framework specifically tailored for the Vietnamese low-resource language domain."
+  bibtex: |
+    @article{quang2026event,
+      author  = {Quang, Dung-Cam and Le, Xuan-Bach and Quan, Tho},
+      title   = {Towards Resource-Constrained Event Extraction: A Knowledge-Augmented Framework for Overcoming Challenges in Vietnamese NLP},
+      journal = {International Journal of Innovative Computing (IJIC)},
+      volume  = {16},
+      number  = {1},
+      pages   = {79--85},
+      year    = {2026},
+      doi     = {10.11113/ijic.v16n1.676}
     }
 
 - id: "18"
