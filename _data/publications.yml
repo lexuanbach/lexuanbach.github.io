@@ -105,6 +105,9 @@
     - type: "paper"
       url: "/publication/SOMET2026.pdf"
       icon: "📄"
+    - type: "code"
+      url: "https://github.com/hieukendu/ILP"
+      icon: "💻"
   abstract: "Organizing university examinations is costly, largely because many rooms must be opened for each exam session. In practice, conservative policies and course-specific constraints often fragment room usage, leaving much capacity unused.<br><br>Unlike traditional examination timetabling research, which jointly optimizes time slots and room assignments, we focus on the post-timetable problem of improving room utilization once exam schedules are already fixed. This paper studies how to reduce the number of rooms required for fixed exam sessions while respecting practical constraints such as room capacities, campus boundaries, and course-separation rules.<br><br>We consider two scenarios: improving existing assignments through post-processing and allocating rooms from scratch. For both, we propose a fast greedy heuristic based on a best-fit decreasing strategy, together with an Integer Linear Programming (ILP) model that produces optimal solutions for moderately sized instances.<br><br>Experiments on real examination data from Ho Chi Minh City University of Technology (HCMUT), a large multi-campus public university in Vietnam, show substantial room savings and illustrate the trade-off between the scalability of heuristics and the optimality of exact methods.<br><br><strong>Keywords:</strong> examination timetabling, room allocation, integer linear programming, greedy heuristic, room utilization optimization"
   bibtex: |
     @inproceedings{le2026examroom,
