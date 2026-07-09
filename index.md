@@ -356,7 +356,6 @@ h2 {
 
 .abstract-content.show,
 .bibtex-content.show {
-    max-height: 500px;
     opacity: 1;
     margin-top: 12px;
 }
@@ -458,20 +457,22 @@ h2 {
 </style>
 
 <script>
+function toggleContent(toggle, content) {
+    toggle.classList.toggle('active');
+    const isOpen = content.classList.toggle('show');
+    content.style.maxHeight = isOpen ? content.scrollHeight + 'px' : '0';
+}
+
 function toggleAbstract(id) {
     const toggle = document.getElementById('toggle-' + id);
     const content = document.getElementById('abstract-' + id);
-    
-    toggle.classList.toggle('active');
-    content.classList.toggle('show');
+    toggleContent(toggle, content);
 }
 
 function toggleBibtex(id) {
     const toggle = document.getElementById('bibtex-toggle-' + id);
     const content = document.getElementById('bibtex-' + id);
-    
-    toggle.classList.toggle('active');
-    content.classList.toggle('show');
+    toggleContent(toggle, content);
 }
 
 function copyBibtex(id) {
