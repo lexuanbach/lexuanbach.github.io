@@ -212,6 +212,24 @@ h2 {
     margin-bottom: 8px;
 }
 
+.pub-award-image {
+    margin-bottom: 10px;
+}
+
+.pub-award-image img {
+    max-height: 180px;
+    max-width: 100%;
+    border-radius: 8px;
+    border: 1px solid rgba(241, 196, 15, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.pub-award-image img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
 .pub-tag {
     background: rgba(26, 26, 46, 0.06);
     color: var(--primary);
@@ -545,6 +563,13 @@ I am interested in both the practical applications and theoretical foundations o
     </div>
     {% if pub.award != "" and pub.award %}
     <div><span class="pub-award">🏆 {{ pub.award }}</span></div>
+    {% endif %}
+    {% if pub.award_image != "" and pub.award_image %}
+    <div class="pub-award-image">
+        <a href="{{ pub.award_image }}" target="_blank">
+            <img src="{{ pub.award_image }}" alt="{{ pub.award }} — {{ pub.title }}" loading="lazy">
+        </a>
+    </div>
     {% endif %}
     <div class="publication-tags">
         {% for tag in pub.tags %}
