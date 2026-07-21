@@ -155,6 +155,7 @@
   authors: "With Huu-Thanh Phan & Tho Quan"
   title: "Uncertainty-Aware Forecasting and Inventory Optimization for ATM Cash Management in Vietnam"
   award: "Won Outstanding Student Paper Award"
+  award_image: "/publication/FLINS-award.jpg"
   venue:
     name: "FLINS-ISKE 2026"
     url: "https://2026.flins.cc/"
@@ -250,6 +251,7 @@
   authors: "With Thi-Hong-Cuc Le"
   title: "From Black-Box to Glass-Box: Explainable AI for Applied Intelligent Software Systems Across the Software Development Life Cycle"
   award: "Won Best Paper Award"
+  award_image: "/publication/IEA-award.jpg"
   venue:
     name: "IEA/AIE 2026"
     url: "https://www.i-somet.org/iea-aie2026/cfp.html"
