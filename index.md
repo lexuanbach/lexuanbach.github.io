@@ -212,24 +212,6 @@ h2 {
     margin-bottom: 8px;
 }
 
-.pub-award-image {
-    margin-bottom: 10px;
-}
-
-.pub-award-image img {
-    max-height: 180px;
-    max-width: 100%;
-    border-radius: 8px;
-    border: 1px solid rgba(241, 196, 15, 0.4);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.pub-award-image img:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
-}
-
 .pub-tag {
     background: rgba(26, 26, 46, 0.06);
     color: var(--primary);
@@ -322,7 +304,8 @@ h2 {
 
 /* Abstract & BibTeX Toggle */
 .abstract-toggle,
-.bibtex-toggle {
+.bibtex-toggle,
+.award-toggle {
     display: inline-flex;
     align-items: center;
     gap: 4px;
@@ -352,19 +335,29 @@ h2 {
     transform: translateY(-1px);
 }
 
+.award-toggle:hover {
+    background: #b7950b;
+    color: white;
+    border-color: #b7950b;
+    transform: translateY(-1px);
+}
+
 .abstract-toggle .arrow,
-.bibtex-toggle .arrow {
+.bibtex-toggle .arrow,
+.award-toggle .arrow {
     transition: transform 0.3s ease;
     display: inline-block;
 }
 
 .abstract-toggle.active .arrow,
-.bibtex-toggle.active .arrow {
+.bibtex-toggle.active .arrow,
+.award-toggle.active .arrow {
     transform: rotate(180deg);
 }
 
 .abstract-content,
-.bibtex-content {
+.bibtex-content,
+.award-content {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s ease, margin-top 0.4s ease, opacity 0.4s ease;
@@ -373,9 +366,27 @@ h2 {
 }
 
 .abstract-content.show,
-.bibtex-content.show {
+.bibtex-content.show,
+.award-content.show {
     opacity: 1;
     margin-top: 12px;
+}
+
+.award-photo img {
+    display: block;
+    max-width: 100%;
+    max-height: 420px;
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid rgba(241, 196, 15, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.award-photo img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
 }
 
 .abstract-text {
@@ -493,6 +504,20 @@ function toggleBibtex(id) {
     toggleContent(toggle, content);
 }
 
+function toggleAward(id) {
+    const toggle = document.getElementById('award-toggle-' + id);
+    const content = document.getElementById('award-' + id);
+    toggleContent(toggle, content);
+    const img = content.querySelector('img');
+    if (img && !img.complete) {
+        img.addEventListener('load', function() {
+            if (content.classList.contains('show')) {
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
+        }, { once: true });
+    }
+}
+
 function copyBibtex(id) {
     const bibtexText = document.getElementById('bibtex-text-' + id).textContent;
     const button = document.getElementById('bibtex-copy-' + id);
@@ -564,13 +589,6 @@ I am interested in both the practical applications and theoretical foundations o
     {% if pub.award != "" and pub.award %}
     <div><span class="pub-award">🏆 {{ pub.award }}</span></div>
     {% endif %}
-    {% if pub.award_image != "" and pub.award_image %}
-    <div class="pub-award-image">
-        <a href="{{ pub.award_image }}" target="_blank">
-            <img src="{{ pub.award_image }}" alt="{{ pub.award }} — {{ pub.title }}" loading="lazy">
-        </a>
-    </div>
-    {% endif %}
     <div class="publication-tags">
         {% for tag in pub.tags %}
         <span class="pub-tag {{ tag.class }}">{{ tag.text }}</span>
@@ -586,7 +604,21 @@ I am interested in both the practical applications and theoretical foundations o
         <span class="bibtex-toggle" id="bibtex-toggle-{{ pub.id }}" onclick="toggleBibtex('{{ pub.id }}')">
             📋 BibTeX <span class="arrow">▼</span>
         </span>
+        {% if pub.award_image != "" and pub.award_image %}
+        <span class="award-toggle" id="award-toggle-{{ pub.id }}" onclick="toggleAward('{{ pub.id }}')">
+            🏆 Award Photo <span class="arrow">▼</span>
+        </span>
+        {% endif %}
     </div>
+    {% if pub.award_image != "" and pub.award_image %}
+    <div class="award-content" id="award-{{ pub.id }}">
+        <div class="award-photo">
+            <a href="{{ pub.award_image }}" target="_blank">
+                <img src="{{ pub.award_image }}" alt="{{ pub.award }} — {{ pub.title }}" loading="lazy">
+            </a>
+        </div>
+    </div>
+    {% endif %}
     <div class="abstract-content" id="abstract-{{ pub.id }}">
         <div class="abstract-text">
             <strong>Abstract:</strong><br><br>
