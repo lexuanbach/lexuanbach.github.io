@@ -1,3 +1,63 @@
+- id: "23"
+  number: "[23]"
+  authors: "With Thanh-Hai Tran"
+  title: "Latent-Space Prediction Error and Fuzzy Risk-Scaled Recovery for Robotic Manipulation"
+  venue:
+    name: "ACIVS 2026"
+    url: "https://acivsconf.org/"
+    location: "Okinawa, Japan"
+    date: "December 2026"
+  tags:
+    - text: "Anomaly Detection"
+      class: "ai"
+    - text: "World Models"
+      class: "rl"
+    - text: "Robotics"
+      class: "ai"
+  links:
+    - type: "paper"
+      url: "/publication/ACIVS2026a.pdf"
+      icon: "📄"
+  abstract: "Industrial pick-and-place lines demand near-zero failure tolerance, yet many safety layers still wait for a fault to manifest before they trigger an indiscriminate Emergency Stop. We ask whether latent prediction error can instead serve as a graded recovery signal.<br><br>Our closed loop combines a frozen DINOv2 encoder, an RSSM whose KL-divergence prediction error gives us an online risk reading, an ANFIS risk mapper, and a controller that applies bounded trajectory corrections scaled by that risk coefficient. In Webots with a UR5e arm and condition-based TRANSIT dynamics, we evaluate four recoverable motion disturbances (N = 40 episodes per mode per scenario), and we treat two semantic or actuation faults as outside joint-space recovery.<br><br>On the harder disturbances, the deployed ON policy improves RSR over a binary fail-safe halt (Jerky +25.0 pp and Speed +42.5 pp, with non-overlapping Wilson 95% CIs). On the lighter disturbances, ON mainly improves trajectory quality, and we reduce mean joint deviation by 15–45% on three motion disturbances (Pause peaks at −44.8%). CPU-only latency is P95 = 34.24 ms, which sits 65.8% below the 100 ms budget.<br><br><strong>Keywords:</strong> Anomaly detection, World models, Fuzzy risk, Risk-aware control, Robotics"
+  bibtex: |
+    @inproceedings{tran2026latent,
+      author    = {Tran, Thanh-Hai and Le, Xuan-Bach},
+      title     = {Latent-Space Prediction Error and Fuzzy Risk-Scaled Recovery for Robotic Manipulation},
+      booktitle = {Proceedings of the 23rd International Conference on Advanced Concepts for Intelligent Vision Systems (ACIVS 2026)},
+      year      = {2026},
+      address   = {Okinawa, Japan}
+    }
+
+- id: "22"
+  number: "[22]"
+  authors: "With Van-Truong-Thinh Nguyen & Thanh-Hai Tran"
+  title: "Swin-AQI: Depth-Aware Vision Transformer with Physics-Informed Learning for Particulate Matter Estimation from Ground Imagery"
+  venue:
+    name: "ACIVS 2026"
+    url: "https://acivsconf.org/"
+    location: "Okinawa, Japan"
+    date: "December 2026"
+  tags:
+    - text: "Vision Transformer"
+      class: "ai"
+    - text: "Physics-Informed Learning"
+      class: "ai"
+    - text: "Air Quality Estimation"
+      class: "ai"
+  links:
+    - type: "paper"
+      url: "/publication/ACIVS2026b.pdf"
+      icon: "📄"
+  abstract: "Street-level imagery is an appealing, low-cost complement to air-quality stations, but a camera is only useful when its pixels respond to the pollutant of interest. For particulate matter they do: aerosols scatter light along the line of sight, so distant buildings, sky boundaries, and horizon regions lose contrast as aerosol loading rises.<br><br><strong>Swin-AQI</strong> is a depth-aware Swin Transformer for monocular PM2.5 and PM10 estimation from geotagged urban images: MiDaS relative depth biases shifted-window attention toward distant tokens, learnable Fourier features encode the capture hour, and Beer–Lambert and Koschmieder terms keep predictions consistent with visibility physics. We supervise with SILAM atmospheric fields.<br><br>On 1,977 daylight images from Ho Chi Minh City, Swin-AQI reaches R²=0.80 for PM2.5 and R²=0.76 for PM10, outperforming every CNN and transformer baseline under identical inputs. Our ablations are candid about why: hour-of-day and uncertainty weighting contribute the most, while depth-aware attention and the physics terms add smaller but separable gains.<br><br><strong>Keywords:</strong> Particulate matter estimation, Depth-aware vision transformer, Physics-informed learning, Street-level imagery"
+  bibtex: |
+    @inproceedings{nguyen2026swinaqi,
+      author    = {Nguyen, Van-Truong-Thinh and Tran, Thanh-Hai and Le, Xuan-Bach},
+      title     = {Swin-AQI: Depth-Aware Vision Transformer with Physics-Informed Learning for Particulate Matter Estimation from Ground Imagery},
+      booktitle = {Proceedings of the 23rd International Conference on Advanced Concepts for Intelligent Vision Systems (ACIVS 2026)},
+      year      = {2026},
+      address   = {Okinawa, Japan}
+    }
+
 - id: "21"
   number: "[21]"
   authors: "With Phat T. Tran-Truong"
