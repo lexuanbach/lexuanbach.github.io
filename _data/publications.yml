@@ -41,7 +41,16 @@
       class: "nlp"
     - text: "Static Analysis"
       class: "verification"
-  links: []
+  links:
+    - type: "paper"
+      url: "/publication/ASE2026.pdf"
+      icon: "📄"
+    - type: "supplement"
+      url: "/publication/ASE2026-supplement.pdf"
+      icon: "📎"
+    - type: "artifact"
+      url: "https://doi.org/10.5281/zenodo.21356624"
+      icon: "📦"
   abstract: "Repository-level vulnerability detection requires reasoning across files, procedures, and long-range dependency chains. This is difficult for both dominant families of methods: static analysis often overapproximates and produces many false positives, while LLM-based approaches struggle with large repository context and may generate plausible but unsupported claims.<br><br>We present GraphLedger, a framework that combines Adaptive Assumption-Corroborating Compression (AACC) with an Assumption Ledger for structured hypothesis verification. AACC reduces repository context while preserving vulnerability-relevant dependency structure. The LLM then proposes explicit vulnerability hypotheses over the compressed context, and the ledger validates their assumptions against repository evidence, producing Verified, Rejected, or Inconclusive outcomes. This makes repository-scale reasoning more auditable and less prone to unsupported conclusions.<br><br>We evaluate GraphLedger on CWE-Bench-Java and CVEfixes. Across both datasets, AACC achieves 0.71 token reduction while retaining 0.90 of dependency edges and 0.88 of taint paths. On CWE-Bench-Java, GraphLedger achieves 0.75 precision, 0.73 recall, and 0.74 F1, and reduces false discovery rate from 0.36 to 0.25 relative to VulAgent under a controlled shared-backend evaluation. These results show that combining structure-aware compression with assumption validation improves the reliability and transparency of repository-level vulnerability detection."
   bibtex: |
     @inproceedings{le2026graphledger,
