@@ -1,3 +1,30 @@
+- id: "24"
+  number: "[24]"
+  authors: "With Tien-Anh Nguyen & Thanh-Hai Tran"
+  title: "Test-Time Spectral Adaptation for Image-to-Image Multispectral Retrieval"
+  venue:
+    name: "ACIVS 2026"
+    url: "https://acivsconf.org/"
+    location: "Okinawa, Japan"
+    date: "December 2026"
+  tags:
+    - text: "Multispectral Retrieval"
+      class: "ai"
+    - text: "Test-Time Adaptation"
+      class: "ai"
+    - text: "Vision-Language Models"
+      class: "nlp"
+  links: []
+  abstract: "Multispectral archives contain evidence that RGB encoders cannot directly ingest. Sentinel-2 images include visible, red-edge, near-infrared, and short-wave infrared bands, whereas models such as CLIP expect three-channel natural images. We study image-to-image multispectral retrieval, where query and gallery images are encoded by the same method-specific pipeline and ranked by cosine similarity between descriptors.<br><br>Starting from a generic RGB-pretrained CLIP backbone, with no Earth-observation pretraining, we propose a parameter-frozen test-time adaptation that updates only B band-weight logits per image. The method initializes the logits uniformly, refines them with a lightweight manifold-consistency objective guided by a class-name prior, and reports band-level attribution scores.<br><br>On 5-fold EuroSAT retrieval with disjoint query/gallery splits, all-band encoding raises Recall@1 from 80.28% for RGB-CLIP to 86.19% for our adapted descriptor and mAP to 46.26%; the all-bands-average reference is statistically indistinguishable on this benchmark, showing that the main EuroSAT gain comes from exposing the frozen encoder to every band. On a single-seed BigEarthNet-MM subset, RGB-CLIP remains best on saturated R@K/mAP, but our method improves strict set-overlap quality (ExactMatch@1, MeanJaccard). We therefore frame the contribution as better strict spectral-semantic matching in the frozen generic-CLIP regime, not as a claim of universal ranking dominance.<br><br><strong>Keywords:</strong> Multispectral retrieval, Test-time adaptation, CLIP, Band attribution, Remote sensing"
+  bibtex: |
+    @inproceedings{nguyen2026testtime,
+      author    = {Nguyen, Tien-Anh and Tran, Thanh-Hai and Le, Xuan-Bach},
+      title     = {Test-Time Spectral Adaptation for Image-to-Image Multispectral Retrieval},
+      booktitle = {Proceedings of the 23rd International Conference on Advanced Concepts for Intelligent Vision Systems (ACIVS 2026)},
+      year      = {2026},
+      address   = {Okinawa, Japan}
+    }
+
 - id: "23"
   number: "[23]"
   authors: "With Thanh-Hai Tran"
