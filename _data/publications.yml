@@ -332,6 +332,9 @@
     - type: "paper"
       url: "/publication/IEA2026c.pdf"
       icon: "📄"
+    - type: "slides"
+      url: "/slides/IEA2026c_slides.pdf"
+      icon: "📊"
   abstract: "Static analysis remains crucial for ensuring software reliability and security, yet it frequently struggles with false positives, rigid rule sets, and an inability to reason about semantic context.<br><br>LLM-based agents show promise as a complement to traditional approaches by bringing autonomous reasoning and verification capabilities to the analysis pipeline. This paper introduces a taxonomy that organizes these agents along four key dimensions: architecture, integration patterns, grounding mechanisms, and application domains.<br><br>Our framework captures how agents are structured, where they intervene in existing workflows, how they validate their outputs, and which tasks they address - from defect detection and code maintenance to security auditing. We examine current evaluation practices and surface major limitations around reliability and scalability.<br><br>The paper concludes by distilling lessons from recent work, highlighting open research challenges, and identifying promising directions for future investigation."
   bibtex: |
     @inproceedings{hua2026llmstaticanalysis,
@@ -364,6 +367,9 @@
     - type: "paper"
       url: "/publication/IEA2026a.pdf"
       icon: "📄"
+    - type: "slides"
+      url: "/slides/IEA2026a_slides.pdf"
+      icon: "📊"
   abstract: "Artificial intelligence (AI), particularly large language models (LLMs), is increasingly embedded across the Software Development Life Cycle (SDLC), yet the opacity of these systems limits trust, verification, and certification in software engineering (SE), especially in safety- and regulation-critical domains.<br><br>This paper presents a systematic mapping study (SMS) of explainable AI (XAI) in SE, spanning classical machine learning, deep learning, and LLM-based tools across all SDLC phases. Using an SDLC- and persona-aware taxonomy, we synthesize evidence on explanation techniques, evaluation practices, and deployment contexts.<br><br>Our analysis reveals a pronounced imbalance: XAI research focuses on implementation and testing, while requirements, design, maintenance, and operations remain underexplored. Faithfulness validation and human-centred evaluation are limited, and LLM-based explanations introduce additional risks related to over-trust and pipeline opacity.<br><br>We conclude with a research agenda centered on faithfulness-by-design, persona-aware explanations, and certification-ready XAI pipelines, outlining a path from black-box to glass-box SE in high-stakes intelligent systems."
   bibtex: |
     @inproceedings{le2026glassbox,
@@ -394,6 +400,9 @@
     - type: "paper"
       url: "/publication/IEA2026b.pdf"
       icon: "📄"
+    - type: "slides"
+      url: "/slides/IEA2026b_slides.pdf"
+      icon: "📊"
   abstract: "As collaborative robots (cobots) are increasingly integrated into unstructured environments, intelligent safety systems capable of detecting hazards without relying on extensive labeled data become necessary. This survey reviews deep learning methods for Industrial Visual Anomaly Detection (IVAD), emphasizing their role in robotic safety monitoring.<br><br>Unlike static quality inspection, robotic IVAD must function in real time, handle dynamic scenes, and detect open-set anomalies. Existing approaches are categorized into reconstruction-based, embedding-based, and vision-language model (VLM) paradigms. Relevant benchmarks and robotics-specific datasets are examined, highlighting challenges such as motion, viewpoint shifts, and multimodal sensing.<br><br>Strong benchmark scores do not carry over to robotic deployments, where dynamic scenes, latency limits, and semantic risks apply. This survey treats IVAD as a safety-critical system component, one that requires edge efficiency, low latency, and integration with middleware such as ROS2. The survey closes by mapping open problems and practical design directions for practitioners."
   bibtex: |
     @inproceedings{tran2026ivad,
