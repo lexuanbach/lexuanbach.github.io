@@ -14,8 +14,17 @@
       class: "ai"
     - text: "Vision-Language Models"
       class: "nlp"
-  links: []
-  abstract: "Multispectral archives contain evidence that RGB encoders cannot directly ingest. Sentinel-2 images include visible, red-edge, near-infrared, and short-wave infrared bands, whereas models such as CLIP expect three-channel natural images. We study image-to-image multispectral retrieval, where query and gallery images are encoded by the same method-specific pipeline and ranked by cosine similarity between descriptors.<br><br>Starting from a generic RGB-pretrained CLIP backbone, with no Earth-observation pretraining, we propose a parameter-frozen test-time adaptation that updates only B band-weight logits per image. The method initializes the logits uniformly, refines them with a lightweight manifold-consistency objective guided by a class-name prior, and reports band-level attribution scores.<br><br>On 5-fold EuroSAT retrieval with disjoint query/gallery splits, all-band encoding raises Recall@1 from 80.28% for RGB-CLIP to 86.19% for our adapted descriptor and mAP to 46.26%; the all-bands-average reference is statistically indistinguishable on this benchmark, showing that the main EuroSAT gain comes from exposing the frozen encoder to every band. On a single-seed BigEarthNet-MM subset, RGB-CLIP remains best on saturated R@K/mAP, but our method improves strict set-overlap quality (ExactMatch@1, MeanJaccard). We therefore frame the contribution as better strict spectral-semantic matching in the frozen generic-CLIP regime, not as a claim of universal ranking dominance.<br><br><strong>Keywords:</strong> Multispectral retrieval, Test-time adaptation, CLIP, Band attribution, Remote sensing"
+  links:
+    - type: "paper"
+      url: "/publication/ACIVS2026c.pdf"
+      icon: "📄"
+    - type: "supplement"
+      url: "/publication/ACIVS2026c-supplement.pdf"
+      icon: "📎"
+    - type: "artifact"
+      url: "https://github.com/tienesng06/acivs_supplementary"
+      icon: "📦"
+  abstract: "Multispectral archives contain evidence that RGB encoders cannot directly ingest. Sentinel-2 images include visible, red-edge, near-infrared, and short-wave infrared bands, whereas models such as CLIP expect three-channel natural images. We study image-to-image multispectral retrieval, where query and gallery images are encoded by the same method-specific pipeline and ranked by cosine similarity between descriptors.<br><br>Starting from a generic RGB-pretrained CLIP backbone, with no Earth-observation pretraining, we propose a parameter-frozen test-time adaptation that updates only B band-weight logits per image. The method initializes the logits uniformly, refines them with a lightweight manifold-consistency objective steered by a class-name text prior, and reports band-level attribution scores.<br><br>On 5-fold EuroSAT retrieval with disjoint query/gallery splits, all-band encoding raises Recall@1 from 80.28% for RGB-CLIP to 86.49% for our adapted descriptor and mAP to 46.50%; the all-bands-average reference is statistically indistinguishable on this benchmark, showing that the main EuroSAT gain comes from exposing the frozen encoder to every band. On a 5-seed BigEarthNet-MM evaluation, our method and the all-bands-average reference perform within one standard deviation across all metrics, while both surpass fixed spectral reductions and cache-based baselines by clear margins. We therefore frame the contribution as accuracy competitive with full-band averaging, but with per-band interpretability and near-zero adaptation overhead in the frozen generic-CLIP regime.<br><br><strong>Keywords:</strong> Multispectral retrieval, Vision-language models, Test-time adaptation, Spectral band weighting, Remote sensing"
   bibtex: |
     @inproceedings{nguyen2026testtime,
       author    = {Nguyen, Tien-Anh and Tran, Thanh-Hai and Le, Xuan-Bach},
@@ -45,7 +54,13 @@
     - type: "paper"
       url: "/publication/ACIVS2026a.pdf"
       icon: "📄"
-  abstract: "Industrial pick-and-place lines demand near-zero failure tolerance, yet many safety layers still wait for a fault to manifest before they trigger an indiscriminate Emergency Stop. We ask whether latent prediction error can instead serve as a graded recovery signal.<br><br>Our closed loop combines a frozen DINOv2 encoder, an RSSM whose KL-divergence prediction error gives us an online risk reading, an ANFIS risk mapper, and a controller that applies bounded trajectory corrections scaled by that risk coefficient. In Webots with a UR5e arm and condition-based TRANSIT dynamics, we evaluate four recoverable motion disturbances (N = 40 episodes per mode per scenario), and we treat two semantic or actuation faults as outside joint-space recovery.<br><br>On the harder disturbances, the deployed ON policy improves RSR over a binary fail-safe halt (Jerky +25.0 pp and Speed +42.5 pp, with non-overlapping Wilson 95% CIs). On the lighter disturbances, ON mainly improves trajectory quality, and we reduce mean joint deviation by 15–45% on three motion disturbances (Pause peaks at −44.8%). CPU-only latency is P95 = 34.24 ms, which sits 65.8% below the 100 ms budget.<br><br><strong>Keywords:</strong> Anomaly detection, World models, Fuzzy risk, Risk-aware control, Robotics"
+    - type: "supplement"
+      url: "/publication/ACIVS2026a-supplement.pdf"
+      icon: "📎"
+    - type: "artifact"
+      url: "https://github.com/haitran-13/acivs2026-supplementary"
+      icon: "📦"
+  abstract: "Industrial pick-and-place lines demand near-zero failure tolerance, yet many safety layers still wait for a fault to manifest before they trigger an indiscriminate Emergency Stop. We ask whether latent prediction error can instead serve as a graded recovery signal.<br><br>Our closed loop combines a frozen DINOv2 encoder, an RSSM whose KL-divergence prediction error gives us an online risk reading, an ANFIS risk mapper, and a controller that applies bounded trajectory corrections scaled by that risk coefficient. In Webots with a UR5e arm and condition-based TRANSIT dynamics, we evaluate four recoverable motion disturbances (N = 40 episodes per mode per scenario) against a binary fail-safe halt (OFF), and we treat two semantic or actuation faults as outside joint-space recovery.<br><br>RSR gains concentrate on the harder disturbances, Jerky (+25.0 pp) and Speed (+42.5 pp, with non-overlapping Wilson 95% CIs), while smoothing gains concentrate on Vibration, Jerky, and Pause, where mean joint deviation drops by 15.4–44.8% (Pause peaks at −44.8%); Speed's smoothing stays flat under the same joint-velocity cap. OFF/ON is a deployed-policy comparison. CPU-only latency is P95 = 34.24 ms, which sits 65.8% below the 100 ms design budget.<br><br><strong>Keywords:</strong> Anomaly detection, World models, Fuzzy risk, Risk-aware control, Robotics"
   bibtex: |
     @inproceedings{tran2026latent,
       author    = {Tran, Thanh-Hai and Le, Xuan-Bach},
@@ -75,7 +90,16 @@
     - type: "paper"
       url: "/publication/ACIVS2026b.pdf"
       icon: "📄"
-  abstract: "Street-level imagery is an appealing, low-cost complement to air-quality stations, but a camera is only useful when its pixels respond to the pollutant of interest. For particulate matter they do: aerosols scatter light along the line of sight, so distant buildings, sky boundaries, and horizon regions lose contrast as aerosol loading rises.<br><br><strong>Swin-AQI</strong> is a depth-aware Swin Transformer for monocular PM2.5 and PM10 estimation from geotagged urban images: MiDaS relative depth biases shifted-window attention toward distant tokens, learnable Fourier features encode the capture hour, and Beer–Lambert and Koschmieder terms keep predictions consistent with visibility physics. We supervise with SILAM atmospheric fields.<br><br>On 1,977 daylight images from Ho Chi Minh City, Swin-AQI reaches R²=0.80 for PM2.5 and R²=0.76 for PM10, outperforming every CNN and transformer baseline under identical inputs. Our ablations are candid about why: hour-of-day and uncertainty weighting contribute the most, while depth-aware attention and the physics terms add smaller but separable gains.<br><br><strong>Keywords:</strong> Particulate matter estimation, Depth-aware vision transformer, Physics-informed learning, Street-level imagery"
+    - type: "supplement"
+      url: "/publication/ACIVS2026b-supplement.pdf"
+      icon: "📎"
+    - type: "artifact"
+      url: "https://github.com/ZleeMb0334/acivs2026_swin-aqi"
+      icon: "📦"
+    - type: "dataset"
+      url: "https://kaggle.com/datasets/thnhnguynvntrng/swin-aqi-dataset"
+      icon: "📊"
+  abstract: "Street-level imagery is an appealing, low-cost complement to air-quality stations, but a camera is only useful when its pixels respond to the pollutant of interest. For particulate matter they do: aerosols scatter light along the line of sight, so distant buildings, sky boundaries, and horizon regions lose contrast as aerosol loading rises.<br><br><strong>Swin-AQI</strong> is a depth-aware Swin Transformer for monocular PM2.5 and PM10 estimation from street-level urban images: a MiDaS-derived depth-coherence bias steers post-backbone attention, learnable Fourier features encode the capture hour, and Beer–Lambert and Koschmieder terms keep predictions consistent with visibility physics. We supervise with SILAM atmospheric fields.<br><br>On 1,977 daylight images from Ho Chi Minh City, Swin-AQI reaches R²=0.80 for PM2.5 and R²=0.76 for PM10 on a random held-out test split — a within-distribution result, since only 35 distinct label combinations span the whole dataset — outperforming every CNN and transformer baseline under a standard single-head MSE objective on the same images and labels. Our ablations are candid about why: hour-of-day and uncertainty weighting contribute the most, while depth-aware attention and the physics terms add smaller but separable gains. The scope is deliberately constrained too: Swin-AQI is a single-city, moderate-pollution estimator whose gaseous outputs stay contextual.<br><br><strong>Keywords:</strong> Particulate matter estimation, Depth-aware vision transformer, Physics-informed learning, Street-level imagery"
   bibtex: |
     @inproceedings{nguyen2026swinaqi,
       author    = {Nguyen, Van-Truong-Thinh and Tran, Thanh-Hai and Le, Xuan-Bach},
