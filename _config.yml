@@ -18,6 +18,8 @@ sass:
 nav:
  - name: "Home"
    link: "index"
+ - name: "Students"
+   link: "students"
  - name: "Resume"
    link: "cv.pdf"
  - name: "Contact"

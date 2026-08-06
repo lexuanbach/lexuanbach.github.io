@@ -1,0 +1,128 @@
+# Student roster rendered by students.md
+#
+# Fields:
+#   name          Full name (required)
+#   level         "master" | "undergraduate"   -> which section the entry appears in
+#   status        "current" | "former"         -> Current vs Former subsection
+#   affiliation   Institution / faculty
+#   period        e.g. "2024 – present", "2022 – 2024" (omit or leave "" to hide)
+#   topic         One line on what they work on
+#   outcome       For former students: where they went next (omit to hide)
+#   publications  List of publication ids from _data/publications.yml
+#   links         Optional external links: [{ text: "Homepage", url: "..." }]
+
+# ---------------------------------------------------------------- Master's ---
+
+- name: "Thanh-Hai Tran"
+  level: "master"
+  status: "current"
+  affiliation: "HCMUT, Faculty of Computer Science and Engineering"
+  period: ""
+  topic: "Visual anomaly detection and risk-aware recovery for robotic manipulation"
+  publications: ["23", "24", "22", "12"]
+  links: []
+
+- name: "Thi-Hong-Cuc Le"
+  level: "master"
+  status: "current"
+  affiliation: "HCMUT, Faculty of Computer Science and Engineering"
+  period: ""
+  topic: "Repository-level vulnerability detection and explainable AI for software engineering"
+  publications: ["20", "13"]
+  links: []
+
+- name: "Hoang-Quoc-Bao Hua"
+  level: "master"
+  status: "current"
+  affiliation: "HCMUT, Faculty of Computer Science and Engineering"
+  period: ""
+  topic: "LLM agents for static analysis and assumption validation"
+  publications: ["20", "14"]
+  links: []
+
+- name: "Khoa Phan"
+  level: "master"
+  status: "former"
+  affiliation: "HCMUT, Faculty of Computer Science and Engineering"
+  period: ""
+  topic: "Hybrid retrieval-augmented generation over legal knowledge graphs"
+  publications: ["10"]
+  links: []
+
+- name: "Phong Chung"
+  level: "master"
+  status: "former"
+  affiliation: "HCMUT, Faculty of Computer Science and Engineering"
+  period: ""
+  topic: "Joint multi-intent detection and slot filling for Vietnamese"
+  publications: ["11"]
+  links: []
+
+- name: "Huu-Thanh Phan"
+  level: "master"
+  status: "former"
+  affiliation: "HCMUT, Faculty of Computer Science and Engineering"
+  period: ""
+  topic: "Uncertainty-aware forecasting and inventory optimization"
+  publications: ["16"]
+  links: []
+
+- name: "Huynh Duy Khang"
+  level: "master"
+  status: "former"
+  affiliation: "HCMUT, Faculty of Computer Science and Engineering"
+  period: ""
+  topic: ""
+  publications: []
+  links: []
+
+# ----------------------------------------------------------- Undergraduate ---
+
+- name: "Van-Truong-Thinh Nguyen"
+  level: "undergraduate"
+  status: "current"
+  affiliation: "HCMUT, Faculty of Computer Science and Engineering"
+  period: ""
+  topic: "Depth-aware vision transformers and physics-informed learning for air-quality estimation"
+  publications: ["22"]
+  links: []
+
+- name: "Tien-Anh Nguyen"
+  level: "undergraduate"
+  status: "current"
+  affiliation: "HCMUT, Faculty of Computer Science and Engineering"
+  period: ""
+  topic: "Test-time adaptation of vision-language models for multispectral retrieval"
+  publications: ["24"]
+  links: []
+
+- name: "Minh-Hieu Le"
+  level: "undergraduate"
+  status: "current"
+  affiliation: "HCMUT, Faculty of Computer Science and Engineering"
+  period: ""
+  topic: "Examination room usage optimization via greedy and exact methods"
+  publications: ["18"]
+  links: []
+
+# ------------------------------------------------------------------ To add ---
+# Co-authors whose level / status I could not confirm from the papers.
+# Uncomment and fill in `level` and `status` to publish them.
+#
+# - name: "Phat T. Tran-Truong"
+#   level: "master"          # ?
+#   status: "current"        # ?
+#   affiliation: "HCMUT, Faculty of Computer Science and Engineering"
+#   period: ""
+#   topic: "Distributional program analysis with LLMs as program samplers"
+#   publications: ["21", "17"]
+#   links: []
+#
+# - name: "Dung-Cam Quang"
+#   level: "master"          # ?
+#   status: "current"        # ?
+#   affiliation: "HCMUT, Faculty of Computer Science and Engineering"
+#   period: ""
+#   topic: "Event extraction with large language models"
+#   publications: ["19", "15"]
+#   links: []

@@ -1,0 +1,43 @@
+{% assign sc = include.student %}
+<div class="student">
+    <div class="student-head">
+        <span class="student-name">{{ sc.name }}</span>
+        {% if sc.period and sc.period != "" %}
+        <span class="student-period">{{ sc.period }}</span>
+        {% endif %}
+    </div>
+    {% if sc.affiliation and sc.affiliation != "" %}
+    <div class="student-affiliation">{{ sc.affiliation }}</div>
+    {% endif %}
+    {% if sc.topic and sc.topic != "" %}
+    <div class="student-topic">{{ sc.topic }}</div>
+    {% endif %}
+    {% if sc.outcome and sc.outcome != "" %}
+    <div class="student-outcome">Now: {{ sc.outcome }}</div>
+    {% endif %}
+    {% if sc.publications and sc.publications.size > 0 %}
+    <ul class="student-pubs">
+        {% for pid in sc.publications %}
+            {% assign pub = site.data.publications | where: "id", pid | first %}
+            {% if pub %}
+            <li>
+                {% assign paperlink = pub.links | where: "type", "paper" | first %}
+                {% if paperlink %}
+                <a href="{{ paperlink.url }}" target="_blank">{{ pub.title }}</a>
+                {% else %}
+                {{ pub.title }}
+                {% endif %}
+                <span class="student-pub-venue">{{ pub.venue.name | split: " (" | first }}</span>
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% if sc.links and sc.links.size > 0 %}
+    <div class="student-links">
+        {% for l in sc.links %}
+        <a href="{{ l.url }}" target="_blank">{{ l.text }}</a>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
