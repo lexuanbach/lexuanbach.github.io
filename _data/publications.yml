@@ -125,15 +125,26 @@
       class: "nlp"
     - text: "Invariant Inference"
       class: "verification"
-  links: []
-  abstract: "A specification under-determines a program. When a large language model (LLM) is prompted with that specification, it induces a distribution over programs that satisfy it in different ways. Pipelines that generate one program and then analyze it discard the key artifact of this distribution: variation across samples. We propose distributional program analysis (DPA): analyze many LLM samples for the same task and aggregate analyzer outputs as cross-sample evidence about candidate program properties. The central statistic is an invariant's survival rate, the fraction of samples in which the analyzer infers it. Under stated sampling and analyzer assumptions, high-survival invariants mark stable intended properties; fragile invariants expose decoding noise or underspecification. We define survival, present a Python prototype, and report a HumanEval+ pilot in which high-survival invariants align with reference-solution invariants in roughly four out of five cases. Filtering samples by survival consistency also improves pass@1 at the same 20-sample budget, showing that variation is an analysis signal rather than noise to hide."
+  links:
+    - type: "paper"
+      url: "/publication/ASE2026-NIER.pdf"
+      icon: "📄"
+    - type: "artifact"
+      url: "https://doi.org/10.5281/zenodo.21863484"
+      icon: "📦"
+  abstract: "A specification under-determines a program: prompted with one, a large language model (LLM) induces a distribution over candidate programs that respond to it in different ways. Pipelines that generate one program and analyze it discard the key artifact of that distribution: variation across samples.<br><br>We propose <strong>distributional program analysis (DPA)</strong>: analyze many LLM samples for the same task and aggregate analyzer outputs as cross-sample evidence about candidate program properties. The central statistic is an invariant's survival rate, the fraction of samples in which the analyzer infers it. Under stated sampling and analyzer assumptions, high-survival invariants mark properties on which independently sampled programs agree; fragile ones may indicate decoding noise, underspecification, or analyzer blind spots. Agreement is not correctness, and we are explicit about when the two come apart.<br><br>We define survival, release a prototype, and report a HumanEval+ pilot in which high-survival invariants match reference-solution invariants in roughly four of five cases; filtering by survival also improves pass@1 at the same 20-sample budget. Variation is an analysis signal, not noise to hide.<br><br><strong>Keywords:</strong> Program analysis, Large language models, Likely invariants, Invariant inference, Uncertainty estimation, Code generation"
   bibtex: |
     @inproceedings{trantruong2026dpa,
       author    = {Tran-Truong, Phat T. and Le, Xuan-Bach},
       title     = {Distributional Program Analysis: Treating Large Language Models as Program Samplers},
-      booktitle = {Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering (ASE 2026), New Ideas and Emerging Results (NIER) Track},
+      booktitle = {Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering (ASE '26), New Ideas and Emerging Results (NIER) Track},
       year      = {2026},
-      address   = {Munich, Germany}
+      location  = {Munich, Germany},
+      publisher = {Association for Computing Machinery},
+      address   = {New York, NY, USA},
+      numpages  = {5},
+      isbn      = {979-8-4007-2882-2},
+      doi       = {10.1145/3832783.3834555}
     }
 
 - id: "20"
