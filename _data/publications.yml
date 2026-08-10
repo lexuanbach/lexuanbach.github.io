@@ -180,7 +180,9 @@
       title     = {GraphLedger: Repository-Level Vulnerability Detection via Graph-Based Compression and Assumption Validation},
       booktitle = {Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering (ASE 2026)},
       year      = {2026},
-      address   = {Munich, Germany}
+      address   = {Munich, Germany},
+      publisher = {Association for Computing Machinery},
+      doi       = {10.1145/3832783.3834420}
     }
 
 - id: "19"
@@ -312,8 +314,13 @@
       author    = {Phan, Huu-Thanh and Le, Xuan-Bach and Quan, Tho},
       title     = {Uncertainty-Aware Forecasting and Inventory Optimization for ATM Cash Management in Vietnam},
       booktitle = {Proceedings of FLINS-ISKE 2026},
+      series    = {Lecture Notes in Computer Science},
+      pages     = {328--346},
+      publisher = {Springer},
+      isbn      = {978-981-92-2497-5},
       year      = {2026},
-      address   = {Sydney, Australia}
+      address   = {Sydney, Australia},
+      doi       = {10.1007/978-981-92-2497-5_19}
     }
 
 - id: "15"
@@ -342,8 +349,13 @@
       author    = {Quang, Dung-Cam and Vo, Vinh Q. and Le, Xuan-Bach and Quan, Tho},
       title     = {The Paradigm Shift in Event Extraction: An In-Depth Overview with Large Language Models},
       booktitle = {Proceedings of the 39th International Conference on Industrial, Engineering and Other Applications of Applied Intelligent Systems (IEA/AIE 2026)},
+      series    = {Lecture Notes in Computer Science},
+      pages     = {63--76},
+      publisher = {Springer},
+      isbn      = {978-981-92-2885-0},
       year      = {2026},
-      address   = {Kuala Lumpur, Malaysia}
+      address   = {Kuala Lumpur, Malaysia},
+      doi       = {10.1007/978-981-92-2885-0_6}
     }
 
 - id: "14"
@@ -376,8 +388,13 @@
       author    = {Hua, Hoang-Quoc-Bao and Le, Xuan-Bach},
       title     = {Emerging Trends and Challenges Toward LLM Agents in Static Analysis},
       booktitle = {Proceedings of the 39th International Conference on Industrial, Engineering and Other Applications of Applied Intelligent Systems (IEA/AIE 2026)},
+      series    = {Lecture Notes in Computer Science},
+      pages     = {101--115},
+      publisher = {Springer},
+      isbn      = {978-981-92-2885-0},
       year      = {2026},
-      address   = {Kuala Lumpur, Malaysia}
+      address   = {Kuala Lumpur, Malaysia},
+      doi       = {10.1007/978-981-92-2885-0_9}
     }
 
 - id: "13"
@@ -411,8 +428,13 @@
       author    = {Le, Thi-Hong-Cuc and Le, Xuan-Bach},
       title     = {From Black-Box to Glass-Box: Explainable AI for Applied Intelligent Software Systems Across the Software Development Life Cycle},
       booktitle = {Proceedings of the 39th International Conference on Industrial, Engineering and Other Applications of Applied Intelligent Systems (IEA/AIE 2026)},
+      series    = {Lecture Notes in Computer Science},
+      pages     = {88--105},
+      publisher = {Springer},
+      isbn      = {978-981-92-2891-1},
       year      = {2026},
-      address   = {Kuala Lumpur, Malaysia}
+      address   = {Kuala Lumpur, Malaysia},
+      doi       = {10.1007/978-981-92-2891-1_8}
     }
 
 - id: "12"
@@ -444,8 +466,13 @@
       author    = {Tran, Thanh-Hai and Le, Xuan-Bach},
       title     = {Industrial Visual Anomaly Detection in Robotics: Methods, Datasets, and Deployable System Architectures},
       booktitle = {Proceedings of the 39th International Conference on Industrial, Engineering and Other Applications of Applied Intelligent Systems (IEA/AIE 2026)},
+      series    = {Lecture Notes in Computer Science},
+      pages     = {105--119},
+      publisher = {Springer},
+      isbn      = {978-981-92-2888-1},
       year      = {2026},
-      address   = {Kuala Lumpur, Malaysia}
+      address   = {Kuala Lumpur, Malaysia},
+      doi       = {10.1007/978-981-92-2888-1_9}
     }
 
 - id: "11"
@@ -477,8 +504,13 @@
       author    = {Chung, Phong and Le-Minh, Kha and Le, Xuan-Bach and Quan, Tho},
       title     = {VSLIM: A Vietnamese Explicit Slot-Intent Mapping for Joint Multi-Intent Detection and Slot Filling},
       booktitle = {Proceedings of the 18th Asian Conference on Intelligent Information and Database Systems (ACIIDS 2026)},
+      series    = {Communications in Computer and Information Science},
+      pages     = {32--46},
+      publisher = {Springer},
+      isbn      = {978-981-92-0263-8},
       year      = {2026},
-      address   = {Kaohsiung, Taiwan}
+      address   = {Kaohsiung, Taiwan},
+      doi       = {10.1007/978-981-92-0263-8_3}
     }
     
 - id: "10"
@@ -510,8 +542,13 @@
       author    = {Phan, Khoa and Le, Xuan-Bach and Quan, Tho},
       title     = {SBV-LawGraph: A Hybrid RAG Approach Integrating Knowledge Graph for the State Bank of Vietnam Legal Documents},
       booktitle = {Proceedings of the 18th Asian Conference on Intelligent Information and Database Systems (ACIIDS 2026)},
+      series    = {Lecture Notes in Computer Science},
+      pages     = {235--250},
+      publisher = {Springer},
+      isbn      = {978-981-92-0071-9},
       year      = {2026},
-      address   = {Kaohsiung, Taiwan}
+      address   = {Kaohsiung, Taiwan},
+      doi       = {10.1007/978-981-92-0071-9_16}
     }
     
 - id: "9"
@@ -543,7 +580,11 @@
       author    = {Le, Xuan-Bach and Wagner, Dominik and Witzman, Leon and Rabinovich, Alexander and Ong, Luke},
       title     = {Reinforcement Learning with LTL and {$\omega$}-Regular Objectives via Optimality-Preserving Translation to Average Rewards},
       booktitle = {Advances in Neural Information Processing Systems (NeurIPS 2024)},
-      year      = {2024}
+      volume    = {37},
+      pages     = {117109--117132},
+      publisher = {Neural Information Processing Systems Foundation},
+      year      = {2024},
+      doi       = {10.52202/079017-3718}
     }
 
 
@@ -576,7 +617,10 @@
       author    = {Le, Xuan-Bach and Lin, Shang-Wei and Sun, Jun and Sanan, David},
       title     = {A Quantum Interpretation of Separating Conjunction for Local Reasoning of Quantum Programs Based on Separation Logic},
       booktitle = {Proceedings of the ACM SIGPLAN Symposium on Principles of Programming Languages (POPL 2022)},
-      year      = {2022}
+      pages     = {1--27},
+      publisher = {Association for Computing Machinery},
+      year      = {2022},
+      doi       = {10.1145/3498697}
     }
     
 - id: "7"
@@ -609,7 +653,9 @@
       title     = {Automatic Verification of Multi-threaded Programs by Inference of Rely-Guarantee Specifications},
       booktitle = {Proceedings of the 25th International Conference on Engineering of Complex Computer Systems (ICECCS 2020)},
       pages     = {43--52},
-      year      = {2020}
+      publisher = {IEEE},
+      year      = {2020},
+      doi       = {10.1109/ICECCS51672.2020.00013}
     }
     
 - id: "6"
@@ -641,7 +687,9 @@
       series    = {LIPIcs},
       volume    = {132},
       pages     = {103:1--103:14},
-      year      = {2019}
+      publisher = {Schloss Dagstuhl -- Leibniz-Zentrum f{\"u}r Informatik},
+      year      = {2019},
+      doi       = {10.4230/LIPIcs.ICALP.2019.103}
     }
     
 - id: "5"
@@ -675,7 +723,10 @@
       booktitle = {Programming Languages and Systems (APLAS 2018)},
       pages     = {89--108},
       publisher = {Springer},
-      year      = {2018}
+      series    = {Lecture Notes in Computer Science},
+      isbn      = {978-3-030-02768-1},
+      year      = {2018},
+      doi       = {10.1007/978-3-030-02768-1_5}
     }
     
 - id: "4"
@@ -712,7 +763,10 @@
       booktitle = {Programming Languages and Systems (ESOP 2018)},
       pages     = {385--414},
       publisher = {Springer},
-      year      = {2018}
+      series    = {Lecture Notes in Computer Science},
+      isbn      = {978-3-319-89884-1},
+      year      = {2018},
+      doi       = {10.1007/978-3-319-89884-1_14}
     }
     
 - id: "3"
@@ -749,7 +803,10 @@
       booktitle = {Formal Methods and Software Engineering (ICFEM 2017)},
       pages     = {226--242},
       publisher = {Springer},
-      year      = {2017}
+      series    = {Lecture Notes in Computer Science},
+      isbn      = {978-3-319-68690-5},
+      year      = {2017},
+      doi       = {10.1007/978-3-319-68690-5_14}
     }
     
 - id: "2"
@@ -784,7 +841,10 @@
       series    = {LIPIcs},
       volume    = {65},
       pages     = {19:1--19:14},
-      year      = {2016}
+      publisher = {Schloss Dagstuhl -- Leibniz-Zentrum f{\"u}r Informatik},
+      isbn      = {978-3-95977-027-9},
+      year      = {2016},
+      doi       = {10.4230/LIPIcs.FSTTCS.2016.19}
     }
     
 - id: "1"
@@ -818,7 +878,10 @@
       booktitle = {Programming Languages and Systems (APLAS 2012)},
       pages     = {368--385},
       publisher = {Springer},
-      year      = {2012}
+      series    = {Lecture Notes in Computer Science},
+      isbn      = {978-3-642-35182-2},
+      year      = {2012},
+      doi       = {10.1007/978-3-642-35182-2_26}
     } 
     
 - id: "phd"
