@@ -8,6 +8,7 @@
 #   period        e.g. "2024 – present", "2022 – 2024" (omit or leave "" to hide)
 #   topic         One line on what they work on
 #   outcome       For former students: where they went next (omit to hide)
+#   cosupervisor  Co-supervisor, e.g. "Prof. Tho Quan" (omit to hide)
 #   publications  List of publication ids from _data/publications.yml
 #   links         Optional external links: [{ text: "Homepage", url: "..." }]
 
@@ -43,6 +44,7 @@
 - name: "Khoa Phan"
   level: "master"
   status: "former"
+  cosupervisor: "Prof. Tho Quan"
   affiliation: "HCMUT, Faculty of Computer Science and Engineering"
   period: ""
   topic: "Hybrid retrieval-augmented generation over legal knowledge graphs"
@@ -52,6 +54,7 @@
 - name: "Phong Chung"
   level: "master"
   status: "former"
+  cosupervisor: "Prof. Tho Quan"
   affiliation: "HCMUT, Faculty of Computer Science and Engineering"
   period: ""
   topic: "Joint multi-intent detection and slot filling for Vietnamese"
@@ -61,6 +64,7 @@
 - name: "Huu-Thanh Phan"
   level: "master"
   status: "former"
+  cosupervisor: "Prof. Tho Quan"
   affiliation: "HCMUT, Faculty of Computer Science and Engineering"
   period: ""
   topic: "Uncertainty-aware forecasting and inventory optimization"
@@ -70,6 +74,7 @@
 - name: "Huynh Duy Khang"
   level: "master"
   status: "former"
+  cosupervisor: "Prof. Tho Quan"
   affiliation: "HCMUT, Faculty of Computer Science and Engineering"
   period: ""
   topic: ""

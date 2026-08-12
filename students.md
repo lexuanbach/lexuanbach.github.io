@@ -141,6 +141,12 @@ body {
     font-size: 0.95em;
 }
 
+.student-cosupervisor {
+    color: var(--text-light);
+    font-size: 0.9em;
+    font-style: normal;
+}
+
 .student-topic {
     margin-top: 4px;
     font-style: italic;
