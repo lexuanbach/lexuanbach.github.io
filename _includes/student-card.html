@@ -9,6 +9,9 @@
     {% if sc.affiliation and sc.affiliation != "" %}
     <div class="student-affiliation">{{ sc.affiliation }}</div>
     {% endif %}
+    {% if sc.cosupervisor and sc.cosupervisor != "" %}
+    <div class="student-cosupervisor">Co-supervised with {{ sc.cosupervisor }}</div>
+    {% endif %}
     {% if sc.topic and sc.topic != "" %}
     <div class="student-topic">{{ sc.topic }}</div>
     {% endif %}
