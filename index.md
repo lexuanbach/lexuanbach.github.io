@@ -483,6 +483,44 @@ h2 {
         padding-left: 48px;
     }
 }
+
+/* Recruiting callout */
+.recruiting {
+    margin-top: 28px;
+    padding: 18px 22px;
+    background: rgba(233, 69, 96, 0.05);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+}
+
+.recruiting p {
+    margin: 0;
+}
+
+.recruiting p + p {
+    margin-top: 8px;
+}
+
+.recruiting-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8em;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px !important;
+}
+
+.recruiting a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.recruiting a:hover {
+    border-bottom-color: var(--accent);
+}
 </style>
 
 <script>
@@ -539,8 +577,8 @@ function copyBibtex(id) {
     <img class="profile-picture" src="me.jpg" alt="Xuan-Bach Le">
     <div class="header-content">
         <h1>Xuan-Bach Le</h1>
-        <p class="title-line">Lecturer, Ho Chi Minh City University of Technology, Vietnam</p>
-        <p>I am a Lecturer at Ho Chi Minh City University of Technology, Vietnam. Previously, I was a postdoctoral researcher at NTU Singapore under Professor <a href="https://www3.ntu.edu.sg/home/luke.ong/" target="_blank">Luke Ong</a>. Additional information about my background can be found in my <a href="cv.pdf" target="_blank">CV</a>.</p>
+        <p class="title-line">Lecturer, Ho Chi Minh City University of Technology, Vietnam &middot; Head of the RAISE Lab</p>
+        <p>I am a Lecturer at Ho Chi Minh City University of Technology, Vietnam, where I head the <a href="https://raise-website.vercel.app/" target="_blank">RAISE lab</a> &mdash; Reasoning in Artificial Intelligence and Software Engineering. Previously, I was a postdoctoral researcher at NTU Singapore under Professor <a href="https://www3.ntu.edu.sg/home/luke.ong/" target="_blank">Luke Ong</a>. Additional information about my background can be found in my <a href="cv.pdf" target="_blank">CV</a>.</p>
         <p>I studied a Double-Degree Program in Computer Science and Pure Mathematics (<a href="courses.html" target="_blank">courses taken</a>) at NUS (2007-2012), then obtained my PhD in Computer Science from NUS (2013-2017) under <a href="https://www.comp.nus.edu.sg/~hobor/" target="_blank">Aquinas Hobor</a> with mentorship from <a href="https://anthonywlin.github.io/" target="_blank">Anthony W. Lin</a>.</p>
     </div>
 </div>
@@ -560,6 +598,12 @@ I am interested in both the practical applications and theoretical foundations o
     <span class="tag">Computational Complexity</span>
     <span class="tag">Reinforcement Learning</span>
     <span class="tag">Quantum Programming</span>
+</div>
+
+<div class="recruiting">
+    <p class="recruiting-title">Looking for motivated students</p>
+    <p>The <a href="https://raise-website.vercel.app/" target="_blank">RAISE lab</a> works on LLMs for software engineering, formal reasoning and verification, secure and trustworthy AI systems, and multilingual and responsible AI. I am looking for motivated students who want to do good research in these areas &mdash; work that is careful, honest about its limits, and worth publishing.</p>
+    <p>If that sounds like you, please <a href="contact">get in touch</a>. You can see what my <a href="students">current and former students</a> work on.</p>
 </div>
 
 
