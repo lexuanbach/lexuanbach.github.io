@@ -227,8 +227,8 @@ body {
 
 <div class="students-intro">
     <h1>Students</h1>
-    <p>I supervise master's and undergraduate students at the Faculty of Computer Science and Engineering, Ho Chi Minh City University of Technology (HCMUT), VNU-HCM. Their work spans LLM agents and program analysis, retrieval-augmented generation, computer vision, and optimization — see the <a href="{{ site.baseurl }}">publication list</a> for the full record.</p>
-    <p>Prospective students are welcome to <a href="contact">get in touch</a>.</p>
+    <p>I head the <a href="https://raise-website.vercel.app/" target="_blank">RAISE lab</a> — Reasoning in Artificial Intelligence and Software Engineering — and supervise master's and undergraduate students at the Faculty of Computer Science and Engineering, Ho Chi Minh City University of Technology (HCMUT), VNU-HCM. Their work spans LLM agents and program analysis, retrieval-augmented generation, computer vision, and optimization — see the <a href="{{ site.baseurl }}">publication list</a> for the full record.</p>
+    <p><strong>I am looking for motivated students to do good research</strong> on LLMs for software engineering, formal reasoning and verification, secure and trustworthy AI systems, and multilingual and responsible AI. If you want to work on hard problems carefully and see the result through to publication, please <a href="contact">get in touch</a>.</p>
 </div>
 
 {% assign masters = site.data.students | where: "level", "master" %}
