@@ -1,3 +1,59 @@
+- id: "27"
+  number: "[27]"
+  authors: "With Thi-Hong-Cuc Le, Huu-Vu-Phuong Tran & Duc-Thuan Mai"
+  title: "LTM-RAG: Longitudinal Trust Mining for Poison-Resilient Retrieval-Augmented Generation"
+  venue:
+    name: "ICDM 2026 (Applied Track, CORE Rank A*, Acceptance Rate: 392/1966, 20%)"
+    url: "https://www3.cs.stonybrook.edu/~icdm2026/"
+    location: "Shenyang, China"
+    date: "November 2026"
+  tags:
+    - text: "RAG"
+      class: "rag"
+    - text: "Poisoning Defense"
+      class: "verification"
+    - text: "Stream Mining"
+      class: "ai"
+  links: []
+  abstract: "Poisoning attacks on retrieval-augmented generation are rarely localized to a single passage. They are recurring campaigns whose evidence is structured across time, yet most existing defenses inspect one query in isolation and discard whatever they learned before the next query arrives. We recast the problem as longitudinal stream mining over a RAG pipeline's evolving sources, chunks, motifs, and lineage.<br><br>Our framework, <strong>LTM-RAG</strong>, maintains four trust memories (one per axis) under decayed Beta posteriors, bounded lineage propagation, and verifier calibration, updated prequentially so that feedback from window t governs only subsequent retrievals. We pair this longitudinal gate with a top-K majority aggregator and recommend their hybrid as the deployment configuration: mining handles recurring evidence, and query-local aggregation handles first exposure.<br><br>On a 36-window prequential benchmark across five attack schedules, the hybrid drops answer-level ASR from 94.8% to 14.0% on the burst persistent-source scenario (5 seeds, BM25 with a fixed gate). A live-judge dense pipeline (BGE + Gemini-2.5-flash-lite + gpt-4o-mini, n≥1200) reproduces the same ordering on the dense+LLM-judge protocol. Controlled-model results explain when each memory carries the load: a detection-delay separation under observable lineage, a hidden-lineage lower bound, and reports of time-to-distrust, time-to-recovery, trust regret, and subgroup false-reputation damage.<br><br>The scope is deliberately bounded. The framework does not cleanse first-exposure poison or defeat white-box optimization, and an attacker who simultaneously breaks motif, lineage, and verifier-feedback assumptions can fully neutralize the gate.<br><br><strong>Keywords:</strong> Retrieval-augmented generation, Data poisoning, Streaming data mining, Trust memory, Provenance, Temporal drift, Adversarial robustness"
+  bibtex: |
+    @inproceedings{le2026ltmrag,
+      author    = {Le, Thi-Hong-Cuc and Tran, Huu-Vu-Phuong and Mai, Duc-Thuan and Le, Xuan-Bach},
+      title     = {LTM-RAG: Longitudinal Trust Mining for Poison-Resilient Retrieval-Augmented Generation},
+      booktitle = {Proceedings of the 26th IEEE International Conference on Data Mining (ICDM 2026)},
+      year      = {2026},
+      location  = {Shenyang, China},
+      publisher = {IEEE}
+    }
+
+- id: "26"
+  number: "[26]"
+  authors: "With Phat T. Tran-Truong, Son Ha & Quang-Tung Nguyen"
+  title: "From Natural-Language Hypotheses to Verified Data-Mining Discoveries"
+  venue:
+    name: "ICDM 2026 (Research Track, CORE Rank A*, Acceptance Rate: 392/1966, 20%)"
+    url: "https://www3.cs.stonybrook.edu/~icdm2026/"
+    location: "Shenyang, China"
+    date: "November 2026"
+  tags:
+    - text: "Pattern Mining"
+      class: "ai"
+    - text: "LLMs for Data Mining"
+      class: "nlp"
+    - text: "False Discovery Control"
+      class: "verification"
+  links: []
+  abstract: "Fluent LLM hypotheses are useful data-mining candidates, but unsafe as discoveries: a generated claim may be unsupported, confounded, multiplicity-induced, or unstable. We study LLM-guided verifiable discovery, where an LLM suggests constrained natural-language hypotheses and a separate verifier decides which claims deserve to be accepted as discoveries.<br><br><strong>VeraDM</strong> compiles temporal, sequence, treatment-effect, and conjunctive hypotheses into typed data-mining queries, then accepts them only after support checks, permutation testing, multiple-testing correction, matched-contrast validation, and held-out replication. Every accepted or rejected claim becomes an auditable evidence card.<br><br>Under split and firewall assumptions, we prove compiler-preservation and held-out FDR results, give BY and multi-round variants, and show a power-separation result explaining when an informative proposer preserves power where exhaustive BH collapses. Experiments on synthetic failure modes, semi-synthetic injections, statistically sound pattern-mining baselines, multi-provider proposer diagnostics, timestamped Bank, Bike, and Healthcare case studies, and audit controls show that VeraDM rejects plausible invalid claims while producing readable, replicated discoveries.<br><br><strong>Keywords:</strong> Statistically sound pattern mining, Trustworthy and interpretable data mining, Large language models for data mining, False discovery control, Held-out replication"
+  bibtex: |
+    @inproceedings{trantruong2026hypotheses,
+      author    = {Tran-Truong, Phat T. and Ha, Son and Nguyen, Quang-Tung and Le, Xuan-Bach},
+      title     = {From Natural-Language Hypotheses to Verified Data-Mining Discoveries},
+      booktitle = {Proceedings of the 26th IEEE International Conference on Data Mining (ICDM 2026)},
+      year      = {2026},
+      location  = {Shenyang, China},
+      publisher = {IEEE}
+    }
+
 - id: "25"
   number: "[25]"
   authors: "With Phat T. Tran-Truong & Son Ha"
