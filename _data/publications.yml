@@ -1,3 +1,30 @@
+- id: "28"
+  number: "[28]"
+  authors: "With Son Ha Xuan & Phat T. Tran-Truong"
+  title: "When Audit Quality Fails to Predict Downstream Utility: A Counterfactual Study of Synthetic-Data Selectors for Low-Resource African NLP"
+  venue:
+    name: "EMNLP 2026 (CORE Rank A*)"
+    url: "https://2026.emnlp.org/"
+    location: "Budapest, Hungary"
+    date: "October 2026"
+  tags:
+    - text: "Synthetic Data"
+      class: "ai"
+    - text: "Low-Resource NLP"
+      class: "nlp"
+    - text: "Counterfactual Audit"
+      class: "verification"
+  links: []
+  abstract: "Quality-aware synthetic-data selection rests on a proxy: examples that an LLM judge rates as good should also help a downstream model learn. We show that this proxy breaks in low-resource African-language classification.<br><br>Across four languages (Amharic, Hausa, Swahili, Yoruba), two classification tasks (MasakhaNEWS, AfriSenti), and five matched-budget selectors, audit rankings and downstream rankings diverge systematically. Within each cell, the Spearman correlation between judged label correctness and Macro-F1 across selectors has mean &rho;&nbsp;=&nbsp;0.04 (median 0.00), showing that the mismatch is not an aggregation artifact.<br><br><strong>CoSDA-V2</strong>, our counterfactual audit framework, produces the cleanest selected pool on three audit channels at once: highest judged label correctness (0.904 vs. 0.767 for naive, a 17.9% relative gain), lowest shortcut score, and a hard-reject rate of 0.162 vs. 0.486 for naive. AlpaGasus nevertheless leads downstream Macro-F1 (0.202 vs. 0.163 for CoSDA-V2), and the inversion persists on the five non-degenerate cells.<br><br>The lesson is methodological: audit quality is a property of the selected pool, not a guarantee of downstream utility. Synthetic-data evaluation should therefore report audit and downstream metrics on the same retained sets. We release the audit tables and a claim ledger that links every reported number to its source row.<br><br><strong>Keywords:</strong> Synthetic data selection, Data-centric NLP, Counterfactual audit, Low-resource NLP"
+  bibtex: |
+    @inproceedings{ha2026audit,
+      author    = {Ha Xuan, Son and Tran-Truong, Phat T. and Le, Xuan-Bach},
+      title     = {When Audit Quality Fails to Predict Downstream Utility: A Counterfactual Study of Synthetic-Data Selectors for Low-Resource African NLP},
+      booktitle = {Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing (EMNLP 2026)},
+      year      = {2026},
+      address   = {Budapest, Hungary}
+    }
+
 - id: "27"
   number: "[27]"
   authors: "With Thi-Hong-Cuc Le, Huu-Vu-Phuong Tran & Duc-Thuan Mai"
@@ -28,7 +55,7 @@
 
 - id: "26"
   number: "[26]"
-  authors: "With Phat T. Tran-Truong, Son Ha & Quang-Tung Nguyen"
+  authors: "With Phat T. Tran-Truong, Son Ha Xuan & Quang-Tung Nguyen"
   title: "From Natural-Language Hypotheses to Verified Data-Mining Discoveries"
   venue:
     name: "ICDM 2026 (Research Track, CORE Rank A*, Acceptance Rate: 392/1966, 20%)"
@@ -46,7 +73,7 @@
   abstract: "Fluent LLM hypotheses are useful data-mining candidates, but unsafe as discoveries: a generated claim may be unsupported, confounded, multiplicity-induced, or unstable. We study LLM-guided verifiable discovery, where an LLM suggests constrained natural-language hypotheses and a separate verifier decides which claims deserve to be accepted as discoveries.<br><br><strong>VeraDM</strong> compiles temporal, sequence, treatment-effect, and conjunctive hypotheses into typed data-mining queries, then accepts them only after support checks, permutation testing, multiple-testing correction, matched-contrast validation, and held-out replication. Every accepted or rejected claim becomes an auditable evidence card.<br><br>Under split and firewall assumptions, we prove compiler-preservation and held-out FDR results, give BY and multi-round variants, and show a power-separation result explaining when an informative proposer preserves power where exhaustive BH collapses. Experiments on synthetic failure modes, semi-synthetic injections, statistically sound pattern-mining baselines, multi-provider proposer diagnostics, timestamped Bank, Bike, and Healthcare case studies, and audit controls show that VeraDM rejects plausible invalid claims while producing readable, replicated discoveries.<br><br><strong>Keywords:</strong> Statistically sound pattern mining, Trustworthy and interpretable data mining, Large language models for data mining, False discovery control, Held-out replication"
   bibtex: |
     @inproceedings{trantruong2026hypotheses,
-      author    = {Tran-Truong, Phat T. and Ha, Son and Nguyen, Quang-Tung and Le, Xuan-Bach},
+      author    = {Tran-Truong, Phat T. and Ha Xuan, Son and Nguyen, Quang-Tung and Le, Xuan-Bach},
       title     = {From Natural-Language Hypotheses to Verified Data-Mining Discoveries},
       booktitle = {Proceedings of the 26th IEEE International Conference on Data Mining (ICDM 2026)},
       year      = {2026},
@@ -56,7 +83,7 @@
 
 - id: "25"
   number: "[25]"
-  authors: "With Phat T. Tran-Truong & Son Ha"
+  authors: "With Phat T. Tran-Truong & Son Ha Xuan"
   title: "GraphMemShield: Auditing Cross-Session Leakage in Graph Memories"
   venue:
     name: "CIKM 2026 (Full Research Track, CORE Rank A, Acceptance Rate: 597/2216, 27%)"
@@ -74,7 +101,7 @@
   abstract: "Persistent knowledge-graph (KG) memories are becoming a practical substrate for graph-backed assistants: they extract entities, relations, timestamps, and provenance from one session and later retrieve k-hop neighborhoods to ground another response. This creates a privacy boundary that is neither standard model memorization nor ordinary document-RAG leakage: the sensitive object is a live, multi-user, provenance-tagged graph.<br><br>We introduce <strong>GraphMemShield</strong>, a reproducible audit and mitigation framework for this setting. It packages a set of scoped retrieval-risk invariants over a provenance-tagged graph history that bound cross-session exposure for provenance-aware guarded retrieval under adaptive multi-hop querying, and a separate scoped local-DP statement for a fixed-universe randomized-response mechanism with explicit composition and group-privacy accounting. The contribution is the explicit scope and the empirical audit, not a new privacy mechanism. The framework implements attacks for cross-session edge exposure, adaptive probing (including a degree-prioritized and an LLM-guided adaptive attacker), session linkage, temporal inference, and lexical plus semantic response leakage with a scorer ablation.<br><br>We evaluate defenses based on provenance-aware bounded sharing, write-time randomized admission, and fixed-universe randomized response. Across five workloads — synthetic, Docker-backed, enterprise/health/finance, MultiWOZ 2.1, and Enron-style communication graphs — unguarded retrieval exposes victim-owned edges and sensitive response content. On the 2,304-edge enterprise benchmark, multi-hop retrieval increases unguarded leakage from 9.2±0.6 to 11.7±0.5 victim edges (10 seeds, 95% CI), and a full backend–retrieval–response pipeline leaks 11.8±0.6 edges and 7.9±0.7 sensitive terms without a guard.<br><br>Bounded sharing makes the privacy–utility tradeoff explicit: increasing the per-pair budget from 0 to 10 raises non-sensitive utility retention from 0.0 to 0.614 while keeping unique victim leakage capped at three edges, and raises a downstream graph-QA accuracy from 0.00 to 0.71 while strict isolation gives 0.00. We further show that this guarantee depends on correct sensitivity provenance, propose three mitigation recipes (sticky labels, neighbor-shadow labeling, and majority-of-raters voting) that restore most of the bound under 50% corruption, and separate a non-DP edge-suppression heuristic from a fixed-universe randomized-response mechanism with explicit composition and full-graph-release scope accounting.<br><br><strong>Keywords:</strong> Knowledge-graph memory, Cross-session leakage, Graph-augmented retrieval, Privacy auditing, Session linkage, Bounded sharing"
   bibtex: |
     @inproceedings{trantruong2026graphmemshield,
-      author    = {Tran-Truong, Phat T. and Le, Xuan-Bach and Ha, Son},
+      author    = {Tran-Truong, Phat T. and Le, Xuan-Bach and Ha Xuan, Son},
       title     = {GraphMemShield: Auditing Cross-Session Leakage in Graph Memories},
       booktitle = {Proceedings of the 35th ACM International Conference on Information and Knowledge Management (CIKM 2026)},
       year      = {2026},
