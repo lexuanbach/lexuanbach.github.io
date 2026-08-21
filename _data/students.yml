@@ -128,18 +128,30 @@
   publications: ["18"]
   links: []
 
+# ----------------------------------------------------------- Collaborators ---
+# Research collaborators (not supervised students).
+
+- name: "Phat T. Tran-Truong"
+  level: "collaborator"
+  status: "current"
+  affiliation: "HCMUT, Faculty of Computer Science and Engineering"
+  period: ""
+  topic: "Agent reliability, verified data-mining discovery, and program analysis with LLMs"
+  publications: ["28", "26", "25", "21", "17"]
+  links: []
+
+- name: "Son Ha Xuan"
+  level: "collaborator"
+  status: "current"
+  affiliation: "RMIT University"
+  period: ""
+  topic: "Synthetic-data auditing, agent memory privacy, and verified discovery"
+  publications: ["28", "26", "25"]
+  links: []
+
 # ------------------------------------------------------------------ To add ---
 # Co-authors whose level / status I could not confirm from the papers.
 # Uncomment and fill in `level` and `status` to publish them.
-#
-# - name: "Phat T. Tran-Truong"
-#   level: "master"          # ?
-#   status: "current"        # ?
-#   affiliation: "HCMUT, Faculty of Computer Science and Engineering"
-#   period: ""
-#   topic: "Distributional program analysis with LLMs as program samplers"
-#   publications: ["21", "17"]
-#   links: []
 #
 # - name: "Dung-Cam Quang"
 #   level: "master"          # ?
