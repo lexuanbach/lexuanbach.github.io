@@ -41,6 +41,24 @@
   publications: ["20", "14"]
   links: []
 
+- name: "Huu-Vu-Phuong Tran"
+  level: "master"
+  status: "current"
+  affiliation: "HCMUT, Faculty of Computer Science and Engineering"
+  period: ""
+  topic: "Poison-resilient retrieval-augmented generation and longitudinal trust mining"
+  publications: ["27"]
+  links: []
+
+- name: "Duc-Thuan Mai"
+  level: "master"
+  status: "current"
+  affiliation: "HCMUT, Faculty of Computer Science and Engineering"
+  period: ""
+  topic: "Poison-resilient retrieval-augmented generation and longitudinal trust mining"
+  publications: ["27"]
+  links: []
+
 - name: "Khoa Phan"
   level: "master"
   status: "former"
