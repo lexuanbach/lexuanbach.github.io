@@ -341,7 +341,7 @@
 - id: "17"
   number: "[17]"
   authors: "With Phat Tran-Truong Tuan"
-  title: "Measuring the Unmeasurable: Markov Chain Reliability for LLM Agents"
+  title: "TraceToChain: Auditing LLM-Agent Reliability with Absorbing Markov Chains"
   venue:
     name: "ISSRE 2026 (Research Track, CORE Rank A)"
     url: "https://cyprusconferences.org/issre2026/"
@@ -355,14 +355,17 @@
     - text: "Markov Chain"
       class: "theory"
   links:
+    - type: "paper"
+      url: "/publication/ISSRE2026.pdf"
+      icon: "📄"
     - type: "code"
       url: "https://anonymous.4open.science/r/TraceToChain-EEE6"
       icon: "💻"
-  abstract: "Large language model (LLM) agents increasingly operate as sequential software systems, but their reliability is often summarized by scalar benchmark metrics. Metrics such as pass@k, pass<sup>k</sup>, and the reliability decay curve (RDC) are useful summaries, but they do not identify the success-time distribution being estimated, test whether traces support that distribution, or quantify finite-trace uncertainty.<br><br>We present TraceToChain, a reproducible pipeline that fits agent execution traces to an absorbing discrete-time Markov chain (DTMC), M&#770;&#8201;=&#8201;(Q&#770;,&#8201;R&#770;<sub>&oplus;</sub>,&#8201;R&#770;<sub>&ominus;</sub>), with explicit diagnostics and uncertainty. The pipeline builds an automatic cluster taxonomy, estimates transitions with Laplace-smoothed maximum-likelihood estimation (MLE), checks fit with a composite Akaike information criterion (AIC) and Kolmogorov&ndash;Smirnov (KS) goodness-of-fit certificate, and reports Dirichlet-posterior credible intervals and non-parametric bootstrap intervals. We adapt classical reliability mathematics (Kemeny&ndash;Snell, Cheung, Goel&ndash;Okumoto) to agent traces.<br><br>The resulting first-passage view reconciles metrics usually reported separately: pass@k, pass<sup>k</sup>, and the RDC are projections of one success-time distribution. On seven controlled MAST-style frameworks with a strict 50/50 fit/test protocol, held-out empirical RDCs overlay their analytic counterparts with max&nbsp;L<sub>&infin;</sub><sup>RDC</sup>&nbsp;=&nbsp;0.053 (median&nbsp;0.048). A two-sample KS test on the first-passage cumulative distribution function (CDF) accepts the fitted chain with p&nbsp;&gt;&nbsp;0.05 on 7/7 frameworks (min&nbsp;p&nbsp;=&nbsp;0.78), and per-entry 95% posterior and bootstrap intervals agree to &asymp;&thinsp;0.01 at the median. The anonymous artifact is available at <a href=\"https://anonymous.4open.science/r/TraceToChain-EEE6\" target=\"_blank\">anonymous.4open.science/r/TraceToChain-EEE6</a>."
+  abstract: "Large language model (LLM) agents are sequential software systems, yet their reliability is reported as scalar benchmark scores &mdash; pass@k, pass<sup>k</sup>, and the reliability decay curve (RDC) &mdash; that neither identify the success-time distribution being estimated nor test whether traces support it, leaving horizon, counterfactual, and metric-reconciliation questions unanswerable.<br><br>We present <strong>TraceToChain</strong>, a reproducible pipeline that fits agent traces to an absorbing discrete-time Markov chain (DTMC) by Laplace-smoothed maximum likelihood, gates every result behind a composite Akaike information criterion (AIC) and Kolmogorov&ndash;Smirnov (KS) certificate, and attaches Dirichlet-posterior and bootstrap intervals. Horizon reliability, local perturbation, and metric reconciliation become first-passage queries on one model, so pass@k, pass<sup>k</sup>, and the RDC stop competing and become projections of a single success-time distribution.<br><br>We evaluate it under a strict 50/50 fit/test protocol on seven controlled MAST-style corpora and on 2,459 real episodes: 479 SWE-bench Verified SWE-agent trajectories and 1,980 &tau;-bench episodes over two models and two domains. On held-out controlled traces the fitted chain reproduces the RDC to a maximum L<sub>&infin;</sub> error of 0.053 and passes the first-passage KS test on 7/7 frameworks (minimum p&nbsp;=&nbsp;0.83). On real traces the certified asymptotic reliability recovers the held-out pass rate to within 0.03 on SWE-bench and to a mean absolute error of 0.0075 across four &tau;-bench corpora, and one fitted chain yields pass@k, pass<sup>k</sup>, and closed-form perturbation answers (&Delta;R<sub>&infin;</sub>&nbsp;=&nbsp;+0.034 for a fallback tool) with no benchmark rerun.<br><br>The certificate states exactly which outputs the evidence supports, and its verdict is invariant across 18 clustering configurations of the real corpus. LLM-agent reliability engineering can thus move from scalar scores to an audited model that identifies its own trustworthy outputs.<br><br><strong>Keywords:</strong> software reliability, large language models, agent systems, absorbing Markov chains, goodness-of-fit, model auditing, first-passage time, pass@k, reliability decay curve"
   bibtex: |
     @inproceedings{tran2026tracetochain,
       author    = {Tran-Truong, Phat Tuan and Le, Xuan-Bach},
-      title     = {Measuring the Unmeasurable: Markov Chain Reliability for LLM Agents},
+      title     = {TraceToChain: Auditing LLM-Agent Reliability with Absorbing Markov Chains},
       booktitle = {Proceedings of the 37th IEEE International Symposium on Software Reliability Engineering (ISSRE 2026)},
       year      = {2026},
       address   = {Limassol, Cyprus}
