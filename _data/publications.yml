@@ -16,7 +16,7 @@
       class: "verification"
   links:
     - type: "paper"
-      url: "/publication/cosda.pdf"
+      url: "/publication/EMNLP2026.pdf"
       icon: "📄"
     - type: "code"
       url: "https://github.com/lexuanbach/CoSDA"
