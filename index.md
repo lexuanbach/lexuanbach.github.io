@@ -482,6 +482,182 @@ h2 {
     .publication.featured {
         padding-left: 48px;
     }
+
+    .pillars {
+        grid-template-columns: 1fr;
+    }
+
+    .vision-statement {
+        font-size: 1.15em;
+    }
+}
+
+/* ===== Research Vision & Pillars ===== */
+.vision-brand {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78em;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+}
+
+.vision-statement {
+    font-size: 1.32em;
+    line-height: 1.55;
+    color: var(--primary);
+    max-width: 44em;
+    margin-bottom: 16px;
+}
+
+.vision-statement strong {
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.vision-note {
+    color: var(--text-light);
+    max-width: 46em;
+}
+
+.pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 32px;
+}
+
+.pillar {
+    display: block;
+    text-align: left;
+    font-family: inherit;
+    color: inherit;
+    text-decoration: none;
+    background: #fff;
+    padding: 20px 20px 16px;
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--p-color);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.pillar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    border-color: var(--p-color);
+    border-top-color: var(--p-color);
+}
+
+.pillar-index {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75em;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--p-color);
+}
+
+.pillar h3 {
+    font-size: 1.15em;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 6px 0 10px;
+    letter-spacing: -0.01em;
+}
+
+.pillar-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74em;
+    line-height: 1.6;
+    color: var(--p-color);
+    margin-bottom: 10px;
+}
+
+.pillar-desc {
+    font-size: 0.92em;
+    line-height: 1.55;
+    color: var(--text-light);
+    margin-bottom: 14px;
+}
+
+.pillar-count {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74em;
+    color: var(--text-light);
+    border-top: 1px solid var(--border);
+    padding-top: 10px;
+}
+
+.pillar-verified { --p-color: #c0392b; }
+.pillar-agents   { --p-color: #8e44ad; }
+.pillar-autonomy { --p-color: #27ae60; }
+.pillar-applied  { --p-color: #7f8c8d; }
+
+/* Publication filter bar */
+.pub-filter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: -8px 0 32px;
+}
+
+.filter-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8em;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: #fafafa;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filter-btn:hover {
+    border-color: var(--p-color, var(--accent));
+    color: var(--p-color, var(--accent));
+}
+
+.filter-btn.active {
+    background: var(--p-color, var(--primary));
+    border-color: var(--p-color, var(--primary));
+    color: #fff;
+}
+
+.filter-count {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78em;
+    color: var(--text-light);
+    margin-left: 4px;
+}
+
+/* Per-publication pillar label */
+.pub-pillar {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7em;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--p-color);
+    margin-bottom: 6px;
+    padding-left: 10px;
+    border-left: 3px solid var(--p-color);
+}
+
+.pub-status {
+    display: inline-block;
+    background: rgba(52, 152, 219, 0.10);
+    color: #2471a3;
+    border: 1px solid rgba(52, 152, 219, 0.35);
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78em;
+    letter-spacing: 0.02em;
+    margin-left: 6px;
 }
 
 /* Recruiting callout */
@@ -556,6 +732,25 @@ function toggleAward(id) {
     }
 }
 
+function filterPillar(pillar, scroll) {
+    var shown = 0;
+    document.querySelectorAll('.publication').forEach(function (p) {
+        var match = (pillar === 'all' || p.dataset.pillar === pillar);
+        p.style.display = match ? '' : 'none';
+        if (match) { shown++; }
+    });
+    document.querySelectorAll('.filter-btn').forEach(function (b) {
+        b.classList.toggle('active', b.dataset.pillar === pillar);
+    });
+    var counter = document.getElementById('filter-count');
+    if (counter) {
+        counter.textContent = shown + (shown === 1 ? ' paper' : ' papers');
+    }
+    if (scroll) {
+        document.getElementById('publications').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
 function copyBibtex(id) {
     const bibtexText = document.getElementById('bibtex-text-' + id).textContent;
     const button = document.getElementById('bibtex-copy-' + id);
@@ -583,21 +778,36 @@ function copyBibtex(id) {
     </div>
 </div>
 
-## Research Interest
+## Research Vision
 
-<p>
-I am interested in both the practical applications and theoretical foundations of Computer Science. My research spans the development of logical frameworks and certified decision procedures for program verification, the study of decidability and computational complexity of underlying logics, and, more recently, the integration of formal methods with modern AI systems. In particular, I explore Retrieval-Augmented Generation (RAG), large language models (LLMs), and program synthesis for reliable software engineering, as well as reinforcement learning under formal specifications.
-</p>
+<p class="vision-brand">Formal &amp; Reliable AI &middot; Verified AI Agents</p>
 
-<div class="research-tags">
-    <span class="tag">LLM agent</span>
-    <span class="tag">Program Synthesis</span>
-    <span class="tag">RAG</span>
-    <span class="tag">Program Verification</span>
-    <span class="tag">Formal Logic</span>
-    <span class="tag">Computational Complexity</span>
-    <span class="tag">Reinforcement Learning</span>
-    <span class="tag">Quantum Programming</span>
+<p class="vision-statement">I develop methods for building AI systems that can <strong>reason</strong>, <strong>verify</strong> what they produce, and <strong>know when they are uncertain</strong>.</p>
+
+<p class="vision-note">My work sits at the intersection of formal methods, large language models, and software reliability: I use logic and verification to give evidence for what learned systems claim, and I use learned systems to reach problems that classical verification cannot. Three pillars carry that agenda, and every paper below is labelled with the one it belongs to &mdash; click a pillar to see only its papers.</p>
+
+<div class="pillars">
+    <a class="pillar pillar-verified" href="#publications" onclick="filterPillar('verified', true); return false;">
+        <span class="pillar-index">01</span>
+        <h3>Verified AI</h3>
+        <p class="pillar-sub">Formal reasoning &middot; program synthesis &middot; verification</p>
+        <p class="pillar-desc">Logics, decision procedures and proof techniques that certify what a program &mdash; or a model &mdash; is claimed to do, from separation logic and fractional permissions to LLM-driven program analysis.</p>
+        <span class="pillar-count">{{ site.data.publications | where: "pillar", "verified" | size }} papers &rarr;</span>
+    </a>
+    <a class="pillar pillar-agents" href="#publications" onclick="filterPillar('agents', true); return false;">
+        <span class="pillar-index">02</span>
+        <h3>Auditable AI Agents</h3>
+        <p class="pillar-sub">LLM agents &middot; RAG &middot; reliability &middot; security</p>
+        <p class="pillar-desc">Making LLM agents and retrieval pipelines accountable: auditing their traces, defending their memories and retrieval corpora, and deciding which of their outputs have earned the right to be trusted.</p>
+        <span class="pillar-count">{{ site.data.publications | where: "pillar", "agents" | size }} papers &rarr;</span>
+    </a>
+    <a class="pillar pillar-autonomy" href="#publications" onclick="filterPillar('autonomy', true); return false;">
+        <span class="pillar-index">03</span>
+        <h3>Safe Autonomous Systems</h3>
+        <p class="pillar-sub">RL &middot; robotics &middot; anomaly detection &middot; risk-aware control</p>
+        <p class="pillar-desc">Autonomy that respects a specification: reinforcement learning under temporal-logic objectives, and detecting and recovering from anomalies before an autonomous system acts on them.</p>
+        <span class="pillar-count">{{ site.data.publications | where: "pillar", "autonomy" | size }} papers &rarr;</span>
+    </a>
 </div>
 
 <div class="recruiting">
@@ -607,10 +817,21 @@ I am interested in both the practical applications and theoretical foundations o
 </div>
 
 
-## Publications
+<h2 id="publications">Publications</h2>
+
+<div class="pub-filter">
+    <button class="filter-btn active" data-pillar="all" onclick="filterPillar('all', false)">All</button>
+    <button class="filter-btn pillar-verified" data-pillar="verified" onclick="filterPillar('verified', false)">Verified AI</button>
+    <button class="filter-btn pillar-agents" data-pillar="agents" onclick="filterPillar('agents', false)">Auditable AI Agents</button>
+    <button class="filter-btn pillar-autonomy" data-pillar="autonomy" onclick="filterPillar('autonomy', false)">Safe Autonomous Systems</button>
+    <button class="filter-btn pillar-applied" data-pillar="applied" onclick="filterPillar('applied', false)">Applied &amp; Collaborative</button>
+    <span class="filter-count" id="filter-count">{{ site.data.publications | size }} papers</span>
+</div>
 
 {% for pub in site.data.publications %}
-<div class="publication{% if pub.is_thesis %} thesis-publication{% endif %}" data-number="{{ pub.number }}">
+{% case pub.pillar %}{% when 'verified' %}{% assign pillar_name = 'Verified AI' %}{% when 'agents' %}{% assign pillar_name = 'Auditable AI Agents' %}{% when 'autonomy' %}{% assign pillar_name = 'Safe Autonomous Systems' %}{% else %}{% assign pillar_name = 'Applied &amp; Collaborative' %}{% endcase %}
+<div class="publication pillar-{{ pub.pillar }}{% if pub.is_thesis %} thesis-publication{% endif %}" data-number="{{ pub.number }}" data-pillar="{{ pub.pillar }}">
+    <div><span class="pub-pillar">{{ pillar_name }}</span></div>
     {% if pub.authors != "" %}
     <div class="publication-authors">{{ pub.authors }}</div>
     {% endif %}
@@ -628,6 +849,9 @@ I am interested in both the practical applications and theoretical foundations o
         {% endif %}
         {% if pub.venue.date != "" %}
         ({{ pub.venue.date }})
+        {% endif %}
+        {% if pub.status != "" and pub.status %}
+        <span class="pub-status">{{ pub.status }}</span>
         {% endif %}
     </div>
     {% if pub.award != "" and pub.award %}
