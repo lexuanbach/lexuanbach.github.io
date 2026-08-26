@@ -492,6 +492,22 @@ h2 {
     }
 }
 
+/* Header honours */
+.header-honor {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 6px 14px;
+    background: rgba(241, 196, 15, 0.10);
+    border: 1px solid rgba(241, 196, 15, 0.45);
+    border-radius: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78em;
+    line-height: 1.5;
+    color: #9a7d0a;
+}
+
 /* ===== Research Vision & Pillars ===== */
 .vision-brand {
     font-family: 'IBM Plex Mono', monospace;
@@ -773,7 +789,8 @@ function copyBibtex(id) {
     <div class="header-content">
         <h1>Xuan-Bach Le</h1>
         <p class="title-line">Lecturer, Ho Chi Minh City University of Technology, Vietnam &middot; Head of the RAISE Lab</p>
-        <p>I am a Lecturer at Ho Chi Minh City University of Technology, Vietnam, where I head the <a href="https://raise-website.vercel.app/" target="_blank">RAISE lab</a> &mdash; Reasoning in Artificial Intelligence and Software Engineering. Previously, I was a postdoctoral researcher at NTU Singapore under Professor <a href="https://www3.ntu.edu.sg/home/luke.ong/" target="_blank">Luke Ong</a>. Additional information about my background can be found in my <a href="cv.pdf" target="_blank">CV</a>.</p>
+        <p class="header-honor">🎖 VNU350 Programme &mdash; Outstanding Young Scientist, VNU-HCM</p>
+        <p>I am a Lecturer at Ho Chi Minh City University of Technology, Vietnam, where I head the <a href="https://raise-website.vercel.app/" target="_blank">RAISE lab</a> &mdash; Reasoning in Artificial Intelligence and Software Engineering. I joined HCMUT through the <strong>VNU350 Programme</strong>, Vietnam National University Ho Chi Minh City&rsquo;s scheme for recruiting outstanding young scientists. Previously, I was a postdoctoral researcher at NTU Singapore under Professor <a href="https://www3.ntu.edu.sg/home/luke.ong/" target="_blank">Luke Ong</a>. Additional information about my background can be found in my <a href="cv.pdf" target="_blank">CV</a>.</p>
         <p>I studied a Double-Degree Program in Computer Science and Pure Mathematics (<a href="courses.html" target="_blank">courses taken</a>) at NUS (2007-2012), then obtained my PhD in Computer Science from NUS (2013-2017) under <a href="https://www.comp.nus.edu.sg/~hobor/" target="_blank">Aquinas Hobor</a> with mentorship from <a href="https://anthonywlin.github.io/" target="_blank">Anthony W. Lin</a>.</p>
     </div>
 </div>
