@@ -5,7 +5,7 @@
   authors: "With Phat T. Tran-Truong & Son Ha Xuan"
   title: "When Audit Quality Fails to Predict Downstream Utility: Synthetic-Data Selection for Low-Resource Classification"
   venue:
-    name: "EMNLP 2026 (CORE Rank A*)"
+    name: "EMNLP 2026 (Findings Track, CORE Rank A*)"
     url: "https://2026.emnlp.org/"
     location: "Budapest, Hungary"
     date: "October 2026"
@@ -28,7 +28,7 @@
     @inproceedings{le2026audit,
       author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Ha Xuan, Son},
       title     = {When Audit Quality Fails to Predict Downstream Utility: Synthetic-Data Selection for Low-Resource Classification},
-      booktitle = {Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing (EMNLP 2026)},
+      booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2026},
       year      = {2026},
       address   = {Budapest, Hungary}
     }
