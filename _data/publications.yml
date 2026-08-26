@@ -1,4 +1,6 @@
 - id: "28"
+  pillar: "agents"
+  status: "To appear"
   number: "[28]"
   authors: "With Phat T. Tran-Truong & Son Ha Xuan"
   title: "When Audit Quality Fails to Predict Downstream Utility: Synthetic-Data Selection for Low-Resource Classification"
@@ -32,6 +34,8 @@
     }
 
 - id: "27"
+  pillar: "agents"
+  status: "To appear"
   number: "[27]"
   authors: "With Thi-Hong-Cuc Le, Huu-Vu-Phuong Tran & Duc-Thuan Mai"
   title: "LTM-RAG: Longitudinal Trust Mining for Poison-Resilient Retrieval-Augmented Generation"
@@ -60,6 +64,8 @@
     }
 
 - id: "26"
+  pillar: "verified"
+  status: "To appear"
   number: "[26]"
   authors: "With Phat T. Tran-Truong, Son Ha Xuan & Quang-Tung Nguyen"
   title: "From Natural-Language Hypotheses to Verified Data-Mining Discoveries"
@@ -88,6 +94,8 @@
     }
 
 - id: "25"
+  pillar: "agents"
+  status: "To appear"
   number: "[25]"
   authors: "With Phat T. Tran-Truong & Son Ha Xuan"
   title: "GraphMemShield: Auditing Cross-Session Leakage in Graph Memories"
@@ -123,6 +131,8 @@
     }
 
 - id: "24"
+  pillar: "applied"
+  status: "To appear"
   number: "[24]"
   authors: "With Tien-Anh Nguyen & Thanh-Hai Tran"
   title: "Test-Time Spectral Adaptation for Image-to-Image Multispectral Retrieval"
@@ -159,6 +169,8 @@
     }
 
 - id: "23"
+  pillar: "autonomy"
+  status: "To appear"
   number: "[23]"
   authors: "With Thanh-Hai Tran"
   title: "Latent-Space Prediction Error and Fuzzy Risk-Scaled Recovery for Robotic Manipulation"
@@ -195,6 +207,8 @@
     }
 
 - id: "22"
+  pillar: "applied"
+  status: "To appear"
   number: "[22]"
   authors: "With Van-Truong-Thinh Nguyen & Thanh-Hai Tran"
   title: "Swin-AQI: Depth-Aware Vision Transformer with Physics-Informed Learning for Particulate Matter Estimation from Ground Imagery"
@@ -234,6 +248,8 @@
     }
 
 - id: "21"
+  pillar: "verified"
+  status: "To appear"
   number: "[21]"
   authors: "With Phat T. Tran-Truong"
   title: "Distributional Program Analysis: Treating Large Language Models as Program Samplers"
@@ -272,6 +288,8 @@
     }
 
 - id: "20"
+  pillar: "agents"
+  status: "To appear"
   number: "[20]"
   authors: "With Thi-Hong-Cuc Le & Hoang-Quoc-Bao Hua"
   title: "GraphLedger: Repository-Level Vulnerability Detection via Graph-Based Compression and Assumption Validation"
@@ -310,6 +328,7 @@
     }
 
 - id: "19"
+  pillar: "applied"
   number: "[19]"
   authors: "With Dung-Cam Quang & Tho Quan"
   title: "Towards Resource-Constrained Event Extraction: A Knowledge-Augmented Framework for Overcoming Challenges in Vietnamese NLP"
@@ -343,6 +362,8 @@
     }
 
 - id: "18"
+  pillar: "applied"
+  status: "To appear"
   number: "[18]"
   authors: "With Hieu Le, Surya Hanjaya & Trang Hoang"
   title: "Examination Room Usage Optimization Via Greedy and Exact Methods: A Vietnamese University Case Study"
@@ -378,6 +399,8 @@
     }
 
 - id: "17"
+  pillar: "agents"
+  status: "To appear"
   number: "[17]"
   authors: "With Phat Tran-Truong Tuan"
   title: "TraceToChain: Auditing LLM-Agent Reliability with Absorbing Markov Chains"
@@ -411,6 +434,7 @@
     }
 
 - id: "16"
+  pillar: "applied"
   number: "[16]"
   authors: "With Huu-Thanh Phan & Tho Quan"
   title: "Uncertainty-Aware Forecasting and Inventory Optimization for ATM Cash Management in Vietnam"
@@ -451,6 +475,7 @@
     }
 
 - id: "15"
+  pillar: "applied"
   number: "[15]"
   authors: "With Dung-Cam Quang, Vinh Q. Vo & Tho Quan"
   title: "The Paradigm Shift in Event Extraction: An In-Depth Overview with Large Language Models"
@@ -486,6 +511,7 @@
     }
 
 - id: "14"
+  pillar: "agents"
   number: "[14]"
   authors: "With Hoang-Quoc-Bao Hua"
   title: "Emerging Trends and Challenges Toward LLM Agents in Static Analysis"
@@ -525,6 +551,7 @@
     }
 
 - id: "13"
+  pillar: "agents"
   number: "[13]"
   authors: "With Thi-Hong-Cuc Le"
   title: "From Black-Box to Glass-Box: Explainable AI for Applied Intelligent Software Systems Across the Software Development Life Cycle"
@@ -565,6 +592,7 @@
     }
 
 - id: "12"
+  pillar: "autonomy"
   number: "[12]"
   authors: "With Thanh-Hai Tran"
   title: "Industrial Visual Anomaly Detection in Robotics: Methods, Datasets, and Deployable System Architectures"
@@ -603,6 +631,7 @@
     }
 
 - id: "11"
+  pillar: "applied"
   number: "[11]"
   authors: "With Phong Chung, Kha Le-Minh & Tho Quan"
   title: "VSLIM: A Vietnamese Explicit Slot-Intent Mapping for Joint Multi-Intent Detection and Slot Filling"
@@ -641,6 +670,7 @@
     }
     
 - id: "10"
+  pillar: "agents"
   number: "[10]"
   authors: "With Khoa Phan & Tho Quan"
   title: "SBV-LawGraph: A Hybrid RAG Approach Integrating Knowledge Graph for the State Bank of Vietnam Legal Documents"
@@ -679,6 +709,7 @@
     }
     
 - id: "9"
+  pillar: "autonomy"
   number: "[9]"
   authors: "With Dominik, Leon, Alexander & Luke Ong"
   title: "Reinforcement Learning with LTL and Omega-Regular Objectives via Optimality-Preserving Translation to Average Rewards"
@@ -716,6 +747,7 @@
 
 
 - id: "8"
+  pillar: "verified"
   number: "[8]"
   authors: "With Shang-Wei Lin, Sun Jun & David Sanan"
   title: "A Quantum Interpretation of Separating Conjunction for Local Reasoning of Quantum Programs Based on Separation Logic"
@@ -751,6 +783,7 @@
     }
     
 - id: "7"
+  pillar: "verified"
   number: "[7]"
   authors: "With David Sanan, Sun Jun & Shang-Wei Lin"
   title: "Automatic Verification of Multi-threaded Programs by Inference of Rely-Guarantee Specifications"
@@ -786,6 +819,7 @@
     }
     
 - id: "6"
+  pillar: "verified"
   number: "[6]"
   authors: "With Pablo Barceló, Chih-Duo Hong, Anthony W. Lin & Reino Niskanen (alphabetical)"
   title: "Monadic Decomposability of Regular Relations"
@@ -820,6 +854,7 @@
     }
     
 - id: "5"
+  pillar: "verified"
   number: "[5]"
   authors: "With Aquinas Hobor & Anthony W. Lin"
   title: "Complexity Analysis of Tree Share Structure"
@@ -857,6 +892,7 @@
     }
     
 - id: "4"
+  pillar: "verified"
   number: "[4]"
   authors: "With Aquinas Hobor"
   title: "Logical Reasoning for Disjoint Permissions"
@@ -897,6 +933,7 @@
     }
     
 - id: "3"
+  pillar: "verified"
   number: "[3]"
   authors: "With Thanh-Toan Nguyen, Wei-Ngan Chin & Aquinas Hobor"
   title: "A Certified Decision Procedure for Tree Shares"
@@ -937,6 +974,7 @@
     }
     
 - id: "2"
+  pillar: "verified"
   number: "[2]"
   authors: "With Aquinas Hobor & Anthony W. Lin"
   title: "Decidability and Complexity of Tree Share Formulas"
@@ -975,6 +1013,7 @@
     }
     
 - id: "1"
+  pillar: "verified"
   number: "[1]"
   authors: "With Cristian Gherghina & Aquinas Hobor"
   title: "Decision Procedures Over Sophisticated Fractional Permissions"
@@ -1012,6 +1051,7 @@
     } 
     
 - id: "phd"
+  pillar: "verified"
   number: "[PhD]"
   authors: ""
   title: "Disjoint Fractional Permissions in Verification: Applications, Systems and Theory"
