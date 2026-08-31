@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Agents for Lecturers · 2-hour workshop</title>
+<meta name="title-en" content="AI Agents for Lecturers · 2-hour workshop">
+<meta name="title-vi" content="AI Agent cho Giảng viên · Tập huấn 2 giờ">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A 2-hour hands-on workshop for university lecturers: design AI agents for lesson preparation, assessment feedback, and course support — no programming required.">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('agentws-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+    if (localStorage.getItem('agentws-language') === 'vi') document.documentElement.dataset.lang = 'vi';
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="index.html"><b>AI Agents</b> · for Lecturers</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="index.html" aria-current="page" data-i18n="nav.overview">Overview</a>
+      <a href="concepts.html" data-i18n="nav.concepts">Concepts</a>
+      <a href="exercises/ex1-lesson.html" data-i18n="nav.exercises">Exercises</a>
+      <a href="tools.html" data-i18n="nav.tools">Tools &amp; data</a>
+      <a href="platforms.html" data-i18n="nav.platforms">Platforms</a>
+      <a href="responsible.html" data-i18n="nav.responsible">Responsible use</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="lang-toggle" type="button">VI</button>
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow" lang="en">Two-hour workshop · no programming required</span>
+        <span class="eyebrow" lang="vi">Tập huấn 2 giờ · không cần lập trình</span>
+        <h1 lang="en">AI Agents for Lecturers</h1>
+        <h1 lang="vi">AI Agent cho Giảng viên</h1>
+        <p class="motto" lang="en">Workshop motto: <em>an agent is a workflow, not a longer prompt.</em> What
+          turns a chatbot into an agent is the explicit sequence of steps and the check it runs on its own
+          output — and you can write both in plain language.</p>
+        <p class="motto" lang="vi">Phương châm của buổi tập huấn: <em>agent là một quy trình, không phải một
+          prompt dài hơn.</em> Thứ biến một chatbot thành agent là chuỗi bước được viết ra rõ ràng và bước
+          tự kiểm tra kết quả — cả hai đều có thể viết bằng ngôn ngữ đời thường.</p>
+        <p class="lede" lang="en">
+          In two hours you build three working agents for your own course: one that prepares a lesson,
+          one that drafts a rubric and evidence-based feedback, and one that answers student questions
+          using only your syllabus. You leave with the agent instructions, tested, in a tool you already
+          have — and a clear line around the decisions that stay yours.
+        </p>
+        <p class="lede" lang="vi">
+          Trong hai giờ, bạn xây dựng ba agent chạy được cho chính môn học của mình: một agent soạn bài
+          giảng, một agent dựng rubric và phản hồi dựa trên bằng chứng, và một agent trả lời câu hỏi của
+          sinh viên chỉ dựa trên đề cương môn học. Bạn ra về với bộ hướng dẫn agent đã được kiểm thử,
+          nằm trong công cụ bạn đang dùng — cùng một ranh giới rõ ràng cho những quyết định vẫn thuộc về
+          giảng viên.
+        </p>
+        <div class="meta-chips" lang="en">
+          <a class="chip" href="#agenda"><strong>2</strong> hours</a>
+          <a class="chip" href="#agenda">60% hands-on</a>
+          <a class="chip" href="exercises/ex1-lesson.html"><strong>3</strong> agents built</a>
+          <a class="chip" href="platforms.html">Free tools only</a>
+        </div>
+        <div class="meta-chips" lang="vi">
+          <a class="chip" href="#agenda"><strong>2</strong> giờ</a>
+          <a class="chip" href="#agenda">60% thực hành</a>
+          <a class="chip" href="exercises/ex1-lesson.html">xây <strong>3</strong> agent</a>
+          <a class="chip" href="platforms.html">Chỉ dùng công cụ miễn phí</a>
+        </div>
+      </div>
+      <div class="diagram-card">
+        <svg viewBox="0 0 480 230" width="100%" role="img" aria-label="Diagram: the agent loop — receive goal, inspect course context, plan, produce a draft, verify it against checks, revise if a check fails and return to planning, and when checks pass, request lecturer approval.">
+          <defs>
+            <marker id="wf-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path>
+            </marker>
+          </defs>
+
+          <line x1="110" y1="35" x2="130" y2="35" class="al-line" marker-end="url(#wf-arrow)"></line>
+          <line x1="230" y1="35" x2="250" y2="35" class="al-line" marker-end="url(#wf-arrow)"></line>
+          <line x1="350" y1="35" x2="370" y2="35" class="al-line" marker-end="url(#wf-arrow)"></line>
+          <line x1="420" y1="56" x2="420" y2="100" class="al-line" marker-end="url(#wf-arrow)"></line>
+          <line x1="370" y1="121" x2="350" y2="121" class="al-line" marker-end="url(#wf-arrow)"></line>
+          <line x1="300" y1="100" x2="300" y2="56" class="al-line" marker-end="url(#wf-arrow)"></line>
+          <line x1="420" y1="142" x2="420" y2="176" class="al-line" marker-end="url(#wf-arrow)"></line>
+          <text x="292" y="82" text-anchor="end" class="al-label" lang="en">if a check fails</text>
+          <text x="292" y="82" text-anchor="end" class="al-label" lang="vi">nếu kiểm tra không đạt</text>
+          <text x="412" y="164" text-anchor="end" class="al-label" lang="en">if checks pass</text>
+          <text x="412" y="164" text-anchor="end" class="al-label" lang="vi">nếu kiểm tra đạt</text>
+
+          <rect x="10" y="14" width="100" height="42" rx="8" class="wf-node"></rect>
+          <text x="60" y="33" text-anchor="middle" class="wf-text" lang="en">receive goal</text>
+          <text x="60" y="33" text-anchor="middle" class="wf-text" lang="vi">nhận mục tiêu</text>
+          <text x="60" y="47" text-anchor="middle" class="al-label" lang="en">what output?</text>
+          <text x="60" y="47" text-anchor="middle" class="al-label" lang="vi">cần kết quả gì?</text>
+
+          <rect x="130" y="14" width="100" height="42" rx="8" class="wf-node"></rect>
+          <text x="180" y="33" text-anchor="middle" class="wf-text" lang="en">inspect</text>
+          <text x="180" y="33" text-anchor="middle" class="wf-text" lang="vi">đọc</text>
+          <text x="180" y="47" text-anchor="middle" class="al-label" lang="en">course context</text>
+          <text x="180" y="47" text-anchor="middle" class="al-label" lang="vi">bối cảnh môn học</text>
+
+          <rect x="250" y="14" width="100" height="42" rx="8" class="wf-node"></rect>
+          <text x="300" y="33" text-anchor="middle" class="wf-text" lang="en">plan</text>
+          <text x="300" y="33" text-anchor="middle" class="wf-text" lang="vi">lập kế hoạch</text>
+          <text x="300" y="47" text-anchor="middle" class="al-label" lang="en">steps + timing</text>
+          <text x="300" y="47" text-anchor="middle" class="al-label" lang="vi">bước + thời lượng</text>
+
+          <rect x="370" y="14" width="100" height="42" rx="8" class="wf-node"></rect>
+          <text x="420" y="33" text-anchor="middle" class="wf-text" lang="en">produce</text>
+          <text x="420" y="33" text-anchor="middle" class="wf-text" lang="vi">tạo bản nháp</text>
+          <text x="420" y="47" text-anchor="middle" class="al-label" lang="en">draft output</text>
+          <text x="420" y="47" text-anchor="middle" class="al-label" lang="vi">kết quả sơ bộ</text>
+
+          <rect x="370" y="100" width="100" height="42" rx="8" class="wf-node check"></rect>
+          <text x="420" y="119" text-anchor="middle" class="wf-text" lang="en">verify</text>
+          <text x="420" y="119" text-anchor="middle" class="wf-text" lang="vi">kiểm tra</text>
+          <text x="420" y="133" text-anchor="middle" class="al-label" lang="en">against checks</text>
+          <text x="420" y="133" text-anchor="middle" class="al-label" lang="vi">theo tiêu chí</text>
+
+          <rect x="250" y="100" width="100" height="42" rx="8" class="wf-node check"></rect>
+          <text x="300" y="119" text-anchor="middle" class="wf-text" lang="en">revise</text>
+          <text x="300" y="119" text-anchor="middle" class="wf-text" lang="vi">chỉnh sửa</text>
+          <text x="300" y="133" text-anchor="middle" class="al-label" lang="en">fix what failed</text>
+          <text x="300" y="133" text-anchor="middle" class="al-label" lang="vi">sửa chỗ chưa đạt</text>
+
+          <rect x="370" y="176" width="100" height="42" rx="8" class="wf-node human"></rect>
+          <text x="420" y="195" text-anchor="middle" class="wf-text" lang="en">lecturer</text>
+          <text x="420" y="195" text-anchor="middle" class="wf-text" lang="vi">giảng viên</text>
+          <text x="420" y="209" text-anchor="middle" class="al-label" lang="en">approves</text>
+          <text x="420" y="209" text-anchor="middle" class="al-label" lang="vi">phê duyệt</text>
+        </svg>
+        <p class="cap" lang="en">The plan–check–revise loop. The last box is not optional.</p>
+        <p class="cap" lang="vi">Vòng lặp lập kế hoạch – kiểm tra – chỉnh sửa. Ô cuối cùng không phải tuỳ chọn.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="facts">
+    <div class="wrap">
+      <div class="fact"><div class="k" lang="en">Duration</div><div class="k" lang="vi">Thời lượng</div><div class="v" lang="en">2 hours</div><div class="v" lang="vi">2 giờ</div></div>
+      <div class="fact"><div class="k" lang="en">Balance</div><div class="k" lang="vi">Tỷ lệ</div><div class="v">40 / 60</div></div>
+      <div class="fact"><div class="k" lang="en">Coding</div><div class="k" lang="vi">Lập trình</div><div class="v" lang="en">None</div><div class="v" lang="vi">Không</div></div>
+      <div class="fact"><div class="k" lang="en">Cost</div><div class="k" lang="vi">Chi phí</div><div class="v" lang="en">Free tools</div><div class="v" lang="vi">Miễn phí</div></div>
+    </div>
+  </div>
+
+  <section class="block" id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow" lang="en">01 · What this workshop is</span>
+        <span class="eyebrow" lang="vi">01 · Buổi tập huấn này là gì</span>
+        <h2 lang="en">Three agents for the work that repeats</h2>
+        <h2 lang="vi">Ba agent cho những việc cứ lặp đi lặp lại</h2>
+        <p lang="en">Most lecturers already use ChatGPT, Gemini, Claude, or Copilot as a chatbot: one question,
+          one answer, judge it yourself. This workshop is about the next step — writing down the
+          <strong>workflow</strong> and the <strong>quality check</strong> so the tool does that judging
+          first, every time, without you re-typing the context.</p>
+        <p lang="vi">Phần lớn giảng viên đã dùng ChatGPT, Gemini, Claude hay Copilot như một chatbot: hỏi một
+          câu, nhận một câu trả lời, rồi tự mình đánh giá. Buổi tập huấn này nói về bước tiếp theo — viết ra
+          <strong>quy trình</strong> và <strong>tiêu chí kiểm tra</strong> để công cụ tự đánh giá trước, mọi
+          lần như một, mà bạn không phải gõ lại bối cảnh.</p>
+      </div>
+      <div class="note tip" lang="en">
+        <span class="note-tag">Why this is not a prompt-engineering course</span>
+        A better prompt gets you a better single answer. An agent gets you a repeatable process: it plans
+        before it writes, checks its draft against your learning outcomes, revises what failed, and tells
+        you which claims it could not verify. The same six ingredients — role, goal, context, workflow,
+        quality checks, guardrails — build all three agents you make today.
+      </div>
+      <div class="note tip" lang="vi">
+        <span class="note-tag">Vì sao đây không phải khoá học "prompt engineering"</span>
+        Một prompt tốt hơn cho bạn một câu trả lời tốt hơn. Một agent cho bạn một quy trình lặp lại được:
+        nó lập kế hoạch trước khi viết, đối chiếu bản nháp với chuẩn đầu ra của bạn, sửa những chỗ chưa đạt,
+        và nói cho bạn biết điều gì nó không thể kiểm chứng. Vẫn sáu thành phần đó — vai trò, mục tiêu, bối
+        cảnh, quy trình, tiêu chí kiểm tra, rào chắn an toàn — dựng nên cả ba agent bạn làm hôm nay.
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="outcomes">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow" lang="en">02 · Learning outcomes</span>
+        <span class="eyebrow" lang="vi">02 · Chuẩn đầu ra</span>
+        <h2 lang="en">By the end of the session, you can</h2>
+        <h2 lang="vi">Kết thúc buổi tập huấn, bạn có thể</h2>
+      </div>
+      <div class="outcomes">
+        <div class="outcome-group">
+          <span class="tag" lang="en">L.O.1 · Understand</span>
+          <span class="tag" lang="vi">CĐR 1 · Hiểu</span>
+          <h3 lang="en">Tell the three apart</h3>
+          <h3 lang="vi">Phân biệt ba loại công cụ</h3>
+          <ul lang="en">
+            <li>Explain the difference between a chatbot, an AI assistant, and an AI agent</li>
+            <li>Decide which of your teaching tasks suit an agent — and which do not</li>
+          </ul>
+          <ul lang="vi">
+            <li>Giải thích khác biệt giữa chatbot, trợ lý AI và AI agent</li>
+            <li>Xác định công việc giảng dạy nào hợp với agent — và việc nào thì không</li>
+          </ul>
+        </div>
+        <div class="outcome-group">
+          <span class="tag" lang="en">L.O.2 · Build</span>
+          <span class="tag" lang="vi">CĐR 2 · Xây dựng</span>
+          <h3 lang="en">Design and run three agents</h3>
+          <h3 lang="vi">Thiết kế và chạy ba agent</h3>
+          <ul lang="en">
+            <li>Design an agent from goal, context, workflow, tools, and guardrails</li>
+            <li>Build a lesson-preparation agent for one of your own lessons</li>
+            <li>Build an assessment agent that drafts a rubric and evidence-based feedback</li>
+            <li>Build a course-support agent grounded in your own course documents</li>
+          </ul>
+          <ul lang="vi">
+            <li>Thiết kế agent từ mục tiêu, bối cảnh, quy trình, công cụ và rào chắn an toàn</li>
+            <li>Xây agent soạn bài giảng cho một buổi học có thật của bạn</li>
+            <li>Xây agent đánh giá: dựng rubric và phản hồi dựa trên bằng chứng</li>
+            <li>Xây agent hỗ trợ môn học, bám vào chính tài liệu môn học của bạn</li>
+          </ul>
+        </div>
+        <div class="outcome-group">
+          <span class="tag" lang="en">L.O.3 · Evaluate</span>
+          <span class="tag" lang="vi">CĐR 3 · Đánh giá</span>
+          <h3 lang="en">Judge what comes back</h3>
+          <h3 lang="vi">Thẩm định kết quả nhận được</h3>
+          <ul lang="en">
+            <li>Evaluate agent output for accuracy, usefulness, privacy, and fairness</li>
+            <li>Name the decisions that must stay with the lecturer</li>
+          </ul>
+          <ul lang="vi">
+            <li>Đánh giá kết quả của agent về độ chính xác, tính hữu ích, quyền riêng tư và công bằng</li>
+            <li>Chỉ ra những quyết định bắt buộc phải thuộc về giảng viên</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="agenda">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow" lang="en">03 · The two hours</span>
+        <span class="eyebrow" lang="vi">03 · Hai giờ diễn ra thế nào</span>
+        <h2 lang="en">Minute-by-minute</h2>
+        <h2 lang="vi">Lịch trình chi tiết</h2>
+        <p lang="en">Roughly 40% explanation and demonstration, 60% hands-on. The three shaded blocks are the ones
+          where you build something for your own course.</p>
+        <p lang="vi">Khoảng 40% trình bày và demo, 60% thực hành. Ba khối được tô nền là lúc bạn xây dựng
+          sản phẩm cho chính môn học của mình.</p>
+      </div>
+
+      <div class="phase-label"><span class="name" lang="en">Framing</span><span class="name" lang="vi">Định khung</span><span class="rule"></span></div>
+      <div class="sched times">
+        <div class="week talk">
+          <span class="no">00:00–00:10</span>
+          <span class="topic" lang="en">Opening and needs assessment
+            <span class="sub">Which teaching task eats the most time but still repeats the same reasoning? Pick one — you will use it all session.</span>
+          </span>
+          <span class="topic" lang="vi">Khai mạc và khảo sát nhu cầu
+            <span class="sub">Công việc giảng dạy nào tốn nhiều thời gian nhất mà vẫn lặp lại cùng một lối tư duy? Chọn một việc — bạn sẽ dùng nó suốt buổi.</span>
+          </span>
+        </div>
+        <div class="week talk">
+          <span class="no">00:10–00:25</span>
+          <span class="topic" lang="en">From chatbot to AI agent
+            <span class="sub">One-shot prompting vs. agentic workflow · the six components · <a href="concepts.html">read the concepts page</a></span>
+          </span>
+          <span class="topic" lang="vi">Từ chatbot đến AI agent
+            <span class="sub">Hỏi một lần so với quy trình agent · sáu thành phần · <a href="concepts.html">xem trang khái niệm</a></span>
+          </span>
+        </div>
+        <div class="week talk">
+          <span class="no">00:25–00:35</span>
+          <span class="topic" lang="en">Instructor demonstration
+            <span class="sub">A lesson-preparation agent that plans, checks its own work, and revises — weak request vs. agent workflow, side by side</span>
+          </span>
+          <span class="topic" lang="vi">Giảng viên hướng dẫn demo
+            <span class="sub">Một agent soạn bài giảng biết lập kế hoạch, tự kiểm tra và chỉnh sửa — so sánh trực tiếp yêu cầu sơ sài với quy trình agent</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="phase-label ex1"><span class="name" lang="en">Build · Exercise 1</span><span class="name" lang="vi">Thực hành · Bài 1</span><span class="rule"></span></div>
+      <div class="sched times">
+        <div class="week ex1 special">
+          <span class="no">00:35–00:55</span>
+          <span class="topic" lang="en">Hands-on 1 — Lesson Preparation Agent <span class="badge">build</span>
+            <span class="sub">Your own upcoming lesson → timed plan, active-learning activity, formative quiz, alignment table · <a href="exercises/ex1-lesson.html">open the exercise</a></span>
+          </span>
+          <span class="topic" lang="vi">Thực hành 1 — Agent soạn bài giảng <span class="badge">xây</span>
+            <span class="sub">Buổi học sắp tới của bạn → kế hoạch theo thời gian, hoạt động học chủ động, bài kiểm tra ngắn, bảng đối chiếu · <a href="exercises/ex1-lesson.html">mở bài thực hành</a></span>
+          </span>
+        </div>
+        <div class="week ex1">
+          <span class="no">00:55–01:05</span>
+          <span class="topic" lang="en">Pair review and prompt improvement
+            <span class="sub">Swap with a neighbour: hunt for vague outcomes, unrealistic timing, invented content — then add an adversarial review step</span>
+          </span>
+          <span class="topic" lang="vi">Rà soát theo cặp và cải thiện prompt
+            <span class="sub">Đổi bài với người bên cạnh: tìm chuẩn đầu ra mơ hồ, phân bổ thời gian phi thực tế, nội dung bịa — rồi thêm một bước tự phản biện</span>
+          </span>
+        </div>
+        <div class="week talk">
+          <span class="no">01:05–01:10</span>
+          <span class="topic" lang="en">Break</span>
+          <span class="topic" lang="vi">Giải lao</span>
+        </div>
+      </div>
+
+      <div class="phase-label ex2"><span class="name" lang="en">Build · Exercises 2 and 3</span><span class="name" lang="vi">Thực hành · Bài 2 và 3</span><span class="rule"></span></div>
+      <div class="sched times">
+        <div class="week talk">
+          <span class="no">01:10–01:20</span>
+          <span class="topic" lang="en">Responsible and effective agent use
+            <span class="sub">Privacy, hallucination, bias, accessibility, human oversight · <a href="responsible.html">the five principles</a></span>
+          </span>
+          <span class="topic" lang="vi">Sử dụng agent có trách nhiệm và hiệu quả
+            <span class="sub">Quyền riêng tư, thông tin bịa, thiên lệch, khả năng tiếp cận, giám sát của con người · <a href="responsible.html">năm nguyên tắc</a></span>
+          </span>
+        </div>
+        <div class="week ex2 special">
+          <span class="no">01:20–01:40</span>
+          <span class="topic" lang="en">Hands-on 2 — Assessment and Feedback Agent <span class="badge">build</span>
+            <span class="sub">A four-level analytic rubric and evidence-based feedback on anonymized work — without the agent setting the grade · <a href="exercises/ex2-assessment.html">open the exercise</a></span>
+          </span>
+          <span class="topic" lang="vi">Thực hành 2 — Agent đánh giá và phản hồi <span class="badge">xây</span>
+            <span class="sub">Rubric phân tích bốn mức và phản hồi dựa trên bằng chứng cho bài làm ẩn danh — agent không được chấm điểm · <a href="exercises/ex2-assessment.html">mở bài thực hành</a></span>
+          </span>
+        </div>
+        <div class="week ex3 special">
+          <span class="no">01:40–01:55</span>
+          <span class="topic" lang="en">Hands-on 3 — Course Support Agent <span class="badge">build</span>
+            <span class="sub">Answers only from your syllabus; says so when the answer is not there; escalates the rest · <a href="exercises/ex3-support.html">open the exercise</a></span>
+          </span>
+          <span class="topic" lang="vi">Thực hành 3 — Agent hỗ trợ môn học <span class="badge">xây</span>
+            <span class="sub">Chỉ trả lời dựa trên đề cương; nói thẳng khi không có thông tin; chuyển phần còn lại cho giảng viên · <a href="exercises/ex3-support.html">mở bài thực hành</a></span>
+          </span>
+        </div>
+        <div class="week talk">
+          <span class="no">01:55–02:00</span>
+          <span class="topic" lang="en">Wrap-up and action plan
+            <span class="sub">One workflow you will actually use in the next seven days, and how you will verify it</span>
+          </span>
+          <span class="topic" lang="vi">Tổng kết và kế hoạch hành động
+            <span class="sub">Một quy trình bạn thật sự sẽ dùng trong bảy ngày tới, và cách bạn sẽ kiểm chứng kết quả</span>
+          </span>
+        </div>
+      </div>
+      <div class="phase-label ex3"><span class="name" lang="en">Optional module · +25 minutes</span><span class="name" lang="vi">Học phần tuỳ chọn · +25 phút</span><span class="rule"></span></div>
+      <div class="sched times">
+        <div class="week ex3">
+          <span class="no">+00:25</span>
+          <span class="topic" lang="en">Tools, connectors and documents <span class="badge">optional</span>
+            <span class="sub">Connect an agent to Gmail, analyse your own syllabus, and have it fill in a spreadsheet — plus the risk that only appears once an agent can read your inbox · <a href="tools.html">open the module</a></span>
+          </span>
+          <span class="topic" lang="vi">Công cụ, connector và tài liệu <span class="badge">tuỳ chọn</span>
+            <span class="sub">Kết nối agent với Gmail, phân tích chính đề cương của bạn, và để nó điền bảng tính — kèm rủi ro chỉ xuất hiện khi agent đọc được hộp thư của bạn · <a href="tools.html">mở học phần</a></span>
+          </span>
+        </div>
+      </div>
+      <p class="sched-note" lang="en">The base session is two hours. The optional module turns it into a
+        2h25 variant, or a short second session — see <a href="tools.html#timing">how it fits</a>.</p>
+      <p class="sched-note" lang="vi">Buổi học gốc dài hai giờ. Học phần tuỳ chọn biến nó thành phiên bản
+        2 giờ 25, hoặc một buổi thứ hai ngắn — xem <a href="tools.html#timing">cách ghép vào</a>.</p>
+      <p class="sched-note" lang="en">Timings are the instructor's plan, not a contract — the hands-on blocks are
+        the ones worth protecting if the session runs late.</p>
+      <p class="sched-note" lang="vi">Thời lượng là dự kiến của giảng viên, không phải cam kết — nếu buổi học
+        bị trễ, phần đáng giữ lại là các khối thực hành.</p>
+    </div>
+  </section>
+
+  <section class="block" id="checklist">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow" lang="en">04 · The framework to take away</span>
+        <span class="eyebrow" lang="vi">04 · Khung mang về áp dụng</span>
+        <h2 lang="en">The AGENT checklist</h2>
+        <h2 lang="vi">Danh mục kiểm tra AGENT</h2>
+        <p lang="en">Five questions to ask of any agent you design after today. If you cannot answer all five,
+          the agent is not ready to run unsupervised on real teaching work.</p>
+        <p lang="vi">Năm câu hỏi dành cho bất kỳ agent nào bạn thiết kế sau hôm nay. Nếu chưa trả lời được cả
+          năm, agent đó chưa sẵn sàng chạy không giám sát trên công việc giảng dạy thật.</p>
+      </div>
+      <div class="gate-grid" lang="en">
+        <div class="gate-item"><span class="gn">A · Aim</span><h4>Is the goal explicit?</h4><p>Not "help me with assessment" but "produce a four-level analytic rubric for this task and this outcome."</p></div>
+        <div class="gate-item"><span class="gn">G · Grounding</span><h4>Does it have real material?</h4><p>The syllabus, the marking guide, the lecture notes. Without them it will invent something plausible.</p></div>
+        <div class="gate-item"><span class="gn">E · Execution</span><h4>Is there a sequence?</h4><p>Numbered steps, with at least one step that checks the work produced by the earlier steps.</p></div>
+        <div class="gate-item"><span class="gn">N · Necessary oversight</span><h4>What stays with you?</h4><p>Final grades, misconduct, accommodations, appeals. Write the refusal into the instructions.</p></div>
+        <div class="gate-item"><span class="gn">T · Testing</span><h4>Has it been tried to break?</h4><p>A normal request, an ambiguous one, one outside scope, one that conflicts with your policy.</p></div>
+      </div>
+      <div class="gate-grid" lang="vi">
+        <div class="gate-item"><span class="gn">A · Aim — Mục tiêu</span><h4>Mục tiêu đã rõ ràng chưa?</h4><p>Không phải "giúp tôi việc đánh giá" mà là "tạo một rubric phân tích bốn mức cho nhiệm vụ này và chuẩn đầu ra này".</p></div>
+        <div class="gate-item"><span class="gn">G · Grounding — Nguồn</span><h4>Đã có tài liệu thật chưa?</h4><p>Đề cương, hướng dẫn chấm, ghi chú bài giảng. Thiếu chúng, agent sẽ bịa ra thứ nghe có vẻ hợp lý.</p></div>
+        <div class="gate-item"><span class="gn">E · Execution — Thực thi</span><h4>Đã có trình tự chưa?</h4><p>Các bước được đánh số, trong đó ít nhất một bước kiểm tra lại kết quả của các bước trước.</p></div>
+        <div class="gate-item"><span class="gn">N · Necessary oversight — Giám sát</span><h4>Điều gì vẫn thuộc về bạn?</h4><p>Điểm số cuối cùng, gian lận học thuật, hỗ trợ đặc biệt, phúc khảo. Hãy viết lời từ chối vào chính hướng dẫn.</p></div>
+        <div class="gate-item"><span class="gn">T · Testing — Kiểm thử</span><h4>Đã thử làm nó sai chưa?</h4><p>Một yêu cầu bình thường, một yêu cầu mơ hồ, một yêu cầu ngoài phạm vi, một yêu cầu trái quy định của bạn.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="prepare">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow" lang="en">05 · Before you arrive</span>
+        <span class="eyebrow" lang="vi">05 · Trước khi đến lớp</span>
+        <h2 lang="en">Fifteen minutes of preparation</h2>
+        <h2 lang="vi">Mười lăm phút chuẩn bị</h2>
+        <p lang="en">Bring your own course material. Every exercise works on a real lesson, a real assignment, and
+          a real syllabus — generic examples produce generic agents, and you will not use those on Monday.</p>
+        <p lang="vi">Hãy mang theo tài liệu môn học của chính bạn. Mọi bài thực hành đều làm trên một buổi học
+          thật, một bài tập thật và một đề cương thật — ví dụ chung chung chỉ tạo ra agent chung chung, và
+          bạn sẽ không dùng đến chúng vào thứ Hai.</p>
+      </div>
+      <div class="ticklist" id="prep">
+        <label class="tick"><input type="checkbox" data-k="laptop"><span lang="en"><strong>A laptop</strong> — not a tablet or phone. Saving a reusable agent needs the desktop web interface.</span><span lang="vi"><strong>Một laptop</strong> — không phải máy tính bảng hay điện thoại. Việc lưu một agent dùng lại được cần giao diện web trên máy tính.</span></label>
+        <label class="tick"><input type="checkbox" data-k="account"><span lang="en"><strong>An account on a free AI tool</strong>, already signed in. See <a href="platforms.html">Platforms</a> for which one and why.</span><span lang="vi"><strong>Tài khoản một công cụ AI miễn phí</strong>, đã đăng nhập sẵn. Xem <a href="platforms.html">Nền tảng</a> để biết chọn công cụ nào và vì sao.</span></label>
+        <label class="tick"><input type="checkbox" data-k="privacy"><span lang="en"><strong>Your data-training setting checked</strong> — <a href="platforms.html#privacy">where to find it</a> in each tool.</span><span lang="vi"><strong>Đã kiểm tra thiết lập dữ liệu huấn luyện</strong> — <a href="platforms.html#privacy">chỗ tìm thiết lập đó</a> trong từng công cụ.</span></label>
+        <label class="tick"><input type="checkbox" data-k="syllabus"><span lang="en"><strong>One syllabus</strong> or course description, as a file or text you can paste.</span><span lang="vi"><strong>Một đề cương</strong> hoặc bản mô tả môn học, dạng tệp hoặc văn bản có thể dán được.</span></label>
+        <label class="tick"><input type="checkbox" data-k="lesson"><span lang="en"><strong>One upcoming lecture topic</strong>, with the class duration and student year level.</span><span lang="vi"><strong>Một chủ đề bài giảng sắp tới</strong>, kèm thời lượng buổi học và năm học của sinh viên.</span></label>
+        <label class="tick"><input type="checkbox" data-k="task"><span lang="en"><strong>One assignment or assessment question.</strong></span><span lang="vi"><strong>Một bài tập hoặc câu hỏi đánh giá.</strong></span></label>
+        <label class="tick"><input type="checkbox" data-k="response"><span lang="en"><strong>One student response with every identifying detail removed</strong> — or use the synthetic sample we provide.</span><span lang="vi"><strong>Một bài làm của sinh viên đã xoá hết thông tin nhận dạng</strong> — hoặc dùng bài mẫu giả lập do chúng tôi cung cấp.</span></label>
+        <label class="tick"><input type="checkbox" data-k="task-choice"><span lang="en"><strong>One answer</strong> to: which of your teaching tasks repeats the same reasoning most often?</span><span lang="vi"><strong>Một câu trả lời</strong> cho câu hỏi: công việc giảng dạy nào của bạn lặp lại cùng một lối tư duy nhiều nhất?</span></label>
+      </div>
+      <p class="subtle-note" lang="en">Your ticks are saved in this browser only, for you.
+        <button class="tick-reset" type="button" data-reset="prep">Clear them</button>
+      </p>
+      <p class="subtle-note" lang="vi">Các mục đã tick chỉ được lưu trong trình duyệt này, cho riêng bạn.
+        <button class="tick-reset" type="button" data-reset="prep">Xoá hết</button>
+      </p>
+      <div class="note warn" lang="en">
+        <span class="note-tag">Anonymize first</span>
+        Remove names, student numbers, email addresses, grades tied to identifiable students, and any
+        health, disability, or disciplinary information <strong>before</strong> the file leaves your
+        computer. If that is difficult for the work you have, bring nothing and use the synthetic
+        response — the exercise works exactly the same.
+      </div>
+      <div class="note warn" lang="vi">
+        <span class="note-tag">Ẩn danh trước đã</span>
+        Hãy xoá họ tên, mã số sinh viên, địa chỉ email, điểm gắn với sinh viên nhận dạng được, và mọi thông
+        tin về sức khoẻ, khuyết tật hay kỷ luật <strong>trước khi</strong> tệp rời khỏi máy của bạn. Nếu việc
+        đó khó với bài làm bạn đang có, đừng mang gì cả và dùng bài mẫu giả lập — bài thực hành vẫn diễn ra
+        y hệt.
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="explore">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow" lang="en">06 · Explore the workshop</span>
+        <span class="eyebrow" lang="vi">06 · Khám phá buổi tập huấn</span>
+        <h2 lang="en">Everything you need, on four pages</h2>
+        <h2 lang="vi">Mọi thứ bạn cần, trong vài trang</h2>
+      </div>
+      <div class="materials-grid">
+        <a class="mat-card lec" href="concepts.html">
+          <div class="mat-num" lang="en">Concepts</div>
+          <div class="mat-num" lang="vi">Khái niệm</div>
+          <h3 lang="en">From chatbot to agent</h3>
+          <h3 lang="vi">Từ chatbot đến agent</h3>
+          <p lang="en">The three-way distinction, the six components of a lecturer agent, and the instructor
+            demonstration: the same lesson asked as a weak request and as an agent workflow.</p>
+          <p lang="vi">Phân biệt ba loại công cụ, sáu thành phần của một agent cho giảng viên, và phần demo:
+            cùng một bài giảng, hỏi theo kiểu sơ sài và hỏi theo quy trình agent.</p>
+          <div class="mat-meta" lang="en">15 min · includes a 4-question self-check</div>
+          <div class="mat-meta" lang="vi">15 phút · có 4 câu tự kiểm tra</div>
+        </a>
+        <a class="mat-card" href="exercises/ex1-lesson.html">
+          <div class="mat-num" lang="en">Exercise 1</div>
+          <div class="mat-num" lang="vi">Bài 1</div>
+          <h3 lang="en">Lesson Preparation Agent</h3>
+          <h3 lang="vi">Agent soạn bài giảng</h3>
+          <p lang="en">Build it in an interactive form that assembles the prompt as you type, then run the
+            alignment checklist and the adversarial pair review.</p>
+          <p lang="vi">Xây bằng biểu mẫu tương tác tự ghép prompt trong lúc bạn gõ, rồi chạy danh mục kiểm tra
+            tính tương thích và phần rà soát phản biện theo cặp.</p>
+          <div class="mat-meta" lang="en">20 min + 10 min review · agent builder</div>
+          <div class="mat-meta" lang="vi">20 phút + 10 phút rà soát · trình dựng agent</div>
+        </a>
+        <a class="mat-card ex2" href="exercises/ex2-assessment.html">
+          <div class="mat-num" lang="en">Exercise 2</div>
+          <div class="mat-num" lang="vi">Bài 2</div>
+          <h3 lang="en">Assessment and Feedback Agent</h3>
+          <h3 lang="vi">Agent đánh giá và phản hồi</h3>
+          <p lang="en">A four-level rubric and criterion-by-criterion feedback quoting the student's own words —
+            then four challenges designed to make the agent defend itself.</p>
+          <p lang="vi">Rubric bốn mức và phản hồi theo từng tiêu chí có trích dẫn chính lời của sinh viên —
+            rồi bốn câu vặn lại buộc agent phải bảo vệ nhận định của mình.</p>
+          <div class="mat-meta" lang="en">20 min · includes a synthetic student response</div>
+          <div class="mat-meta" lang="vi">20 phút · kèm bài làm giả lập</div>
+        </a>
+        <a class="mat-card ex3" href="exercises/ex3-support.html">
+          <div class="mat-num" lang="en">Exercise 3</div>
+          <div class="mat-num" lang="vi">Bài 3</div>
+          <h3 lang="en">Course Support Agent</h3>
+          <h3 lang="vi">Agent hỗ trợ môn học</h3>
+          <p lang="en">Grounded in your syllabus and nothing else. Three test questions: one it can answer, one it
+            must decline, one it must escalate to you.</p>
+          <p lang="vi">Chỉ bám vào đề cương của bạn, không gì khác. Ba câu kiểm thử: một câu nó trả lời được,
+            một câu nó phải từ chối, một câu nó phải chuyển lại cho bạn.</p>
+          <div class="mat-meta" lang="en">15 min · includes a sample syllabus</div>
+          <div class="mat-meta" lang="vi">15 phút · kèm đề cương mẫu</div>
+        </a>
+        <a class="mat-card ex2" href="tools.html">
+          <div class="mat-num" lang="en">Optional module</div>
+          <div class="mat-num" lang="vi">Học phần tuỳ chọn</div>
+          <h3 lang="en">Tools, connectors and documents</h3>
+          <h3 lang="vi">Công cụ, connector và tài liệu</h3>
+          <p lang="en">Connecting an agent to Gmail, analysing your own documents, and getting a filled-in
+            spreadsheet back — with the one risk that only appears once an agent can read your inbox.</p>
+          <p lang="vi">Kết nối agent với Gmail, phân tích tài liệu của chính bạn, và nhận về một bảng tính đã
+            điền — kèm rủi ro duy nhất chỉ xuất hiện khi agent đọc được hộp thư của bạn.</p>
+          <div class="mat-meta" lang="en">+25 min · 3 templates · demo and hands-on</div>
+          <div class="mat-meta" lang="vi">+25 phút · 3 mẫu · demo và thực hành</div>
+        </a>
+        <a class="mat-card" href="platforms.html">
+          <div class="mat-num" lang="en">Platforms</div>
+          <div class="mat-num" lang="vi">Nền tảng</div>
+          <h3 lang="en">Which free tool, and how to set it up</h3>
+          <h3 lang="vi">Chọn công cụ miễn phí nào và cài đặt ra sao</h3>
+          <p lang="en">What each free tier can actually save and ground, what is paid-only, the privacy toggles,
+            and the instructor's pre-flight checklist.</p>
+          <p lang="vi">Gói miễn phí của từng công cụ thật sự lưu và nạp tài liệu được đến đâu, cái gì chỉ có
+            khi trả phí, các công tắc quyền riêng tư, và danh mục chuẩn bị của giảng viên.</p>
+          <div class="mat-meta" lang="en">Comparison table · setup steps</div>
+          <div class="mat-meta" lang="vi">Bảng so sánh · các bước cài đặt</div>
+        </a>
+        <a class="mat-card ex3" href="responsible.html">
+          <div class="mat-num" lang="en">Responsible use</div>
+          <div class="mat-num" lang="vi">Trách nhiệm</div>
+          <h3 lang="en">Five principles and the safety checklist</h3>
+          <h3 lang="vi">Năm nguyên tắc và danh mục an toàn</h3>
+          <p lang="en">Grounding, student privacy, human decisions, uncertainty disclosure, and the five tests
+            every agent should survive before it meets a student.</p>
+          <p lang="vi">Bám nguồn tài liệu, quyền riêng tư của sinh viên, quyết định của con người, công bố mức
+            chắc chắn, và năm bài kiểm thử mọi agent phải vượt qua trước khi gặp sinh viên.</p>
+          <div class="mat-meta" lang="en">10 min · printable checklist</div>
+          <div class="mat-meta" lang="vi">10 phút · danh mục in được</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="platforms.html"><span class="dir" data-i18n="nav.setup">Set up first</span><span lang="en">Platforms and setup</span><span lang="vi">Nền tảng và cài đặt</span></a>
+    <a href="concepts.html" class="next"><span class="dir" data-i18n="nav.next">Next →</span><span lang="en">From chatbot to agent</span><span lang="vi">Từ chatbot đến agent</span></a>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>AI Agents</b> · for Lecturers</span>
+    <p data-i18n="foot.subtitle">Practical AI Agents for University Lecturers: Designing Safe and Effective Workflows for Teaching, Assessment, and Student Support</p>
+  </div>
+</footer>
+
+<script src="assets/i18n.js"></script>
+<script src="assets/course.js"></script>
+<script src="assets/workshop.js"></script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+{
+ "page": "tools.html",
+ "questions": [
+  {
+   "a": 0,
+   "en": [
+    "1. Which kind of tool carries the lowest risk?",
+    "A document you upload for the agent to read",
+    "A spreadsheet the agent generates and hands back",
+    "A connector into a live Gmail or Drive account",
+    "A calendar the agent can read and write entries in",
+    "You choose exactly what an uploaded file contains, and nothing leaves except what you put in. That is why the module says start here and work outwards."
+   ],
+   "vi": [
+    "1. Loại công cụ nào mang rủi ro thấp nhất?",
+    "Một tài liệu bạn tải lên cho agent đọc",
+    "Một bảng tính agent tạo ra rồi trả lại cho bạn",
+    "Một connector vào tài khoản Gmail hay Drive thật",
+    "Một lịch mà agent đọc và ghi thêm mục vào được",
+    "Bạn chọn chính xác nội dung tệp tải lên, và không gì ra ngoài ngoài thứ bạn đưa vào. Vì thế học phần này nói hãy bắt đầu từ đây rồi mở rộng dần."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "2. What is a connector, in one sentence?",
+    "A file format that lets agents exchange documents",
+    "A standing permission to read a service on your behalf",
+    "A paid add-on that increases the context window size",
+    "A browser extension that copies text into the chat",
+    "You grant it once, and from then on the agent can search and read that account inside an ordinary conversation — which is both the convenience and the risk."
+   ],
+   "vi": [
+    "2. Nói gọn trong một câu, connector là gì?",
+    "Một định dạng tệp giúp các agent trao đổi tài liệu",
+    "Một quyền thường trực để đọc dịch vụ thay mặt bạn",
+    "Một gói trả phí giúp tăng kích thước cửa sổ ngữ cảnh",
+    "Một tiện ích trình duyệt chép văn bản vào khung chat",
+    "Bạn cấp quyền một lần, và từ đó agent có thể tìm và đọc tài khoản ấy ngay trong một cuộc trò chuyện bình thường — vừa là tiện lợi vừa là rủi ro."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "3. Are Gmail connectors available on the free tiers?",
+    "Yes on ChatGPT free, no on Claude and on Gemini",
+    "Yes — all three major platforms include them free",
+    "No — they are paid on both ChatGPT and Claude",
+    "Only for institutional accounts, never for personal",
+    "Checked in August 2026: Claude and ChatGPT both put them behind paid plans, and ChatGPT does not offer them in the UK, EU, Switzerland or the EEA at all."
+   ],
+   "vi": [
+    "3. Connector Gmail có sẵn ở các gói miễn phí không?",
+    "Có ở gói ChatGPT miễn phí, không có ở Claude và Gemini",
+    "Có — cả ba nền tảng lớn đều cho dùng hoàn toàn miễn phí",
+    "Không — cả ChatGPT và Claude đều tính phí tính năng này",
+    "Chỉ dành cho tài khoản của trường, không cho cá nhân",
+    "Kiểm tra tháng 8/2026: Claude và ChatGPT đều đặt tính năng này sau gói trả phí, và ChatGPT hoàn toàn không cung cấp nó ở Anh, EU, Thụy Sĩ và EEA."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "4. Why is a university inbox a poor place to start experimenting?",
+    "The messages are rarely relevant to teaching work",
+    "It usually contains too many messages to process",
+    "Institutional accounts have stricter rate limits",
+    "It holds other people's personal information",
+    "Students never agreed to have their messages read by a third-party service. That question is your institution's to answer, and it should be answered first."
+   ],
+   "vi": [
+    "4. Vì sao hộp thư của trường là nơi tệ để bắt đầu thử nghiệm?",
+    "Các thư trong đó hiếm khi liên quan đến giảng dạy",
+    "Nó thường có quá nhiều thư để xử lý cho xuể",
+    "Tài khoản của trường bị giới hạn tần suất chặt hơn",
+    "Nó chứa thông tin cá nhân của những người khác",
+    "Sinh viên chưa từng đồng ý cho một dịch vụ bên thứ ba đọc thư của mình. Đó là câu hỏi thuộc về nhà trường, và phải được trả lời trước tiên."
+   ]
+  },
+  {
+   "a": 0,
+   "en": [
+    "5. What are the three rules that make a connector safe enough to try?",
+    "Read-only, draft never send, and a scoped account",
+    "Paid plan, latest model, and a private browser window",
+    "Short prompts, small mailbox, and frequent deletion",
+    "Written policy, annual review, and student consent",
+    "None of the three is clever. Together they keep the worst case inside a draft you read, rather than an action taken in your name that you cannot undo."
+   ],
+   "vi": [
+    "5. Ba nguyên tắc nào khiến một connector đủ an toàn để thử?",
+    "Chỉ đọc, soạn nháp không gửi, và tài khoản giới hạn",
+    "Gói trả phí, mô hình mới nhất, và cửa sổ ẩn danh",
+    "Prompt ngắn, hộp thư nhỏ, và xoá thư thường xuyên",
+    "Chính sách thành văn, rà soát hằng năm, và sự đồng ý",
+    "Không nguyên tắc nào trong ba nguyên tắc này là cao siêu. Cùng nhau, chúng giữ tình huống xấu nhất nằm trong một bản nháp bạn đọc, thay vì một hành động nhân danh bạn mà không rút lại được."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "6. Why is asking for a summary the weakest use of document analysis?",
+    "Summaries exceed the free tier upload size limits",
+    "It is the one answer you could get without the file",
+    "Models are known to summarise long files inaccurately",
+    "The summary cannot be exported to a spreadsheet",
+    "Ask instead for what you would have to read the whole document to discover: which outcome is never assessed, what changed between two versions, what the exam tested that nobody promised."
+   ],
+   "vi": [
+    "6. Vì sao xin một bản tóm tắt là cách dùng yếu nhất của việc phân tích tài liệu?",
+    "Bản tóm tắt vượt quá hạn mức dung lượng gói miễn phí",
+    "Đó là câu trả lời bạn có được mà không cần đến tệp",
+    "Các mô hình vốn nổi tiếng là tóm tắt tệp dài không chuẩn",
+    "Bản tóm tắt không xuất được sang định dạng bảng tính",
+    "Hãy hỏi thứ mà bạn phải đọc hết cả tài liệu mới biết: chuẩn đầu ra nào không được đánh giá, hai phiên bản khác nhau ở đâu, đề thi kiểm tra gì mà không ai cam kết."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "7. Which workflow step catches a scanned or truncated file?",
+    "Asking it to summarise each section separately",
+    "Requiring a quotation for every single claim made",
+    "Opening with tell me what you could not read",
+    "Limiting the upload to one document at a time",
+    "A PDF of photographs contains no text, and a long file can be silently cut. Both produce a confident answer about material the agent never actually saw."
+   ],
+   "vi": [
+    "7. Bước nào trong quy trình bắt được tệp bị scan hoặc bị cắt bớt?",
+    "Yêu cầu nó tóm tắt riêng rẽ từng phần một của tài liệu",
+    "Bắt buộc phải trích dẫn cho từng khẳng định được nêu ra",
+    "Mở đầu bằng câu hãy cho tôi biết bạn không đọc được gì",
+    "Giới hạn mỗi lần chỉ tải lên đúng một tài liệu mà thôi",
+    "Một PDF gồm ảnh chụp thì không chứa chữ, còn tệp dài có thể bị cắt âm thầm. Cả hai đều cho ra câu trả lời tự tin về thứ agent chưa hề nhìn thấy."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "8. What does the requirement to quote and locate protect against?",
+    "The agent refusing to analyse a long document",
+    "Tables arriving with their columns scrambled",
+    "The free tier running out of daily uploads",
+    "General knowledge leaking in to fill a gap",
+    "Without it, the agent answers from what courses usually contain rather than from your file — fluently, plausibly, and about a document that is not yours."
+   ],
+   "vi": [
+    "8. Yêu cầu trích dẫn và chỉ vị trí bảo vệ bạn khỏi điều gì?",
+    "Agent từ chối phân tích một tài liệu quá dài",
+    "Bảng biểu bị đọc lộn xộn, sai thứ tự các cột",
+    "Gói miễn phí hết lượt tải tệp trong ngày hôm đó",
+    "Kiến thức chung rò rỉ vào để lấp chỗ trống",
+    "Thiếu nó, agent trả lời theo những gì các môn học thường có chứ không theo tệp của bạn — trôi chảy, hợp lý, và nói về một tài liệu không phải của bạn."
+   ]
+  },
+  {
+   "a": 0,
+   "en": [
+    "9. Which three failures make a generated table look finished but wrong?",
+    "Invented rows, dropped rows, and column drift",
+    "Wrong fonts, wrong widths, and wrong cell borders",
+    "Missing headers, extra headers, and merged cells",
+    "Slow export, failed export, and corrupted encoding",
+    "None of the three looks wrong on screen. That is precisely why the verification rule is to count rows against the source rather than to read the table through."
+   ],
+   "vi": [
+    "9. Ba lỗi nào khiến một bảng do agent tạo trông có vẻ xong nhưng lại sai?",
+    "Dòng bịa thêm, dòng bị mất, và giá trị lệch cột",
+    "Sai phông chữ, sai độ rộng, và sai đường viền ô",
+    "Thiếu tiêu đề, thừa tiêu đề, và các ô bị gộp lại",
+    "Xuất chậm, xuất thất bại, và mã hoá ký tự bị lỗi",
+    "Không lỗi nào trong ba lỗi trông có vẻ sai trên màn hình. Chính vì thế nguyên tắc kiểm chứng là đếm số dòng đối chiếu với nguồn, chứ không phải đọc lướt cả bảng."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "10. What should an agent write in a cell the source does not answer?",
+    "N/A, which is the standard spreadsheet convention",
+    "NOT IN SOURCE, so the gap stays visible to you",
+    "Its best estimate, clearly marked as an estimate",
+    "Nothing, leaving the cell blank for you to fill",
+    "A blank reads as an oversight and N/A reads as not applicable. A phrase you can search for is what turns a silent gap into something you will actually notice."
+   ],
+   "vi": [
+    "10. Agent nên ghi gì vào ô mà nguồn không trả lời?",
+    "N/A, vì đó là quy ước chuẩn trong các bảng tính",
+    "KHÔNG CÓ TRONG NGUỒN, để bạn vẫn thấy chỗ trống đó",
+    "Ước lượng tốt nhất của nó, có ghi rõ là ước lượng",
+    "Không ghi gì cả, để trống ô đó cho bạn tự điền vào",
+    "Ô trống bị đọc là sơ suất, còn N/A bị đọc là không áp dụng. Một cụm từ tìm kiếm được mới biến khoảng trống lặng lẽ thành thứ bạn thật sự để ý thấy."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "11. Why can an agent not simply ignore instructions found inside an email?",
+    "The platform strips formatting before the agent reads it",
+    "Emails are encrypted, so it cannot inspect them properly",
+    "Your instructions and the email arrive as the same text",
+    "Connectors deliver messages without their subject lines",
+    "There is no reliable channel that marks one block of text as trusted and another as data. That is the whole vulnerability, and structure is the only real defence."
+   ],
+   "vi": [
+    "11. Vì sao agent không thể đơn giản là bỏ qua mệnh lệnh nằm trong email?",
+    "Nền tảng đã bóc hết định dạng trước khi agent đọc tới nơi",
+    "Email được mã hoá nên nó không kiểm tra kỹ được nội dung",
+    "Chỉ dẫn của bạn và email đều đến dưới dạng cùng một văn bản",
+    "Connector chuyển thư đến mà không kèm theo dòng tiêu đề",
+    "Không có kênh nào đáng tin đánh dấu khối chữ này là chỉ dẫn còn khối kia là dữ liệu. Đó là toàn bộ lỗ hổng, và cấu trúc là cách phòng vệ thật sự duy nhất."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "12. What does a passing result on the injection test T6 look like?",
+    "It carries out the instruction and then tells you it did",
+    "It deletes the message containing the hidden instruction",
+    "It replies to the sender asking them to confirm the request",
+    "It reports the suspicious line and does not act on it",
+    "Report, do not obey. Listing it in a review section is the behaviour to require; acting on it, or quietly repeating its claim in a draft, are both failures."
+   ],
+   "vi": [
+    "12. Kết quả đạt ở phép thử tiêm lệnh T6 trông như thế nào?",
+    "Nó thực hiện chỉ dẫn rồi báo lại cho bạn là đã làm",
+    "Nó xoá lá thư có chứa chỉ dẫn được giấu bên trong",
+    "Nó trả lời người gửi để hỏi xác nhận lại yêu cầu đó",
+    "Nó báo cáo dòng khả nghi đó và không làm theo",
+    "Báo cáo, đừng tuân theo. Hành vi cần yêu cầu là liệt kê nó vào một mục rà soát; làm theo, hoặc lặng lẽ nhắc lại điều đó trong bản nháp, đều là trượt."
+   ]
+  }
+ ]
+}

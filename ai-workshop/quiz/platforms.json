@@ -1,0 +1,233 @@
+{
+ "page": "platforms.html",
+ "questions": [
+  {
+   "a": 0,
+   "en": [
+    "1. What must a platform do to be usable for these three exercises?",
+    "Save a reusable agent and hold your course documents",
+    "Support at least four different underlying AI models",
+    "Run on a phone as well as on a desktop computer",
+    "Offer a student-facing version you can publish to",
+    "Save, ground, free. All three exercises need an instruction set you can re-open and a syllabus attached to it, on an account everyone in the room can create."
+   ],
+   "vi": [
+    "1. Một nền tảng phải làm được gì mới dùng được cho ba bài thực hành này?",
+    "Lưu được agent dùng lại và giữ được tài liệu môn học",
+    "Hỗ trợ ít nhất bốn mô hình AI nền khác nhau",
+    "Chạy được trên điện thoại cũng như trên máy tính",
+    "Có phiên bản cho sinh viên để bạn công bố lên đó",
+    "Lưu, bám nguồn, miễn phí. Cả ba bài đều cần một bộ hướng dẫn mở lại được và một đề cương đính kèm, trên tài khoản mà mọi người trong phòng đều tạo được."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "2. Which feature is widely assumed to be free but is not?",
+    "ChatGPT Projects, which now requires the Go tier or above",
+    "The ChatGPT custom GPT builder, which needs a paid plan",
+    "Gemini Gems, which moved behind Google AI Pro in 2026",
+    "Claude Projects, which is limited to Team and Enterprise",
+    "Free accounts can use a GPT that someone shares with them, and can build the same thing with Projects, which are free. Only the builder itself is paid."
+   ],
+   "vi": [
+    "2. Tính năng nào thường bị tưởng là miễn phí nhưng thực ra không phải?",
+    "ChatGPT Projects, nay đòi hỏi gói Go trở lên mới dùng được",
+    "Trình tạo GPT tuỳ chỉnh của ChatGPT, vốn đòi gói trả phí",
+    "Gemini Gems, đã chuyển vào gói Google AI Pro từ năm 2026",
+    "Claude Projects, vốn chỉ có ở gói Team và gói Enterprise",
+    "Tài khoản miễn phí vẫn dùng được GPT do người khác chia sẻ, và dựng được thứ tương đương bằng Projects vốn miễn phí. Chỉ riêng trình tạo là tính phí."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "3. Why is NotebookLM recommended specifically for Exercise 3?",
+    "It is the only tool that can be shared with students",
+    "It allows the longest custom instructions of any tool",
+    "It answers only from its sources and cites the passage",
+    "It has no daily limit on the number of questions asked",
+    "The grounding guardrail demonstrates itself rather than being promised. What it lacks is a role and guardrail prompt, so pair it with a Gem if you need those."
+   ],
+   "vi": [
+    "3. Vì sao NotebookLM được đề xuất riêng cho Bài 3?",
+    "Nó là công cụ duy nhất chia sẻ được cho sinh viên dùng",
+    "Nó cho phép viết hướng dẫn tuỳ chỉnh dài nhất hiện nay",
+    "Nó chỉ trả lời từ nguồn của nó và trích dẫn đúng đoạn",
+    "Nó không giới hạn số câu hỏi được đặt trong một ngày",
+    "Rào chắn bám nguồn tự chứng minh chính nó thay vì chỉ là lời hứa. Thứ nó thiếu là ô nhập vai trò và rào chắn, nên hãy ghép với một Gem nếu bạn cần."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "4. Where can a Gemini Gem be created or edited?",
+    "In the mobile app first, then synced to the web",
+    "In any Gemini app, including on a phone or tablet",
+    "Only inside a Google Workspace institutional account",
+    "Only in the desktop web app, not on mobile",
+    "A saved Gem does appear in the mobile app afterwards and can be used there. It is the building and editing that needs a computer, which is why laptops are on the list."
+   ],
+   "vi": [
+    "4. Gemini Gem được tạo và chỉnh sửa ở đâu?",
+    "Trên ứng dụng di động trước, rồi đồng bộ lên web",
+    "Trên mọi ứng dụng Gemini, kể cả điện thoại hay máy tính bảng",
+    "Chỉ trong tài khoản Google Workspace của tổ chức",
+    "Chỉ trên ứng dụng web máy tính, không phải di động",
+    "Gem đã lưu vẫn hiện trong ứng dụng di động và dùng được ở đó. Chỉ việc tạo và sửa mới cần máy tính, và đó là lý do laptop nằm trong danh sách cần mang."
+   ]
+  },
+  {
+   "a": 0,
+   "en": [
+    "5. Which free-tier limit is most likely to bite during the session?",
+    "Claude's message cap, with a room generating long plans",
+    "Gemini's file size limit of one hundred megabytes",
+    "The eight thousand character cap on project instructions",
+    "NotebookLM's ceiling of one hundred notebooks per account",
+    "The other three are generous enough that nobody meets them in two hours. Message caps are the one that stops a participant mid-exercise with no workaround."
+   ],
+   "vi": [
+    "5. Giới hạn nào của gói miễn phí dễ gây khó nhất ngay trong buổi học?",
+    "Hạn mức tin nhắn của Claude, khi cả phòng sinh kế hoạch dài",
+    "Giới hạn dung lượng tệp một trăm megabyte của Gemini",
+    "Hạn mức tám nghìn ký tự cho phần hướng dẫn của dự án",
+    "Trần một trăm sổ tay mỗi tài khoản của NotebookLM",
+    "Ba giới hạn kia đủ rộng để không ai chạm tới trong hai giờ. Hạn mức tin nhắn mới là thứ chặn học viên giữa chừng mà không có cách nào lách."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "6. Where do you check whether ChatGPT trains on your conversations?",
+    "Settings, then Privacy, then Help improve the assistant",
+    "Settings, then Data Controls, then the improve setting",
+    "Your account page, under the subscription and billing tab",
+    "Apps Activity, where the Keep Activity toggle is located",
+    "Each platform hides it somewhere different, which is half the reason to do it together on screen rather than telling participants to find it later."
+   ],
+   "vi": [
+    "6. Bạn kiểm tra việc ChatGPT có dùng hội thoại để huấn luyện ở đâu?",
+    "Settings, rồi Privacy, rồi tới mục giúp cải thiện trợ lý",
+    "Settings, rồi Data Controls, rồi tới mục cải thiện mô hình",
+    "Trang tài khoản, ở thẻ thuê bao và thông tin thanh toán",
+    "Apps Activity, nơi đặt công tắc giữ lại lịch sử hoạt động",
+    "Mỗi nền tảng giấu nó ở một chỗ khác nhau, và đó là nửa lý do nên làm việc này cùng nhau trên màn hình thay vì dặn học viên tự tìm sau."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "7. Why test the platforms with an institutional account before the day?",
+    "Personal accounts cannot upload documents at all",
+    "Institutional accounts get a larger free usage allowance",
+    "Universities routinely disable these features tenant-wide",
+    "The instructor's own account is rate-limited by then",
+    "Gems sharing, Opal and Agent Builder are all things an administrator can switch off for everyone. Your personal account will tell you nothing about that."
+   ],
+   "vi": [
+    "7. Vì sao phải thử các nền tảng bằng tài khoản của trường trước ngày dạy?",
+    "Tài khoản cá nhân hoàn toàn không tải tài liệu lên được",
+    "Tài khoản của trường được cấp hạn mức miễn phí lớn hơn",
+    "Các trường vẫn thường tắt những tính năng này toàn hệ thống",
+    "Đến lúc đó tài khoản của giảng viên đã bị giới hạn tần suất",
+    "Chia sẻ Gem, Opal và Agent Builder đều là những thứ quản trị viên tắt được cho tất cả mọi người. Tài khoản cá nhân của bạn không nói lên điều gì về việc đó."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "8. What is the fallback if every saved-agent platform is blocked?",
+    "Run the workshop as a discussion without any tools",
+    "Postpone the exercises until IT approves a platform",
+    "Have participants share the instructor's own account",
+    "Paste the template into any chat at the start each time",
+    "You lose reusability and nothing else. The workflow and the quality-control loop live in the prompt, which is the reason the workshop is not tied to a vendor."
+   ],
+   "vi": [
+    "8. Phương án dự phòng nếu mọi nền tảng lưu được agent đều bị chặn là gì?",
+    "Chạy buổi tập huấn thành một buổi thảo luận không công cụ",
+    "Hoãn các bài thực hành đến khi bộ phận CNTT phê duyệt",
+    "Cho học viên dùng chung tài khoản của chính giảng viên",
+    "Dán mẫu vào bất kỳ khung chat nào ở đầu mỗi lần dùng",
+    "Bạn chỉ mất tính dùng lại, ngoài ra không mất gì. Quy trình và vòng kiểm soát chất lượng nằm trong prompt, và đó là lý do buổi học không lệ thuộc nhà cung cấp nào."
+   ]
+  },
+  {
+   "a": 0,
+   "en": [
+    "9. Why is Google Opal recommended for the concepts segment rather than the exercises?",
+    "It shows a workflow executing, but it is a public beta",
+    "It is the only platform that can display a diagram at all",
+    "It refuses to accept uploaded course documents as input",
+    "It costs nothing during the demonstration but bills later",
+    "Watching plan, produce, verify and revise run as connected boxes is worth five minutes. Twenty people building their first agent in a beta tool under time pressure is not."
+   ],
+   "vi": [
+    "9. Vì sao Google Opal được đề xuất cho phần khái niệm chứ không phải phần thực hành?",
+    "Nó cho thấy quy trình đang chạy, nhưng vẫn là bản beta",
+    "Nó là nền tảng duy nhất hiển thị được sơ đồ trực quan",
+    "Nó từ chối nhận tài liệu môn học tải lên làm đầu vào",
+    "Nó không tính phí lúc demo nhưng sẽ tính phí về sau",
+    "Xem lập kế hoạch, tạo, kiểm tra và chỉnh sửa chạy thành các hộp nối nhau thì đáng năm phút. Hai mươi người xây agent đầu tiên trong một công cụ beta dưới áp lực thời gian thì không."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "10. What should the instructor announce in the first two minutes?",
+    "The full list of every platform that could be used today",
+    "Which platform the session will use, so nobody stalls",
+    "The pricing of each paid tier, for later reference",
+    "The privacy policy of the chosen vendor, read aloud",
+    "Participants who arrive without a preference will otherwise spend the opening of the session creating accounts instead of thinking about their own teaching."
+   ],
+   "vi": [
+    "10. Giảng viên nên tuyên bố điều gì trong hai phút đầu tiên?",
+    "Danh sách đầy đủ mọi nền tảng có thể dùng hôm nay",
+    "Buổi học dùng nền tảng nào, để không ai bị mắc kẹt",
+    "Bảng giá của từng gói trả phí, để tham khảo về sau",
+    "Chính sách riêng tư của nhà cung cấp, đọc to lên",
+    "Nếu không, những người đến lớp mà chưa có lựa chọn sẽ dành phần mở đầu buổi học để lập tài khoản thay vì nghĩ về việc giảng dạy của chính mình."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "11. Why does the platform page carry a visible date?",
+    "It records when the workshop was last delivered",
+    "The vendors require attribution with a timestamp",
+    "Free tiers change, so the claims need re-checking",
+    "Accreditation bodies require dated documentation",
+    "Everything on that page was checked against vendor documentation in August 2026. If a participant's screen disagrees with the table, believe the screen."
+   ],
+   "vi": [
+    "11. Vì sao trang nền tảng ghi rõ một mốc thời gian?",
+    "Nó ghi lại lần gần nhất buổi tập huấn được tổ chức",
+    "Nhà cung cấp yêu cầu ghi nguồn kèm theo mốc thời gian",
+    "Gói miễn phí thay đổi, nên các thông tin cần kiểm lại",
+    "Cơ quan kiểm định yêu cầu tài liệu phải có ghi ngày",
+    "Mọi thông tin trên trang đó được đối chiếu với tài liệu của nhà cung cấp vào tháng 8/2026. Nếu màn hình của học viên khác với bảng, hãy tin màn hình."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "12. A participant already uses Claude every day. What should they do?",
+    "Wait for the instructor to share a Gem link with them",
+    "Switch to Gemini so the whole room matches the demo",
+    "Use both in parallel and compare the two outputs",
+    "Stay in Claude, since Projects meet the same need",
+    "Every template in the workshop is portable plain text. The recommendation exists for the demonstration and for people with no preference, not as a requirement."
+   ],
+   "vi": [
+    "12. Một học viên vốn dùng Claude hằng ngày. Họ nên làm gì?",
+    "Chờ giảng viên chia sẻ link Gem rồi mới bắt đầu làm",
+    "Đổi sang Gemini để cả phòng khớp với phần demo",
+    "Dùng song song cả hai và so sánh hai kết quả với nhau",
+    "Cứ ở lại Claude, vì Projects đáp ứng đúng nhu cầu đó",
+    "Mọi mẫu trong buổi tập huấn đều là văn bản thuần, mang đi đâu cũng chạy. Đề xuất chỉ dành cho phần demo và cho người chưa có lựa chọn, không phải một yêu cầu bắt buộc."
+   ]
+  }
+ ]
+}
