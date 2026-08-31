@@ -1,0 +1,233 @@
+{
+ "page": "responsible.html",
+ "questions": [
+  {
+   "a": 0,
+   "en": [
+    "1. Why does the workshop present these principles as useful rather than cautious?",
+    "Each one makes the agent more accurate or more usable",
+    "Cautious agents are more likely to satisfy regulators",
+    "They shorten the time an agent takes to produce output",
+    "They are conditions of use imposed by the platforms",
+    "Grounded agents invent less, declared uncertainty is the part you read first, and an agent you tried to break is the one you can rely on next semester."
+   ],
+   "vi": [
+    "1. Vì sao buổi tập huấn trình bày các nguyên tắc này như thứ hữu ích chứ không phải thận trọng?",
+    "Mỗi nguyên tắc khiến agent chính xác hơn hoặc dùng được hơn",
+    "Agent thận trọng thì dễ làm hài lòng cơ quan quản lý hơn",
+    "Chúng rút ngắn thời gian agent cần để tạo ra kết quả",
+    "Chúng là điều kiện sử dụng do các nền tảng đặt ra",
+    "Agent có nguồn thì ít bịa hơn, phần công bố mức chưa chắc chắn là phần bạn đọc trước tiên, và agent bạn từng cố làm hỏng mới là agent dựa vào được ở học kỳ sau."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "2. Which item must be removed before a student response is uploaded?",
+    "Any reference to the assessment task being marked",
+    "Any health, disability or disciplinary information",
+    "Any spelling or grammatical errors in the writing",
+    "Any part of the response the student wrote poorly",
+    "Names, student numbers, email addresses, grades tied to an identifiable person, and health, disability or disciplinary detail all come out before the file leaves your machine."
+   ],
+   "vi": [
+    "2. Phải xoá thông tin nào trước khi tải bài làm của sinh viên lên?",
+    "Mọi chỗ nhắc đến nhiệm vụ đánh giá đang được chấm",
+    "Mọi thông tin về sức khoẻ, khuyết tật hay kỷ luật",
+    "Mọi lỗi chính tả hoặc lỗi ngữ pháp có trong bài viết",
+    "Mọi phần trong bài mà sinh viên viết chưa được tốt",
+    "Họ tên, mã số sinh viên, email, điểm gắn với người nhận dạng được, cùng thông tin sức khoẻ, khuyết tật hay kỷ luật đều phải xoá trước khi tệp rời máy bạn."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "3. Which decision may an agent legitimately contribute to?",
+    "Granting an extension on documented medical grounds",
+    "Determining whether academic misconduct has occurred",
+    "Mapping evidence in a script to levels in your rubric",
+    "Deciding the outcome of a formal grade appeal case",
+    "It may suggest a band, a pattern, or a reading of a policy. The number that enters the system, and every decision about a person, stays with the lecturer."
+   ],
+   "vi": [
+    "3. Agent được phép góp phần vào quyết định nào?",
+    "Cho gia hạn dựa trên minh chứng lý do sức khoẻ",
+    "Kết luận xem có hành vi gian lận học thuật hay không",
+    "Đối chiếu bằng chứng trong bài với các mức của rubric",
+    "Quyết định kết quả của một vụ phúc khảo điểm chính thức",
+    "Nó có thể gợi ý một khung điểm, một xu hướng, hay một cách hiểu quy định. Con số nhập vào hệ thống, và mọi quyết định về con người, vẫn thuộc về giảng viên."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "4. How should AI-detection output be treated in a misconduct case?",
+    "As equivalent to a plagiarism similarity match report",
+    "As sufficient grounds to open a formal investigation",
+    "As conclusive if the reported confidence is above ninety",
+    "As unreliable evidence that decides nothing on its own",
+    "The judgement is never delegated, and detector output is not the kind of evidence a decision about a student's academic record can rest on."
+   ],
+   "vi": [
+    "4. Kết quả của công cụ phát hiện AI nên được đối xử thế nào trong vụ việc gian lận?",
+    "Như tương đương với báo cáo trùng lặp của phần mềm đạo văn",
+    "Như căn cứ đủ để mở một cuộc điều tra chính thức",
+    "Như kết luận chắc chắn nếu độ tin cậy báo trên chín mươi",
+    "Như bằng chứng không đáng tin, tự nó không quyết định gì",
+    "Phán quyết không bao giờ được giao đi, và kết quả của công cụ phát hiện không phải loại bằng chứng để dựa vào mà quyết định về hồ sơ học thuật của một sinh viên."
+   ]
+  },
+  {
+   "a": 0,
+   "en": [
+    "5. What are the four categories in a confidence-and-gaps section?",
+    "Supported, inferred, missing, and needs your approval",
+    "Certain, probable, possible, and entirely speculative",
+    "Correct, incorrect, unverified, and outside the scope",
+    "Factual, interpretive, creative, and administrative",
+    "Sorting its own claims this way turns an invisible risk into a section you can check in thirty seconds — which is why it is worth asking for by name."
+   ],
+   "vi": [
+    "5. Mục mức chắc chắn và khoảng trống gồm bốn nhóm nào?",
+    "Có căn cứ, suy luận, còn thiếu, và cần bạn phê duyệt",
+    "Chắc chắn, nhiều khả năng, có thể, và hoàn toàn phỏng đoán",
+    "Đúng, sai, chưa kiểm chứng, và nằm ngoài phạm vi môn học",
+    "Sự kiện, diễn giải, sáng tạo, và mang tính hành chính",
+    "Tự phân loại khẳng định theo cách này biến một rủi ro vô hình thành mục bạn kiểm tra được trong ba mươi giây — vì thế đáng để yêu cầu đích danh."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "6. The materials do not cover a question. What is the correct output?",
+    "The most probable answer, flagged as an inference",
+    "A plain statement that the materials do not cover it",
+    "A refusal to continue the conversation any further",
+    "A request that the lecturer rewrite the source document",
+    "Category C exists precisely so that a gap is reported rather than filled. Guessing well is the failure mode; naming the gap is the behaviour being trained."
+   ],
+   "vi": [
+    "6. Tài liệu không đề cập tới một câu hỏi. Kết quả đúng là gì?",
+    "Câu trả lời khả dĩ nhất, có đánh dấu là suy luận",
+    "Một câu nói thẳng rằng tài liệu không đề cập điều đó",
+    "Một lời từ chối tiếp tục cuộc trò chuyện thêm nữa",
+    "Một yêu cầu giảng viên viết lại tài liệu nguồn đó",
+    "Nhóm C tồn tại đúng là để khoảng trống được báo cáo thay vì bị lấp. Đoán giỏi mới là kiểu lỗi; gọi tên khoảng trống mới là hành vi đang được rèn."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "7. Which of the five tests do people most often skip?",
+    "T2, the ambiguous request missing key information",
+    "T1, the normal request the agent was built to handle",
+    "T5, where a student pushes back against your policy",
+    "T3, a question about a course you do not teach",
+    "Models are trained to be helpful, and helpfulness under social pressure looks like agreement. An agent that folds is the failure most likely to reach a real student."
+   ],
+   "vi": [
+    "7. Trong năm phép thử, phép nào hay bị bỏ qua nhất?",
+    "T2, yêu cầu mơ hồ do thiếu thông tin quan trọng",
+    "T1, yêu cầu bình thường mà agent được xây để xử lý",
+    "T5, khi sinh viên nài nỉ ngược lại quy định của bạn",
+    "T3, câu hỏi về một môn học mà bạn không giảng dạy",
+    "Các mô hình được huấn luyện để tỏ ra hữu ích, mà hữu ích dưới áp lực xã giao trông giống hệt sự đồng tình. Agent chịu thua chính là lỗi dễ đến tay sinh viên thật nhất."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "8. On T4 you ask what mark the work deserves. What counts as a pass?",
+    "It asks to see the rest of the cohort before answering",
+    "It gives a range rather than a single precise number",
+    "It answers but reminds you the mark is provisional",
+    "It declines and names who is responsible for deciding",
+    "Any number is a fail, however carefully hedged. The refusal has to be in the instructions, which is why every template in the workshop writes it there."
+   ],
+   "vi": [
+    "8. Ở T4 bạn hỏi bài này đáng mấy điểm. Thế nào là đạt?",
+    "Nó xin xem bài của cả lớp trước rồi mới trả lời được",
+    "Nó đưa ra một khoảng điểm thay vì một con số chính xác",
+    "Nó trả lời nhưng nhắc bạn rằng điểm đó chỉ là tạm thời",
+    "Nó từ chối và nói rõ ai là người có quyền quyết định",
+    "Bất kỳ con số nào cũng là trượt, dù có rào đón cẩn thận đến đâu. Lời từ chối phải nằm trong hướng dẫn, và vì thế mọi mẫu trong buổi học đều viết nó vào đó."
+   ]
+  },
+  {
+   "a": 0,
+   "en": [
+    "9. When does the sixth test, for injection, become necessary?",
+    "As soon as the agent can read a file or an inbox",
+    "Only when the agent is published to students directly",
+    "Only on platforms that allow it to send messages",
+    "Once the agent has been in use for a full semester",
+    "The five tests assume the agent only reads what you typed. A document or a connected account introduces text that nobody on your side wrote."
+   ],
+   "vi": [
+    "9. Khi nào phép thử thứ sáu về tiêm lệnh trở nên cần thiết?",
+    "Ngay khi agent đọc được một tệp hoặc một hộp thư",
+    "Chỉ khi agent được mở trực tiếp cho sinh viên dùng",
+    "Chỉ trên những nền tảng cho phép nó gửi tin nhắn đi",
+    "Khi agent đã được dùng liên tục trọn một học kỳ",
+    "Năm phép thử kia giả định agent chỉ đọc thứ bạn gõ. Một tài liệu hay một tài khoản đã kết nối đưa vào loại văn bản mà không ai bên phía bạn viết ra."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "10. What does accessibility mean on the safety checklist?",
+    "A version of every document available in large print",
+    "Readable structure and no meaning carried by colour alone",
+    "Compatibility with the university's own learning system",
+    "An option for students to request a human response",
+    "It is a property of the output the agent hands you, and one you have to check, because a model optimises for looking organised rather than for being navigable."
+   ],
+   "vi": [
+    "10. Trong danh mục an toàn, khả năng tiếp cận nghĩa là gì?",
+    "Mỗi tài liệu đều có một phiên bản in khổ chữ lớn",
+    "Cấu trúc dễ đọc và không truyền ý nghĩa chỉ bằng màu sắc",
+    "Tương thích với hệ thống học tập trực tuyến của trường",
+    "Một lựa chọn để sinh viên yêu cầu người thật trả lời",
+    "Đây là thuộc tính của kết quả agent đưa cho bạn, và bạn phải tự kiểm, vì mô hình tối ưu cho việc trông có vẻ ngăn nắp chứ không phải cho việc dễ đi theo."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "11. What does the N in the AGENT checklist stand for?",
+    "Narrow scope, meaning one task per agent you build",
+    "New material, meaning what the agent has not yet seen",
+    "Necessary oversight, meaning which decisions stay yours",
+    "Neutral tone, meaning feedback that avoids judgement",
+    "Aim, Grounding, Execution, Necessary oversight, Testing. If you cannot answer all five about an agent, it is not ready for real teaching work."
+   ],
+   "vi": [
+    "11. Chữ N trong danh mục AGENT là viết tắt của gì?",
+    "Narrow scope, tức mỗi agent chỉ làm đúng một việc",
+    "New material, tức những gì agent chưa từng được thấy",
+    "Necessary oversight, tức quyết định nào vẫn thuộc về bạn",
+    "Neutral tone, tức phản hồi tránh mọi lời phán xét",
+    "Aim, Grounding, Execution, Necessary oversight, Testing. Nếu chưa trả lời được cả năm câu về một agent, nó chưa sẵn sàng cho công việc giảng dạy thật."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "12. If you keep only one habit from the whole workshop, which is it?",
+    "Read the whole output before sending anything on",
+    "Always specify a professional role for the agent",
+    "Upload the syllabus at the start of every session",
+    "Add a step that checks the draft before you see it",
+    "One sentence — check the result against what matters and fix what fails — is the difference between a chatbot and an agent, and it costs nothing to add."
+   ],
+   "vi": [
+    "12. Nếu chỉ giữ được một thói quen từ cả buổi tập huấn, đó là gì?",
+    "Đọc toàn bộ kết quả trước khi gửi bất cứ thứ gì đi",
+    "Luôn chỉ định một vai trò chuyên môn cụ thể cho agent",
+    "Tải đề cương môn học lên vào đầu mỗi phiên làm việc",
+    "Thêm một bước kiểm tra bản nháp trước khi bạn nhìn thấy",
+    "Một câu — hãy đối chiếu kết quả với điều quan trọng và sửa chỗ chưa đạt — chính là khác biệt giữa chatbot và agent, mà thêm vào thì chẳng tốn gì."
+   ]
+  }
+ ]
+}

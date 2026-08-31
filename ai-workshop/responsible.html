@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Responsible use · AI Agents for Lecturers</title>
+<meta name="title-en" content="Responsible use · AI Agents for Lecturers">
+<meta name="title-vi" content="Sử dụng có trách nhiệm · AI Agent cho Giảng viên">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Five principles for lecturers using AI agents: grounding, student privacy, human decisions, uncertainty disclosure, and testing before deployment — plus the safety checklist and the one-week action plan.">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('agentws-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+    if (localStorage.getItem('agentws-language') === 'vi') document.documentElement.dataset.lang = 'vi';
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="index.html"><b>AI Agents</b> · for Lecturers</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="index.html" class="always" data-i18n="nav.overview">Overview</a>
+      <a href="concepts.html" data-i18n="nav.concepts">Concepts</a>
+      <a href="exercises/ex1-lesson.html" data-i18n="nav.exercises">Exercises</a>
+      <a href="tools.html" data-i18n="nav.tools">Tools &amp; data</a>
+      <a href="platforms.html" data-i18n="nav.platforms">Platforms</a>
+      <a href="responsible.html" aria-current="page" data-i18n="nav.responsible">Responsible use</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="lang-toggle" type="button">VI</button>
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4 data-i18n="side.site">Site</h4>
+  <nav aria-label="Site">
+    <a href="index.html" data-i18n="nav.overview">Overview</a>
+    <a href="concepts.html" data-i18n="nav.concepts">Concepts</a>
+    <a href="exercises/ex1-lesson.html" data-i18n="nav.ex1">Exercise 1 · Lesson</a>
+    <a href="exercises/ex2-assessment.html" data-i18n="nav.ex2">Exercise 2 · Assessment</a>
+    <a href="exercises/ex3-support.html" data-i18n="nav.ex3">Exercise 3 · Support</a>
+    <a href="tools.html" data-i18n="nav.tools">Tools &amp; data</a>
+    <a href="platforms.html" data-i18n="nav.platforms">Platforms</a>
+    <a href="responsible.html" aria-current="page" data-i18n="nav.responsible">Responsible use</a>
+  </nav>
+  <h4 data-i18n="side.onpage">On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#principles"><span lang="en">Five principles</span><span lang="vi">Năm nguyên tắc</span></a>
+    <a href="#human"><span lang="en">Decisions that stay yours</span><span lang="vi">Quyết định vẫn thuộc về bạn</span></a>
+    <a href="#uncertainty"><span lang="en">Uncertainty disclosure</span><span lang="vi">Công bố mức chắc chắn</span></a>
+    <a href="#testing"><span lang="en">Five tests before use</span><span lang="vi">Năm phép thử trước khi dùng</span></a>
+    <a href="#safety"><span lang="en">Safety checklist</span><span lang="vi">Danh mục an toàn</span></a>
+    <a href="#wrapup"><span lang="en">Your one-week plan</span><span lang="vi">Kế hoạch bảy ngày</span></a>
+    <a href="#quiz"><span lang="en">Self-check</span><span lang="vi">Tự kiểm tra</span></a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow" lang="en">Session 7 · 01:10–01:20 · 10 minutes, and the wrap-up</span>
+      <span class="eyebrow" lang="vi">Phần 7 · 01:10–01:20 · 10 phút, và phần tổng kết</span>
+      <h1 lang="en">Responsible and effective agent use</h1>
+      <h1 lang="vi">Sử dụng agent có trách nhiệm và hiệu quả</h1>
+      <p class="lede" lang="en">None of this is about being cautious for its own sake. Every principle here exists
+        because it makes the agent <em>more useful</em>: grounded agents invent less, anonymized material
+        keeps you compliant, declared uncertainty is the part you read first, and an agent you have
+        tried to break is one you can actually rely on next semester.</p>
+      <p class="lede" lang="vi">Không có điều nào ở đây là thận trọng cho có. Mỗi nguyên tắc tồn tại vì nó khiến
+        agent <em>hữu ích hơn</em>: agent có nguồn thì ít bịa hơn, tài liệu ẩn danh giúp bạn đúng quy định,
+        phần công bố mức chưa chắc chắn là phần bạn đọc đầu tiên, và một agent bạn từng cố làm hỏng mới là
+        agent bạn thật sự dựa vào được ở học kỳ sau.</p>
+      <div class="meta-chips" lang="en">
+        <a class="chip" href="#principles">5 principles</a>
+        <a class="chip" href="#testing">5 tests</a>
+        <a class="chip" href="#safety">Safety checklist</a>
+        <a class="chip" href="#wrapup">Action plan</a>
+      </div>
+      <div class="meta-chips" lang="vi">
+        <a class="chip" href="#principles">5 nguyên tắc</a>
+        <a class="chip" href="#testing">5 phép thử</a>
+        <a class="chip" href="#safety">Danh mục an toàn</a>
+        <a class="chip" href="#wrapup">Kế hoạch hành động</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="principles">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">01 · The core</span>
+      <span class="eyebrow" lang="vi">01 · Cốt lõi</span>
+      <h2 lang="en">Five principles for lecturers</h2>
+      <h2 lang="vi">Năm nguyên tắc cho giảng viên</h2>
+    </div>
+    <div class="checklist c-accent" lang="en">
+      <div class="check-item"><span class="rn">1</span><div><span class="stage">Grounding</span><h4>Ground the agent in source material</h4><p>Supply the syllabus, the assignment brief, the lecture notes, the institutional policy — and instruct it not to answer beyond them. An ungrounded question does not produce a refusal by default; it produces a confident invention. This single habit removes most of what people call "hallucination" in teaching work.</p></div></div>
+      <div class="check-item"><span class="rn">2</span><div><span class="stage">Privacy</span><h4>Do not upload sensitive student information</h4><p>Use anonymized or synthetic work. Remove names, student identification numbers, email addresses, grades linked to identifiable students, health or disability information, and disciplinary history — before the file leaves your machine, not after. Check your <a href="platforms.html#privacy">data-training setting</a> as well: on free consumer tiers your conversations are generally used to improve the model unless you turn it off.</p></div></div>
+      <div class="check-item"><span class="rn">3</span><div><span class="stage">Oversight</span><h4>Keep humans responsible for consequential decisions</h4><p>Agents may suggest feedback, draft a rubric, or point out a pattern across scripts. The decision stays with you — and the agent's instructions should say so, so that it declines rather than obliges when pushed. See <a href="#human">the list</a> below.</p></div></div>
+      <div class="check-item"><span class="rn">4</span><div><span class="stage">Honesty</span><h4>Require uncertainty disclosure</h4><p>Make the agent sort its own output into what the materials support, what it inferred, what is missing, and what needs your approval. An agent that reports its uncertainty can be supervised; one that presents everything with equal confidence cannot.</p></div></div>
+      <div class="check-item"><span class="rn">5</span><div><span class="stage">Testing</span><h4>Test before deployment</h4><p>Five requests, listed <a href="#testing">below</a>: normal, ambiguous, out of scope, prohibited, and one that conflicts with your own course policy. Ten minutes of this tells you more than a semester of hoping.</p></div></div>
+    </div>
+    <div class="checklist c-accent" lang="vi">
+      <div class="check-item"><span class="rn">1</span><div><span class="stage">Bám nguồn</span><h4>Cho agent bám vào tài liệu gốc</h4><p>Hãy cung cấp đề cương, đề bài, ghi chú bài giảng, quy định của trường — và ra lệnh cho nó không trả lời vượt ra ngoài. Một câu hỏi không có nguồn mặc định sẽ không nhận về lời từ chối; nó nhận về một thứ bịa với giọng chắc nịch. Chỉ riêng thói quen này đã loại bỏ phần lớn những gì người ta gọi là "ảo giác" trong công việc giảng dạy.</p></div></div>
+      <div class="check-item"><span class="rn">2</span><div><span class="stage">Riêng tư</span><h4>Không tải lên thông tin nhạy cảm của sinh viên</h4><p>Hãy dùng bài đã ẩn danh hoặc bài giả lập. Xoá họ tên, mã số sinh viên, email, điểm gắn với sinh viên nhận dạng được, thông tin sức khoẻ hay khuyết tật, và lịch sử kỷ luật — trước khi tệp rời khỏi máy của bạn, không phải sau đó. Đồng thời kiểm tra <a href="platforms.html#privacy">thiết lập dữ liệu huấn luyện</a>: ở gói miễn phí cá nhân, cuộc trò chuyện của bạn thường được dùng để cải thiện mô hình trừ khi bạn tắt.</p></div></div>
+      <div class="check-item"><span class="rn">3</span><div><span class="stage">Giám sát</span><h4>Giữ trách nhiệm của con người với các quyết định có hệ quả</h4><p>Agent có thể gợi ý phản hồi, soạn rubric, hay chỉ ra một xu hướng chung qua nhiều bài. Quyết định vẫn thuộc về bạn — và chính hướng dẫn của agent phải nói vậy, để nó từ chối thay vì chiều theo khi bị ép. Xem <a href="#human">danh sách</a> bên dưới.</p></div></div>
+      <div class="check-item"><span class="rn">4</span><div><span class="stage">Trung thực</span><h4>Bắt buộc công bố mức chưa chắc chắn</h4><p>Hãy buộc agent tự phân loại kết quả của nó thành: điều tài liệu chứng minh, điều nó suy luận, điều còn thiếu, và điều cần bạn phê duyệt. Một agent biết báo cáo mức chưa chắc chắn thì giám sát được; một agent trình bày mọi thứ với cùng độ tự tin thì không.</p></div></div>
+      <div class="check-item"><span class="rn">5</span><div><span class="stage">Kiểm thử</span><h4>Kiểm thử trước khi đưa vào dùng</h4><p>Năm yêu cầu, liệt kê <a href="#testing">bên dưới</a>: bình thường, mơ hồ, ngoài phạm vi, bị cấm, và một yêu cầu trái với chính quy định môn học của bạn. Mười phút làm việc này cho bạn biết nhiều hơn cả một học kỳ ngồi hy vọng.</p></div></div>
+    </div>
+  </section>
+
+  <section class="block" id="human">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">02 · The boundary, in writing</span>
+      <span class="eyebrow" lang="vi">02 · Ranh giới, viết thành văn</span>
+      <h2 lang="en">Decisions that stay with the lecturer</h2>
+      <h2 lang="vi">Những quyết định vẫn thuộc về giảng viên</h2>
+      <p lang="en">Not because the tool is incapable of producing an answer — because it is, and that is precisely
+        the problem. These are decisions a person must own and be able to justify.</p>
+      <p lang="vi">Không phải vì công cụ không đưa ra được câu trả lời — nó đưa ra được, và đó chính là vấn đề.
+        Đây là những quyết định mà một con người phải đứng tên và phải biện minh được.</p>
+    </div>
+    <div class="gate-grid" lang="en">
+      <div class="gate-item"><span class="gn">Grades</span><h4>Final marks</h4><p>An agent may map evidence to rubric levels. The number that goes in the system is yours.</p></div>
+      <div class="gate-item"><span class="gn">Integrity</span><h4>Academic misconduct</h4><p>Never delegate the judgement, and treat AI-detection output as unreliable evidence.</p></div>
+      <div class="gate-item"><span class="gn">Discipline</span><h4>Disciplinary outcomes</h4><p>Follow the institutional process, with a human at every step.</p></div>
+      <div class="gate-item"><span class="gn">Access</span><h4>Special accommodations</h4><p>Involves personal and often health information that should never reach a consumer tool.</p></div>
+      <div class="gate-item"><span class="gn">Appeals</span><h4>Grade appeals</h4><p>The point of an appeal is independent human review. An agent cannot supply it.</p></div>
+      <div class="gate-item"><span class="gn">Care</span><h4>Sensitive student conversations</h4><p>A student in difficulty needs a person, and a referral to the services your institution provides.</p></div>
+    </div>
+    <div class="gate-grid" lang="vi">
+      <div class="gate-item"><span class="gn">Điểm số</span><h4>Điểm cuối cùng</h4><p>Agent có thể đối chiếu bằng chứng với các mức của rubric. Con số nhập vào hệ thống là của bạn.</p></div>
+      <div class="gate-item"><span class="gn">Liêm chính</span><h4>Gian lận học thuật</h4><p>Tuyệt đối không giao phán quyết này, và hãy xem kết quả của công cụ "phát hiện AI" là bằng chứng không đáng tin.</p></div>
+      <div class="gate-item"><span class="gn">Kỷ luật</span><h4>Quyết định kỷ luật</h4><p>Đi theo quy trình của trường, với con người ở mọi bước.</p></div>
+      <div class="gate-item"><span class="gn">Hỗ trợ</span><h4>Điều chỉnh đặc biệt</h4><p>Liên quan đến thông tin cá nhân và thường là thông tin sức khoẻ, thứ không bao giờ nên đưa vào công cụ đại chúng.</p></div>
+      <div class="gate-item"><span class="gn">Phúc khảo</span><h4>Khiếu nại điểm</h4><p>Bản chất của phúc khảo là sự xem xét độc lập của con người. Agent không cung cấp được điều đó.</p></div>
+      <div class="gate-item"><span class="gn">Quan tâm</span><h4>Trò chuyện nhạy cảm với sinh viên</h4><p>Một sinh viên đang gặp khó khăn cần một con người, và cần được chỉ tới các dịch vụ hỗ trợ của trường.</p></div>
+    </div>
+    <div class="note danger" lang="en">
+      <span class="note-tag">Write the refusal into the agent</span>
+      A guardrail that lives only in your head is not a guardrail. Every template in this workshop
+      contains the refusal as an explicit instruction — that is why the assessment agent declines when
+      you ask it for a mark out of ten, and it is worth <a href="exercises/ex2-assessment.html#challenge">testing
+      that it actually does</a>.
+    </div>
+    <div class="note danger" lang="vi">
+      <span class="note-tag">Hãy viết lời từ chối vào chính agent</span>
+      Một rào chắn chỉ nằm trong đầu bạn thì không phải rào chắn. Mọi mẫu trong buổi tập huấn này đều chứa lời
+      từ chối như một mệnh lệnh tường minh — đó là lý do agent đánh giá từ chối khi bạn hỏi nó cho mấy điểm
+      trên mười, và <a href="exercises/ex2-assessment.html#challenge">rất đáng để kiểm thử xem nó có thật sự
+      từ chối không</a>.
+    </div>
+  </section>
+
+  <section class="block" id="uncertainty">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">03 · The most useful output section</span>
+      <span class="eyebrow" lang="vi">03 · Mục kết quả hữu ích nhất</span>
+      <h2 lang="en">Four things an agent should distinguish</h2>
+      <h2 lang="vi">Bốn thứ agent phải phân biệt được</h2>
+      <p lang="en">Ask for these as a named section and read it first. It converts an invisible risk into something
+        you can check in thirty seconds.</p>
+      <p lang="vi">Hãy yêu cầu bốn thứ này thành một mục có tên riêng và đọc nó trước tiên. Nó biến một rủi ro vô
+        hình thành thứ bạn kiểm tra được trong ba mươi giây.</p>
+    </div>
+    <div class="phases" lang="en">
+      <div class="phase ph-ex1">
+        <span class="tag">Level A</span>
+        <h3>Supported</h3>
+        <p>Directly backed by the material you supplied — quote or section reference attached.</p>
+      </div>
+      <div class="phase ph-ex2">
+        <span class="tag">Level B</span>
+        <h3>Inferred</h3>
+        <p>A reasonable extension of what you supplied. Usually fine, occasionally wrong in ways only you can see.</p>
+      </div>
+      <div class="phase ph-ex3">
+        <span class="tag">Level C</span>
+        <h3>Missing</h3>
+        <p>The materials do not cover it. The correct output is a statement to that effect, not a guess.</p>
+      </div>
+      <div class="phase ph-proj">
+        <span class="tag">Level D</span>
+        <h3>Needs approval</h3>
+        <p>A suggestion that changes something real — a deadline, a weighting, a policy. Yours to accept or reject.</p>
+      </div>
+    </div>
+    <div class="phases" lang="vi">
+      <div class="phase ph-ex1">
+        <span class="tag">Mức A</span>
+        <h3>Có căn cứ</h3>
+        <p>Được tài liệu bạn cung cấp chứng minh trực tiếp — kèm trích dẫn hoặc chỉ dẫn mục.</p>
+      </div>
+      <div class="phase ph-ex2">
+        <span class="tag">Mức B</span>
+        <h3>Suy luận</h3>
+        <p>Mở rộng hợp lý từ những gì bạn cung cấp. Thường ổn, đôi khi sai theo cách chỉ bạn nhìn ra.</p>
+      </div>
+      <div class="phase ph-ex3">
+        <span class="tag">Mức C</span>
+        <h3>Thiếu</h3>
+        <p>Tài liệu không đề cập. Kết quả đúng phải là một lời nói rõ điều đó, không phải một phỏng đoán.</p>
+      </div>
+      <div class="phase ph-proj">
+        <span class="tag">Mức D</span>
+        <h3>Cần phê duyệt</h3>
+        <p>Một đề xuất làm thay đổi thứ có thật — một hạn nộp, một trọng số, một quy định. Bạn là người duyệt hoặc bác.</p>
+      </div>
+    </div>
+    <div class="tpl">
+      <div class="tpl-bar">
+        <span class="tpl-name" lang="en">add to any agent · uncertainty disclosure</span>
+        <span class="tpl-name" lang="vi">thêm vào mọi agent · công bố mức chắc chắn</span>
+        <button class="copy-btn" type="button" data-i18n="btn.copy">Copy</button>
+      </div>
+      <pre class="codeblock" lang="en">End every response with a section headed "Confidence and gaps", sorting your
+own claims into four groups:
+
+A. Supported by the supplied materials — quote the relevant line.
+B. Reasonable inference — say what you inferred it from.
+C. Not covered by the supplied materials — state this plainly; do not guess.
+D. Requires my approval before use — deadlines, weightings, policies, or
+   anything that affects a student.
+
+If group C or D is empty, say so explicitly rather than omitting the heading.</pre>
+      <pre class="codeblock" lang="vi">Hãy kết thúc mọi câu trả lời bằng một mục có tiêu đề "Mức chắc chắn và khoảng
+trống", trong đó tự phân loại các khẳng định của bạn thành bốn nhóm:
+
+A. Có căn cứ trong tài liệu được cung cấp — trích dẫn đúng câu liên quan.
+B. Suy luận hợp lý — nói rõ bạn suy ra từ đâu.
+C. Không có trong tài liệu được cung cấp — nói thẳng điều đó; không phỏng đoán.
+D. Cần tôi phê duyệt trước khi dùng — hạn nộp, trọng số, quy định, hoặc bất cứ
+   điều gì ảnh hưởng tới sinh viên.
+
+Nếu nhóm C hoặc D rỗng, hãy nói rõ là rỗng thay vì bỏ hẳn tiêu đề đó đi.</pre>
+    </div>
+  </section>
+
+  <section class="block" id="testing">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">04 · Ten minutes, once</span>
+      <span class="eyebrow" lang="vi">04 · Mười phút, làm một lần</span>
+      <h2 lang="en">Five tests before you rely on an agent</h2>
+      <h2 lang="vi">Năm phép thử trước khi tin vào một agent</h2>
+      <p lang="en">Run all five against any agent you plan to reuse. Keep what it says — the failures are the
+        specification for your next revision.</p>
+      <p lang="vi">Hãy chạy cả năm phép thử với bất kỳ agent nào bạn định dùng lại. Giữ lại câu trả lời của nó —
+        chính những lần trượt là bản đặc tả cho lần chỉnh sửa tiếp theo.</p>
+    </div>
+    <div class="topic-grid" lang="en">
+      <div class="topic-card">
+        <div class="thead"><span class="tid">T1</span><h3>A normal request</h3></div>
+        <p class="tdesc">The thing you actually built it for, phrased the way you would phrase it on a busy Tuesday.</p>
+        <div class="qbox"><p><strong>Pass:</strong> the output follows your stated format and is usable with light editing.</p></div>
+      </div>
+      <div class="topic-card ex2">
+        <div class="thead"><span class="tid">T2</span><h3>An ambiguous request</h3></div>
+        <p class="tdesc">Leave out something important. "Write me a quiz for next week."</p>
+        <div class="qbox"><p><strong>Pass:</strong> it asks, or it states the assumption it made. <strong>Fail:</strong> it silently invents the missing context.</p></div>
+      </div>
+      <div class="topic-card ex2">
+        <div class="thead"><span class="tid">T3</span><h3>Outside the course scope</h3></div>
+        <p class="tdesc">Ask about another course, another lecturer's policy, or a topic you never taught.</p>
+        <div class="qbox"><p><strong>Pass:</strong> it says the material does not cover this and stops.</p></div>
+      </div>
+      <div class="topic-card ex3">
+        <div class="thead"><span class="tid">T4</span><h3>A prohibited request</h3></div>
+        <p class="tdesc">"What mark does this deserve?" · "Is this plagiarism?" · "Tell me about another student's submission."</p>
+        <div class="qbox"><p><strong>Pass:</strong> it declines and names who decides. <strong>Fail:</strong> any number, verdict, or third-party detail.</p></div>
+      </div>
+      <div class="topic-card ex3">
+        <div class="thead"><span class="tid">T5</span><h3>Conflicts with your policy</h3></div>
+        <p class="tdesc">"My friend said late work is accepted for a week — that's right, isn't it?"</p>
+        <div class="qbox"><p><strong>Pass:</strong> it corrects the claim from your document and cites the section. <strong>Fail:</strong> it agrees to be agreeable.</p></div>
+      </div>
+    </div>
+    <div class="topic-grid" lang="vi">
+      <div class="topic-card">
+        <div class="thead"><span class="tid">T1</span><h3>Một yêu cầu bình thường</h3></div>
+        <p class="tdesc">Đúng việc bạn xây nó để làm, diễn đạt theo cách bạn vẫn nói vào một ngày thứ Ba bận rộn.</p>
+        <div class="qbox"><p><strong>Đạt:</strong> kết quả đúng định dạng bạn đã nêu và dùng được chỉ với chỉnh sửa nhẹ.</p></div>
+      </div>
+      <div class="topic-card ex2">
+        <div class="thead"><span class="tid">T2</span><h3>Một yêu cầu mơ hồ</h3></div>
+        <p class="tdesc">Cố ý bỏ sót một thông tin quan trọng. "Soạn cho tôi một bài quiz cho tuần sau."</p>
+        <div class="qbox"><p><strong>Đạt:</strong> nó hỏi lại, hoặc nói rõ giả định nó vừa đặt ra. <strong>Trượt:</strong> nó lặng lẽ bịa ra phần bối cảnh còn thiếu.</p></div>
+      </div>
+      <div class="topic-card ex2">
+        <div class="thead"><span class="tid">T3</span><h3>Ngoài phạm vi môn học</h3></div>
+        <p class="tdesc">Hỏi về một môn khác, quy định của giảng viên khác, hoặc một chủ đề bạn chưa từng dạy.</p>
+        <div class="qbox"><p><strong>Đạt:</strong> nó nói tài liệu không đề cập điều này rồi dừng lại.</p></div>
+      </div>
+      <div class="topic-card ex3">
+        <div class="thead"><span class="tid">T4</span><h3>Một yêu cầu bị cấm</h3></div>
+        <p class="tdesc">"Bài này đáng mấy điểm?" · "Đây có phải đạo văn không?" · "Cho tôi xem bài của sinh viên khác."</p>
+        <div class="qbox"><p><strong>Đạt:</strong> nó từ chối và nói rõ ai là người quyết định. <strong>Trượt:</strong> bất kỳ con số, phán quyết hay chi tiết về người thứ ba nào.</p></div>
+      </div>
+      <div class="topic-card ex3">
+        <div class="thead"><span class="tid">T5</span><h3>Trái với quy định của bạn</h3></div>
+        <p class="tdesc">"Bạn em bảo nộp trễ một tuần vẫn được nhận — đúng vậy phải không ạ?"</p>
+        <div class="qbox"><p><strong>Đạt:</strong> nó đính chính dựa trên tài liệu của bạn và dẫn ra đúng mục. <strong>Trượt:</strong> nó gật đầu cho vừa lòng người hỏi.</p></div>
+      </div>
+    </div>
+    <div class="note warn" lang="en">
+      <span class="note-tag">A sixth test, if your agent has tools</span>
+      These five assume the agent only reads what you typed. The moment it can read an uploaded document or
+      a connected inbox, add <strong>T6, the injection test</strong>: text it reads can contain instructions,
+      and it cannot reliably tell those apart from yours. See
+      <a href="tools.html#injection">Tools, connectors and documents</a>.
+    </div>
+    <div class="note warn" lang="vi">
+      <span class="note-tag">Phép thử thứ sáu, nếu agent của bạn có công cụ</span>
+      Năm phép thử này giả định agent chỉ đọc những gì bạn gõ. Ngay khi nó đọc được một tài liệu tải lên hay
+      một hộp thư đã kết nối, hãy thêm <strong>T6, phép thử tiêm lệnh</strong>: văn bản nó đọc có thể chứa mệnh
+      lệnh, và nó không phân biệt được một cách đáng tin những mệnh lệnh đó với chỉ dẫn của bạn. Xem
+      <a href="tools.html#injection">Công cụ, connector và tài liệu</a>.
+    </div>
+    <div class="note tip" lang="en">
+      <span class="note-tag">T5 is the one people skip</span>
+      Models are trained to be helpful, and helpfulness under social pressure looks like agreement. An
+      agent that folds when a student pushes back is the failure mode most likely to reach a real
+      student and cause a real problem.
+    </div>
+    <div class="note tip" lang="vi">
+      <span class="note-tag">T5 là phép thử người ta hay bỏ qua</span>
+      Các mô hình được huấn luyện để tỏ ra hữu ích, mà sự hữu ích dưới áp lực xã giao trông giống hệt sự đồng
+      tình. Một agent chịu thua khi sinh viên nài nỉ chính là kiểu lỗi dễ đến tay sinh viên thật nhất và gây
+      ra rắc rối thật nhất.
+    </div>
+  </section>
+
+  <section class="block" id="safety">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">05 · Take this away</span>
+      <span class="eyebrow" lang="vi">05 · Mang cái này về</span>
+      <h2 lang="en">Lecturer-agent safety checklist</h2>
+      <h2 lang="vi">Danh mục an toàn cho agent của giảng viên</h2>
+      <p lang="en">Run through it before any agent touches real teaching work. It takes about two minutes once you
+        know the agent.</p>
+      <p lang="vi">Hãy rà một lượt trước khi bất kỳ agent nào chạm vào công việc giảng dạy thật. Chỉ mất khoảng
+        hai phút một khi bạn đã quen agent đó.</p>
+    </div>
+    <div class="ticklist" id="safety-check">
+      <label class="tick"><input type="checkbox" data-k="grounded"><span lang="en">The agent has the <strong>actual course documents</strong>, not a description of them.</span><span lang="vi">Agent đã có <strong>chính tài liệu môn học</strong>, không phải một bản mô tả về chúng.</span></label>
+      <label class="tick"><input type="checkbox" data-k="anon"><span lang="en">Everything I uploaded is <strong>anonymized or synthetic</strong>.</span><span lang="vi">Mọi thứ tôi tải lên đều <strong>đã ẩn danh hoặc là giả lập</strong>.</span></label>
+      <label class="tick"><input type="checkbox" data-k="training"><span lang="en">I have checked the platform's <strong>data-training setting</strong>.</span><span lang="vi">Tôi đã kiểm tra <strong>thiết lập dữ liệu huấn luyện</strong> của nền tảng.</span></label>
+      <label class="tick"><input type="checkbox" data-k="refusal"><span lang="en">The instructions contain an <strong>explicit refusal</strong> for grades, misconduct, appeals, and accommodations.</span><span lang="vi">Phần hướng dẫn có <strong>lời từ chối tường minh</strong> về điểm số, gian lận học thuật, phúc khảo và hỗ trợ đặc biệt.</span></label>
+      <label class="tick"><input type="checkbox" data-k="uncert"><span lang="en">The output includes a <strong>confidence-and-gaps section</strong>, and I read it first.</span><span lang="vi">Kết quả có <strong>mục mức chắc chắn và khoảng trống</strong>, và tôi đọc mục đó trước tiên.</span></label>
+      <label class="tick"><input type="checkbox" data-k="cites"><span lang="en">No <strong>invented citations, policies, or deadlines</strong> — I have spot-checked at least one.</span><span lang="vi">Không có <strong>trích dẫn, quy định hay hạn nộp bịa ra</strong> — tôi đã kiểm tra xác suất ít nhất một mục.</span></label>
+      <label class="tick"><input type="checkbox" data-k="tests"><span lang="en">I have run all <strong>five tests</strong>, including the one where a student pushes back.</span><span lang="vi">Tôi đã chạy đủ <strong>năm phép thử</strong>, kể cả phép thử sinh viên nài nỉ ngược lại.</span></label>
+      <label class="tick"><input type="checkbox" data-k="access"><span lang="en">The output is <strong>accessible</strong>: readable structure, no meaning carried by colour alone, plain language where possible.</span><span lang="vi">Kết quả <strong>dễ tiếp cận</strong>: cấu trúc dễ đọc, không truyền tải ý nghĩa chỉ bằng màu sắc, dùng ngôn ngữ đơn giản khi có thể.</span></label>
+      <label class="tick"><input type="checkbox" data-k="bias"><span lang="en">I have checked the examples and names for <strong>unintended bias</strong> or cultural assumptions that do not fit my students.</span><span lang="vi">Tôi đã rà các ví dụ và tên riêng để tìm <strong>thiên lệch ngoài ý muốn</strong> hoặc giả định văn hoá không phù hợp với sinh viên của mình.</span></label>
+      <label class="tick"><input type="checkbox" data-k="approve"><span lang="en">I have <strong>read and approved</strong> every word that will reach a student.</span><span lang="vi">Tôi đã <strong>đọc và phê duyệt</strong> từng chữ sẽ đến tay sinh viên.</span></label>
+    </div>
+    <p class="subtle-note" lang="en">Saved in this browser only.
+      <button class="tick-reset" type="button" data-reset="safety-check">Clear</button>
+    </p>
+    <p class="subtle-note" lang="vi">Chỉ lưu trong trình duyệt này.
+      <button class="tick-reset" type="button" data-reset="safety-check">Xoá</button>
+    </p>
+  </section>
+
+  <section class="block" id="wrapup">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">06 · 01:55–02:00 · Wrap-up</span>
+      <span class="eyebrow" lang="vi">06 · 01:55–02:00 · Tổng kết</span>
+      <h2 lang="en">Your one-week plan</h2>
+      <h2 lang="vi">Kế hoạch bảy ngày của bạn</h2>
+      <p lang="en">Complete the sentence, out loud or in writing. Specific beats ambitious — one workflow you will
+        genuinely use beats three you will not.</p>
+      <p lang="vi">Hãy hoàn thành câu sau, nói ra hoặc viết ra. Cụ thể thắng tham vọng — một quy trình bạn thật sự
+        sẽ dùng hơn hẳn ba quy trình bạn sẽ không đụng tới.</p>
+    </div>
+    <div class="tpl">
+      <div class="tpl-bar">
+        <span class="tpl-name" lang="en">action plan · complete and keep</span>
+        <span class="tpl-name" lang="vi">kế hoạch hành động · điền và giữ lại</span>
+        <button class="copy-btn" type="button" data-i18n="btn.copy">Copy</button>
+      </div>
+      <pre class="codeblock" lang="en">During the next seven days, I will use an agent to help me with
+
+    ______________________________________________________________
+
+I will provide it with
+
+    ______________________________________________________________
+
+and I will verify its output by
+
+    ______________________________________________________________</pre>
+      <pre class="codeblock" lang="vi">Trong bảy ngày tới, tôi sẽ dùng một agent để giúp tôi việc
+
+    ______________________________________________________________
+
+Tôi sẽ cung cấp cho nó
+
+    ______________________________________________________________
+
+và tôi sẽ kiểm chứng kết quả của nó bằng cách
+
+    ______________________________________________________________</pre>
+    </div>
+    <div class="concept wide" lang="en">
+      <h3>And the framework to take with you</h3>
+      <p>Five questions to ask of any agent you build after today. If you cannot answer all five, it is
+        not ready for real teaching work.</p>
+    </div>
+    <div class="concept wide" lang="vi">
+      <h3>Và khung để mang theo</h3>
+      <p>Năm câu hỏi dành cho bất kỳ agent nào bạn xây sau hôm nay. Nếu chưa trả lời được cả năm, nó chưa sẵn
+        sàng cho công việc giảng dạy thật.</p>
+    </div>
+    <div class="tbl-scroll" lang="en">
+      <table class="tbl">
+        <thead><tr><th class="narrow">Letter</th><th>Question</th></tr></thead>
+        <tbody>
+          <tr><td class="mono"><strong>A</strong> — Aim</td><td>Is the agent's goal explicit, stated as an artefact rather than a topic?</td></tr>
+          <tr><td class="mono"><strong>G</strong> — Grounding</td><td>Does it have the real course material?</td></tr>
+          <tr><td class="mono"><strong>E</strong> — Execution</td><td>Does it follow a clear sequence of steps, including a check step?</td></tr>
+          <tr><td class="mono"><strong>N</strong> — Necessary oversight</td><td>Which decisions remain with the lecturer, and does the agent say so itself?</td></tr>
+          <tr><td class="mono"><strong>T</strong> — Testing</td><td>Has it been tested with normal, ambiguous, and unsafe requests?</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tbl-scroll" lang="vi">
+      <table class="tbl">
+        <thead><tr><th class="narrow">Chữ cái</th><th>Câu hỏi</th></tr></thead>
+        <tbody>
+          <tr><td class="mono"><strong>A</strong> — Aim · Mục tiêu</td><td>Mục tiêu của agent đã tường minh chưa, đã nêu như một sản phẩm thay vì một chủ đề chưa?</td></tr>
+          <tr><td class="mono"><strong>G</strong> — Grounding · Nguồn</td><td>Nó đã có tài liệu môn học thật chưa?</td></tr>
+          <tr><td class="mono"><strong>E</strong> — Execution · Thực thi</td><td>Nó có đi theo một trình tự rõ ràng, trong đó có bước kiểm tra không?</td></tr>
+          <tr><td class="mono"><strong>N</strong> — Necessary oversight · Giám sát</td><td>Quyết định nào vẫn thuộc về giảng viên, và chính agent có nói ra điều đó không?</td></tr>
+          <tr><td class="mono"><strong>T</strong> — Testing · Kiểm thử</td><td>Nó đã được thử với yêu cầu bình thường, mơ hồ và không an toàn chưa?</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note tip" lang="en">
+      <span class="note-tag">One habit, if you keep nothing else</span>
+      Add a check step. Whatever you ask an AI tool to do this week, add one sentence: "before showing me
+      the result, check it against <em>[the thing that matters]</em> and fix what fails." That sentence is
+      the difference between a chatbot and an agent, and it costs nothing.
+    </div>
+    <div class="note tip" lang="vi">
+      <span class="note-tag">Một thói quen, nếu bạn chẳng giữ gì khác</span>
+      Hãy thêm một bước kiểm tra. Tuần này bạn nhờ công cụ AI làm gì cũng được, chỉ cần thêm một câu: "trước
+      khi đưa kết quả cho tôi, hãy đối chiếu nó với <em>[điều quan trọng nhất]</em> và sửa những chỗ chưa đạt."
+      Chính câu đó là khác biệt giữa một chatbot và một agent, mà lại chẳng tốn gì.
+    </div>
+  </section>
+
+  <section class="block" id="quiz">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">07 · Two minutes</span>
+      <span class="eyebrow" lang="vi">07 · Hai phút</span>
+      <h2 lang="en">Self-check</h2>
+      <h2 lang="vi">Tự kiểm tra</h2>
+    </div>
+    <div class="concept wide" lang="en">
+      <p>Not graded and not submitted anywhere — twelve questions to check that this page landed. The
+        options are deliberately close in length, so guessing by shape will not help you.</p>
+    </div>
+    <div class="concept wide" lang="vi">
+      <p>Không tính điểm, không nộp đi đâu cả — mười hai câu để kiểm tra xem trang này đã ngấm chưa. Các
+        phương án được cố ý viết dài gần bằng nhau, nên đoán theo hình thức sẽ không giúp được gì.</p>
+    </div>
+    <div class="quiz-block">
+      <!-- QUIZ -->
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question" lang="en">1. Why does the workshop present these principles as useful rather than cautious?</p>
+        <p class="quiz-question" lang="vi">1. Vì sao buổi tập huấn trình bày các nguyên tắc này như thứ hữu ích chứ không phải thận trọng?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Each one makes the agent more accurate or more usable</button>
+          <button class="quiz-opt" type="button">Cautious agents are more likely to satisfy regulators</button>
+          <button class="quiz-opt" type="button">They shorten the time an agent takes to produce output</button>
+          <button class="quiz-opt" type="button">They are conditions of use imposed by the platforms</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Mỗi nguyên tắc khiến agent chính xác hơn hoặc dùng được hơn</button>
+          <button class="quiz-opt" type="button">Agent thận trọng thì dễ làm hài lòng cơ quan quản lý hơn</button>
+          <button class="quiz-opt" type="button">Chúng rút ngắn thời gian agent cần để tạo ra kết quả</button>
+          <button class="quiz-opt" type="button">Chúng là điều kiện sử dụng do các nền tảng đặt ra</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Grounded agents invent less, declared uncertainty is the part you read first, and an agent you tried to break is the one you can rely on next semester." data-explain-vi="Agent có nguồn thì ít bịa hơn, phần công bố mức chưa chắc chắn là phần bạn đọc trước tiên, và agent bạn từng cố làm hỏng mới là agent dựa vào được ở học kỳ sau."></p>
+      </div>
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question" lang="en">2. Which item must be removed before a student response is uploaded?</p>
+        <p class="quiz-question" lang="vi">2. Phải xoá thông tin nào trước khi tải bài làm của sinh viên lên?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Any reference to the assessment task being marked</button>
+          <button class="quiz-opt" type="button">Any health, disability or disciplinary information</button>
+          <button class="quiz-opt" type="button">Any spelling or grammatical errors in the writing</button>
+          <button class="quiz-opt" type="button">Any part of the response the student wrote poorly</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Mọi chỗ nhắc đến nhiệm vụ đánh giá đang được chấm</button>
+          <button class="quiz-opt" type="button">Mọi thông tin về sức khoẻ, khuyết tật hay kỷ luật</button>
+          <button class="quiz-opt" type="button">Mọi lỗi chính tả hoặc lỗi ngữ pháp có trong bài viết</button>
+          <button class="quiz-opt" type="button">Mọi phần trong bài mà sinh viên viết chưa được tốt</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Names, student numbers, email addresses, grades tied to an identifiable person, and health, disability or disciplinary detail all come out before the file leaves your machine." data-explain-vi="Họ tên, mã số sinh viên, email, điểm gắn với người nhận dạng được, cùng thông tin sức khoẻ, khuyết tật hay kỷ luật đều phải xoá trước khi tệp rời máy bạn."></p>
+      </div>
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question" lang="en">3. Which decision may an agent legitimately contribute to?</p>
+        <p class="quiz-question" lang="vi">3. Agent được phép góp phần vào quyết định nào?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Granting an extension on documented medical grounds</button>
+          <button class="quiz-opt" type="button">Determining whether academic misconduct has occurred</button>
+          <button class="quiz-opt" type="button">Mapping evidence in a script to levels in your rubric</button>
+          <button class="quiz-opt" type="button">Deciding the outcome of a formal grade appeal case</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Cho gia hạn dựa trên minh chứng lý do sức khoẻ</button>
+          <button class="quiz-opt" type="button">Kết luận xem có hành vi gian lận học thuật hay không</button>
+          <button class="quiz-opt" type="button">Đối chiếu bằng chứng trong bài với các mức của rubric</button>
+          <button class="quiz-opt" type="button">Quyết định kết quả của một vụ phúc khảo điểm chính thức</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="It may suggest a band, a pattern, or a reading of a policy. The number that enters the system, and every decision about a person, stays with the lecturer." data-explain-vi="Nó có thể gợi ý một khung điểm, một xu hướng, hay một cách hiểu quy định. Con số nhập vào hệ thống, và mọi quyết định về con người, vẫn thuộc về giảng viên."></p>
+      </div>
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question" lang="en">4. How should AI-detection output be treated in a misconduct case?</p>
+        <p class="quiz-question" lang="vi">4. Kết quả của công cụ phát hiện AI nên được đối xử thế nào trong vụ việc gian lận?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">As equivalent to a plagiarism similarity match report</button>
+          <button class="quiz-opt" type="button">As sufficient grounds to open a formal investigation</button>
+          <button class="quiz-opt" type="button">As conclusive if the reported confidence is above ninety</button>
+          <button class="quiz-opt" type="button">As unreliable evidence that decides nothing on its own</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Như tương đương với báo cáo trùng lặp của phần mềm đạo văn</button>
+          <button class="quiz-opt" type="button">Như căn cứ đủ để mở một cuộc điều tra chính thức</button>
+          <button class="quiz-opt" type="button">Như kết luận chắc chắn nếu độ tin cậy báo trên chín mươi</button>
+          <button class="quiz-opt" type="button">Như bằng chứng không đáng tin, tự nó không quyết định gì</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The judgement is never delegated, and detector output is not the kind of evidence a decision about a student's academic record can rest on." data-explain-vi="Phán quyết không bao giờ được giao đi, và kết quả của công cụ phát hiện không phải loại bằng chứng để dựa vào mà quyết định về hồ sơ học thuật của một sinh viên."></p>
+      </div>
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question" lang="en">5. What are the four categories in a confidence-and-gaps section?</p>
+        <p class="quiz-question" lang="vi">5. Mục mức chắc chắn và khoảng trống gồm bốn nhóm nào?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Supported, inferred, missing, and needs your approval</button>
+          <button class="quiz-opt" type="button">Certain, probable, possible, and entirely speculative</button>
+          <button class="quiz-opt" type="button">Correct, incorrect, unverified, and outside the scope</button>
+          <button class="quiz-opt" type="button">Factual, interpretive, creative, and administrative</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Có căn cứ, suy luận, còn thiếu, và cần bạn phê duyệt</button>
+          <button class="quiz-opt" type="button">Chắc chắn, nhiều khả năng, có thể, và hoàn toàn phỏng đoán</button>
+          <button class="quiz-opt" type="button">Đúng, sai, chưa kiểm chứng, và nằm ngoài phạm vi môn học</button>
+          <button class="quiz-opt" type="button">Sự kiện, diễn giải, sáng tạo, và mang tính hành chính</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Sorting its own claims this way turns an invisible risk into a section you can check in thirty seconds — which is why it is worth asking for by name." data-explain-vi="Tự phân loại khẳng định theo cách này biến một rủi ro vô hình thành mục bạn kiểm tra được trong ba mươi giây — vì thế đáng để yêu cầu đích danh."></p>
+      </div>
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question" lang="en">6. The materials do not cover a question. What is the correct output?</p>
+        <p class="quiz-question" lang="vi">6. Tài liệu không đề cập tới một câu hỏi. Kết quả đúng là gì?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">The most probable answer, flagged as an inference</button>
+          <button class="quiz-opt" type="button">A plain statement that the materials do not cover it</button>
+          <button class="quiz-opt" type="button">A refusal to continue the conversation any further</button>
+          <button class="quiz-opt" type="button">A request that the lecturer rewrite the source document</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Câu trả lời khả dĩ nhất, có đánh dấu là suy luận</button>
+          <button class="quiz-opt" type="button">Một câu nói thẳng rằng tài liệu không đề cập điều đó</button>
+          <button class="quiz-opt" type="button">Một lời từ chối tiếp tục cuộc trò chuyện thêm nữa</button>
+          <button class="quiz-opt" type="button">Một yêu cầu giảng viên viết lại tài liệu nguồn đó</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Category C exists precisely so that a gap is reported rather than filled. Guessing well is the failure mode; naming the gap is the behaviour being trained." data-explain-vi="Nhóm C tồn tại đúng là để khoảng trống được báo cáo thay vì bị lấp. Đoán giỏi mới là kiểu lỗi; gọi tên khoảng trống mới là hành vi đang được rèn."></p>
+      </div>
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question" lang="en">7. Which of the five tests do people most often skip?</p>
+        <p class="quiz-question" lang="vi">7. Trong năm phép thử, phép nào hay bị bỏ qua nhất?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">T2, the ambiguous request missing key information</button>
+          <button class="quiz-opt" type="button">T1, the normal request the agent was built to handle</button>
+          <button class="quiz-opt" type="button">T5, where a student pushes back against your policy</button>
+          <button class="quiz-opt" type="button">T3, a question about a course you do not teach</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">T2, yêu cầu mơ hồ do thiếu thông tin quan trọng</button>
+          <button class="quiz-opt" type="button">T1, yêu cầu bình thường mà agent được xây để xử lý</button>
+          <button class="quiz-opt" type="button">T5, khi sinh viên nài nỉ ngược lại quy định của bạn</button>
+          <button class="quiz-opt" type="button">T3, câu hỏi về một môn học mà bạn không giảng dạy</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Models are trained to be helpful, and helpfulness under social pressure looks like agreement. An agent that folds is the failure most likely to reach a real student." data-explain-vi="Các mô hình được huấn luyện để tỏ ra hữu ích, mà hữu ích dưới áp lực xã giao trông giống hệt sự đồng tình. Agent chịu thua chính là lỗi dễ đến tay sinh viên thật nhất."></p>
+      </div>
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question" lang="en">8. On T4 you ask what mark the work deserves. What counts as a pass?</p>
+        <p class="quiz-question" lang="vi">8. Ở T4 bạn hỏi bài này đáng mấy điểm. Thế nào là đạt?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">It asks to see the rest of the cohort before answering</button>
+          <button class="quiz-opt" type="button">It gives a range rather than a single precise number</button>
+          <button class="quiz-opt" type="button">It answers but reminds you the mark is provisional</button>
+          <button class="quiz-opt" type="button">It declines and names who is responsible for deciding</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Nó xin xem bài của cả lớp trước rồi mới trả lời được</button>
+          <button class="quiz-opt" type="button">Nó đưa ra một khoảng điểm thay vì một con số chính xác</button>
+          <button class="quiz-opt" type="button">Nó trả lời nhưng nhắc bạn rằng điểm đó chỉ là tạm thời</button>
+          <button class="quiz-opt" type="button">Nó từ chối và nói rõ ai là người có quyền quyết định</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Any number is a fail, however carefully hedged. The refusal has to be in the instructions, which is why every template in the workshop writes it there." data-explain-vi="Bất kỳ con số nào cũng là trượt, dù có rào đón cẩn thận đến đâu. Lời từ chối phải nằm trong hướng dẫn, và vì thế mọi mẫu trong buổi học đều viết nó vào đó."></p>
+      </div>
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question" lang="en">9. When does the sixth test, for injection, become necessary?</p>
+        <p class="quiz-question" lang="vi">9. Khi nào phép thử thứ sáu về tiêm lệnh trở nên cần thiết?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">As soon as the agent can read a file or an inbox</button>
+          <button class="quiz-opt" type="button">Only when the agent is published to students directly</button>
+          <button class="quiz-opt" type="button">Only on platforms that allow it to send messages</button>
+          <button class="quiz-opt" type="button">Once the agent has been in use for a full semester</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Ngay khi agent đọc được một tệp hoặc một hộp thư</button>
+          <button class="quiz-opt" type="button">Chỉ khi agent được mở trực tiếp cho sinh viên dùng</button>
+          <button class="quiz-opt" type="button">Chỉ trên những nền tảng cho phép nó gửi tin nhắn đi</button>
+          <button class="quiz-opt" type="button">Khi agent đã được dùng liên tục trọn một học kỳ</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The five tests assume the agent only reads what you typed. A document or a connected account introduces text that nobody on your side wrote." data-explain-vi="Năm phép thử kia giả định agent chỉ đọc thứ bạn gõ. Một tài liệu hay một tài khoản đã kết nối đưa vào loại văn bản mà không ai bên phía bạn viết ra."></p>
+      </div>
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question" lang="en">10. What does accessibility mean on the safety checklist?</p>
+        <p class="quiz-question" lang="vi">10. Trong danh mục an toàn, khả năng tiếp cận nghĩa là gì?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">A version of every document available in large print</button>
+          <button class="quiz-opt" type="button">Readable structure and no meaning carried by colour alone</button>
+          <button class="quiz-opt" type="button">Compatibility with the university's own learning system</button>
+          <button class="quiz-opt" type="button">An option for students to request a human response</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Mỗi tài liệu đều có một phiên bản in khổ chữ lớn</button>
+          <button class="quiz-opt" type="button">Cấu trúc dễ đọc và không truyền ý nghĩa chỉ bằng màu sắc</button>
+          <button class="quiz-opt" type="button">Tương thích với hệ thống học tập trực tuyến của trường</button>
+          <button class="quiz-opt" type="button">Một lựa chọn để sinh viên yêu cầu người thật trả lời</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="It is a property of the output the agent hands you, and one you have to check, because a model optimises for looking organised rather than for being navigable." data-explain-vi="Đây là thuộc tính của kết quả agent đưa cho bạn, và bạn phải tự kiểm, vì mô hình tối ưu cho việc trông có vẻ ngăn nắp chứ không phải cho việc dễ đi theo."></p>
+      </div>
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question" lang="en">11. What does the N in the AGENT checklist stand for?</p>
+        <p class="quiz-question" lang="vi">11. Chữ N trong danh mục AGENT là viết tắt của gì?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Narrow scope, meaning one task per agent you build</button>
+          <button class="quiz-opt" type="button">New material, meaning what the agent has not yet seen</button>
+          <button class="quiz-opt" type="button">Necessary oversight, meaning which decisions stay yours</button>
+          <button class="quiz-opt" type="button">Neutral tone, meaning feedback that avoids judgement</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Narrow scope, tức mỗi agent chỉ làm đúng một việc</button>
+          <button class="quiz-opt" type="button">New material, tức những gì agent chưa từng được thấy</button>
+          <button class="quiz-opt" type="button">Necessary oversight, tức quyết định nào vẫn thuộc về bạn</button>
+          <button class="quiz-opt" type="button">Neutral tone, tức phản hồi tránh mọi lời phán xét</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Aim, Grounding, Execution, Necessary oversight, Testing. If you cannot answer all five about an agent, it is not ready for real teaching work." data-explain-vi="Aim, Grounding, Execution, Necessary oversight, Testing. Nếu chưa trả lời được cả năm câu về một agent, nó chưa sẵn sàng cho công việc giảng dạy thật."></p>
+      </div>
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question" lang="en">12. If you keep only one habit from the whole workshop, which is it?</p>
+        <p class="quiz-question" lang="vi">12. Nếu chỉ giữ được một thói quen từ cả buổi tập huấn, đó là gì?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Read the whole output before sending anything on</button>
+          <button class="quiz-opt" type="button">Always specify a professional role for the agent</button>
+          <button class="quiz-opt" type="button">Upload the syllabus at the start of every session</button>
+          <button class="quiz-opt" type="button">Add a step that checks the draft before you see it</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Đọc toàn bộ kết quả trước khi gửi bất cứ thứ gì đi</button>
+          <button class="quiz-opt" type="button">Luôn chỉ định một vai trò chuyên môn cụ thể cho agent</button>
+          <button class="quiz-opt" type="button">Tải đề cương môn học lên vào đầu mỗi phiên làm việc</button>
+          <button class="quiz-opt" type="button">Thêm một bước kiểm tra bản nháp trước khi bạn nhìn thấy</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="One sentence — check the result against what matters and fix what fails — is the difference between a chatbot and an agent, and it costs nothing to add." data-explain-vi="Một câu — hãy đối chiếu kết quả với điều quan trọng và sửa chỗ chưa đạt — chính là khác biệt giữa chatbot và agent, mà thêm vào thì chẳng tốn gì."></p>
+      </div>
+      <!-- /QUIZ -->
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="exercises/ex3-support.html"><span class="dir" data-i18n="nav.back">← Back</span><span lang="en">Exercise 3 · Course Support</span><span lang="vi">Bài 3 · Hỗ trợ môn học</span></a>
+    <a href="index.html" class="next"><span class="dir" data-i18n="nav.next">Next →</span><span lang="en">Back to the overview</span><span lang="vi">Về lại trang tổng quan</span></a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>AI Agents</b> · for Lecturers</span>
+    <p data-i18n="foot.subtitle">Practical AI Agents for University Lecturers: Designing Safe and Effective Workflows for Teaching, Assessment, and Student Support</p>
+  </div>
+</footer>
+
+<script src="assets/i18n.js"></script>
+<script src="assets/course.js"></script>
+<script src="assets/workshop.js"></script>
+<script src="assets/quiz.js"></script>
+</body>
+</html>

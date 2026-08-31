@@ -1,0 +1,233 @@
+{
+ "page": "exercises/ex1-lesson.html",
+ "questions": [
+  {
+   "a": 0,
+   "en": [
+    "1. What should you have to hand before building this agent?",
+    "A real upcoming topic, its duration and the year level",
+    "A published paper on active-learning pedagogy methods",
+    "A completed lesson plan you can ask it to rewrite",
+    "Written permission from your head of department",
+    "The exercise is worth twenty minutes only if you keep the output, and that means feeding it a lesson you are actually about to teach."
+   ],
+   "vi": [
+    "1. Bạn cần có sẵn những gì trước khi xây agent này?",
+    "Một chủ đề thật sắp dạy, thời lượng và năm học",
+    "Một bài báo khoa học về phương pháp học chủ động",
+    "Một kế hoạch bài giảng hoàn chỉnh để nhờ viết lại",
+    "Giấy cho phép dùng AI từ trưởng bộ môn của bạn",
+    "Bài thực hành chỉ đáng hai mươi phút nếu bạn giữ được kết quả, nghĩa là phải đưa vào một buổi học bạn sắp dạy thật."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "2. What happens if you leave AVAILABLE MATERIALS empty?",
+    "It refuses to produce any lesson plan at all",
+    "It invents content that sounds entirely plausible",
+    "It asks you for the materials before it starts",
+    "It restricts itself strictly to the topic sentence",
+    "An empty context field is not read as a limit. It is read as permission to fill the gap with whatever a course on this topic usually contains."
+   ],
+   "vi": [
+    "2. Điều gì xảy ra nếu bạn để trống ô TÀI LIỆU SẴN CÓ?",
+    "Nó từ chối tạo bất kỳ kế hoạch bài giảng nào",
+    "Nó bịa ra nội dung nghe hoàn toàn hợp lý",
+    "Nó sẽ hỏi xin bạn tài liệu trước khi bắt đầu",
+    "Nó chỉ bám chặt vào đúng câu nêu chủ đề",
+    "Ô bối cảnh để trống không được hiểu là một giới hạn. Nó được hiểu là lời cho phép lấp chỗ trống bằng những gì một môn học như vậy thường có."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "3. Which workflow steps are the ones that make this an agent?",
+    "Steps 1 and 2, analysing topic and prior knowledge",
+    "Steps 3 and 4, the timed plan and the active exercise",
+    "Steps 6 to 8, checking alignment and time, then revising",
+    "Step 5 alone, which adds the formative assessment",
+    "Everything before step 6 is generation. Steps 6 to 8 evaluate what was generated and repair it, which is the difference between an agent and a long prompt."
+   ],
+   "vi": [
+    "3. Những bước nào trong quy trình khiến đây trở thành một agent?",
+    "Bước 1 và 2, phân tích chủ đề và kiến thức nền",
+    "Bước 3 và 4, kế hoạch theo giờ và hoạt động chủ động",
+    "Bước 6 đến 8, kiểm tra tương thích, thời lượng rồi sửa",
+    "Riêng bước 5, tức là thêm bài đánh giá quá trình",
+    "Mọi thứ trước bước 6 là sinh nội dung. Bước 6 đến 8 đánh giá thứ vừa sinh ra và sửa nó — đó là khác biệt giữa agent và một prompt dài."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "4. A \"no\" on the seven-point checklist mainly tells you what?",
+    "That you should start a longer new conversation",
+    "That this platform is the wrong one for the task",
+    "That the tool cannot really plan lessons at all",
+    "Which of the six components needs strengthening",
+    "The checklist diagnoses your instructions, not the tool. Almost every no traces back to a component you left thin, usually context or quality checks."
+   ],
+   "vi": [
+    "4. Một câu \"không\" trong danh mục bảy điểm chủ yếu cho bạn biết gì?",
+    "Rằng bạn nên mở một cuộc trò chuyện dài hơn",
+    "Rằng nền tảng này không hợp với công việc đó",
+    "Rằng công cụ thật ra không soạn bài giảng được",
+    "Thành phần nào trong sáu thành phần cần củng cố",
+    "Danh mục này chẩn đoán hướng dẫn của bạn, không phải công cụ. Gần như mọi câu không đều truy về một thành phần bạn viết còn mỏng, thường là bối cảnh hoặc tiêu chí kiểm tra."
+   ]
+  },
+  {
+   "a": 0,
+   "en": [
+    "5. In the pair review, what is the reviewer's actual job?",
+    "Hunt for vague outcomes, invented content and timing",
+    "Encourage the designer and note what worked well",
+    "Rewrite the agent instructions in their own words",
+    "Score the lesson plan against a marking rubric",
+    "The reviewer is not there to be kind. Missing information, unrealistic minutes, unmeasurable outcomes and content from nowhere are the six things to look for."
+   ],
+   "vi": [
+    "5. Trong phần rà soát theo cặp, nhiệm vụ thật sự của người rà soát là gì?",
+    "Tìm chuẩn đầu ra mơ hồ, nội dung bịa và lỗi thời lượng",
+    "Động viên người thiết kế và ghi nhận những điểm đã tốt",
+    "Viết lại hướng dẫn của agent theo cách diễn đạt riêng",
+    "Chấm điểm kế hoạch bài giảng đó theo một rubric có sẵn",
+    "Người rà soát không ở đó để tỏ ra dễ tính. Thiếu thông tin, số phút phi thực tế, chuẩn đầu ra không đo được và nội dung từ hư không là những thứ cần tìm."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "6. What does adding the adversarial review block actually change?",
+    "It makes the model consult external web sources",
+    "It turns a one-pass generator into a self-reviewer",
+    "It shortens the output by cutting weaker sections",
+    "It saves the instructions for reuse next semester",
+    "It is the single highest-value edit most participants make. Ask it to show what the review found as well, and you get an audit trail of your own weak instructions."
+   ],
+   "vi": [
+    "6. Thêm khối tự phản biện vào thì thực chất thay đổi điều gì?",
+    "Khiến mô hình tra cứu thêm các nguồn trên web",
+    "Biến cỗ máy sinh một lượt thành thứ tự rà soát mình",
+    "Rút ngắn kết quả bằng cách cắt phần yếu hơn đi",
+    "Lưu lại hướng dẫn để dùng lại vào học kỳ sau",
+    "Đây là chỉnh sửa có giá trị nhất mà phần lớn học viên thực hiện. Hãy yêu cầu nó cho xem cả phần rà soát, bạn sẽ có nhật ký về những chỗ hướng dẫn còn yếu."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "7. Which deliverable is the one you will still be using next month?",
+    "The five-question formative quiz with its answers",
+    "The timed lesson plan you will teach next week",
+    "The revised agent instructions, not the lesson plan",
+    "The list of assumptions the agent flagged for you",
+    "The lesson plan is used once. The instructions are the reusable artefact — that is why the exercise ends by revising them rather than by polishing the plan."
+   ],
+   "vi": [
+    "7. Sản phẩm nào bạn vẫn còn dùng đến vào tháng sau?",
+    "Bài quiz đánh giá quá trình năm câu kèm đáp án",
+    "Kế hoạch bài giảng bạn sẽ dạy vào tuần tới đây",
+    "Bộ hướng dẫn agent đã sửa, không phải kế hoạch bài",
+    "Danh sách các giả định mà agent đã đánh dấu",
+    "Kế hoạch bài giảng chỉ dùng một lần. Bộ hướng dẫn mới là sản phẩm dùng lại được — vì thế bài thực hành kết thúc bằng việc sửa nó, chứ không phải trau chuốt kế hoạch."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "8. The agent proposes a 15-minute group activity. What do you check?",
+    "Whether the students are likely to find it enjoyable",
+    "Whether the activity has a memorable and catchy name",
+    "Whether the word collaborative appears often enough",
+    "Whether forming groups and reporting back are counted",
+    "Timing is the most common unrealistic element. Fifteen minutes of activity usually means five of setup, seven of work and eight of reporting — which is twenty."
+   ],
+   "vi": [
+    "8. Agent đề xuất một hoạt động nhóm 15 phút. Bạn kiểm tra điều gì?",
+    "Sinh viên có khả năng thấy hoạt động này vui không",
+    "Hoạt động đó đã có một cái tên dễ nhớ hay chưa",
+    "Từ \"cộng tác\" đã xuất hiện đủ nhiều hay chưa",
+    "Đã tính cả thời gian chia nhóm và báo cáo lại chưa",
+    "Thời lượng là chỗ phi thực tế phổ biến nhất. Mười lăm phút hoạt động thường là năm phút bố trí, bảy phút làm và tám phút báo cáo — tức là hai mươi."
+   ]
+  },
+  {
+   "a": 0,
+   "en": [
+    "9. What makes a quiz item ambiguous, in this exercise's sense?",
+    "A wrong option can also be defended as correct",
+    "The question is longer than the four options are",
+    "Students have not yet covered the topic in class",
+    "The answer key was written after the questions",
+    "Try to defend a wrong option. If you succeed, the item is broken — and this is exactly what the adversarial review step is instructed to look for."
+   ],
+   "vi": [
+    "9. Theo bài thực hành này, điều gì khiến một câu quiz bị nhập nhằng?",
+    "Một phương án sai cũng có thể bảo vệ là đúng",
+    "Câu hỏi dài hơn cả bốn phương án trả lời cộng lại",
+    "Sinh viên chưa được học chủ đề đó trên lớp",
+    "Đáp án được viết ra sau khi đã viết câu hỏi",
+    "Hãy thử bảo vệ một phương án sai. Nếu bảo vệ được thì câu đó hỏng — và đây đúng là thứ bước tự phản biện được giao đi tìm."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "10. Why insist on a real lesson rather than a hypothetical one?",
+    "The platforms reject obviously hypothetical requests",
+    "Generic input produces an agent you will never reuse",
+    "Real lessons need fewer tokens and so run faster",
+    "Hypothetical topics trigger far more hallucinations",
+    "A generic agent produces a generic plan, and nobody takes a generic plan into a classroom on Monday. The exercise only pays off if the output survives the session."
+   ],
+   "vi": [
+    "10. Vì sao phải dùng buổi học thật thay vì một buổi giả định?",
+    "Các nền tảng từ chối yêu cầu mang tính giả định rõ ràng",
+    "Đầu vào chung chung tạo ra agent bạn sẽ không dùng lại",
+    "Buổi học thật tốn ít token hơn nên chạy nhanh hơn hẳn",
+    "Chủ đề giả định khiến mô hình bịa đặt nhiều hơn nhiều",
+    "Agent chung chung tạo ra kế hoạch chung chung, và không ai mang kế hoạch chung chung vào lớp sáng thứ Hai. Bài này chỉ có lãi nếu kết quả sống sót sau buổi tập huấn."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "11. In the builder, what does the red placeholder text mean?",
+    "A required field that blocks the copy button",
+    "A field the platform will reject on submission",
+    "A section the agent will be forced to guess at",
+    "A suggestion the workshop recommends deleting",
+    "The red is the missing-context problem made visible before you run the agent rather than after. The counter under the preview says how many sections are still placeholders."
+   ],
+   "vi": [
+    "11. Trong trình dựng, chữ màu đỏ ở phần xem trước nghĩa là gì?",
+    "Một ô bắt buộc đang chặn nút sao chép lại",
+    "Một ô mà nền tảng sẽ từ chối khi gửi đi",
+    "Một mục mà agent sẽ buộc phải tự đoán ra",
+    "Một gợi ý mà buổi tập huấn khuyên nên xoá",
+    "Màu đỏ làm hiện ra vấn đề thiếu bối cảnh trước khi bạn chạy agent chứ không phải sau. Bộ đếm dưới khung xem trước cho biết còn bao nhiêu mục là chỗ trống."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "12. What belongs in the final \"risks and lecturer decisions\" section?",
+    "A summary of the lesson written for your students",
+    "A list of the parts the agent could not format well",
+    "The references the agent used while building the plan",
+    "Claims you must verify and choices only you can make",
+    "This section is the handover point. It is the part to read first, because it tells you where the agent stopped being able to stand behind its own output."
+   ],
+   "vi": [
+    "12. Mục cuối \"rủi ro và quyết định của giảng viên\" chứa những gì?",
+    "Bản tóm tắt bài học được viết dành cho sinh viên đọc",
+    "Danh sách những phần agent không định dạng đẹp được",
+    "Các tài liệu tham khảo agent dùng khi dựng kế hoạch",
+    "Điều bạn phải kiểm chứng và lựa chọn chỉ bạn quyết được",
+    "Mục này là điểm bàn giao. Đây là phần nên đọc trước tiên, vì nó cho biết agent hết khả năng đứng sau kết quả của chính nó từ chỗ nào."
+   ]
+  }
+ ]
+}

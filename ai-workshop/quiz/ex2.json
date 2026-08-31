@@ -1,0 +1,233 @@
+{
+ "page": "exercises/ex2-assessment.html",
+ "questions": [
+  {
+   "a": 0,
+   "en": [
+    "1. What condition must the student response meet before you upload it?",
+    "Anonymized or synthetic, with every identifier removed",
+    "Marked already, so the agent can check your grading",
+    "At least 800 words, so the rubric has enough to work on",
+    "Written this semester, so the material is still current",
+    "Names, student numbers, email addresses and distinctive details all come out before the file leaves your machine. If that is hard, use the synthetic response instead."
+   ],
+   "vi": [
+    "1. Bài làm của sinh viên phải đạt điều kiện gì trước khi bạn tải lên?",
+    "Đã ẩn danh hoặc là bài giả lập, xoá hết thông tin nhận dạng",
+    "Đã được chấm sẵn, để agent kiểm tra lại cách bạn cho điểm",
+    "Dài ít nhất 800 từ, để rubric có đủ dữ liệu mà làm việc",
+    "Được viết trong học kỳ này, để nội dung còn tính thời sự",
+    "Họ tên, mã số sinh viên, email và các chi tiết đặc thù đều phải xoá trước khi tệp rời máy bạn. Nếu việc đó khó, hãy dùng bài giả lập."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "2. Where should the student response go?",
+    "Inside the instructions, under REFERENCE MATERIAL",
+    "In your first message, not inside the instructions",
+    "As an attachment named after the assessment task",
+    "In a separate conversation from the rubric agent",
+    "Keeping the response out of the instructions is what makes the rubric agent reusable: the same agent then marks the next thirty scripts without being rebuilt."
+   ],
+   "vi": [
+    "2. Bài làm của sinh viên nên được đưa vào đâu?",
+    "Vào trong phần hướng dẫn, mục TÀI LIỆU THAM CHIẾU",
+    "Vào tin nhắn đầu tiên, không nằm trong phần hướng dẫn",
+    "Dưới dạng tệp đính kèm đặt tên theo nhiệm vụ đánh giá",
+    "Vào một cuộc trò chuyện tách khỏi agent dựng rubric",
+    "Để bài làm nằm ngoài phần hướng dẫn chính là thứ khiến agent rubric dùng lại được: vẫn agent đó sẽ chấm ba mươi bài tiếp theo mà không phải dựng lại."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "3. Which instruction is deliberately written as a refusal?",
+    "Quote or point to evidence found in the response",
+    "Create an analytic rubric with four performance levels",
+    "Do not calculate or assign the final official grade",
+    "Separate strengths from the recommended next actions",
+    "Step 9 is not an omission. It is the boundary written into the agent so that the tool declines rather than obliges when someone asks it for a mark."
+   ],
+   "vi": [
+    "3. Chỉ dẫn nào được viết ra một cách có chủ ý như một lời từ chối?",
+    "Trích dẫn hoặc chỉ ra bằng chứng tìm thấy trong bài làm",
+    "Xây dựng một rubric phân tích với bốn mức năng lực",
+    "Không tính toán hay đưa ra điểm số chính thức cuối cùng",
+    "Tách riêng điểm mạnh khỏi các hành động nên làm tiếp",
+    "Bước 9 không phải chỗ bỏ sót. Đó là ranh giới được viết vào agent để công cụ từ chối thay vì chiều theo khi có người hỏi xin điểm."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "4. Why do overlapping rubric criteria matter?",
+    "The criteria stop matching the learning outcomes",
+    "The rubric becomes too long for students to read",
+    "The agent will refuse to apply the rubric at all",
+    "The same weakness gets penalised twice over",
+    "Overlap is the most common defect in an AI-drafted rubric, and it is easy to fix once named — which is why challenge 2 asks the agent to find it."
+   ],
+   "vi": [
+    "4. Vì sao các tiêu chí rubric bị chồng lấn lại là vấn đề?",
+    "Các tiêu chí thôi khớp với chuẩn đầu ra môn học",
+    "Rubric trở nên quá dài để sinh viên chịu đọc",
+    "Agent sẽ từ chối áp dụng rubric đó hoàn toàn",
+    "Cùng một điểm yếu bị trừ điểm đến hai lần",
+    "Chồng lấn là lỗi phổ biến nhất của rubric do AI soạn, và rất dễ sửa một khi đã gọi tên — vì thế câu vặn số 2 yêu cầu agent tự tìm ra nó."
+   ]
+  },
+  {
+   "a": 0,
+   "en": [
+    "5. Which feedback sentence follows the workshop's rule?",
+    "The justification relies on convenience, not on fit",
+    "You have been rather careless with your reasoning",
+    "This is a weak submission from a struggling student",
+    "You clearly did not spend much time on this section",
+    "Feedback addresses the work, not the person. The first names something in the text that the student can act on; the others describe the student instead."
+   ],
+   "vi": [
+    "5. Câu phản hồi nào tuân thủ nguyên tắc của buổi tập huấn?",
+    "Phần biện luận dựa trên sự tiện lợi, không dựa trên độ phù hợp",
+    "Em đã khá cẩu thả trong cách lập luận của bài viết này",
+    "Đây là một bài nộp yếu của một sinh viên đang gặp khó khăn",
+    "Rõ ràng em đã không dành nhiều thời gian cho phần này",
+    "Phản hồi nhắm vào bài làm, không nhắm vào con người. Câu đầu chỉ ra một thứ trong bài mà sinh viên sửa được; các câu còn lại đang mô tả sinh viên."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "6. What does challenge 1, asking it to justify a judgement, reveal?",
+    "Whether the rubric has the right number of levels",
+    "Whether it assessed the criterion or the fluency",
+    "Whether the student understood the assignment brief",
+    "Whether the model has enough context left to work",
+    "If it cannot point to specific words, it was pattern-matching on how polished the writing sounded rather than testing the criterion you wrote."
+   ],
+   "vi": [
+    "6. Câu vặn số 1, yêu cầu biện minh cho một nhận định, cho thấy điều gì?",
+    "Rubric đã có đúng số mức năng lực cần thiết chưa",
+    "Nó đánh giá theo tiêu chí hay chỉ theo độ trôi chảy",
+    "Sinh viên có hiểu đúng yêu cầu của đề bài hay không",
+    "Mô hình còn đủ ngữ cảnh để tiếp tục làm việc không",
+    "Nếu nó không chỉ ra được câu chữ cụ thể, nghĩa là nó đang bắt theo độ bóng bẩy của văn phong chứ không kiểm tra theo tiêu chí bạn đã viết."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "7. Your agent answers \"about 6 out of 10\" when pushed. What now?",
+    "Report the platform for breaching its own policy",
+    "Accept it, since the number is only advisory anyway",
+    "Strengthen the guardrail wording and test it again",
+    "Delete the conversation and start the exercise over",
+    "A failed refusal test is a better workshop outcome than a rubric, because it shows you exactly which sentence in your instructions was not doing its job."
+   ],
+   "vi": [
+    "7. Agent của bạn trả lời \"khoảng 6 trên 10\" khi bị ép. Giờ làm gì?",
+    "Báo cáo nền tảng vì đã vi phạm chính sách của chính họ",
+    "Chấp nhận, vì con số đó dù sao cũng chỉ mang tính tham khảo",
+    "Viết chặt hơn phần rào chắn rồi kiểm thử lại lần nữa",
+    "Xoá cuộc trò chuyện và bắt đầu lại bài thực hành từ đầu",
+    "Một phép thử từ chối bị trượt là kết quả tập huấn giá trị hơn cả cái rubric, vì nó chỉ ra chính xác câu nào trong hướng dẫn của bạn chưa làm đúng việc."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "8. In the synthetic sample, what is wrong with the research question?",
+    "It repeats the wording of the assessment task exactly",
+    "It concerns first-year students rather than final-year",
+    "It cannot be answered with a questionnaire instrument",
+    "It states a broad topic rather than a focused question",
+    "How do first-year students study? names an area of interest. A research question narrows to something a specific method could actually answer."
+   ],
+   "vi": [
+    "8. Trong bài giả lập, câu hỏi nghiên cứu sai ở chỗ nào?",
+    "Nó lặp lại nguyên văn cách diễn đạt của chính đề bài",
+    "Nó nói về sinh viên năm nhất chứ không phải năm cuối",
+    "Nó không thể trả lời được bằng công cụ bảng hỏi khảo sát",
+    "Nó nêu một chủ đề rộng chứ không phải câu hỏi có trọng tâm",
+    "\"Sinh viên năm nhất học như thế nào?\" chỉ nêu một mảng quan tâm. Câu hỏi nghiên cứu phải thu hẹp tới thứ mà một phương pháp cụ thể trả lời được."
+   ]
+  },
+  {
+   "a": 0,
+   "en": [
+    "9. What is the flaw in the sample's justification of the questionnaire?",
+    "It argues from convenience instead of from fit",
+    "It never mentions the sample size it would need",
+    "It confuses questionnaires with structured interviews",
+    "It proposes a method the course has not yet taught",
+    "Quick, cheap and easy to count are all true and none of them answer the real question: does this instrument measure what the research question asks about?"
+   ],
+   "vi": [
+    "9. Phần biện luận cho bảng hỏi trong bài mẫu hỏng ở chỗ nào?",
+    "Nó lập luận từ sự tiện lợi thay vì từ độ phù hợp",
+    "Nó không hề nhắc tới cỡ mẫu cần thiết phải có",
+    "Nó nhầm lẫn giữa bảng hỏi và phỏng vấn có cấu trúc",
+    "Nó đề xuất phương pháp mà môn học chưa hề dạy đến",
+    "Nhanh, rẻ và dễ đếm đều đúng cả, và không câu nào trả lời được câu hỏi thật: công cụ này có đo đúng thứ mà câu hỏi nghiên cứu quan tâm không?"
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "10. \"At least 100 responses, which should be enough to be reliable\" is what?",
+    "A correct statement of the usual sampling convention",
+    "An unsupported claim presented as if it were settled",
+    "A limitation, correctly identified and then mitigated",
+    "A reasonable inference from the size of the faculty",
+    "It is asserted, not argued. A good rubric criterion makes the agent notice claims like this instead of rewarding the confident tone they are written in."
+   ],
+   "vi": [
+    "10. Câu \"ít nhất 100 phiếu, như vậy là đủ để đáng tin cậy\" là gì?",
+    "Một phát biểu đúng về quy ước chọn mẫu thông thường",
+    "Một khẳng định không căn cứ, trình bày như thể đã được chốt",
+    "Một hạn chế đã được nhận diện đúng và đã được giảm thiểu",
+    "Một suy luận hợp lý dựa trên quy mô của khoa hiện nay",
+    "Nó được khẳng định chứ không được lập luận. Một tiêu chí rubric tốt sẽ buộc agent nhận ra những câu như vậy thay vì thưởng cho giọng văn chắc nịch."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "11. What is section G of the output actually for?",
+    "A record of which rubric levels were awarded where",
+    "The grade band the agent thinks the work deserves",
+    "The judgements that need the lecturer to decide them",
+    "A summary of the feedback rewritten for the student",
+    "Section G is the handover point between the tool and the marker. Read it first: it tells you where the agent stopped being able to stand behind its own analysis."
+   ],
+   "vi": [
+    "11. Mục G trong kết quả thực chất dùng để làm gì?",
+    "Bản ghi lại mức rubric nào đã được cho ở tiêu chí nào",
+    "Khung điểm mà agent cho rằng bài làm này xứng đáng",
+    "Những phán quyết cần chính giảng viên đứng ra quyết định",
+    "Bản tóm tắt phản hồi được viết lại dành cho sinh viên",
+    "Mục G là điểm bàn giao giữa công cụ và người chấm. Hãy đọc nó trước: nó cho biết agent hết khả năng đứng sau phân tích của chính nó từ chỗ nào."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "12. Which artefact from this exercise is the reusable one?",
+    "The challenge questions, saved for the next workshop",
+    "The feedback, which can be adapted for other students",
+    "The student response, kept as an exemplar for teaching",
+    "The rubric, which applies to every future submission",
+    "The rubric outlives the script it was tested on, and it can be published to students in advance — which is most of its value as an assessment-design artefact."
+   ],
+   "vi": [
+    "12. Sản phẩm nào của bài thực hành này là thứ dùng lại được?",
+    "Bộ câu vặn lại, để dành cho buổi tập huấn lần sau",
+    "Phản hồi, vì có thể chỉnh lại cho các sinh viên khác",
+    "Bài làm mẫu, giữ lại làm ví dụ minh hoạ khi giảng dạy",
+    "Rubric, vì nó áp dụng cho mọi lượt nộp bài về sau",
+    "Rubric sống lâu hơn bài làm dùng để thử nó, và có thể công bố trước cho sinh viên — đó là phần lớn giá trị của nó với tư cách sản phẩm thiết kế đánh giá."
+   ]
+  }
+ ]
+}
