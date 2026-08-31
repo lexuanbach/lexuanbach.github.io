@@ -1,0 +1,745 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<title>From chatbot to agent · AI Agents for Lecturers</title>
+<meta name="title-en" content="From chatbot to agent · AI Agents for Lecturers">
+<meta name="title-vi" content="Từ chatbot đến agent · AI Agent cho Giảng viên">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The difference between a chatbot, an assistant, and an agent; the six components of a lecturer agent; and the same lesson request written both ways.">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('agentws-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+    if (localStorage.getItem('agentws-language') === 'vi') document.documentElement.dataset.lang = 'vi';
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="index.html"><b>AI Agents</b> · for Lecturers</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="index.html" class="always" data-i18n="nav.overview">Overview</a>
+      <a href="concepts.html" aria-current="page" data-i18n="nav.concepts">Concepts</a>
+      <a href="exercises/ex1-lesson.html" data-i18n="nav.exercises">Exercises</a>
+      <a href="tools.html" data-i18n="nav.tools">Tools &amp; data</a>
+      <a href="platforms.html" data-i18n="nav.platforms">Platforms</a>
+      <a href="responsible.html" data-i18n="nav.responsible">Responsible use</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="lang-toggle" type="button">VI</button>
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4 data-i18n="side.site">Site</h4>
+  <nav aria-label="Site">
+    <a href="index.html" data-i18n="nav.overview">Overview</a>
+    <a href="concepts.html" aria-current="page" data-i18n="nav.concepts">Concepts</a>
+    <a href="exercises/ex1-lesson.html" data-i18n="nav.ex1">Exercise 1 · Lesson</a>
+    <a href="exercises/ex2-assessment.html" data-i18n="nav.ex2">Exercise 2 · Assessment</a>
+    <a href="exercises/ex3-support.html" data-i18n="nav.ex3">Exercise 3 · Support</a>
+    <a href="tools.html" data-i18n="nav.tools">Tools &amp; data</a>
+    <a href="platforms.html" data-i18n="nav.platforms">Platforms</a>
+    <a href="responsible.html" data-i18n="nav.responsible">Responsible use</a>
+  </nav>
+  <h4 data-i18n="side.onpage">On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#three"><span lang="en">Chatbot, assistant, agent</span><span lang="vi">Chatbot, trợ lý, agent</span></a>
+    <a href="#components"><span lang="en">The six components</span><span lang="vi">Sáu thành phần</span></a>
+    <a href="#loop"><span lang="en">The workflow loop</span><span lang="vi">Vòng lặp quy trình</span></a>
+    <a href="#suitable"><span lang="en">What to delegate</span><span lang="vi">Nên giao việc gì</span></a>
+    <a href="#demo"><span lang="en">Demonstration</span><span lang="vi">Phần demo</span></a>
+    <a href="#quiz"><span lang="en">Self-check</span><span lang="vi">Tự kiểm tra</span></a>
+    <a href="#quiz"><span lang="en">Self-check</span><span lang="vi">Tự kiểm tra</span></a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow" lang="en">Session 2 · 00:10–00:25 · 15 minutes</span>
+      <span class="eyebrow" lang="vi">Phần 2 · 00:10–00:25 · 15 phút</span>
+      <h1 lang="en">From chatbot to AI agent</h1>
+      <h1 lang="vi">Từ chatbot đến AI agent</h1>
+      <p class="lede" lang="en">The word "agent" is used for everything at the moment, which makes it useless as a
+        label. This page gives you a working distinction you can apply in the next ten minutes, the six
+        ingredients every agent in this workshop is built from, and the honest boundary: which of your
+        tasks this helps with, and which it will quietly make worse.</p>
+      <p class="lede" lang="vi">Hiện nay chữ "agent" được gắn cho đủ thứ, đến mức không còn phân biệt được gì.
+        Trang này đưa ra một cách phân biệt dùng được ngay trong mười phút tới, sáu thành phần tạo nên mọi
+        agent trong buổi tập huấn này, và một ranh giới thành thật: việc nào nó giúp được, và việc nào nó sẽ
+        âm thầm làm tệ đi.</p>
+      <div class="meta-chips" lang="en">
+        <a class="chip" href="#three">Three-way distinction</a>
+        <a class="chip" href="#components">6 components</a>
+        <a class="chip" href="#demo">Weak vs. agent request</a>
+        <a class="chip" href="#quiz">Self-check</a>
+      </div>
+      <div class="meta-chips" lang="vi">
+        <a class="chip" href="#three">Phân biệt ba loại</a>
+        <a class="chip" href="#components">6 thành phần</a>
+        <a class="chip" href="#demo">Sơ sài vs. quy trình agent</a>
+        <a class="chip" href="#quiz">Tự kiểm tra</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="three">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">01 · The distinction</span>
+      <span class="eyebrow" lang="vi">01 · Phân biệt</span>
+      <h2 lang="en">Chatbot, assistant, agent</h2>
+      <h2 lang="vi">Chatbot, trợ lý, agent</h2>
+      <p lang="en">The difference is not the model — the same model sits behind all three. The difference is how
+        much of the <em>process</em> you have written down and handed over.</p>
+      <p lang="vi">Khác biệt không nằm ở mô hình — cả ba đều chạy trên cùng một mô hình. Khác biệt nằm ở chỗ
+        bạn đã viết ra và giao lại bao nhiêu phần của <em>quy trình</em>.</p>
+    </div>
+    <div class="phases" lang="en">
+      <div class="phase ph-found">
+        <span class="tag">Level 1</span>
+        <h3>Chatbot</h3>
+        <p>Responds to one message.</p>
+        <ul>
+          <li>You supply the context every time</li>
+          <li>You judge the answer</li>
+          <li>You decide what happens next</li>
+          <li><strong>"Create a lecture about software testing."</strong></li>
+        </ul>
+      </div>
+      <div class="phase ph-ex2">
+        <span class="tag">Level 2</span>
+        <h3>AI assistant</h3>
+        <p>Helps with a sequence of tasks that you direct.</p>
+        <ul>
+          <li>Remembers the conversation and your files</li>
+          <li>You still decide each next step</li>
+          <li>Quality control is entirely yours</li>
+          <li><strong>"Now turn that into slides. Now write a quiz."</strong></li>
+        </ul>
+      </div>
+      <div class="phase ph-ex1">
+        <span class="tag">Level 3</span>
+        <h3>AI agent</h3>
+        <p>Receives a goal, follows a workflow, checks its own work, and revises or escalates.</p>
+        <ul>
+          <li>The steps are written down in advance</li>
+          <li>It verifies its draft before showing you</li>
+          <li>It names what it could not verify</li>
+          <li><strong>"Prepare this lesson. Check the alignment. Fix what fails. Flag what I must decide."</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="phases" lang="vi">
+      <div class="phase ph-found">
+        <span class="tag">Mức 1</span>
+        <h3>Chatbot</h3>
+        <p>Trả lời một tin nhắn.</p>
+        <ul>
+          <li>Bạn phải cung cấp bối cảnh mỗi lần</li>
+          <li>Bạn tự đánh giá câu trả lời</li>
+          <li>Bạn quyết định bước tiếp theo</li>
+          <li><strong>"Soạn cho tôi một bài giảng về kiểm thử phần mềm."</strong></li>
+        </ul>
+      </div>
+      <div class="phase ph-ex2">
+        <span class="tag">Mức 2</span>
+        <h3>Trợ lý AI</h3>
+        <p>Hỗ trợ một chuỗi việc do bạn điều khiển.</p>
+        <ul>
+          <li>Nhớ cuộc trò chuyện và các tệp của bạn</li>
+          <li>Bạn vẫn quyết định từng bước kế tiếp</li>
+          <li>Kiểm soát chất lượng hoàn toàn thuộc về bạn</li>
+          <li><strong>"Giờ chuyển thành slide. Giờ viết một bài quiz."</strong></li>
+        </ul>
+      </div>
+      <div class="phase ph-ex1">
+        <span class="tag">Mức 3</span>
+        <h3>AI agent</h3>
+        <p>Nhận một mục tiêu, đi theo quy trình, tự kiểm tra kết quả, rồi chỉnh sửa hoặc chuyển lại cho người.</p>
+        <ul>
+          <li>Các bước đã được viết ra từ trước</li>
+          <li>Nó tự kiểm bản nháp trước khi đưa cho bạn</li>
+          <li>Nó chỉ rõ những gì nó không kiểm chứng được</li>
+          <li><strong>"Soạn bài này. Kiểm tra tính tương thích. Sửa chỗ chưa đạt. Đánh dấu phần tôi phải quyết."</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="note tip" lang="en">
+      <span class="note-tag">The useful consequence</span>
+      An agent does not have to run by itself. A structured prompt containing an explicit
+      plan–review–revision loop is already an agentic workflow, and it is the only kind this workshop
+      asks you to build. Nothing here requires an API, a subscription, or a line of code.
+    </div>
+    <div class="note tip" lang="vi">
+      <span class="note-tag">Hệ quả hữu ích</span>
+      Agent không nhất thiết phải chạy tự động. Một prompt có cấu trúc chứa vòng lặp lập kế hoạch – rà soát –
+      chỉnh sửa đã là một quy trình agent, và đó là loại duy nhất buổi tập huấn này yêu cầu bạn xây. Không có
+      phần nào ở đây cần API, cần thuê bao trả phí hay cần một dòng code.
+    </div>
+  </section>
+
+  <section class="block" id="components">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">02 · The anatomy</span>
+      <span class="eyebrow" lang="vi">02 · Giải phẫu</span>
+      <h2 lang="en">The six components of a lecturer agent</h2>
+      <h2 lang="vi">Sáu thành phần của một agent cho giảng viên</h2>
+      <p lang="en">Every template in this workshop is these six headings with your content underneath. When an
+        agent misbehaves, one of the six is usually missing — that is the first place to look.</p>
+      <p lang="vi">Mọi mẫu trong buổi tập huấn này đều là sáu đề mục ấy với nội dung của bạn bên dưới. Khi agent
+        chạy sai, thường là thiếu một trong sáu — đó là chỗ nên xem đầu tiên.</p>
+    </div>
+    <div class="checklist c-accent" lang="en">
+      <div class="check-item"><span class="rn">1</span><div><span class="stage">Role</span><h4>What expertise should it simulate?</h4><p>"A teaching-design agent for a second-year software engineering course" behaves differently from "a helpful assistant" — it sets the vocabulary, the defaults, and the standard it holds itself to.</p></div></div>
+      <div class="check-item"><span class="rn">2</span><div><span class="stage">Goal</span><h4>What final result must it produce?</h4><p>Stated as an artefact, not a topic. Not "help with the lesson" but "a 90-minute plan with three measurable outcomes, one activity, and a five-question formative quiz."</p></div></div>
+      <div class="check-item"><span class="rn">3</span><div><span class="stage">Context</span><h4>What course, students, materials, constraints?</h4><p>Year level, prior knowledge, class size, room, technology, language, and the actual course documents. This is the component most often left out, and the one that causes invented content.</p></div></div>
+      <div class="check-item"><span class="rn">4</span><div><span class="stage">Workflow</span><h4>What steps, in what order?</h4><p>Numbered. Analysis before production, production before checking, checking before revision. The order is the part that makes it an agent.</p></div></div>
+      <div class="check-item"><span class="rn">5</span><div><span class="stage">Quality checks</span><h4>How should it evaluate its own output?</h4><p>Concrete tests it can actually run on its draft: does every activity map to an outcome? does the timing add up? does any question have two defensible answers?</p></div></div>
+      <div class="check-item"><span class="rn">6</span><div><span class="stage">Guardrails</span><h4>What must it avoid, refuse, or escalate?</h4><p>No invented policies, no invented citations, no final grades, no decisions about individual students. Written as instructions, not hopes.</p></div></div>
+    </div>
+    <div class="checklist c-accent" lang="vi">
+      <div class="check-item"><span class="rn">1</span><div><span class="stage">Vai trò</span><h4>Nó nên đóng vai chuyên môn nào?</h4><p>"Một agent thiết kế bài giảng cho môn công nghệ phần mềm năm hai" hành xử khác hẳn "một trợ lý hữu ích" — vai trò quy định thuật ngữ, các mặc định và chuẩn mực mà nó tự đặt cho mình.</p></div></div>
+      <div class="check-item"><span class="rn">2</span><div><span class="stage">Mục tiêu</span><h4>Kết quả cuối cùng phải là gì?</h4><p>Phải nêu như một sản phẩm, không phải một chủ đề. Không phải "giúp tôi soạn bài" mà là "kế hoạch 90 phút với ba chuẩn đầu ra đo được, một hoạt động và một bài quiz năm câu".</p></div></div>
+      <div class="check-item"><span class="rn">3</span><div><span class="stage">Bối cảnh</span><h4>Môn nào, sinh viên nào, tài liệu và ràng buộc gì?</h4><p>Năm học, kiến thức nền, sĩ số, phòng học, thiết bị, ngôn ngữ, và chính tài liệu môn học. Đây là thành phần hay bị bỏ sót nhất, và là nguyên nhân của nội dung bịa.</p></div></div>
+      <div class="check-item"><span class="rn">4</span><div><span class="stage">Quy trình</span><h4>Những bước nào, theo thứ tự nào?</h4><p>Đánh số rõ. Phân tích trước khi tạo, tạo trước khi kiểm, kiểm trước khi sửa. Chính thứ tự này biến nó thành agent.</p></div></div>
+      <div class="check-item"><span class="rn">5</span><div><span class="stage">Tiêu chí kiểm tra</span><h4>Nó tự đánh giá kết quả bằng cách nào?</h4><p>Những phép thử cụ thể nó chạy được trên bản nháp: mọi hoạt động có gắn với một chuẩn đầu ra không? tổng thời lượng có khớp không? có câu hỏi nào có hai đáp án đều bảo vệ được không?</p></div></div>
+      <div class="check-item"><span class="rn">6</span><div><span class="stage">Rào chắn</span><h4>Nó phải tránh, từ chối hay chuyển tiếp điều gì?</h4><p>Không bịa quy định, không bịa trích dẫn, không chấm điểm cuối cùng, không ra quyết định về từng sinh viên. Viết thành mệnh lệnh, chứ không phải kỳ vọng.</p></div></div>
+    </div>
+  </section>
+
+    <div class="note tip" lang="en">
+      <span class="note-tag">And a seventh thing, once you go further</span>
+      Learning outcome 2 also mentions <strong>tools</strong> — what the agent can reach beyond the text you
+      typed: a document you upload, a spreadsheet it fills in, a connector into Gmail. That is a module of
+      its own, because it changes the risks as well as the powers:
+      <a href="tools.html">Tools, connectors and documents</a>.
+    </div>
+    <div class="note tip" lang="vi">
+      <span class="note-tag">Và một thứ thứ bảy, khi bạn đi xa hơn</span>
+      Chuẩn đầu ra 2 còn nhắc tới <strong>công cụ</strong> — những gì agent với tới được ngoài đoạn văn bản bạn
+      gõ: một tài liệu bạn tải lên, một bảng tính nó điền, một connector vào Gmail. Đó là một học phần riêng,
+      vì nó thay đổi cả rủi ro lẫn năng lực:
+      <a href="tools.html">Công cụ, connector và tài liệu</a>.
+    </div>
+
+  <section class="block" id="loop">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">03 · The shape</span>
+      <span class="eyebrow" lang="vi">03 · Hình dạng</span>
+      <h2 lang="en">The workflow loop</h2>
+      <h2 lang="vi">Vòng lặp quy trình</h2>
+    </div>
+    <div class="concept wide" lang="en">
+      <p>Written as one line, the workflow every agent in this workshop follows is:</p>
+      <pre class="codeblock">receive goal → inspect course context → plan → produce output → verify → revise → request lecturer approval</pre>
+      <p>Two of those seven steps do the work that a chatbot never does on its own. <strong>Verify</strong>
+        is where the agent tests its draft against the checks you wrote. <strong>Revise</strong> is where
+        it fixes what failed before you ever see it. Remove those two and you are back to a long prompt.</p>
+      <p>The seventh step matters just as much and is not a formality: the agent's output is a
+        <em>proposal</em>. Nothing here decides anything about a student.</p>
+    </div>
+    <div class="concept wide" lang="vi">
+      <p>Viết gọn thành một dòng, quy trình mà mọi agent trong buổi này đi theo là:</p>
+      <pre class="codeblock">nhận mục tiêu → đọc bối cảnh môn học → lập kế hoạch → tạo kết quả → kiểm tra → chỉnh sửa → xin giảng viên phê duyệt</pre>
+      <p>Hai trong bảy bước ấy làm phần việc mà chatbot không bao giờ tự làm. <strong>Kiểm tra</strong> là lúc
+        agent đối chiếu bản nháp với những tiêu chí bạn đã viết. <strong>Chỉnh sửa</strong> là lúc nó vá những
+        chỗ chưa đạt trước khi bạn nhìn thấy. Bỏ hai bước này đi, bạn quay lại với một prompt dài.</p>
+      <p>Bước thứ bảy quan trọng không kém và không phải thủ tục hình thức: kết quả của agent là một
+        <em>đề xuất</em>. Không có gì ở đây quyết định điều gì về một sinh viên.</p>
+    </div>
+  </section>
+
+  <section class="block" id="suitable">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">04 · The boundary</span>
+      <span class="eyebrow" lang="vi">04 · Ranh giới</span>
+      <h2 lang="en">What to delegate, and what not to</h2>
+      <h2 lang="vi">Nên giao việc gì, và không nên giao việc gì</h2>
+      <p lang="en">The test is not difficulty. It is whether the task has a checkable answer and whether being
+        wrong is recoverable.</p>
+      <p lang="vi">Tiêu chí không phải là độ khó. Tiêu chí là công việc đó có đáp án kiểm chứng được không, và
+        nếu sai thì có sửa lại được không.</p>
+    </div>
+    <div class="compare" lang="en">
+      <div class="cmp good">
+        <span class="cmp-tag">Suits an agent</span>
+        <h4>Repetitive reasoning with a checkable result</h4>
+        <ul>
+          <li>Drafting a lesson plan against stated outcomes</li>
+          <li>Generating examples, analogies, and counter-examples</li>
+          <li>Writing quiz items and their answer keys</li>
+          <li>Turning a marking guide into an analytic rubric</li>
+          <li>First-pass formative feedback on a draft</li>
+          <li>Answering the same syllabus question for the fortieth time</li>
+          <li>Checking outcome–activity–assessment alignment</li>
+          <li>Summarizing and reformatting your own material</li>
+        </ul>
+      </div>
+      <div class="cmp">
+        <span class="cmp-tag">Does not suit an agent</span>
+        <h4>Judgement with consequences for a person</h4>
+        <ul>
+          <li>Deciding a final grade</li>
+          <li>Deciding whether misconduct occurred</li>
+          <li>Disciplinary decisions of any kind</li>
+          <li>Granting extensions or special accommodations</li>
+          <li>Resolving a grade appeal</li>
+          <li>Counselling a student in difficulty</li>
+          <li>Anything requiring facts you have not supplied</li>
+          <li>Anything you would not be willing to defend in writing</li>
+        </ul>
+      </div>
+    </div>
+    <div class="compare" lang="vi">
+      <div class="cmp good">
+        <span class="cmp-tag">Hợp với agent</span>
+        <h4>Tư duy lặp lại, kết quả kiểm chứng được</h4>
+        <ul>
+          <li>Soạn kế hoạch bài giảng bám theo chuẩn đầu ra đã nêu</li>
+          <li>Tạo ví dụ, phép so sánh và phản ví dụ</li>
+          <li>Viết câu hỏi quiz kèm đáp án</li>
+          <li>Chuyển hướng dẫn chấm thành rubric phân tích</li>
+          <li>Phản hồi quá trình vòng đầu cho một bản nháp</li>
+          <li>Trả lời cùng một câu hỏi về đề cương lần thứ bốn mươi</li>
+          <li>Kiểm tra tính tương thích chuẩn đầu ra – hoạt động – đánh giá</li>
+          <li>Tóm tắt và định dạng lại chính tài liệu của bạn</li>
+        </ul>
+      </div>
+      <div class="cmp">
+        <span class="cmp-tag">Không hợp với agent</span>
+        <h4>Phán quyết có hệ quả với một con người</h4>
+        <ul>
+          <li>Quyết định điểm số cuối cùng</li>
+          <li>Kết luận có gian lận học thuật hay không</li>
+          <li>Mọi quyết định kỷ luật</li>
+          <li>Cho gia hạn hay hỗ trợ đặc biệt</li>
+          <li>Giải quyết phúc khảo điểm</li>
+          <li>Tư vấn cho sinh viên đang gặp khó khăn</li>
+          <li>Bất cứ việc gì cần dữ kiện mà bạn chưa cung cấp</li>
+          <li>Bất cứ việc gì bạn không sẵn sàng bảo vệ bằng văn bản</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note danger" lang="en">
+      <span class="note-tag">The line, stated once</span>
+      An agent may <strong>suggest</strong> a grade band, a pattern across scripts, or a policy reading.
+      The lecturer decides. Every template in this workshop writes that refusal into the agent's own
+      instructions, so the tool declines rather than obliges.
+    </div>
+    <div class="note danger" lang="vi">
+      <span class="note-tag">Ranh giới, nói một lần cho rõ</span>
+      Agent có thể <strong>gợi ý</strong> một khung điểm, một xu hướng chung qua nhiều bài, hay một cách hiểu
+      quy định. Người quyết định là giảng viên. Mọi mẫu trong buổi tập huấn này đều viết lời từ chối đó vào
+      chính hướng dẫn của agent, để công cụ từ chối thay vì chiều theo.
+    </div>
+  </section>
+
+  <section class="block" id="demo">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">05 · Instructor demonstration · 00:25–00:35</span>
+      <span class="eyebrow" lang="vi">05 · Phần demo của giảng viên · 00:25–00:35</span>
+      <h2 lang="en">The same lesson, asked two ways</h2>
+      <h2 lang="vi">Cùng một bài giảng, hỏi theo hai cách</h2>
+      <p lang="en">Watch what changes. It is not the length of the request — it is that the second one contains a
+        workflow and a quality-control loop.</p>
+      <p lang="vi">Hãy để ý điều gì thay đổi. Không phải độ dài của yêu cầu — mà là cách thứ hai có quy trình và
+        có vòng kiểm soát chất lượng.</p>
+    </div>
+
+    <div class="compare" lang="en">
+      <div class="cmp">
+        <span class="cmp-tag">Weak request</span>
+        <h4>One line, no context</h4>
+        <pre class="codeblock">Create a lecture about software testing.</pre>
+        <p>What comes back is plausible, generic, and unusable without an hour of editing: outcomes that
+          cannot be measured, a timing plan that ignores your 90 minutes, examples pitched at the wrong
+          year, and no way to tell which parts were invented.</p>
+      </div>
+      <div class="cmp good">
+        <span class="cmp-tag">Agent workflow</span>
+        <h4>Six components, seven steps</h4>
+        <p>The version below is the demonstration prompt. Copy it, run it in your own tool, and compare
+          the result with the one-liner above — that comparison <em>is</em> the demonstration.</p>
+        <p>Notice steps 4 and 5: the agent is told to check its own draft before presenting it, and
+          step 6 tells it what to do with what it finds.</p>
+      </div>
+    </div>
+    <div class="compare" lang="vi">
+      <div class="cmp">
+        <span class="cmp-tag">Yêu cầu sơ sài</span>
+        <h4>Một dòng, không bối cảnh</h4>
+        <pre class="codeblock">Soạn cho tôi một bài giảng về kiểm thử phần mềm.</pre>
+        <p>Thứ nhận về nghe hợp lý, chung chung, và không dùng được nếu không sửa cả tiếng: chuẩn đầu ra không
+          đo được, phân bổ thời gian bỏ qua 90 phút của bạn, ví dụ sai trình độ, và không có cách nào biết
+          phần nào là bịa.</p>
+      </div>
+      <div class="cmp good">
+        <span class="cmp-tag">Quy trình agent</span>
+        <h4>Sáu thành phần, bảy bước</h4>
+        <p>Bản dưới đây là prompt dùng để demo. Hãy sao chép, chạy trong công cụ của bạn, rồi so kết quả với
+          câu một dòng phía trên — chính phép so sánh đó <em>là</em> phần demo.</p>
+        <p>Để ý bước 4 và 5: agent được yêu cầu tự kiểm bản nháp trước khi trình bày, còn bước 6 nói cho nó
+          biết phải làm gì với những lỗi vừa tìm ra.</p>
+      </div>
+    </div>
+
+    <div class="tpl">
+      <div class="tpl-bar">
+        <span class="tpl-name" lang="en">demonstration · lesson-preparation agent</span>
+        <span class="tpl-name" lang="vi">demo · agent soạn bài giảng</span>
+        <button class="copy-btn" type="button" data-i18n="btn.copy">Copy</button>
+      </div>
+      <pre class="codeblock" lang="en">You are a university teaching-design agent.
+
+COURSE:
+Introduction to Software Engineering
+
+STUDENTS:
+Second-year undergraduate students with basic programming knowledge.
+
+LESSON TOPIC:
+Unit testing and test-case design.
+
+DURATION:
+90 minutes.
+
+GOAL:
+Prepare an active-learning lesson that helps students explain unit testing,
+write basic test cases, and identify weak test cases.
+
+WORKFLOW:
+1. Analyse the lesson topic and intended learning outcomes.
+2. Propose three measurable learning outcomes.
+3. Design a 90-minute lesson with explanation, examples, student activities,
+   and formative assessment.
+4. Check whether every activity supports at least one learning outcome.
+5. Identify content that may be too difficult for the students.
+6. Revise the lesson after completing the checks.
+
+OUTPUT:
+A. Learning outcomes
+B. Timed lesson agenda
+C. Worked example
+D. Group activity
+E. Five-question formative quiz with answers
+F. Alignment table
+G. Assumptions and issues requiring lecturer verification
+
+GUARDRAILS:
+- Do not invent course policies.
+- Clearly identify assumptions.
+- Do not include unverifiable references.
+- The lecturer must approve all final teaching and assessment materials.</pre>
+      <pre class="codeblock" lang="vi">Bạn là một agent thiết kế bài giảng đại học.
+
+MÔN HỌC:
+Nhập môn Công nghệ phần mềm
+
+SINH VIÊN:
+Sinh viên đại học năm hai, đã có kiến thức lập trình cơ bản.
+
+CHỦ ĐỀ BÀI HỌC:
+Kiểm thử đơn vị và thiết kế ca kiểm thử.
+
+THỜI LƯỢNG:
+90 phút.
+
+MỤC TIÊU:
+Soạn một bài học theo hướng học chủ động, giúp sinh viên giải thích được kiểm thử
+đơn vị, viết được ca kiểm thử cơ bản, và nhận ra ca kiểm thử yếu.
+
+QUY TRÌNH:
+1. Phân tích chủ đề bài học và chuẩn đầu ra dự kiến.
+2. Đề xuất ba chuẩn đầu ra đo được.
+3. Thiết kế bài học 90 phút gồm phần giảng giải, ví dụ, hoạt động cho sinh viên
+   và bài đánh giá quá trình.
+4. Kiểm tra xem mỗi hoạt động có phục vụ ít nhất một chuẩn đầu ra hay không.
+5. Chỉ ra nội dung có thể quá khó với sinh viên.
+6. Chỉnh sửa lại bài học sau khi hoàn tất các bước kiểm tra.
+
+KẾT QUẢ ĐẦU RA:
+A. Chuẩn đầu ra của bài học
+B. Kịch bản buổi học theo thời gian
+C. Ví dụ có lời giải
+D. Hoạt động nhóm
+E. Bài quiz đánh giá quá trình năm câu kèm đáp án
+F. Bảng đối chiếu
+G. Các giả định và vấn đề cần giảng viên kiểm chứng
+
+RÀO CHẮN AN TOÀN:
+- Không bịa ra quy định của môn học.
+- Nêu rõ mọi giả định.
+- Không đưa vào tài liệu tham khảo không kiểm chứng được.
+- Giảng viên phải phê duyệt mọi tài liệu giảng dạy và đánh giá cuối cùng.</pre>
+    </div>
+
+    <div class="note tip" lang="en">
+      <span class="note-tag">What to watch for in the demonstration</span>
+      Section G is the tell. A chatbot answer has no equivalent of "here is what I assumed and what you
+      need to verify" — it presents everything with the same confidence. An agent that reports its own
+      uncertainty is one you can actually supervise.
+    </div>
+    <div class="note tip" lang="vi">
+      <span class="note-tag">Điều cần để ý trong phần demo</span>
+      Mục G mới là điểm mấu chốt. Câu trả lời của chatbot không có phần "đây là những gì tôi giả định và
+      những gì bạn cần kiểm chứng" — nó trình bày mọi thứ với cùng một giọng chắc chắn. Một agent biết báo cáo
+      mức chưa chắc chắn của chính nó mới là agent bạn giám sát được.
+    </div>
+  </section>
+
+  <section class="block" id="quiz">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">06 · Two minutes</span>
+      <span class="eyebrow" lang="vi">06 · Hai phút</span>
+      <h2 lang="en">Self-check</h2>
+      <h2 lang="vi">Tự kiểm tra</h2>
+    </div>
+    <div class="concept wide" lang="en">
+      <p>Not graded, not submitted anywhere — a quick check that the distinction landed before you start
+        building.</p>
+    </div>
+    <div class="concept wide" lang="vi">
+      <p>Không tính điểm, không nộp đi đâu cả — chỉ là một phép kiểm tra nhanh xem cách phân biệt đã rõ chưa
+        trước khi bạn bắt tay vào xây.</p>
+    </div>
+    <div class="quiz-block">
+      <!-- QUIZ -->
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question" lang="en">1. What makes a request &quot;agentic&quot; rather than merely long?</p>
+        <p class="quiz-question" lang="vi">1. Điều gì khiến một yêu cầu mang tính &quot;agent&quot; chứ không chỉ là dài?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">It sets out steps whose later stages check the earlier ones</button>
+          <button class="quiz-opt" type="button">It attaches the course documents alongside the request</button>
+          <button class="quiz-opt" type="button">It assigns the model a specific professional role to play</button>
+          <button class="quiz-opt" type="button">It runs to completion without any human involvement</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Nó nêu các bước mà bước sau kiểm tra lại bước trước</button>
+          <button class="quiz-opt" type="button">Nó đính kèm tài liệu môn học cùng với yêu cầu đó</button>
+          <button class="quiz-opt" type="button">Nó giao cho mô hình một vai trò chuyên môn cụ thể</button>
+          <button class="quiz-opt" type="button">Nó chạy đến khi xong mà không cần con người can thiệp</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Role and documents both help, and autonomy is not required at all. The defining feature is the sequence in which the agent produces something and then evaluates and revises it before you see it." data-explain-vi="Vai trò và tài liệu đều có ích, còn tính tự động thì không bắt buộc. Đặc điểm định nghĩa là trình tự trong đó agent tạo ra kết quả rồi tự đánh giá và chỉnh sửa trước khi bạn nhìn thấy."></p>
+      </div>
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question" lang="en">2. Your agent invents a late-submission penalty that is not in your syllabus. Which component failed first?</p>
+        <p class="quiz-question" lang="vi">2. Agent của bạn bịa ra một mức phạt nộp trễ không có trong đề cương. Thành phần nào hỏng trước tiên?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Role — it was not told to act as a course-support agent</button>
+          <button class="quiz-opt" type="button">Context — it had no authoritative source, so it guessed</button>
+          <button class="quiz-opt" type="button">Goal — the requested output was not specific enough</button>
+          <button class="quiz-opt" type="button">Workflow — it produced its answer in the wrong order</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Vai trò — nó chưa được giao làm agent hỗ trợ môn học</button>
+          <button class="quiz-opt" type="button">Bối cảnh — nó không có nguồn chính thức nên tự đoán</button>
+          <button class="quiz-opt" type="button">Mục tiêu — kết quả được yêu cầu chưa đủ cụ thể rõ ràng</button>
+          <button class="quiz-opt" type="button">Quy trình — nó tạo ra câu trả lời sai thứ tự các bước</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Ungrounded questions get plausible inventions. Supplying the policy text is the fix; a guardrail that makes it say &quot;not specified in the supplied materials&quot; is the safety net." data-explain-vi="Câu hỏi không nguồn thì nhận về thứ bịa nghe hợp lý. Cách sửa là cung cấp chính văn bản quy định; rào chắn buộc nó nói &quot;không có trong tài liệu được cung cấp&quot; là lưới an toàn."></p>
+      </div>
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question" lang="en">3. Which task is the poorest fit for an agent, even a well-designed one?</p>
+        <p class="quiz-question" lang="vi">3. Việc nào ít phù hợp nhất với agent, kể cả agent được thiết kế tốt?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Turning a marking guide into a four-level analytic rubric</button>
+          <button class="quiz-opt" type="button">Drafting five formative quiz questions with their answers</button>
+          <button class="quiz-opt" type="button">Deciding whether a student's late work should be penalised</button>
+          <button class="quiz-opt" type="button">Checking that each activity supports a learning outcome</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Chuyển hướng dẫn chấm thành rubric phân tích bốn mức</button>
+          <button class="quiz-opt" type="button">Soạn năm câu hỏi quiz đánh giá quá trình kèm đáp án</button>
+          <button class="quiz-opt" type="button">Quyết định có phạt bài nộp trễ của một sinh viên</button>
+          <button class="quiz-opt" type="button">Kiểm tra mỗi hoạt động có phục vụ một chuẩn đầu ra</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The first three have checkable results and recoverable errors. The fourth is a decision about a specific person with consequences — it belongs to the lecturer." data-explain-vi="Ba việc đầu có kết quả kiểm chứng được và sai thì sửa được. Việc thứ tư là quyết định về một con người cụ thể và có hệ quả — nó thuộc về giảng viên."></p>
+      </div>
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question" lang="en">4. Your agent produces a fine lesson plan citing a paper that does not exist. What is the most useful change?</p>
+        <p class="quiz-question" lang="vi">4. Agent tạo ra một kế hoạch bài giảng tốt nhưng trích dẫn một bài báo không tồn tại. Sửa thế nào là hữu ích nhất?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Shorten the request so there is much less for it to invent</button>
+          <button class="quiz-opt" type="button">Ask it to be considerably more accurate on the next attempt</button>
+          <button class="quiz-opt" type="button">Switch to a larger, newer and more expensive model version</button>
+          <button class="quiz-opt" type="button">Ban citations and label each claim by how well it is supported</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Rút ngắn yêu cầu để nó có ít chỗ hơn nhiều để bịa ra</button>
+          <button class="quiz-opt" type="button">Dặn nó lần sau hãy chính xác hơn đáng kể so với lần này</button>
+          <button class="quiz-opt" type="button">Đổi sang phiên bản mô hình lớn hơn, mới hơn và đắt hơn</button>
+          <button class="quiz-opt" type="button">Cấm trích dẫn và gán nhãn mức căn cứ cho từng khẳng định</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="&quot;Be accurate&quot; is not an instruction a model can act on. Forbid what it cannot verify, and require it to sort its claims by how well they are supported." data-explain-vi="&quot;Hãy chính xác&quot; không phải chỉ dẫn mà mô hình thực thi được. Hãy cấm những gì nó không kiểm chứng được, và buộc nó phân loại khẳng định theo mức độ có nguồn."></p>
+      </div>
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question" lang="en">5. In this workshop's terms, what marks a tool as an assistant rather than an agent?</p>
+        <p class="quiz-question" lang="vi">5. Theo cách phân biệt của buổi tập huấn này, điều gì cho thấy một công cụ là trợ lý chứ không phải agent?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">You still decide each next step and judge the output</button>
+          <button class="quiz-opt" type="button">It answers one message and then forgets everything</button>
+          <button class="quiz-opt" type="button">It checks its own draft before it shows you anything</button>
+          <button class="quiz-opt" type="button">It refuses any task that involves student records</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Bạn vẫn quyết định từng bước và tự đánh giá kết quả</button>
+          <button class="quiz-opt" type="button">Nó trả lời một tin nhắn rồi quên sạch mọi thứ đã nói</button>
+          <button class="quiz-opt" type="button">Nó tự kiểm bản nháp trước khi đưa thứ gì đó cho bạn</button>
+          <button class="quiz-opt" type="button">Nó từ chối mọi việc có liên quan đến hồ sơ sinh viên</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="An assistant carries context across a sequence of tasks, but you direct every step and you do all the quality control. An agent takes over part of that judging." data-explain-vi="Trợ lý giữ được bối cảnh qua một chuỗi việc, nhưng bạn điều khiển từng bước và bạn làm toàn bộ khâu kiểm soát chất lượng. Agent gánh bớt phần đánh giá đó."></p>
+      </div>
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question" lang="en">6. Which pair of steps does a chatbot never perform on its own?</p>
+        <p class="quiz-question" lang="vi">6. Cặp bước nào mà chatbot không bao giờ tự thực hiện?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Analysing the topic and listing prior knowledge</button>
+          <button class="quiz-opt" type="button">Verifying the draft and revising what failed it</button>
+          <button class="quiz-opt" type="button">Producing the output and formatting it neatly</button>
+          <button class="quiz-opt" type="button">Receiving the goal and restating it back to you</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Phân tích chủ đề và liệt kê kiến thức có trước</button>
+          <button class="quiz-opt" type="button">Kiểm tra bản nháp và sửa những chỗ chưa đạt</button>
+          <button class="quiz-opt" type="button">Tạo ra kết quả và trình bày cho gọn gàng đẹp mắt</button>
+          <button class="quiz-opt" type="button">Nhận mục tiêu và nhắc lại mục tiêu đó cho bạn</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Verify and revise are the two steps that turn generation into a process. Remove them and a long, careful prompt is still only a prompt." data-explain-vi="Kiểm tra và chỉnh sửa là hai bước biến việc sinh nội dung thành một quy trình. Bỏ chúng đi thì một prompt dài và kỹ vẫn chỉ là một prompt."></p>
+      </div>
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question" lang="en">7. Which of these learning outcomes is actually measurable?</p>
+        <p class="quiz-question" lang="vi">7. Chuẩn đầu ra nào dưới đây thực sự đo được?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Students will understand the basic principles of recursion</button>
+          <button class="quiz-opt" type="button">Students will appreciate why testing matters to a team</button>
+          <button class="quiz-opt" type="button">Students will trace a recursive call and predict its output</button>
+          <button class="quiz-opt" type="button">Students will be familiar with common testing techniques</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Sinh viên sẽ hiểu được các nguyên lý cơ bản của đệ quy</button>
+          <button class="quiz-opt" type="button">Sinh viên sẽ thấy được vì sao kiểm thử lại quan trọng</button>
+          <button class="quiz-opt" type="button">Sinh viên sẽ lần theo lời gọi đệ quy và dự đoán kết quả</button>
+          <button class="quiz-opt" type="button">Sinh viên sẽ quen thuộc với các phương pháp kiểm thử</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Understand, appreciate and be familiar with cannot be observed. Trace and predict describe something a student visibly does, so two markers can agree." data-explain-vi="Hiểu, thấy được và quen thuộc đều không quan sát được. Lần theo và dự đoán mô tả việc sinh viên làm ra được, nên hai người chấm có thể thống nhất."></p>
+      </div>
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question" lang="en">8. Guardrails belong in an agent's design as which of these?</p>
+        <p class="quiz-question" lang="vi">8. Rào chắn an toàn nằm ở đâu trong thiết kế một agent?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Warnings you add afterwards once something goes wrong</button>
+          <button class="quiz-opt" type="button">General hopes about how the agent will likely behave</button>
+          <button class="quiz-opt" type="button">Notes you keep for yourself and never send to the tool</button>
+          <button class="quiz-opt" type="button">Instructions the agent must follow, stated explicitly</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Cảnh báo bạn thêm vào sau khi đã có sự cố xảy ra rồi</button>
+          <button class="quiz-opt" type="button">Kỳ vọng chung về cách agent nhiều khả năng sẽ hành xử</button>
+          <button class="quiz-opt" type="button">Ghi chú bạn giữ cho riêng mình và không gửi cho nó</button>
+          <button class="quiz-opt" type="button">Mệnh lệnh agent bắt buộc phải theo, nêu ra tường minh</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="A guardrail that lives only in your head is not a guardrail. Written into the instructions, it is what makes the tool decline rather than oblige when pushed." data-explain-vi="Rào chắn chỉ nằm trong đầu bạn thì không phải rào chắn. Khi được viết vào hướng dẫn, nó chính là thứ khiến công cụ từ chối thay vì chiều theo khi bị ép."></p>
+      </div>
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question" lang="en">9. Why is the final &quot;request lecturer approval&quot; step not a formality?</p>
+        <p class="quiz-question" lang="vi">9. Vì sao bước cuối &quot;xin giảng viên phê duyệt&quot; không phải thủ tục hình thức?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Because the agent's output is a proposal, not a decision</button>
+          <button class="quiz-opt" type="button">Because the platform requires approval before it can save</button>
+          <button class="quiz-opt" type="button">Because approval makes the agent run faster the next time</button>
+          <button class="quiz-opt" type="button">Because students need to see that a human was involved</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Vì kết quả của agent là một đề xuất, không phải quyết định</button>
+          <button class="quiz-opt" type="button">Vì nền tảng bắt buộc phải phê duyệt thì mới lưu lại được</button>
+          <button class="quiz-opt" type="button">Vì việc phê duyệt giúp agent chạy nhanh hơn ở những lần sau</button>
+          <button class="quiz-opt" type="button">Vì sinh viên cần thấy rằng có con người tham gia vào việc này</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The step exists because nothing the agent produces decides anything about a student. It is a proposal until a person with responsibility accepts it." data-explain-vi="Bước này tồn tại vì không thứ gì agent tạo ra quyết định điều gì về một sinh viên. Nó chỉ là đề xuất cho tới khi một người có trách nhiệm chấp nhận."></p>
+      </div>
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question" lang="en">10. Which missing component most often causes invented content?</p>
+        <p class="quiz-question" lang="vi">10. Thiếu thành phần nào thường gây ra nội dung bịa nhất?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">The role component — no expertise had been specified</button>
+          <button class="quiz-opt" type="button">The context component — it had no real course material</button>
+          <button class="quiz-opt" type="button">The output component — the required format was unclear</button>
+          <button class="quiz-opt" type="button">The goal component — the aim was left far too broad</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Thành phần vai trò — chưa hề chỉ định chuyên môn cho nó</button>
+          <button class="quiz-opt" type="button">Thành phần bối cảnh — nó không có tài liệu môn học thật</button>
+          <button class="quiz-opt" type="button">Thành phần đầu ra — định dạng cần có chưa được nêu rõ</button>
+          <button class="quiz-opt" type="button">Thành phần mục tiêu — mục đích bị để quá rộng quá chung</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Content gets invented where grounding is absent. The other three produce output that is vague, badly shaped or off-target, but not usually fabricated." data-explain-vi="Nội dung bị bịa ở chỗ thiếu nguồn. Ba thành phần còn lại tạo ra kết quả mơ hồ, sai hình dạng hoặc lệch trọng tâm, nhưng thường không phải bịa đặt."></p>
+      </div>
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question" lang="en">11. Which of these tasks suits an agent best?</p>
+        <p class="quiz-question" lang="vi">11. Việc nào dưới đây hợp với agent nhất?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Deciding whether a case counts as academic misconduct</button>
+          <button class="quiz-opt" type="button">Granting a student an extension on documented grounds</button>
+          <button class="quiz-opt" type="button">Checking outcome-to-activity alignment across a plan</button>
+          <button class="quiz-opt" type="button">Resolving a grade appeal lodged against your marking</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Quyết định một vụ việc có phải gian lận học thuật không</button>
+          <button class="quiz-opt" type="button">Cho một sinh viên gia hạn dựa trên minh chứng đã nộp</button>
+          <button class="quiz-opt" type="button">Kiểm tra tính tương thích trong một kế hoạch bài giảng</button>
+          <button class="quiz-opt" type="button">Giải quyết đơn phúc khảo điểm khiếu nại việc bạn chấm</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Alignment checking is repetitive reasoning with a checkable answer and a recoverable error. The other three are decisions about a person with consequences." data-explain-vi="Kiểm tra tính tương thích là tư duy lặp lại, có đáp án kiểm chứng được và sai thì sửa được. Ba việc kia là quyết định về một con người và có hệ quả."></p>
+      </div>
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question" lang="en">12. What does &quot;an agent need not run autonomously&quot; mean in practice here?</p>
+        <p class="quiz-question" lang="vi">12. Câu &quot;agent không nhất thiết phải chạy tự động&quot; nghĩa là gì trên thực tế?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">The agent will pause by itself whenever it is uncertain</button>
+          <button class="quiz-opt" type="button">Autonomy is available only on the paid subscription tiers</button>
+          <button class="quiz-opt" type="button">You must approve every message the agent sends back to you</button>
+          <button class="quiz-opt" type="button">A structured prompt with a check loop already qualifies</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Agent sẽ tự dừng lại mỗi khi nó cảm thấy chưa chắc chắn</button>
+          <button class="quiz-opt" type="button">Tính tự động chỉ có ở các gói thuê bao trả phí cao cấp</button>
+          <button class="quiz-opt" type="button">Bạn phải phê duyệt từng tin nhắn mà agent gửi lại cho bạn</button>
+          <button class="quiz-opt" type="button">Một prompt có cấu trúc kèm vòng kiểm tra đã đủ tính agent</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Nothing in this workshop needs an API, a subscription or code. Writing the plan-check-revise loop into an ordinary prompt is already an agentic workflow." data-explain-vi="Không phần nào trong buổi tập huấn này cần API, thuê bao hay code. Viết vòng lập kế hoạch – kiểm tra – chỉnh sửa vào một prompt thường đã là quy trình agent."></p>
+      </div>
+      <!-- /QUIZ -->
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="index.html"><span class="dir" data-i18n="nav.back">← Back</span><span data-i18n="nav.overview">Overview</span></a>
+    <a href="exercises/ex1-lesson.html" class="next"><span class="dir" data-i18n="nav.next">Next →</span><span lang="en">Exercise 1 · Lesson Preparation Agent</span><span lang="vi">Bài 1 · Agent soạn bài giảng</span></a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>AI Agents</b> · for Lecturers</span>
+    <p data-i18n="foot.subtitle">Practical AI Agents for University Lecturers: Designing Safe and Effective Workflows for Teaching, Assessment, and Student Support</p>
+  </div>
+</footer>
+
+<script src="assets/i18n.js"></script>
+<script src="assets/course.js"></script>
+<script src="assets/workshop.js"></script>
+<script src="assets/quiz.js"></script>
+</body>
+</html>

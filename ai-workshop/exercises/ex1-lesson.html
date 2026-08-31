@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exercise 1 · Lesson Preparation Agent</title>
+<meta name="title-en" content="Exercise 1 · Lesson Preparation Agent">
+<meta name="title-vi" content="Bài 1 · Agent soạn bài giảng">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Build an agent that prepares one lesson and checks the alignment between learning outcomes, activities, and assessment.">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('agentws-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+    if (localStorage.getItem('agentws-language') === 'vi') document.documentElement.dataset.lang = 'vi';
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../index.html"><b>AI Agents</b> · for Lecturers</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../index.html" class="always" data-i18n="nav.overview">Overview</a>
+      <a href="../concepts.html" data-i18n="nav.concepts">Concepts</a>
+      <a href="ex1-lesson.html" aria-current="page" data-i18n="nav.exercises">Exercises</a>
+      <a href="../tools.html" data-i18n="nav.tools">Tools &amp; data</a>
+      <a href="../platforms.html" data-i18n="nav.platforms">Platforms</a>
+      <a href="../responsible.html" data-i18n="nav.responsible">Responsible use</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="lang-toggle" type="button">VI</button>
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4 data-i18n="side.site">Site</h4>
+  <nav aria-label="Site">
+    <a href="../index.html" data-i18n="nav.overview">Overview</a>
+    <a href="../concepts.html" data-i18n="nav.concepts">Concepts</a>
+    <a href="ex1-lesson.html" aria-current="page" data-i18n="nav.ex1">Exercise 1 · Lesson</a>
+    <a href="ex2-assessment.html" data-i18n="nav.ex2">Exercise 2 · Assessment</a>
+    <a href="ex3-support.html" data-i18n="nav.ex3">Exercise 3 · Support</a>
+    <a href="../tools.html" data-i18n="nav.tools">Tools &amp; data</a>
+    <a href="../platforms.html" data-i18n="nav.platforms">Platforms</a>
+    <a href="../responsible.html" data-i18n="nav.responsible">Responsible use</a>
+  </nav>
+  <h4 data-i18n="side.onpage">On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#prepare"><span lang="en">What to have ready</span><span lang="vi">Cần chuẩn bị gì</span></a>
+    <a href="#build"><span lang="en">Build the agent</span><span lang="vi">Xây agent</span></a>
+    <a href="#template"><span lang="en">Plain template</span><span lang="vi">Mẫu dạng chữ</span></a>
+    <a href="#evaluate"><span lang="en">Evaluate the result</span><span lang="vi">Đánh giá kết quả</span></a>
+    <a href="#review"><span lang="en">Pair review</span><span lang="vi">Rà soát theo cặp</span></a>
+    <a href="#deliverable"><span lang="en">Deliverable</span><span lang="vi">Sản phẩm</span></a>
+    <a href="#quiz"><span lang="en">Self-check</span><span lang="vi">Tự kiểm tra</span></a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow" lang="en">Exercise 1 · 00:35–00:55 · 20 minutes, then 10 minutes of pair review</span>
+      <span class="eyebrow" lang="vi">Bài 1 · 00:35–00:55 · 20 phút, sau đó 10 phút rà soát theo cặp</span>
+      <h1 lang="en">Lesson Preparation Agent</h1>
+      <h1 lang="vi">Agent soạn bài giảng</h1>
+      <p class="lede" lang="en">Build an agent that prepares one real lesson from your own course — and, more
+        importantly, checks its own draft for the thing that usually goes wrong: activities that do not
+        actually serve the learning outcomes, and a plan that does not fit the time you have.</p>
+      <p class="lede" lang="vi">Xây một agent soạn một buổi học có thật trong môn của bạn — và quan trọng hơn,
+        biết tự soi bản nháp để tìm lỗi thường gặp nhất: hoạt động không thật sự phục vụ chuẩn đầu ra, và
+        kế hoạch không vừa với thời lượng bạn có.</p>
+      <div class="meta-chips" lang="en">
+        <a class="chip" href="#build">Interactive builder</a>
+        <a class="chip" href="#evaluate">7-point checklist</a>
+        <a class="chip" href="#review">Adversarial review</a>
+      </div>
+      <div class="meta-chips" lang="vi">
+        <a class="chip" href="#build">Trình dựng tương tác</a>
+        <a class="chip" href="#evaluate">Danh mục 7 điểm</a>
+        <a class="chip" href="#review">Rà soát phản biện</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="prepare">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">01 · Before you start</span>
+      <span class="eyebrow" lang="vi">01 · Trước khi bắt đầu</span>
+      <h2 lang="en">Choose one upcoming lesson</h2>
+      <h2 lang="vi">Chọn một buổi học sắp tới</h2>
+      <p lang="en">Not a hypothetical one. Pick a topic you are actually teaching in the next few weeks — the
+        exercise is worth twenty minutes only if you keep the output.</p>
+      <p lang="vi">Đừng chọn một buổi giả định. Hãy chọn chủ đề bạn thật sự sẽ dạy trong vài tuần tới — bài
+        thực hành này chỉ đáng hai mươi phút nếu bạn giữ lại được kết quả.</p>
+    </div>
+    <div class="concept wide" lang="en">
+      <p>Have these to hand. Anything you leave blank, the agent will invent:</p>
+      <ul>
+        <li><strong>Course name</strong> and student year level</li>
+        <li><strong>Topic</strong> for this one session</li>
+        <li><strong>Class duration</strong> in minutes</li>
+        <li><strong>Existing learning outcomes</strong>, if the course already has them</li>
+        <li><strong>Teaching constraints</strong> — class size, room, technology, language</li>
+        <li><strong>Preferred teaching style</strong> and any materials you already use</li>
+      </ul>
+    </div>
+    <div class="concept wide" lang="vi">
+      <p>Hãy chuẩn bị sẵn những thứ sau. Chỗ nào bạn để trống, agent sẽ tự bịa ra:</p>
+      <ul>
+        <li><strong>Tên môn học</strong> và năm học của sinh viên</li>
+        <li><strong>Chủ đề</strong> của riêng buổi học này</li>
+        <li><strong>Thời lượng buổi học</strong> tính bằng phút</li>
+        <li><strong>Chuẩn đầu ra sẵn có</strong>, nếu môn học đã ban hành</li>
+        <li><strong>Ràng buộc giảng dạy</strong> — sĩ số, phòng học, thiết bị, ngôn ngữ</li>
+        <li><strong>Phong cách giảng dạy ưa dùng</strong> và tài liệu bạn đang dùng</li>
+      </ul>
+    </div>
+    <div class="note tip" lang="en">
+      <span class="note-tag">If you did not bring material</span>
+      Use a topic you know well and state the constraints from memory. The agent's output will be less
+      usable, but the workflow, the checks, and the failure modes are identical — and that is what you
+      are here to see.
+    </div>
+    <div class="note tip" lang="vi">
+      <span class="note-tag">Nếu bạn không mang tài liệu</span>
+      Hãy dùng một chủ đề bạn nắm vững và nêu ràng buộc theo trí nhớ. Kết quả của agent sẽ kém dùng được hơn,
+      nhưng quy trình, các bước kiểm tra và các kiểu lỗi thì y hệt — và đó mới là thứ bạn đến đây để thấy.
+    </div>
+  </section>
+
+  <section class="block" id="build">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">02 · Build it</span>
+      <span class="eyebrow" lang="vi">02 · Bắt tay xây</span>
+      <h2 lang="en">The agent builder</h2>
+      <h2 lang="vi">Trình dựng agent</h2>
+      <p lang="en">Fill in the fields on the left; the finished agent instructions assemble on the right as you
+        type. Anything still <span class="mono" style="color:var(--red)">[in red]</span> is a placeholder
+        the agent will have to guess at. Copy the result into your AI tool when it is complete.</p>
+      <p lang="vi">Điền các ô bên trái; bộ hướng dẫn agent sẽ tự ghép ở bên phải trong lúc bạn gõ. Phần nào còn
+        <span class="mono" style="color:var(--red)">[màu đỏ]</span> là chỗ trống mà agent sẽ phải tự đoán. Khi
+        đã đầy đủ, hãy sao chép kết quả vào công cụ AI của bạn.</p>
+    </div>
+
+    <div class="bld-presets">
+      <a class="bld-preset" href="ex1-lesson.html" aria-pressed="true"><span lang="en">1 · Lesson preparation</span><span lang="vi">1 · Soạn bài giảng</span></a>
+      <a class="bld-preset" href="ex2-assessment.html"><span lang="en">2 · Assessment &amp; feedback</span><span lang="vi">2 · Đánh giá &amp; phản hồi</span></a>
+      <a class="bld-preset" href="ex3-support.html"><span lang="en">3 · Course support</span><span lang="vi">3 · Hỗ trợ môn học</span></a>
+    </div>
+
+    <div class="builder" id="builder" data-preset="lesson">
+      <form class="bld-form" onsubmit="return false">
+        <div class="bld-field">
+          <label for="f-role"><span lang="en">Role</span><span lang="vi">Vai trò</span></label>
+          <input id="f-role" name="role" type="text">
+        </div>
+        <div class="bld-field">
+          <label for="f-course"><span lang="en">Course</span><span lang="vi">Môn học</span></label>
+          <input id="f-course" name="course" type="text">
+        </div>
+        <div class="bld-field">
+          <label for="f-students"><span lang="en">Student profile</span><span lang="vi">Hồ sơ sinh viên</span></label>
+          <textarea id="f-students" name="students" rows="2"></textarea>
+        </div>
+        <div class="bld-field">
+          <label for="f-focus"><span lang="en">Lesson topic</span><span lang="vi">Chủ đề bài học</span></label>
+          <textarea id="f-focus" name="focus" rows="2"></textarea>
+        </div>
+        <div class="bld-field">
+          <label for="f-materials">
+            <span lang="en">Available materials<span class="hint">Paste the syllabus section, textbook chapter, or your notes. This is the field that prevents invented content.</span></span>
+            <span lang="vi">Tài liệu sẵn có<span class="hint">Dán phần đề cương, chương giáo trình hoặc ghi chú của bạn. Đây chính là ô ngăn agent bịa nội dung.</span></span>
+          </label>
+          <textarea id="f-materials" name="materials" rows="4"></textarea>
+        </div>
+        <div class="bld-field">
+          <label for="f-constraints">
+            <span lang="en">Constraints<span class="hint">Duration, class size, technology, room, format.</span></span>
+            <span lang="vi">Ràng buộc<span class="hint">Thời lượng, sĩ số, thiết bị, phòng học, hình thức lớp.</span></span>
+          </label>
+          <textarea id="f-constraints" name="constraints" rows="4"></textarea>
+        </div>
+        <div class="bld-field">
+          <label for="f-goal">
+            <span lang="en">Goal<span class="hint">What students should be able to do afterwards — one line each.</span></span>
+            <span lang="vi">Mục tiêu<span class="hint">Sau buổi học sinh viên làm được gì — mỗi ý một dòng.</span></span>
+          </label>
+          <textarea id="f-goal" name="goal" rows="4"></textarea>
+        </div>
+        <div class="bld-field">
+          <label for="f-workflow">
+            <span lang="en">Workflow<span class="hint">Pre-filled. Steps 6–8 are the ones that make this an agent — edit rather than delete them.</span></span>
+            <span lang="vi">Quy trình<span class="hint">Đã điền sẵn. Bước 6–8 là thứ biến nó thành agent — hãy sửa chứ đừng xoá.</span></span>
+          </label>
+          <textarea id="f-workflow" name="workflow" rows="9"></textarea>
+        </div>
+        <div class="bld-field">
+          <label for="f-output"><span lang="en">Output</span><span lang="vi">Kết quả đầu ra</span></label>
+          <textarea id="f-output" name="output" rows="8"></textarea>
+        </div>
+        <div class="bld-field">
+          <label for="f-guardrails"><span lang="en">Guardrails</span><span lang="vi">Rào chắn an toàn</span></label>
+          <textarea id="f-guardrails" name="guardrails" rows="4"></textarea>
+        </div>
+      </form>
+
+      <div class="bld-preview">
+        <div class="bld-head">
+          <span class="tpl-name" data-i18n="bld.title">your agent</span>
+          <div class="bld-actions">
+            <button class="copy-btn bld-reset" type="button" data-i18n="btn.reset">Reset</button>
+            <button class="copy-btn bld-copy" type="button" data-i18n="btn.copyPrompt">Copy prompt</button>
+          </div>
+        </div>
+        <pre class="bld-out"></pre>
+        <div class="bld-count"></div>
+      </div>
+    </div>
+    <p class="subtle-note" lang="en">What you type is saved in this browser only, so you can move between the three
+      exercises without losing it. Each language keeps its own draft. Nothing is uploaded anywhere.</p>
+    <p class="subtle-note" lang="vi">Nội dung bạn gõ chỉ được lưu trong trình duyệt này, nên bạn có thể đi lại
+      giữa ba bài thực hành mà không mất dữ liệu. Mỗi ngôn ngữ giữ bản nháp riêng. Không có gì được tải lên đâu cả.</p>
+  </section>
+
+  <section class="block" id="template">
+    <div class="sec-head foldable">
+      <span class="eyebrow" lang="en">03 · Alternative</span>
+      <span class="eyebrow" lang="vi">03 · Cách khác</span>
+      <h2 lang="en">The plain template</h2>
+      <h2 lang="vi">Mẫu dạng chữ</h2>
+    </div>
+    <div class="fold-body">
+      <div class="concept wide" lang="en">
+        <p>If you would rather paste and edit by hand — or you are working on paper — this is the same
+          agent as a fill-in-the-blanks template.</p>
+      </div>
+      <div class="concept wide" lang="vi">
+        <p>Nếu bạn muốn dán rồi tự sửa bằng tay — hoặc đang làm trên giấy — đây là cùng một agent dưới dạng
+          mẫu điền vào chỗ trống.</p>
+      </div>
+      <div class="tpl">
+        <div class="tpl-bar">
+          <span class="tpl-name" lang="en">exercise 1 · lesson-preparation agent</span>
+          <span class="tpl-name" lang="vi">bài 1 · agent soạn bài giảng</span>
+          <button class="copy-btn" type="button" data-i18n="btn.copy">Copy</button>
+        </div>
+        <pre class="codeblock" lang="en">You are a teaching-design agent for [COURSE].
+
+STUDENT PROFILE:
+[Year level, prior knowledge, class size, language, and relevant needs]
+
+LESSON TOPIC:
+[Topic]
+
+DURATION:
+[Number of minutes]
+
+AVAILABLE MATERIALS:
+[List or paste the relevant syllabus, textbook section, or notes]
+
+GOAL:
+Create a lesson that enables students to:
+1. [Outcome 1]
+2. [Outcome 2]
+3. [Outcome 3]
+
+CONSTRAINTS:
+- Class size: [...]
+- Available technology: [...]
+- Teaching format: [...]
+- Other limitations: [...]
+
+WORKFLOW:
+1. Analyse the topic, student profile, and learning outcomes.
+2. Identify prerequisite knowledge.
+3. Create a timed lesson plan.
+4. Include at least one active-learning exercise.
+5. Include a formative assessment.
+6. Check the alignment among outcomes, activities, and assessment.
+7. Check whether the workload fits the available time.
+8. Revise any weak or misaligned component.
+
+OUTPUT:
+- Learning outcomes
+- Preparation requirements
+- Timed lesson plan
+- Explanation and examples
+- Student activity
+- Formative assessment with answers
+- Outcome–activity–assessment alignment table
+- Risks, assumptions, and lecturer decisions required
+
+GUARDRAILS:
+- Do not invent facts that are absent from the materials.
+- Label uncertain content.
+- Do not invent citations.
+- Do not make final decisions on behalf of the lecturer.</pre>
+        <pre class="codeblock" lang="vi">Bạn là một agent thiết kế bài giảng cho môn [TÊN MÔN HỌC].
+
+HỒ SƠ SINH VIÊN:
+[Năm học, kiến thức nền, sĩ số, ngôn ngữ và các nhu cầu đặc biệt]
+
+CHỦ ĐỀ BÀI HỌC:
+[Chủ đề]
+
+THỜI LƯỢNG:
+[Số phút]
+
+TÀI LIỆU SẴN CÓ:
+[Liệt kê hoặc dán phần đề cương, mục giáo trình hoặc ghi chú liên quan]
+
+MỤC TIÊU:
+Tạo một bài học giúp sinh viên có thể:
+1. [Chuẩn đầu ra 1]
+2. [Chuẩn đầu ra 2]
+3. [Chuẩn đầu ra 3]
+
+RÀNG BUỘC:
+- Sĩ số: [...]
+- Thiết bị sẵn có: [...]
+- Hình thức giảng dạy: [...]
+- Giới hạn khác: [...]
+
+QUY TRÌNH:
+1. Phân tích chủ đề, hồ sơ sinh viên và chuẩn đầu ra.
+2. Xác định kiến thức tiên quyết.
+3. Xây dựng kế hoạch bài giảng có phân bổ thời gian.
+4. Đưa vào ít nhất một hoạt động học tập chủ động.
+5. Đưa vào một bài đánh giá quá trình.
+6. Kiểm tra sự tương thích giữa chuẩn đầu ra, hoạt động và đánh giá.
+7. Kiểm tra khối lượng công việc có vừa với thời lượng hay không.
+8. Chỉnh sửa mọi thành phần còn yếu hoặc chưa tương thích.
+
+KẾT QUẢ ĐẦU RA:
+- Chuẩn đầu ra của bài học
+- Yêu cầu chuẩn bị
+- Kế hoạch bài giảng theo thời gian
+- Phần giảng giải và ví dụ
+- Hoạt động cho sinh viên
+- Bài đánh giá quá trình kèm đáp án
+- Bảng đối chiếu chuẩn đầu ra – hoạt động – đánh giá
+- Rủi ro, giả định và những quyết định cần giảng viên đưa ra
+
+RÀO CHẮN AN TOÀN:
+- Không bịa ra dữ kiện không có trong tài liệu được cung cấp.
+- Ghi rõ những nội dung chưa chắc chắn.
+- Không bịa trích dẫn tài liệu.
+- Không quyết định thay giảng viên.</pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="evaluate">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">04 · Judge the output</span>
+      <span class="eyebrow" lang="vi">04 · Thẩm định kết quả</span>
+      <h2 lang="en">Run the checklist</h2>
+      <h2 lang="vi">Chạy danh mục kiểm tra</h2>
+      <p lang="en">Read what came back against these seven questions before you read it as a lesson plan. A "no"
+        is not a failure of the tool — it tells you which of the six components to strengthen.</p>
+      <p lang="vi">Hãy đọc kết quả nhận về theo bảy câu hỏi này trước khi đọc nó như một kế hoạch bài giảng.
+        Một câu "không" không phải lỗi của công cụ — nó chỉ cho bạn biết cần củng cố thành phần nào trong sáu
+        thành phần.</p>
+    </div>
+    <div class="ticklist" id="ex1-check">
+      <label class="tick"><input type="checkbox" data-k="measurable"><span lang="en">Are the learning outcomes <strong>measurable</strong>? ("Understand recursion" is not; "trace a recursive call and predict its output" is.)</span><span lang="vi">Chuẩn đầu ra có <strong>đo được</strong> không? ("Hiểu đệ quy" thì không; "lần theo một lời gọi đệ quy và dự đoán kết quả" thì có.)</span></label>
+      <label class="tick"><input type="checkbox" data-k="activity"><span lang="en">Does <strong>each activity</strong> support at least one stated outcome?</span><span lang="vi"><strong>Mỗi hoạt động</strong> có phục vụ ít nhất một chuẩn đầu ra đã nêu không?</span></label>
+      <label class="tick"><input type="checkbox" data-k="assess"><span lang="en">Does the <strong>assessment</strong> measure the outcomes, rather than something adjacent that is easier to test?</span><span lang="vi"><strong>Phần đánh giá</strong> có đo đúng chuẩn đầu ra không, hay chỉ đo một thứ gần gần mà dễ kiểm hơn?</span></label>
+      <label class="tick"><input type="checkbox" data-k="time"><span lang="en">Is the lesson <strong>feasible in the time available</strong>? Add up the minutes yourself.</span><span lang="vi">Bài học có <strong>khả thi trong thời lượng</strong> không? Hãy tự cộng số phút lại.</span></label>
+      <label class="tick"><input type="checkbox" data-k="level"><span lang="en">Is the <strong>difficulty right</strong> for these students, given what they have already covered?</span><span lang="vi"><strong>Độ khó có phù hợp</strong> với nhóm sinh viên này, xét theo những gì họ đã học?</span></label>
+      <label class="tick"><input type="checkbox" data-k="assumptions"><span lang="en">Are <strong>assumptions and uncertain claims</strong> clearly identified in their own section?</span><span lang="vi"><strong>Giả định và những khẳng định chưa chắc chắn</strong> có được nêu rõ trong một mục riêng không?</span></label>
+      <label class="tick"><input type="checkbox" data-k="participation"><span lang="en">Is there <strong>meaningful student participation</strong>, or is it a lecture with questions bolted on?</span><span lang="vi">Có <strong>sự tham gia thực chất của sinh viên</strong> không, hay chỉ là bài giảng gắn thêm vài câu hỏi?</span></label>
+    </div>
+    <p class="subtle-note" lang="en">Saved in this browser only.
+      <button class="tick-reset" type="button" data-reset="ex1-check">Clear</button>
+    </p>
+    <p class="subtle-note" lang="vi">Chỉ lưu trong trình duyệt này.
+      <button class="tick-reset" type="button" data-reset="ex1-check">Xoá</button>
+    </p>
+  </section>
+
+  <section class="block" id="review">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">05 · 00:55–01:05 · Pair review</span>
+      <span class="eyebrow" lang="vi">05 · 00:55–01:05 · Rà soát theo cặp</span>
+      <h2 lang="en">Break your neighbour's agent</h2>
+      <h2 lang="vi">Hãy làm hỏng agent của người bên cạnh</h2>
+      <p lang="en">Work in pairs. One of you is the <strong>agent designer</strong>, the other the
+        <strong>quality reviewer</strong>. Then swap. The reviewer's job is not to be kind.</p>
+      <p lang="vi">Làm việc theo cặp. Một người là <strong>người thiết kế agent</strong>, người kia là
+        <strong>người rà soát chất lượng</strong>. Sau đó đổi vai. Nhiệm vụ của người rà soát không phải là
+        tỏ ra dễ tính.</p>
+    </div>
+    <div class="gate-grid" lang="en">
+      <div class="gate-item"><span class="gn">Missing</span><h4>Absent information</h4><p>What did the agent have to guess because the instructions never said?</p></div>
+      <div class="gate-item"><span class="gn">Timing</span><h4>Unrealistic minutes</h4><p>Add the segments up. Does a 15-minute group activity really include forming groups and reporting back?</p></div>
+      <div class="gate-item"><span class="gn">Vague</span><h4>Unmeasurable outcomes</h4><p>Could two lecturers disagree about whether a student met it?</p></div>
+      <div class="gate-item"><span class="gn">Drift</span><h4>Activities serving nothing</h4><p>An enjoyable exercise that maps to no outcome is a nice twenty minutes you cannot justify.</p></div>
+      <div class="gate-item"><span class="gn">Invented</span><h4>Content from nowhere</h4><p>Facts, tools, citations, or course policies that appear in the output but not in the materials.</p></div>
+      <div class="gate-item"><span class="gn">Ambiguous</span><h4>Quiz items with two answers</h4><p>Try to defend a wrong option. If you can, the item is broken.</p></div>
+    </div>
+    <div class="gate-grid" lang="vi">
+      <div class="gate-item"><span class="gn">Thiếu</span><h4>Thông tin vắng mặt</h4><p>Agent đã phải tự đoán điều gì chỉ vì hướng dẫn không hề nói tới?</p></div>
+      <div class="gate-item"><span class="gn">Thời gian</span><h4>Số phút phi thực tế</h4><p>Cộng các đoạn lại. Hoạt động nhóm 15 phút đã tính cả thời gian chia nhóm và báo cáo chưa?</p></div>
+      <div class="gate-item"><span class="gn">Mơ hồ</span><h4>Chuẩn đầu ra không đo được</h4><p>Hai giảng viên có thể bất đồng về việc sinh viên đã đạt hay chưa không?</p></div>
+      <div class="gate-item"><span class="gn">Lệch</span><h4>Hoạt động chẳng phục vụ gì</h4><p>Một hoạt động vui nhưng không gắn với chuẩn đầu ra nào là hai mươi phút dễ chịu mà bạn không biện minh được.</p></div>
+      <div class="gate-item"><span class="gn">Bịa</span><h4>Nội dung từ hư không</h4><p>Dữ kiện, công cụ, trích dẫn hay quy định môn học xuất hiện trong kết quả nhưng không có trong tài liệu.</p></div>
+      <div class="gate-item"><span class="gn">Nhập nhằng</span><h4>Câu quiz có hai đáp án</h4><p>Thử bảo vệ một phương án sai. Nếu bảo vệ được, câu hỏi đó hỏng.</p></div>
+    </div>
+    <div class="concept wide" lang="en">
+      <h3>Then make the agent do this to itself</h3>
+      <p>Add the following to your agent's instructions and run it again. This one addition converts a
+        one-pass generator into something that reviews its own work — and it is the single highest-value
+        edit most participants make today.</p>
+    </div>
+    <div class="concept wide" lang="vi">
+      <h3>Rồi bắt agent tự làm điều đó với chính nó</h3>
+      <p>Thêm đoạn dưới đây vào hướng dẫn của agent rồi chạy lại. Chỉ một bổ sung này biến một cỗ máy sinh
+        nội dung một lượt thành thứ biết tự rà soát công việc của mình — và đó là chỉnh sửa có giá trị nhất
+        mà phần lớn học viên thực hiện hôm nay.</p>
+    </div>
+    <div class="tpl">
+      <div class="tpl-bar">
+        <span class="tpl-name" lang="en">add to any agent · adversarial self-review</span>
+        <span class="tpl-name" lang="vi">thêm vào mọi agent · tự phản biện</span>
+        <button class="copy-btn" type="button" data-i18n="btn.copy">Copy</button>
+      </div>
+      <pre class="codeblock" lang="en">Before presenting the final result, perform an adversarial review.
+
+Look specifically for:
+1. Activities that are not aligned with the learning outcomes.
+2. Unrealistic time allocations.
+3. Questions with more than one defensible answer.
+4. Content that assumes knowledge students may not possess.
+5. Factual claims that require lecturer verification.
+
+Revise the result after completing the review.</pre>
+      <pre class="codeblock" lang="vi">Trước khi trình bày kết quả cuối cùng, hãy tự rà soát theo hướng phản biện.
+
+Tìm cụ thể những lỗi sau:
+1. Hoạt động không tương thích với chuẩn đầu ra.
+2. Phân bổ thời gian phi thực tế.
+3. Câu hỏi có nhiều hơn một đáp án bảo vệ được.
+4. Nội dung giả định sinh viên đã biết những thứ có thể họ chưa biết.
+5. Khẳng định về sự kiện cần giảng viên kiểm chứng.
+
+Sau khi rà soát xong, hãy chỉnh sửa lại kết quả.</pre>
+    </div>
+    <div class="note tip" lang="en">
+      <span class="note-tag">Ask for the review itself</span>
+      Add "show me what the review found and what you changed" and you get an audit trail. It is often
+      more informative than the lesson plan — it tells you which parts of your instructions were weak.
+    </div>
+    <div class="note tip" lang="vi">
+      <span class="note-tag">Hãy đòi xem chính phần rà soát</span>
+      Thêm câu "hãy cho tôi xem phần rà soát đã phát hiện gì và bạn đã sửa gì", bạn sẽ có một nhật ký kiểm tra.
+      Nó thường cung cấp nhiều thông tin hơn cả kế hoạch bài giảng — vì nó cho biết phần nào trong hướng dẫn
+      của bạn còn yếu.
+    </div>
+  </section>
+
+  <section class="block" id="deliverable">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">06 · What you leave with</span>
+      <span class="eyebrow" lang="vi">06 · Bạn mang về những gì</span>
+      <h2 lang="en">Deliverable</h2>
+      <h2 lang="vi">Sản phẩm</h2>
+    </div>
+    <div class="checklist c-accent" lang="en">
+      <div class="check-item"><span class="rn">1</span><div><h4>One timed lesson plan</h4><p>For a real, upcoming session, with the minutes adding up.</p></div></div>
+      <div class="check-item"><span class="rn">2</span><div><h4>One active-learning activity</h4><p>Tied explicitly to a stated outcome.</p></div></div>
+      <div class="check-item"><span class="rn">3</span><div><h4>One short formative assessment</h4><p>With answers, and with any ambiguous item already found and fixed.</p></div></div>
+      <div class="check-item"><span class="rn">4</span><div><h4>One alignment table</h4><p>Outcome → activity → assessment, which is also the artefact your programme review will ask for.</p></div></div>
+      <div class="check-item"><span class="rn">5</span><div><h4>Revised agent instructions</h4><p>The version after the pair review — this is the thing you reuse next week, not the lesson plan.</p></div></div>
+    </div>
+    <div class="checklist c-accent" lang="vi">
+      <div class="check-item"><span class="rn">1</span><div><h4>Một kế hoạch bài giảng theo thời gian</h4><p>Cho một buổi học có thật sắp tới, với tổng số phút khớp nhau.</p></div></div>
+      <div class="check-item"><span class="rn">2</span><div><h4>Một hoạt động học tập chủ động</h4><p>Gắn rõ ràng với một chuẩn đầu ra đã nêu.</p></div></div>
+      <div class="check-item"><span class="rn">3</span><div><h4>Một bài đánh giá quá trình ngắn</h4><p>Kèm đáp án, và mọi câu nhập nhằng đều đã được phát hiện và sửa.</p></div></div>
+      <div class="check-item"><span class="rn">4</span><div><h4>Một bảng đối chiếu</h4><p>Chuẩn đầu ra → hoạt động → đánh giá, cũng chính là thứ mà kiểm định chương trình sẽ hỏi bạn.</p></div></div>
+      <div class="check-item"><span class="rn">5</span><div><h4>Bộ hướng dẫn agent đã chỉnh sửa</h4><p>Bản sau khi rà soát theo cặp — đây mới là thứ bạn dùng lại tuần sau, không phải kế hoạch bài giảng.</p></div></div>
+    </div>
+  </section>
+
+  <section class="block" id="quiz">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">07 · Two minutes</span>
+      <span class="eyebrow" lang="vi">07 · Hai phút</span>
+      <h2 lang="en">Self-check</h2>
+      <h2 lang="vi">Tự kiểm tra</h2>
+    </div>
+    <div class="concept wide" lang="en">
+      <p>Not graded and not submitted anywhere — twelve questions to check that this page landed. The
+        options are deliberately close in length, so guessing by shape will not help you.</p>
+    </div>
+    <div class="concept wide" lang="vi">
+      <p>Không tính điểm, không nộp đi đâu cả — mười hai câu để kiểm tra xem trang này đã ngấm chưa. Các
+        phương án được cố ý viết dài gần bằng nhau, nên đoán theo hình thức sẽ không giúp được gì.</p>
+    </div>
+    <div class="quiz-block">
+      <!-- QUIZ -->
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question" lang="en">1. What should you have to hand before building this agent?</p>
+        <p class="quiz-question" lang="vi">1. Bạn cần có sẵn những gì trước khi xây agent này?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">A real upcoming topic, its duration and the year level</button>
+          <button class="quiz-opt" type="button">A published paper on active-learning pedagogy methods</button>
+          <button class="quiz-opt" type="button">A completed lesson plan you can ask it to rewrite</button>
+          <button class="quiz-opt" type="button">Written permission from your head of department</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Một chủ đề thật sắp dạy, thời lượng và năm học</button>
+          <button class="quiz-opt" type="button">Một bài báo khoa học về phương pháp học chủ động</button>
+          <button class="quiz-opt" type="button">Một kế hoạch bài giảng hoàn chỉnh để nhờ viết lại</button>
+          <button class="quiz-opt" type="button">Giấy cho phép dùng AI từ trưởng bộ môn của bạn</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The exercise is worth twenty minutes only if you keep the output, and that means feeding it a lesson you are actually about to teach." data-explain-vi="Bài thực hành chỉ đáng hai mươi phút nếu bạn giữ được kết quả, nghĩa là phải đưa vào một buổi học bạn sắp dạy thật."></p>
+      </div>
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question" lang="en">2. What happens if you leave AVAILABLE MATERIALS empty?</p>
+        <p class="quiz-question" lang="vi">2. Điều gì xảy ra nếu bạn để trống ô TÀI LIỆU SẴN CÓ?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">It refuses to produce any lesson plan at all</button>
+          <button class="quiz-opt" type="button">It invents content that sounds entirely plausible</button>
+          <button class="quiz-opt" type="button">It asks you for the materials before it starts</button>
+          <button class="quiz-opt" type="button">It restricts itself strictly to the topic sentence</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Nó từ chối tạo bất kỳ kế hoạch bài giảng nào</button>
+          <button class="quiz-opt" type="button">Nó bịa ra nội dung nghe hoàn toàn hợp lý</button>
+          <button class="quiz-opt" type="button">Nó sẽ hỏi xin bạn tài liệu trước khi bắt đầu</button>
+          <button class="quiz-opt" type="button">Nó chỉ bám chặt vào đúng câu nêu chủ đề</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="An empty context field is not read as a limit. It is read as permission to fill the gap with whatever a course on this topic usually contains." data-explain-vi="Ô bối cảnh để trống không được hiểu là một giới hạn. Nó được hiểu là lời cho phép lấp chỗ trống bằng những gì một môn học như vậy thường có."></p>
+      </div>
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question" lang="en">3. Which workflow steps are the ones that make this an agent?</p>
+        <p class="quiz-question" lang="vi">3. Những bước nào trong quy trình khiến đây trở thành một agent?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Steps 1 and 2, analysing topic and prior knowledge</button>
+          <button class="quiz-opt" type="button">Steps 3 and 4, the timed plan and the active exercise</button>
+          <button class="quiz-opt" type="button">Steps 6 to 8, checking alignment and time, then revising</button>
+          <button class="quiz-opt" type="button">Step 5 alone, which adds the formative assessment</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Bước 1 và 2, phân tích chủ đề và kiến thức nền</button>
+          <button class="quiz-opt" type="button">Bước 3 và 4, kế hoạch theo giờ và hoạt động chủ động</button>
+          <button class="quiz-opt" type="button">Bước 6 đến 8, kiểm tra tương thích, thời lượng rồi sửa</button>
+          <button class="quiz-opt" type="button">Riêng bước 5, tức là thêm bài đánh giá quá trình</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Everything before step 6 is generation. Steps 6 to 8 evaluate what was generated and repair it, which is the difference between an agent and a long prompt." data-explain-vi="Mọi thứ trước bước 6 là sinh nội dung. Bước 6 đến 8 đánh giá thứ vừa sinh ra và sửa nó — đó là khác biệt giữa agent và một prompt dài."></p>
+      </div>
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question" lang="en">4. A &quot;no&quot; on the seven-point checklist mainly tells you what?</p>
+        <p class="quiz-question" lang="vi">4. Một câu &quot;không&quot; trong danh mục bảy điểm chủ yếu cho bạn biết gì?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">That you should start a longer new conversation</button>
+          <button class="quiz-opt" type="button">That this platform is the wrong one for the task</button>
+          <button class="quiz-opt" type="button">That the tool cannot really plan lessons at all</button>
+          <button class="quiz-opt" type="button">Which of the six components needs strengthening</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Rằng bạn nên mở một cuộc trò chuyện dài hơn</button>
+          <button class="quiz-opt" type="button">Rằng nền tảng này không hợp với công việc đó</button>
+          <button class="quiz-opt" type="button">Rằng công cụ thật ra không soạn bài giảng được</button>
+          <button class="quiz-opt" type="button">Thành phần nào trong sáu thành phần cần củng cố</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The checklist diagnoses your instructions, not the tool. Almost every no traces back to a component you left thin, usually context or quality checks." data-explain-vi="Danh mục này chẩn đoán hướng dẫn của bạn, không phải công cụ. Gần như mọi câu không đều truy về một thành phần bạn viết còn mỏng, thường là bối cảnh hoặc tiêu chí kiểm tra."></p>
+      </div>
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question" lang="en">5. In the pair review, what is the reviewer's actual job?</p>
+        <p class="quiz-question" lang="vi">5. Trong phần rà soát theo cặp, nhiệm vụ thật sự của người rà soát là gì?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Hunt for vague outcomes, invented content and timing</button>
+          <button class="quiz-opt" type="button">Encourage the designer and note what worked well</button>
+          <button class="quiz-opt" type="button">Rewrite the agent instructions in their own words</button>
+          <button class="quiz-opt" type="button">Score the lesson plan against a marking rubric</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Tìm chuẩn đầu ra mơ hồ, nội dung bịa và lỗi thời lượng</button>
+          <button class="quiz-opt" type="button">Động viên người thiết kế và ghi nhận những điểm đã tốt</button>
+          <button class="quiz-opt" type="button">Viết lại hướng dẫn của agent theo cách diễn đạt riêng</button>
+          <button class="quiz-opt" type="button">Chấm điểm kế hoạch bài giảng đó theo một rubric có sẵn</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The reviewer is not there to be kind. Missing information, unrealistic minutes, unmeasurable outcomes and content from nowhere are the six things to look for." data-explain-vi="Người rà soát không ở đó để tỏ ra dễ tính. Thiếu thông tin, số phút phi thực tế, chuẩn đầu ra không đo được và nội dung từ hư không là những thứ cần tìm."></p>
+      </div>
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question" lang="en">6. What does adding the adversarial review block actually change?</p>
+        <p class="quiz-question" lang="vi">6. Thêm khối tự phản biện vào thì thực chất thay đổi điều gì?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">It makes the model consult external web sources</button>
+          <button class="quiz-opt" type="button">It turns a one-pass generator into a self-reviewer</button>
+          <button class="quiz-opt" type="button">It shortens the output by cutting weaker sections</button>
+          <button class="quiz-opt" type="button">It saves the instructions for reuse next semester</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Khiến mô hình tra cứu thêm các nguồn trên web</button>
+          <button class="quiz-opt" type="button">Biến cỗ máy sinh một lượt thành thứ tự rà soát mình</button>
+          <button class="quiz-opt" type="button">Rút ngắn kết quả bằng cách cắt phần yếu hơn đi</button>
+          <button class="quiz-opt" type="button">Lưu lại hướng dẫn để dùng lại vào học kỳ sau</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="It is the single highest-value edit most participants make. Ask it to show what the review found as well, and you get an audit trail of your own weak instructions." data-explain-vi="Đây là chỉnh sửa có giá trị nhất mà phần lớn học viên thực hiện. Hãy yêu cầu nó cho xem cả phần rà soát, bạn sẽ có nhật ký về những chỗ hướng dẫn còn yếu."></p>
+      </div>
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question" lang="en">7. Which deliverable is the one you will still be using next month?</p>
+        <p class="quiz-question" lang="vi">7. Sản phẩm nào bạn vẫn còn dùng đến vào tháng sau?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">The five-question formative quiz with its answers</button>
+          <button class="quiz-opt" type="button">The timed lesson plan you will teach next week</button>
+          <button class="quiz-opt" type="button">The revised agent instructions, not the lesson plan</button>
+          <button class="quiz-opt" type="button">The list of assumptions the agent flagged for you</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Bài quiz đánh giá quá trình năm câu kèm đáp án</button>
+          <button class="quiz-opt" type="button">Kế hoạch bài giảng bạn sẽ dạy vào tuần tới đây</button>
+          <button class="quiz-opt" type="button">Bộ hướng dẫn agent đã sửa, không phải kế hoạch bài</button>
+          <button class="quiz-opt" type="button">Danh sách các giả định mà agent đã đánh dấu</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The lesson plan is used once. The instructions are the reusable artefact — that is why the exercise ends by revising them rather than by polishing the plan." data-explain-vi="Kế hoạch bài giảng chỉ dùng một lần. Bộ hướng dẫn mới là sản phẩm dùng lại được — vì thế bài thực hành kết thúc bằng việc sửa nó, chứ không phải trau chuốt kế hoạch."></p>
+      </div>
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question" lang="en">8. The agent proposes a 15-minute group activity. What do you check?</p>
+        <p class="quiz-question" lang="vi">8. Agent đề xuất một hoạt động nhóm 15 phút. Bạn kiểm tra điều gì?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Whether the students are likely to find it enjoyable</button>
+          <button class="quiz-opt" type="button">Whether the activity has a memorable and catchy name</button>
+          <button class="quiz-opt" type="button">Whether the word collaborative appears often enough</button>
+          <button class="quiz-opt" type="button">Whether forming groups and reporting back are counted</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Sinh viên có khả năng thấy hoạt động này vui không</button>
+          <button class="quiz-opt" type="button">Hoạt động đó đã có một cái tên dễ nhớ hay chưa</button>
+          <button class="quiz-opt" type="button">Từ &quot;cộng tác&quot; đã xuất hiện đủ nhiều hay chưa</button>
+          <button class="quiz-opt" type="button">Đã tính cả thời gian chia nhóm và báo cáo lại chưa</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Timing is the most common unrealistic element. Fifteen minutes of activity usually means five of setup, seven of work and eight of reporting — which is twenty." data-explain-vi="Thời lượng là chỗ phi thực tế phổ biến nhất. Mười lăm phút hoạt động thường là năm phút bố trí, bảy phút làm và tám phút báo cáo — tức là hai mươi."></p>
+      </div>
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question" lang="en">9. What makes a quiz item ambiguous, in this exercise's sense?</p>
+        <p class="quiz-question" lang="vi">9. Theo bài thực hành này, điều gì khiến một câu quiz bị nhập nhằng?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">A wrong option can also be defended as correct</button>
+          <button class="quiz-opt" type="button">The question is longer than the four options are</button>
+          <button class="quiz-opt" type="button">Students have not yet covered the topic in class</button>
+          <button class="quiz-opt" type="button">The answer key was written after the questions</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Một phương án sai cũng có thể bảo vệ là đúng</button>
+          <button class="quiz-opt" type="button">Câu hỏi dài hơn cả bốn phương án trả lời cộng lại</button>
+          <button class="quiz-opt" type="button">Sinh viên chưa được học chủ đề đó trên lớp</button>
+          <button class="quiz-opt" type="button">Đáp án được viết ra sau khi đã viết câu hỏi</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Try to defend a wrong option. If you succeed, the item is broken — and this is exactly what the adversarial review step is instructed to look for." data-explain-vi="Hãy thử bảo vệ một phương án sai. Nếu bảo vệ được thì câu đó hỏng — và đây đúng là thứ bước tự phản biện được giao đi tìm."></p>
+      </div>
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question" lang="en">10. Why insist on a real lesson rather than a hypothetical one?</p>
+        <p class="quiz-question" lang="vi">10. Vì sao phải dùng buổi học thật thay vì một buổi giả định?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">The platforms reject obviously hypothetical requests</button>
+          <button class="quiz-opt" type="button">Generic input produces an agent you will never reuse</button>
+          <button class="quiz-opt" type="button">Real lessons need fewer tokens and so run faster</button>
+          <button class="quiz-opt" type="button">Hypothetical topics trigger far more hallucinations</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Các nền tảng từ chối yêu cầu mang tính giả định rõ ràng</button>
+          <button class="quiz-opt" type="button">Đầu vào chung chung tạo ra agent bạn sẽ không dùng lại</button>
+          <button class="quiz-opt" type="button">Buổi học thật tốn ít token hơn nên chạy nhanh hơn hẳn</button>
+          <button class="quiz-opt" type="button">Chủ đề giả định khiến mô hình bịa đặt nhiều hơn nhiều</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="A generic agent produces a generic plan, and nobody takes a generic plan into a classroom on Monday. The exercise only pays off if the output survives the session." data-explain-vi="Agent chung chung tạo ra kế hoạch chung chung, và không ai mang kế hoạch chung chung vào lớp sáng thứ Hai. Bài này chỉ có lãi nếu kết quả sống sót sau buổi tập huấn."></p>
+      </div>
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question" lang="en">11. In the builder, what does the red placeholder text mean?</p>
+        <p class="quiz-question" lang="vi">11. Trong trình dựng, chữ màu đỏ ở phần xem trước nghĩa là gì?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">A required field that blocks the copy button</button>
+          <button class="quiz-opt" type="button">A field the platform will reject on submission</button>
+          <button class="quiz-opt" type="button">A section the agent will be forced to guess at</button>
+          <button class="quiz-opt" type="button">A suggestion the workshop recommends deleting</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Một ô bắt buộc đang chặn nút sao chép lại</button>
+          <button class="quiz-opt" type="button">Một ô mà nền tảng sẽ từ chối khi gửi đi</button>
+          <button class="quiz-opt" type="button">Một mục mà agent sẽ buộc phải tự đoán ra</button>
+          <button class="quiz-opt" type="button">Một gợi ý mà buổi tập huấn khuyên nên xoá</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The red is the missing-context problem made visible before you run the agent rather than after. The counter under the preview says how many sections are still placeholders." data-explain-vi="Màu đỏ làm hiện ra vấn đề thiếu bối cảnh trước khi bạn chạy agent chứ không phải sau. Bộ đếm dưới khung xem trước cho biết còn bao nhiêu mục là chỗ trống."></p>
+      </div>
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question" lang="en">12. What belongs in the final &quot;risks and lecturer decisions&quot; section?</p>
+        <p class="quiz-question" lang="vi">12. Mục cuối &quot;rủi ro và quyết định của giảng viên&quot; chứa những gì?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">A summary of the lesson written for your students</button>
+          <button class="quiz-opt" type="button">A list of the parts the agent could not format well</button>
+          <button class="quiz-opt" type="button">The references the agent used while building the plan</button>
+          <button class="quiz-opt" type="button">Claims you must verify and choices only you can make</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Bản tóm tắt bài học được viết dành cho sinh viên đọc</button>
+          <button class="quiz-opt" type="button">Danh sách những phần agent không định dạng đẹp được</button>
+          <button class="quiz-opt" type="button">Các tài liệu tham khảo agent dùng khi dựng kế hoạch</button>
+          <button class="quiz-opt" type="button">Điều bạn phải kiểm chứng và lựa chọn chỉ bạn quyết được</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="This section is the handover point. It is the part to read first, because it tells you where the agent stopped being able to stand behind its own output." data-explain-vi="Mục này là điểm bàn giao. Đây là phần nên đọc trước tiên, vì nó cho biết agent hết khả năng đứng sau kết quả của chính nó từ chỗ nào."></p>
+      </div>
+      <!-- /QUIZ -->
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="../concepts.html"><span class="dir" data-i18n="nav.back">← Back</span><span lang="en">From chatbot to agent</span><span lang="vi">Từ chatbot đến agent</span></a>
+    <a href="ex2-assessment.html" class="next"><span class="dir" data-i18n="nav.next">Next →</span><span lang="en">Exercise 2 · Assessment and Feedback</span><span lang="vi">Bài 2 · Đánh giá và phản hồi</span></a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>AI Agents</b> · for Lecturers</span>
+    <p data-i18n="foot.subtitle">Practical AI Agents for University Lecturers: Designing Safe and Effective Workflows for Teaching, Assessment, and Student Support</p>
+  </div>
+</footer>
+
+<script src="../assets/i18n.js"></script>
+<script src="../assets/course.js"></script>
+<script src="../assets/workshop.js"></script>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

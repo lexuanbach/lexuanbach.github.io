@@ -1,0 +1,233 @@
+{
+ "page": "concepts.html",
+ "questions": [
+  {
+   "a": 0,
+   "en": [
+    "1. What makes a request \"agentic\" rather than merely long?",
+    "It sets out steps whose later stages check the earlier ones",
+    "It attaches the course documents alongside the request",
+    "It assigns the model a specific professional role to play",
+    "It runs to completion without any human involvement",
+    "Role and documents both help, and autonomy is not required at all. The defining feature is the sequence in which the agent produces something and then evaluates and revises it before you see it."
+   ],
+   "vi": [
+    "1. Điều gì khiến một yêu cầu mang tính \"agent\" chứ không chỉ là dài?",
+    "Nó nêu các bước mà bước sau kiểm tra lại bước trước",
+    "Nó đính kèm tài liệu môn học cùng với yêu cầu đó",
+    "Nó giao cho mô hình một vai trò chuyên môn cụ thể",
+    "Nó chạy đến khi xong mà không cần con người can thiệp",
+    "Vai trò và tài liệu đều có ích, còn tính tự động thì không bắt buộc. Đặc điểm định nghĩa là trình tự trong đó agent tạo ra kết quả rồi tự đánh giá và chỉnh sửa trước khi bạn nhìn thấy."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "2. Your agent invents a late-submission penalty that is not in your syllabus. Which component failed first?",
+    "Role — it was not told to act as a course-support agent",
+    "Context — it had no authoritative source, so it guessed",
+    "Goal — the requested output was not specific enough",
+    "Workflow — it produced its answer in the wrong order",
+    "Ungrounded questions get plausible inventions. Supplying the policy text is the fix; a guardrail that makes it say \"not specified in the supplied materials\" is the safety net."
+   ],
+   "vi": [
+    "2. Agent của bạn bịa ra một mức phạt nộp trễ không có trong đề cương. Thành phần nào hỏng trước tiên?",
+    "Vai trò — nó chưa được giao làm agent hỗ trợ môn học",
+    "Bối cảnh — nó không có nguồn chính thức nên tự đoán",
+    "Mục tiêu — kết quả được yêu cầu chưa đủ cụ thể rõ ràng",
+    "Quy trình — nó tạo ra câu trả lời sai thứ tự các bước",
+    "Câu hỏi không nguồn thì nhận về thứ bịa nghe hợp lý. Cách sửa là cung cấp chính văn bản quy định; rào chắn buộc nó nói \"không có trong tài liệu được cung cấp\" là lưới an toàn."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "3. Which task is the poorest fit for an agent, even a well-designed one?",
+    "Turning a marking guide into a four-level analytic rubric",
+    "Drafting five formative quiz questions with their answers",
+    "Deciding whether a student's late work should be penalised",
+    "Checking that each activity supports a learning outcome",
+    "The first three have checkable results and recoverable errors. The fourth is a decision about a specific person with consequences — it belongs to the lecturer."
+   ],
+   "vi": [
+    "3. Việc nào ít phù hợp nhất với agent, kể cả agent được thiết kế tốt?",
+    "Chuyển hướng dẫn chấm thành rubric phân tích bốn mức",
+    "Soạn năm câu hỏi quiz đánh giá quá trình kèm đáp án",
+    "Quyết định có phạt bài nộp trễ của một sinh viên",
+    "Kiểm tra mỗi hoạt động có phục vụ một chuẩn đầu ra",
+    "Ba việc đầu có kết quả kiểm chứng được và sai thì sửa được. Việc thứ tư là quyết định về một con người cụ thể và có hệ quả — nó thuộc về giảng viên."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "4. Your agent produces a fine lesson plan citing a paper that does not exist. What is the most useful change?",
+    "Shorten the request so there is much less for it to invent",
+    "Ask it to be considerably more accurate on the next attempt",
+    "Switch to a larger, newer and more expensive model version",
+    "Ban citations and label each claim by how well it is supported",
+    "\"Be accurate\" is not an instruction a model can act on. Forbid what it cannot verify, and require it to sort its claims by how well they are supported."
+   ],
+   "vi": [
+    "4. Agent tạo ra một kế hoạch bài giảng tốt nhưng trích dẫn một bài báo không tồn tại. Sửa thế nào là hữu ích nhất?",
+    "Rút ngắn yêu cầu để nó có ít chỗ hơn nhiều để bịa ra",
+    "Dặn nó lần sau hãy chính xác hơn đáng kể so với lần này",
+    "Đổi sang phiên bản mô hình lớn hơn, mới hơn và đắt hơn",
+    "Cấm trích dẫn và gán nhãn mức căn cứ cho từng khẳng định",
+    "\"Hãy chính xác\" không phải chỉ dẫn mà mô hình thực thi được. Hãy cấm những gì nó không kiểm chứng được, và buộc nó phân loại khẳng định theo mức độ có nguồn."
+   ]
+  },
+  {
+   "a": 0,
+   "en": [
+    "5. In this workshop's terms, what marks a tool as an assistant rather than an agent?",
+    "You still decide each next step and judge the output",
+    "It answers one message and then forgets everything",
+    "It checks its own draft before it shows you anything",
+    "It refuses any task that involves student records",
+    "An assistant carries context across a sequence of tasks, but you direct every step and you do all the quality control. An agent takes over part of that judging."
+   ],
+   "vi": [
+    "5. Theo cách phân biệt của buổi tập huấn này, điều gì cho thấy một công cụ là trợ lý chứ không phải agent?",
+    "Bạn vẫn quyết định từng bước và tự đánh giá kết quả",
+    "Nó trả lời một tin nhắn rồi quên sạch mọi thứ đã nói",
+    "Nó tự kiểm bản nháp trước khi đưa thứ gì đó cho bạn",
+    "Nó từ chối mọi việc có liên quan đến hồ sơ sinh viên",
+    "Trợ lý giữ được bối cảnh qua một chuỗi việc, nhưng bạn điều khiển từng bước và bạn làm toàn bộ khâu kiểm soát chất lượng. Agent gánh bớt phần đánh giá đó."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "6. Which pair of steps does a chatbot never perform on its own?",
+    "Analysing the topic and listing prior knowledge",
+    "Verifying the draft and revising what failed it",
+    "Producing the output and formatting it neatly",
+    "Receiving the goal and restating it back to you",
+    "Verify and revise are the two steps that turn generation into a process. Remove them and a long, careful prompt is still only a prompt."
+   ],
+   "vi": [
+    "6. Cặp bước nào mà chatbot không bao giờ tự thực hiện?",
+    "Phân tích chủ đề và liệt kê kiến thức có trước",
+    "Kiểm tra bản nháp và sửa những chỗ chưa đạt",
+    "Tạo ra kết quả và trình bày cho gọn gàng đẹp mắt",
+    "Nhận mục tiêu và nhắc lại mục tiêu đó cho bạn",
+    "Kiểm tra và chỉnh sửa là hai bước biến việc sinh nội dung thành một quy trình. Bỏ chúng đi thì một prompt dài và kỹ vẫn chỉ là một prompt."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "7. Which of these learning outcomes is actually measurable?",
+    "Students will understand the basic principles of recursion",
+    "Students will appreciate why testing matters to a team",
+    "Students will trace a recursive call and predict its output",
+    "Students will be familiar with common testing techniques",
+    "Understand, appreciate and be familiar with cannot be observed. Trace and predict describe something a student visibly does, so two markers can agree."
+   ],
+   "vi": [
+    "7. Chuẩn đầu ra nào dưới đây thực sự đo được?",
+    "Sinh viên sẽ hiểu được các nguyên lý cơ bản của đệ quy",
+    "Sinh viên sẽ thấy được vì sao kiểm thử lại quan trọng",
+    "Sinh viên sẽ lần theo lời gọi đệ quy và dự đoán kết quả",
+    "Sinh viên sẽ quen thuộc với các phương pháp kiểm thử",
+    "Hiểu, thấy được và quen thuộc đều không quan sát được. Lần theo và dự đoán mô tả việc sinh viên làm ra được, nên hai người chấm có thể thống nhất."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "8. Guardrails belong in an agent's design as which of these?",
+    "Warnings you add afterwards once something goes wrong",
+    "General hopes about how the agent will likely behave",
+    "Notes you keep for yourself and never send to the tool",
+    "Instructions the agent must follow, stated explicitly",
+    "A guardrail that lives only in your head is not a guardrail. Written into the instructions, it is what makes the tool decline rather than oblige when pushed."
+   ],
+   "vi": [
+    "8. Rào chắn an toàn nằm ở đâu trong thiết kế một agent?",
+    "Cảnh báo bạn thêm vào sau khi đã có sự cố xảy ra rồi",
+    "Kỳ vọng chung về cách agent nhiều khả năng sẽ hành xử",
+    "Ghi chú bạn giữ cho riêng mình và không gửi cho nó",
+    "Mệnh lệnh agent bắt buộc phải theo, nêu ra tường minh",
+    "Rào chắn chỉ nằm trong đầu bạn thì không phải rào chắn. Khi được viết vào hướng dẫn, nó chính là thứ khiến công cụ từ chối thay vì chiều theo khi bị ép."
+   ]
+  },
+  {
+   "a": 0,
+   "en": [
+    "9. Why is the final \"request lecturer approval\" step not a formality?",
+    "Because the agent's output is a proposal, not a decision",
+    "Because the platform requires approval before it can save",
+    "Because approval makes the agent run faster the next time",
+    "Because students need to see that a human was involved",
+    "The step exists because nothing the agent produces decides anything about a student. It is a proposal until a person with responsibility accepts it."
+   ],
+   "vi": [
+    "9. Vì sao bước cuối \"xin giảng viên phê duyệt\" không phải thủ tục hình thức?",
+    "Vì kết quả của agent là một đề xuất, không phải quyết định",
+    "Vì nền tảng bắt buộc phải phê duyệt thì mới lưu lại được",
+    "Vì việc phê duyệt giúp agent chạy nhanh hơn ở những lần sau",
+    "Vì sinh viên cần thấy rằng có con người tham gia vào việc này",
+    "Bước này tồn tại vì không thứ gì agent tạo ra quyết định điều gì về một sinh viên. Nó chỉ là đề xuất cho tới khi một người có trách nhiệm chấp nhận."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "10. Which missing component most often causes invented content?",
+    "The role component — no expertise had been specified",
+    "The context component — it had no real course material",
+    "The output component — the required format was unclear",
+    "The goal component — the aim was left far too broad",
+    "Content gets invented where grounding is absent. The other three produce output that is vague, badly shaped or off-target, but not usually fabricated."
+   ],
+   "vi": [
+    "10. Thiếu thành phần nào thường gây ra nội dung bịa nhất?",
+    "Thành phần vai trò — chưa hề chỉ định chuyên môn cho nó",
+    "Thành phần bối cảnh — nó không có tài liệu môn học thật",
+    "Thành phần đầu ra — định dạng cần có chưa được nêu rõ",
+    "Thành phần mục tiêu — mục đích bị để quá rộng quá chung",
+    "Nội dung bị bịa ở chỗ thiếu nguồn. Ba thành phần còn lại tạo ra kết quả mơ hồ, sai hình dạng hoặc lệch trọng tâm, nhưng thường không phải bịa đặt."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "11. Which of these tasks suits an agent best?",
+    "Deciding whether a case counts as academic misconduct",
+    "Granting a student an extension on documented grounds",
+    "Checking outcome-to-activity alignment across a plan",
+    "Resolving a grade appeal lodged against your marking",
+    "Alignment checking is repetitive reasoning with a checkable answer and a recoverable error. The other three are decisions about a person with consequences."
+   ],
+   "vi": [
+    "11. Việc nào dưới đây hợp với agent nhất?",
+    "Quyết định một vụ việc có phải gian lận học thuật không",
+    "Cho một sinh viên gia hạn dựa trên minh chứng đã nộp",
+    "Kiểm tra tính tương thích trong một kế hoạch bài giảng",
+    "Giải quyết đơn phúc khảo điểm khiếu nại việc bạn chấm",
+    "Kiểm tra tính tương thích là tư duy lặp lại, có đáp án kiểm chứng được và sai thì sửa được. Ba việc kia là quyết định về một con người và có hệ quả."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "12. What does \"an agent need not run autonomously\" mean in practice here?",
+    "The agent will pause by itself whenever it is uncertain",
+    "Autonomy is available only on the paid subscription tiers",
+    "You must approve every message the agent sends back to you",
+    "A structured prompt with a check loop already qualifies",
+    "Nothing in this workshop needs an API, a subscription or code. Writing the plan-check-revise loop into an ordinary prompt is already an agentic workflow."
+   ],
+   "vi": [
+    "12. Câu \"agent không nhất thiết phải chạy tự động\" nghĩa là gì trên thực tế?",
+    "Agent sẽ tự dừng lại mỗi khi nó cảm thấy chưa chắc chắn",
+    "Tính tự động chỉ có ở các gói thuê bao trả phí cao cấp",
+    "Bạn phải phê duyệt từng tin nhắn mà agent gửi lại cho bạn",
+    "Một prompt có cấu trúc kèm vòng kiểm tra đã đủ tính agent",
+    "Không phần nào trong buổi tập huấn này cần API, thuê bao hay code. Viết vòng lập kế hoạch – kiểm tra – chỉnh sửa vào một prompt thường đã là quy trình agent."
+   ]
+  }
+ ]
+}

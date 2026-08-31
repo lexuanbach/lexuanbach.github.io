@@ -1,0 +1,233 @@
+{
+ "page": "exercises/ex3-support.html",
+ "questions": [
+  {
+   "a": 0,
+   "en": [
+    "1. Why leave one common question unanswered by the syllabus you paste?",
+    "So you can test what it does when it has no answer",
+    "So the agent has less material and answers faster",
+    "So students learn to read the syllabus for themselves",
+    "So the platform does not exceed its context window",
+    "Without a gap you can only test the easy case. The behaviour that matters — saying that something is not in the materials — has nothing to trigger it."
+   ],
+   "vi": [
+    "1. Vì sao nên để một câu hỏi thường gặp không có lời giải trong đề cương bạn dán?",
+    "Để bạn thử được nó làm gì khi không có câu trả lời",
+    "Để agent có ít tài liệu hơn và trả lời được nhanh hơn",
+    "Để sinh viên học cách tự đọc đề cương của môn học",
+    "Để nền tảng không vượt quá giới hạn cửa sổ ngữ cảnh",
+    "Không có khoảng trống thì bạn chỉ thử được trường hợp dễ. Hành vi quan trọng nhất — nói rằng điều đó không có trong tài liệu — sẽ không có gì kích hoạt."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "2. Test 2 asks about file formats. What is the correct behaviour?",
+    "Recommend PDF, since that is the usual expectation",
+    "State that the materials do not specify this, then stop",
+    "Refuse to answer and escalate the question to you",
+    "Search the web for the university's general policy",
+    "Not covered is a complete and correct answer. Escalation is for exceptions and personal circumstances; a simple gap only needs to be named honestly."
+   ],
+   "vi": [
+    "2. Phép thử 2 hỏi về định dạng tệp. Hành vi đúng là gì?",
+    "Khuyến nghị dùng PDF, vì đó là thông lệ phổ biến",
+    "Nói rằng tài liệu không nêu điều này, rồi dừng lại",
+    "Từ chối trả lời và chuyển câu hỏi đó lại cho bạn",
+    "Tìm trên web quy định chung của trường về việc này",
+    "\"Không có trong tài liệu\" đã là một câu trả lời đầy đủ và đúng. Chuyển tiếp dành cho ngoại lệ và hoàn cảnh cá nhân; một khoảng trống đơn giản chỉ cần được nói thẳng."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "3. What is the single most likely failure in this exercise?",
+    "Quoting the syllabus section without answering",
+    "Refusing to answer even the supported question",
+    "Inventing a format rule because it is the common one",
+    "Producing a reply that is far too long to send",
+    "Plausibility is the trap. PDF only sounds like a real policy, arrives with no hedging, and is indistinguishable from a genuine rule until a student acts on it."
+   ],
+   "vi": [
+    "3. Lỗi dễ xảy ra nhất trong bài thực hành này là gì?",
+    "Trích dẫn mục trong đề cương mà không hề trả lời",
+    "Từ chối trả lời cả câu hỏi vốn có sẵn trong tài liệu",
+    "Bịa ra quy định định dạng vì đó là thông lệ phổ biến",
+    "Tạo ra câu trả lời dài quá mức để có thể gửi đi được",
+    "Cái bẫy nằm ở sự hợp lý. \"Chỉ nhận PDF\" nghe như một quy định thật, không kèm chút do dự nào, và không phân biệt được với quy định thật cho tới khi có sinh viên làm theo."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "4. Test 3, the student ill for two weeks, expects which response?",
+    "Ask the student to supply medical documentation first",
+    "Confirm that the penalty will almost certainly be waived",
+    "State that illness is not covered by the syllabus text",
+    "Refuse to guarantee, explain the route, refer to you",
+    "The syllabus does describe a documented-circumstances route, so the agent can explain it neutrally. What it cannot do is promise an outcome on your behalf."
+   ],
+   "vi": [
+    "4. Phép thử 3, sinh viên ốm hai tuần, cần câu trả lời như thế nào?",
+    "Yêu cầu sinh viên nộp giấy tờ y tế trước đã rồi tính",
+    "Xác nhận rằng gần như chắc chắn sẽ được miễn điểm phạt",
+    "Nói rằng đề cương không hề đề cập đến việc ốm đau",
+    "Từ chối hứa hẹn, giải thích quy trình, chuyển lại cho bạn",
+    "Đề cương có mô tả quy trình cho trường hợp đặc biệt có minh chứng, nên agent giải thích trung tính được. Thứ nó không được làm là hứa hẹn kết quả thay bạn."
+   ]
+  },
+  {
+   "a": 0,
+   "en": [
+    "5. What is the failure mode on the escalation question?",
+    "Reassurance you never authorised the agent to give",
+    "A reply that is too cold for a distressed student",
+    "Refusing to answer any part of the message at all",
+    "Quoting the late-submission rule without comment",
+    "Do not worry, that will be fine is a promise you may have to break. Warmth is required; a commitment about the outcome is not yours for the agent to make."
+   ],
+   "vi": [
+    "5. Kiểu lỗi ở câu hỏi cần chuyển tiếp là gì?",
+    "Sự trấn an mà bạn chưa hề cho phép agent đưa ra",
+    "Câu trả lời quá lạnh lùng với một sinh viên đang lo",
+    "Từ chối trả lời bất kỳ phần nào của lá thư đó cả",
+    "Trích quy định nộp trễ ra mà không bình luận gì thêm",
+    "\"Em đừng lo, sẽ ổn thôi\" là lời hứa bạn có thể phải nuốt lời. Sự ân cần là bắt buộc; còn cam kết về kết quả thì agent không có quyền đưa ra thay bạn."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "6. Your agent gets a test wrong. Where do you fix it?",
+    "In the chat, by correcting it in the next message",
+    "In the instructions, so the fix survives to tomorrow",
+    "In the syllabus, by rewriting the ambiguous section",
+    "In the platform settings, by lowering the creativity",
+    "A correction typed into the conversation is gone when the conversation is. A corrected guardrail is permanent, which is the whole point of building an agent."
+   ],
+   "vi": [
+    "6. Agent của bạn làm sai một phép thử. Bạn sửa ở đâu?",
+    "Trong khung chat, bằng cách chỉnh lại ở tin nhắn sau",
+    "Trong phần hướng dẫn, để bản sửa còn giá trị đến mai",
+    "Trong đề cương, bằng cách viết lại mục còn mơ hồ đó",
+    "Trong thiết lập nền tảng, bằng cách giảm độ sáng tạo",
+    "Lời chỉnh gõ vào cuộc trò chuyện sẽ mất cùng cuộc trò chuyện. Một rào chắn đã sửa thì còn mãi, và đó chính là lý do ta xây agent."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "7. After repairing an instruction, what do you do next?",
+    "Publish the agent, since the defect has been fixed",
+    "Re-run only the question that failed, to save time",
+    "Re-run all three test questions, not just the one",
+    "Record the change and move on to the next exercise",
+    "Fixes propagate. An agent made cautious enough to stop inventing formats can become cautious enough to stop answering the deadline question too."
+   ],
+   "vi": [
+    "7. Sau khi sửa một chỉ dẫn, việc tiếp theo là gì?",
+    "Công bố agent, vì khiếm khuyết đã được khắc phục rồi",
+    "Chỉ chạy lại đúng câu vừa bị lỗi, cho tiết kiệm thời gian",
+    "Chạy lại cả ba câu kiểm thử, không chỉ mỗi câu bị lỗi",
+    "Ghi lại thay đổi rồi chuyển sang bài thực hành kế tiếp",
+    "Các bản sửa lan sang nhau. Một agent được làm cho đủ thận trọng để thôi bịa định dạng có thể thận trọng đến mức thôi trả lời cả câu hỏi về hạn nộp."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "8. Which does more to prevent invented policies?",
+    "Asking the agent to double-check its own answer twice",
+    "Telling the agent firmly not to invent any policies",
+    "Choosing a newer model with a larger context window",
+    "Supplying the policy document to the agent itself",
+    "Instructions help; grounding helps more; doing both is the design. On a platform that enforces grounding, the refusal comes free rather than being requested."
+   ],
+   "vi": [
+    "8. Điều gì ngăn việc bịa quy định hiệu quả hơn?",
+    "Yêu cầu agent tự kiểm tra lại câu trả lời của nó hai lần",
+    "Dặn agent thật dứt khoát rằng đừng bịa ra quy định nào",
+    "Chọn mô hình mới hơn với cửa sổ ngữ cảnh lớn hơn nhiều",
+    "Đưa cho chính agent văn bản quy định gốc để nó bám vào",
+    "Ra lệnh thì có ích; cho nguồn còn ích hơn; làm cả hai mới là thiết kế đúng. Trên nền tảng bắt buộc bám nguồn, lời từ chối có sẵn chứ không cần đi xin."
+   ]
+  },
+  {
+   "a": 0,
+   "en": [
+    "9. Which platform enforces grounding by design rather than by instruction?",
+    "NotebookLM, which answers only from uploaded sources",
+    "Gemini Gems, which stores knowledge files with the agent",
+    "ChatGPT Projects, which keeps files at project level",
+    "Claude Projects, which allows custom instructions",
+    "The other three are told to stay grounded and mostly comply. A source-only notebook cannot answer from outside its sources at all, and cites the passage each time."
+   ],
+   "vi": [
+    "9. Nền tảng nào bắt buộc bám nguồn ngay từ thiết kế, không phải bằng lời dặn?",
+    "NotebookLM, vốn chỉ trả lời dựa trên nguồn đã tải lên",
+    "Gemini Gems, lưu được các tệp kiến thức cùng với agent",
+    "ChatGPT Projects, giữ các tệp ở cấp độ của dự án",
+    "Claude Projects, cho phép đặt hướng dẫn tuỳ chỉnh",
+    "Ba công cụ kia được dặn hãy bám nguồn và phần lớn thì làm theo. Một sổ tay chỉ đọc nguồn thì không thể trả lời ngoài nguồn, và lần nào cũng trích dẫn đúng đoạn."
+   ]
+  },
+  {
+   "a": 1,
+   "en": [
+    "10. Which messages must the agent list separately, never grouped?",
+    "Any message that arrived outside working hours",
+    "Illness, extension, appeal and misconduct mentions",
+    "Messages from students who have written before",
+    "Questions the syllabus answers in more than one place",
+    "These are the cases where a person is involved and a decision has consequences. Grouping them into a category is exactly how one of them gets a generic reply."
+   ],
+   "vi": [
+    "10. Những thư nào agent phải liệt kê riêng, tuyệt đối không gộp nhóm?",
+    "Mọi thư được gửi đến ngoài giờ làm việc hành chính",
+    "Thư nhắc đến ốm đau, gia hạn, phúc khảo và gian lận",
+    "Thư từ những sinh viên đã từng viết cho bạn trước đó",
+    "Câu hỏi mà đề cương trả lời ở nhiều hơn một chỗ",
+    "Đây là những trường hợp có con người liên quan và quyết định có hệ quả. Gộp chúng thành một nhóm chính là cách để một trong số đó nhận câu trả lời mẫu."
+   ]
+  },
+  {
+   "a": 2,
+   "en": [
+    "11. Opening this agent directly to students is what kind of step?",
+    "Impossible, since the platforms do not allow it",
+    "The natural next step once the tests all pass",
+    "A different decision, with obligations of its own",
+    "Equivalent to publishing the syllabus on the LMS",
+    "Accuracy, availability, accessibility, data protection and a route to a human all become your responsibility. Run it as your own drafting assistant for a semester first."
+   ],
+   "vi": [
+    "11. Mở agent này trực tiếp cho sinh viên dùng là bước như thế nào?",
+    "Không thể làm được, vì các nền tảng không cho phép",
+    "Bước tiếp theo tự nhiên khi mọi phép thử đều đạt",
+    "Một quyết định khác hẳn, kèm nghĩa vụ riêng của nó",
+    "Tương đương với việc đăng đề cương lên hệ thống LMS",
+    "Độ chính xác, tính sẵn sàng, khả năng tiếp cận, bảo vệ dữ liệu và một lối gặp người thật đều thành trách nhiệm của bạn. Hãy dùng nó như trợ lý soạn nháp riêng trong một học kỳ trước đã."
+   ]
+  },
+  {
+   "a": 3,
+   "en": [
+    "12. Which sentence is the one this whole exercise is training?",
+    "According to the syllabus, the deadline is 17 October",
+    "I am an AI assistant and may sometimes be incorrect",
+    "Please consult your lecturer for further information",
+    "This is not specified in the supplied course materials",
+    "Saying nothing is there is the hardest sentence to get out of a model trained to be helpful, and it is the one that keeps an invented policy off a student's screen."
+   ],
+   "vi": [
+    "12. Câu nào là thứ mà cả bài thực hành này đang rèn luyện?",
+    "Theo đề cương môn học, hạn nộp là ngày 17 tháng 10",
+    "Tôi là trợ lý AI và đôi khi có thể trả lời chưa chính xác",
+    "Bạn vui lòng liên hệ giảng viên để biết thêm thông tin",
+    "Thông tin này không được nêu trong tài liệu môn học",
+    "Nói rằng \"không có gì ở đó\" là câu khó moi ra nhất từ một mô hình được huấn luyện để tỏ ra hữu ích, và đó là câu giữ cho một quy định bịa không hiện lên màn hình sinh viên."
+   ]
+  }
+ ]
+}

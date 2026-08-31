@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Platforms and setup · AI Agents for Lecturers</title>
+<meta name="title-en" content="Platforms and setup · AI Agents for Lecturers">
+<meta name="title-vi" content="Nền tảng và cài đặt · AI Agent cho Giảng viên">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Which free AI tools can actually save a reusable agent and ground it in your course documents — with setup steps, privacy toggles, and an instructor pre-flight checklist.">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('agentws-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+    if (localStorage.getItem('agentws-language') === 'vi') document.documentElement.dataset.lang = 'vi';
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="index.html"><b>AI Agents</b> · for Lecturers</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="index.html" class="always" data-i18n="nav.overview">Overview</a>
+      <a href="concepts.html" data-i18n="nav.concepts">Concepts</a>
+      <a href="exercises/ex1-lesson.html" data-i18n="nav.exercises">Exercises</a>
+      <a href="tools.html" data-i18n="nav.tools">Tools &amp; data</a>
+      <a href="platforms.html" aria-current="page" data-i18n="nav.platforms">Platforms</a>
+      <a href="responsible.html" data-i18n="nav.responsible">Responsible use</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="lang-toggle" type="button">VI</button>
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4 data-i18n="side.site">Site</h4>
+  <nav aria-label="Site">
+    <a href="index.html" data-i18n="nav.overview">Overview</a>
+    <a href="concepts.html" data-i18n="nav.concepts">Concepts</a>
+    <a href="exercises/ex1-lesson.html" data-i18n="nav.ex1">Exercise 1 · Lesson</a>
+    <a href="exercises/ex2-assessment.html" data-i18n="nav.ex2">Exercise 2 · Assessment</a>
+    <a href="exercises/ex3-support.html" data-i18n="nav.ex3">Exercise 3 · Support</a>
+    <a href="tools.html" data-i18n="nav.tools">Tools &amp; data</a>
+    <a href="platforms.html" aria-current="page" data-i18n="nav.platforms">Platforms</a>
+    <a href="responsible.html" data-i18n="nav.responsible">Responsible use</a>
+  </nav>
+  <h4 data-i18n="side.onpage">On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#requirement"><span lang="en">What a platform must do</span><span lang="vi">Nền tảng phải làm được gì</span></a>
+    <a href="#recommended"><span lang="en">Recommended stack</span><span lang="vi">Bộ công cụ đề xuất</span></a>
+    <a href="#comparison"><span lang="en">Full comparison</span><span lang="vi">Bảng so sánh đầy đủ</span></a>
+    <a href="#paid"><span lang="en">What is not free</span><span lang="vi">Cái gì không miễn phí</span></a>
+    <a href="#privacy"><span lang="en">Privacy settings</span><span lang="vi">Thiết lập quyền riêng tư</span></a>
+    <a href="#preflight"><span lang="en">Instructor pre-flight</span><span lang="vi">Chuẩn bị của giảng viên</span></a>
+    <a href="#blocked"><span lang="en">If a platform is blocked</span><span lang="vi">Nếu nền tảng bị chặn</span></a>
+    <a href="#quiz"><span lang="en">Self-check</span><span lang="vi">Tự kiểm tra</span></a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow" lang="en">Setup · do this before the session</span>
+      <span class="eyebrow" lang="vi">Cài đặt · làm trước buổi tập huấn</span>
+      <h1 lang="en">Platforms and setup</h1>
+      <h1 lang="vi">Nền tảng và cài đặt</h1>
+      <p class="lede" lang="en">Every template in this workshop is plain text, so it runs anywhere. What differs
+        between tools is whether you can <em>save</em> the agent and <em>attach your course documents</em>
+        to it on a free account — which is exactly what the three exercises need. This page says which
+        tools clear that bar right now, and which quietly do not.</p>
+      <p class="lede" lang="vi">Mọi mẫu trong buổi tập huấn này đều là văn bản thuần, nên chạy được ở bất cứ đâu.
+        Khác biệt giữa các công cụ nằm ở chỗ bạn có <em>lưu</em> được agent và <em>đính kèm tài liệu môn học</em>
+        vào nó bằng tài khoản miễn phí hay không — đúng thứ mà ba bài thực hành cần. Trang này nói rõ công cụ
+        nào hiện đạt yêu cầu đó, và công cụ nào thì âm thầm không đạt.</p>
+      <div class="meta-chips" lang="en">
+        <a class="chip" href="#recommended">Recommended stack</a>
+        <a class="chip" href="#comparison">7 platforms compared</a>
+        <a class="chip" href="#privacy">Privacy toggles</a>
+      </div>
+      <div class="meta-chips" lang="vi">
+        <a class="chip" href="#recommended">Bộ công cụ đề xuất</a>
+        <a class="chip" href="#comparison">So sánh 7 nền tảng</a>
+        <a class="chip" href="#privacy">Công tắc riêng tư</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="requirement">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">01 · The bar</span>
+      <span class="eyebrow" lang="vi">01 · Tiêu chuẩn tối thiểu</span>
+      <h2 lang="en">Three requirements, one of which is easy to miss</h2>
+      <h2 lang="vi">Ba yêu cầu, trong đó một yêu cầu rất dễ bỏ sót</h2>
+    </div>
+    <div class="gate-grid" lang="en">
+      <div class="gate-item"><span class="gn">Save</span><h4>A reusable instruction set</h4><p>You must be able to store the agent's role, workflow, and guardrails once and re-open it — not paste the whole thing into a fresh chat every time.</p></div>
+      <div class="gate-item"><span class="gn">Ground</span><h4>Attached course documents</h4><p>The syllabus, marking guide, or lecture notes must live <em>with</em> the agent, so every conversation starts already knowing your course.</p></div>
+      <div class="gate-item"><span class="gn">Free</span><h4>On an ordinary account</h4><p>Not a trial, not a departmental licence, not the instructor's personal subscription. Everyone in the room must be able to do it.</p></div>
+    </div>
+    <div class="gate-grid" lang="vi">
+      <div class="gate-item"><span class="gn">Lưu</span><h4>Bộ hướng dẫn dùng lại được</h4><p>Bạn phải lưu được vai trò, quy trình và rào chắn của agent một lần rồi mở lại — chứ không phải dán lại toàn bộ vào một cửa sổ chat mới mỗi lần.</p></div>
+      <div class="gate-item"><span class="gn">Bám nguồn</span><h4>Đính kèm tài liệu môn học</h4><p>Đề cương, hướng dẫn chấm hay ghi chú bài giảng phải nằm <em>cùng</em> agent, để mọi cuộc trò chuyện đều bắt đầu khi nó đã biết môn học của bạn.</p></div>
+      <div class="gate-item"><span class="gn">Miễn phí</span><h4>Trên tài khoản thông thường</h4><p>Không phải bản dùng thử, không phải giấy phép của khoa, không phải thuê bao cá nhân của giảng viên. Mọi người trong phòng đều phải làm được.</p></div>
+    </div>
+    <div class="note tip" lang="en">
+      <span class="note-tag">Use what you already have</span>
+      If you already work in ChatGPT or Claude, stay there — both have a free equivalent of the feature
+      we need. The recommendation below matters most for the instructor's demonstration and for
+      participants arriving with no preference. Say the choice out loud in the first two minutes so
+      nobody spends the opening of the session creating an account.
+    </div>
+    <div class="note tip" lang="vi">
+      <span class="note-tag">Dùng thứ bạn đang có</span>
+      Nếu bạn đã quen ChatGPT hay Claude, cứ ở lại đó — cả hai đều có bản miễn phí tương đương tính năng ta
+      cần. Đề xuất bên dưới quan trọng nhất với phần demo của giảng viên và với người đến lớp mà chưa có lựa
+      chọn nào. Hãy tuyên bố lựa chọn ngay trong hai phút đầu, để không ai mất phần mở đầu buổi học chỉ để
+      lập tài khoản.
+    </div>
+  </section>
+
+  <section class="block" id="recommended">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">02 · The short answer</span>
+      <span class="eyebrow" lang="vi">02 · Câu trả lời ngắn gọn</span>
+      <h2 lang="en">Recommended stack</h2>
+      <h2 lang="vi">Bộ công cụ đề xuất</h2>
+      <p lang="en">Mapped to the parts of the session where each one earns its place.</p>
+      <p lang="vi">Gắn với từng phần của buổi học, nơi mỗi công cụ chứng minh được giá trị của nó.</p>
+    </div>
+    <div class="tbl-scroll" lang="en">
+      <table class="tbl">
+        <thead>
+          <tr><th class="narrow">Session segment</th><th class="narrow">Platform</th><th>Why this one</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">00:10–00:25<br>Concepts</td>
+            <td><strong>Google Opal</strong><br><span class="mono soft">Google Labs</span></td>
+            <td>Renders a workflow as connected boxes, so <span class="mono">plan → produce → verify → revise</span> becomes something participants watch execute rather than a diagram on a slide. No code, free in beta, and available in over 160 countries.</td>
+          </tr>
+          <tr>
+            <td class="mono">00:25–00:35<br>Demonstration</td>
+            <td><strong>Gemini Gems</strong></td>
+            <td>The lesson-preparation agent is saved once, re-run live, and shared with the room by link.</td>
+          </tr>
+          <tr>
+            <td class="mono">Exercises 1 &amp; 2</td>
+            <td><strong>Gemini Gems</strong><br><span class="mono soft">primary</span></td>
+            <td>Free on every tier, stores the six-component template verbatim, and accepts the syllabus as a Knowledge file — up to 10 files. Our templates paste straight into the instructions box.</td>
+          </tr>
+          <tr>
+            <td class="mono">Exercise 3</td>
+            <td><strong>NotebookLM</strong></td>
+            <td>The strongest pedagogical fit on this page: it answers only from the uploaded sources and cites the passage each time. The grounding guardrail demonstrates itself instead of being merely promised.</td>
+          </tr>
+          <tr>
+            <td class="mono">Any exercise</td>
+            <td><strong>ChatGPT Projects</strong> or <strong>Claude Projects</strong><br><span class="mono soft">fallback</span></td>
+            <td>Both free, both store project-level instructions plus files. For participants who already live in one of them.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tbl-scroll" lang="vi">
+      <table class="tbl">
+        <thead>
+          <tr><th class="narrow">Phần của buổi học</th><th class="narrow">Nền tảng</th><th>Vì sao chọn công cụ này</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">00:10–00:25<br>Khái niệm</td>
+            <td><strong>Google Opal</strong><br><span class="mono soft">Google Labs</span></td>
+            <td>Vẽ quy trình thành các hộp nối với nhau, nên <span class="mono">lập kế hoạch → tạo → kiểm tra → chỉnh sửa</span> trở thành thứ học viên nhìn thấy chạy thật, thay vì một sơ đồ trên slide. Không cần code, miễn phí trong giai đoạn beta, đã mở ở hơn 160 quốc gia.</td>
+          </tr>
+          <tr>
+            <td class="mono">00:25–00:35<br>Demo</td>
+            <td><strong>Gemini Gems</strong></td>
+            <td>Agent soạn bài giảng được lưu một lần, chạy lại trực tiếp trên lớp, và chia sẻ cho cả phòng bằng đường link.</td>
+          </tr>
+          <tr>
+            <td class="mono">Bài 1 &amp; 2</td>
+            <td><strong>Gemini Gems</strong><br><span class="mono soft">chính</span></td>
+            <td>Miễn phí ở mọi gói, lưu nguyên vẹn mẫu sáu thành phần, và nhận đề cương làm tệp Knowledge — tối đa 10 tệp. Các mẫu của chúng ta dán thẳng vào ô hướng dẫn là chạy.</td>
+          </tr>
+          <tr>
+            <td class="mono">Bài 3</td>
+            <td><strong>NotebookLM</strong></td>
+            <td>Phù hợp về mặt sư phạm nhất trong cả trang này: nó chỉ trả lời dựa trên nguồn đã tải lên và trích dẫn đúng đoạn mỗi lần. Rào chắn bám nguồn tự chứng minh chính nó, thay vì chỉ là một lời hứa.</td>
+          </tr>
+          <tr>
+            <td class="mono">Bài nào cũng được</td>
+            <td><strong>ChatGPT Projects</strong> hoặc <strong>Claude Projects</strong><br><span class="mono soft">dự phòng</span></td>
+            <td>Cả hai đều miễn phí, đều lưu được hướng dẫn cấp dự án kèm tệp. Dành cho học viên đã quen dùng một trong hai.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block" id="comparison">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">03 · The detail</span>
+      <span class="eyebrow" lang="vi">03 · Chi tiết</span>
+      <h2 lang="en">Full comparison</h2>
+      <h2 lang="vi">Bảng so sánh đầy đủ</h2>
+      <p lang="en">Free-tier capabilities, and the constraint that will actually bite during a two-hour session
+        with a room full of people.</p>
+      <p lang="vi">Khả năng của gói miễn phí, và giới hạn thật sự sẽ gây khó trong một buổi hai giờ với cả phòng
+        đông người.</p>
+    </div>
+    <div class="tbl-scroll" lang="en">
+      <table class="tbl">
+        <thead>
+          <tr><th class="narrow">Platform</th><th class="center">Saves an agent</th><th class="narrow">Document grounding</th><th>Free-tier constraint to plan around</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Gemini Gems</strong><br><span class="mono soft">gemini.google.com</span></td>
+            <td class="center yes">Yes</td>
+            <td class="mono">10 files<br>100 MB each</td>
+            <td>Gems can only be created or edited in the desktop web app. Sharing is blocked if the knowledge files did not come from Google Drive or the local device.</td>
+          </tr>
+          <tr>
+            <td><strong>NotebookLM</strong></td>
+            <td class="center yes">Yes</td>
+            <td class="mono">50 sources<br>per notebook</td>
+            <td>50 chats per day. No custom role or guardrail system prompt, so pair it with a Gem if the escalation response format matters to you.</td>
+          </tr>
+          <tr>
+            <td><strong>ChatGPT Projects</strong></td>
+            <td class="center yes">Yes</td>
+            <td class="mono">5 files<br>per project</td>
+            <td>Project instructions hold 8,000 characters — ample. The custom <em>GPT builder</em> is a paid feature; Projects are the free equivalent, and free accounts can still use a GPT you share with them.</td>
+          </tr>
+          <tr>
+            <td><strong>Claude Projects</strong></td>
+            <td class="center yes">Yes</td>
+            <td class="mono">5 projects<br>on free</td>
+            <td>The tightest message limits of the three. A room of participants each generating long lesson plans may hit them mid-exercise.</td>
+          </tr>
+          <tr>
+            <td><strong>Google Opal</strong><br><span class="mono soft">Google Labs</span></td>
+            <td class="center yes">Yes</td>
+            <td class="mono">via steps</td>
+            <td>Public beta. Excellent for demonstrating what a workflow <em>is</em>; not where you want twenty people building their first agent under time pressure.</td>
+          </tr>
+          <tr>
+            <td><strong>Poe</strong><br><span class="mono soft">poe.com/create_bot</span></td>
+            <td class="center yes">Yes</td>
+            <td class="mono">instructions only</td>
+            <td>Free bot creation with a shareable link, but compute-point limits apply to the stronger models. Useful mainly as a way to hand a working agent to people who cannot build one.</td>
+          </tr>
+          <tr>
+            <td><strong>Microsoft 365 Copilot</strong><br><span class="mono soft">Agent Builder</span></td>
+            <td class="center partial">Tenant</td>
+            <td class="mono">SharePoint</td>
+            <td>Gated by your institution's licence <em>and</em> its administrator settings. Confirm with IT before the session; do not build a live workshop on it unsighted.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tbl-scroll" lang="vi">
+      <table class="tbl">
+        <thead>
+          <tr><th class="narrow">Nền tảng</th><th class="center">Lưu được agent</th><th class="narrow">Nạp tài liệu</th><th>Giới hạn gói miễn phí cần tính trước</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Gemini Gems</strong><br><span class="mono soft">gemini.google.com</span></td>
+            <td class="center yes">Có</td>
+            <td class="mono">10 tệp<br>mỗi tệp 100 MB</td>
+            <td>Chỉ tạo và sửa Gem được trên bản web máy tính. Không chia sẻ được nếu tệp Knowledge không đến từ Google Drive hoặc từ máy của bạn.</td>
+          </tr>
+          <tr>
+            <td><strong>NotebookLM</strong></td>
+            <td class="center yes">Có</td>
+            <td class="mono">50 nguồn<br>mỗi sổ tay</td>
+            <td>50 lượt hỏi mỗi ngày. Không có ô nhập vai trò hay rào chắn riêng, nên hãy ghép với một Gem nếu bạn cần đúng định dạng câu trả lời chuyển tiếp.</td>
+          </tr>
+          <tr>
+            <td><strong>ChatGPT Projects</strong></td>
+            <td class="center yes">Có</td>
+            <td class="mono">5 tệp<br>mỗi dự án</td>
+            <td>Ô hướng dẫn dự án chứa 8.000 ký tự — quá đủ. Trình tạo <em>GPT tuỳ chỉnh</em> là tính năng trả phí; Projects là bản miễn phí tương đương, và tài khoản miễn phí vẫn dùng được GPT do bạn chia sẻ.</td>
+          </tr>
+          <tr>
+            <td><strong>Claude Projects</strong></td>
+            <td class="center yes">Có</td>
+            <td class="mono">5 dự án<br>ở gói miễn phí</td>
+            <td>Giới hạn số lượt nhắn chặt nhất trong ba công cụ. Cả phòng cùng sinh kế hoạch bài giảng dài có thể chạm giới hạn giữa chừng.</td>
+          </tr>
+          <tr>
+            <td><strong>Google Opal</strong><br><span class="mono soft">Google Labs</span></td>
+            <td class="center yes">Có</td>
+            <td class="mono">qua các bước</td>
+            <td>Bản beta công khai. Rất tốt để minh hoạ quy trình <em>là gì</em>; nhưng không phải nơi để hai mươi người xây agent đầu tiên dưới áp lực thời gian.</td>
+          </tr>
+          <tr>
+            <td><strong>Poe</strong><br><span class="mono soft">poe.com/create_bot</span></td>
+            <td class="center yes">Có</td>
+            <td class="mono">chỉ hướng dẫn</td>
+            <td>Tạo bot miễn phí kèm link chia sẻ, nhưng các mô hình mạnh bị giới hạn điểm tính toán. Chủ yếu hữu ích để trao một agent chạy được cho người không tự xây được.</td>
+          </tr>
+          <tr>
+            <td><strong>Microsoft 365 Copilot</strong><br><span class="mono soft">Agent Builder</span></td>
+            <td class="center partial">Tuỳ trường</td>
+            <td class="mono">SharePoint</td>
+            <td>Phụ thuộc giấy phép của trường <em>và</em> thiết lập của quản trị viên. Hãy xác nhận với bộ phận CNTT trước buổi học; đừng đặt cược một buổi tập huấn trực tiếp vào nó khi chưa kiểm chứng.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block" id="paid">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">04 · Clear the confusion</span>
+      <span class="eyebrow" lang="vi">04 · Gỡ hiểu nhầm</span>
+      <h2 lang="en">What is not free</h2>
+      <h2 lang="vi">Cái gì không miễn phí</h2>
+    </div>
+    <div class="concept wide" lang="en">
+      <p>Two features are widely assumed to be free and are not. Both have a free substitute that does
+        everything this workshop needs, so nobody has to spend anything:</p>
+      <ul>
+        <li><strong>ChatGPT's custom GPT builder</strong> requires a paid plan. Free users can
+          <em>use</em> a GPT someone shares with them, and can build the equivalent with
+          <strong>Projects</strong>, which are free.</li>
+        <li><strong>Mistral Le Chat's agent builder</strong> is a Pro feature. The free tier gives you
+          chat and document upload but not the saved no-code agent.</li>
+      </ul>
+      <p>Anything on this page marked free was free on an ordinary personal account, checked against the
+        vendors' own documentation in <span class="mono">August 2026</span>. Free tiers move; if a
+        participant's screen disagrees with this table, believe the screen and tell the instructor.</p>
+    </div>
+    <div class="concept wide" lang="vi">
+      <p>Có hai tính năng thường bị tưởng là miễn phí nhưng không phải. Cả hai đều có bản thay thế miễn phí
+        làm được mọi thứ buổi tập huấn này cần, nên không ai phải trả tiền:</p>
+      <ul>
+        <li><strong>Trình tạo GPT tuỳ chỉnh của ChatGPT</strong> đòi gói trả phí. Người dùng miễn phí vẫn
+          <em>dùng</em> được GPT do người khác chia sẻ, và xây được thứ tương đương bằng
+          <strong>Projects</strong>, vốn miễn phí.</li>
+        <li><strong>Trình dựng agent của Mistral Le Chat</strong> là tính năng gói Pro. Gói miễn phí cho bạn
+          trò chuyện và tải tài liệu, nhưng không cho lưu agent không cần code.</li>
+      </ul>
+      <p>Mọi thứ được ghi là miễn phí trên trang này đều miễn phí trên tài khoản cá nhân thông thường, đã đối
+        chiếu với tài liệu chính thức của nhà cung cấp vào <span class="mono">tháng 8/2026</span>. Gói miễn phí
+        thay đổi liên tục; nếu màn hình của học viên khác với bảng này, hãy tin màn hình và báo cho giảng viên.</p>
+    </div>
+  </section>
+
+  <section class="block" id="connectors-pointer">
+    <div class="wrap">
+      <div class="note tip" lang="en">
+        <span class="note-tag">Connectors and file limits are on their own page</span>
+        This table covers what each platform can <em>save</em>. What each one can <em>reach</em> — a Gmail
+        connector, how many documents a free tier will read, whether it can hand you back a spreadsheet —
+        is on <a href="tools.html#connectors">Tools, connectors and documents</a>, together with the
+        reasons a university inbox is not the place to start.
+      </div>
+      <div class="note tip" lang="vi">
+        <span class="note-tag">Connector và hạn mức tệp nằm ở trang riêng</span>
+        Bảng này nói về khả năng <em>lưu</em> của từng nền tảng. Còn khả năng <em>với tới</em> — connector Gmail,
+        gói miễn phí đọc được bao nhiêu tài liệu, có trả về bảng tính được không — nằm ở
+        <a href="tools.html#connectors">Công cụ, connector và tài liệu</a>, kèm lý do vì sao hộp thư của trường
+        không phải nơi để bắt đầu.
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="privacy">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">05 · Do this before uploading anything</span>
+      <span class="eyebrow" lang="vi">05 · Làm việc này trước khi tải bất cứ thứ gì lên</span>
+      <h2 lang="en">Check the training setting</h2>
+      <h2 lang="vi">Kiểm tra thiết lập dữ liệu huấn luyện</h2>
+      <p lang="en">On consumer free tiers, your conversations are generally used to improve the model unless you
+        turn that off — and the defaults have changed more than once. Check the current state rather
+        than trusting what you remember.</p>
+      <p lang="vi">Ở các gói miễn phí dành cho người dùng cá nhân, cuộc trò chuyện của bạn thường được dùng để
+        cải thiện mô hình trừ khi bạn tắt đi — và mặc định đã thay đổi nhiều lần. Hãy kiểm tra trạng thái hiện
+        tại thay vì tin vào trí nhớ.</p>
+    </div>
+    <div class="tbl-scroll" lang="en">
+      <table class="tbl">
+        <thead><tr><th class="narrow">Platform</th><th>Where to look</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ChatGPT</strong></td><td class="mono">Settings → Data Controls → "Improve the model for everyone"</td></tr>
+          <tr><td><strong>Gemini</strong></td><td class="mono">Gemini Apps Activity → "Keep Activity"</td></tr>
+          <tr><td><strong>Claude</strong></td><td class="mono">Settings → Privacy → "Help improve Claude"</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tbl-scroll" lang="vi">
+      <table class="tbl">
+        <thead><tr><th class="narrow">Nền tảng</th><th>Tìm ở đâu</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ChatGPT</strong></td><td class="mono">Settings → Data Controls → "Improve the model for everyone"</td></tr>
+          <tr><td><strong>Gemini</strong></td><td class="mono">Gemini Apps Activity → "Keep Activity"</td></tr>
+          <tr><td><strong>Claude</strong></td><td class="mono">Settings → Privacy → "Help improve Claude"</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note warn" lang="en">
+      <span class="note-tag">This is a teaching moment, not an administrative step</span>
+      Doing this together, on screen, in the first minutes of the session makes
+      <a href="responsible.html#principles">principle 2</a> concrete: it is the difference between
+      "do not upload student data" as a slogan and as a setting you have just changed. It is also the
+      reason every exercise here works from anonymized or synthetic material.
+    </div>
+    <div class="note warn" lang="vi">
+      <span class="note-tag">Đây là một khoảnh khắc dạy học, không phải thủ tục hành chính</span>
+      Cùng nhau làm việc này, trên màn hình, trong những phút đầu buổi học sẽ khiến
+      <a href="responsible.html#principles">nguyên tắc 2</a> trở nên cụ thể: đó là khác biệt giữa "đừng tải dữ
+      liệu sinh viên lên" như một khẩu hiệu và như một thiết lập bạn vừa tự tay đổi. Đó cũng là lý do mọi bài
+      thực hành ở đây đều làm trên tài liệu ẩn danh hoặc giả lập.
+    </div>
+  </section>
+
+  <section class="block" id="preflight">
+    <div class="sec-head foldable">
+      <span class="eyebrow" lang="en">06 · For the instructor</span>
+      <span class="eyebrow" lang="vi">06 · Dành cho giảng viên</span>
+      <h2 lang="en">Pre-flight checklist</h2>
+      <h2 lang="vi">Danh mục chuẩn bị</h2>
+    </div>
+    <div class="fold-body">
+      <div class="concept wide" lang="en">
+        <h3>One week before</h3>
+      </div>
+      <div class="concept wide" lang="vi">
+        <h3>Một tuần trước</h3>
+      </div>
+      <div class="ticklist" id="pf-week">
+        <label class="tick"><input type="checkbox" data-k="email"><span lang="en">Send the pre-session email so participants arrive with an account, a syllabus, and an anonymized response.</span><span lang="vi">Gửi email trước buổi học để học viên đến lớp với tài khoản, đề cương và một bài làm đã ẩn danh.</span></label>
+        <label class="tick"><input type="checkbox" data-k="gem"><span lang="en">Build the demonstration lesson-preparation Gem and confirm its share link opens in a private browser window.</span><span lang="vi">Dựng sẵn Gem soạn bài giảng dùng để demo và kiểm tra link chia sẻ mở được trong cửa sổ ẩn danh.</span></label>
+        <label class="tick"><input type="checkbox" data-k="nb"><span lang="en">Build the Exercise 3 notebook from the <a href="exercises/ex3-support.html#sample">sample syllabus</a>.</span><span lang="vi">Dựng sẵn sổ tay cho Bài 3 từ <a href="exercises/ex3-support.html#sample">đề cương mẫu</a>.</span></label>
+        <label class="tick"><input type="checkbox" data-k="opal"><span lang="en">Build the Opal workflow used in the concepts segment.</span><span lang="vi">Dựng sẵn quy trình Opal dùng trong phần khái niệm.</span></label>
+      </div>
+      <div class="concept wide" lang="en">
+        <h3>One day before</h3>
+      </div>
+      <div class="concept wide" lang="vi">
+        <h3>Một ngày trước</h3>
+      </div>
+      <div class="ticklist" id="pf-day">
+        <label class="tick"><input type="checkbox" data-k="acct"><span lang="en"><strong>Test with an account of the type participants will have</strong> — an institutional Google Workspace or Microsoft 365 account, not your personal one. Universities routinely disable Gems sharing, Opal, or Agent Builder tenant-wide.</span><span lang="vi"><strong>Thử bằng tài khoản đúng loại mà học viên sẽ dùng</strong> — tài khoản Google Workspace hoặc Microsoft 365 của trường, không phải tài khoản cá nhân của bạn. Các trường vẫn thường tắt tính năng chia sẻ Gem, Opal hay Agent Builder trên toàn hệ thống.</span></label>
+        <label class="tick"><input type="checkbox" data-k="net"><span lang="en">Confirm the venue network does not block the platforms.</span><span lang="vi">Kiểm tra mạng ở phòng học không chặn các nền tảng này.</span></label>
+        <label class="tick"><input type="checkbox" data-k="pdf"><span lang="en">Export the demonstration outputs to PDF as an offline fallback.</span><span lang="vi">Xuất kết quả demo ra PDF để dự phòng khi mất mạng.</span></label>
+        <label class="tick"><input type="checkbox" data-k="print"><span lang="en">Print the <a href="responsible.html#safety">safety checklist</a> and the plain templates for anyone whose laptop fails.</span><span lang="vi">In <a href="responsible.html#safety">danh mục an toàn</a> và các mẫu dạng chữ cho người bị hỏng laptop.</span></label>
+      </div>
+      <div class="concept wide" lang="en">
+        <h3>On the day</h3>
+      </div>
+      <div class="concept wide" lang="vi">
+        <h3>Trong ngày diễn ra</h3>
+      </div>
+      <div class="ticklist" id="pf-onday">
+        <label class="tick"><input type="checkbox" data-k="announce"><span lang="en">State the platform choice in the first two minutes.</span><span lang="vi">Tuyên bố lựa chọn nền tảng trong hai phút đầu tiên.</span></label>
+        <label class="tick"><input type="checkbox" data-k="links"><span lang="en">Have the shared Gem link and notebook link ready to paste into the chat or onto a slide.</span><span lang="vi">Chuẩn bị sẵn link Gem và link sổ tay để dán vào khung chat hoặc lên slide.</span></label>
+        <label class="tick"><input type="checkbox" data-k="toggle"><span lang="en">Walk the room through the privacy toggle together, before the first upload.</span><span lang="vi">Cùng cả phòng thao tác công tắc quyền riêng tư, trước lần tải tài liệu đầu tiên.</span></label>
+      </div>
+      <p class="subtle-note" lang="en">Ticks are saved in this browser only.
+        <button class="tick-reset" type="button" data-reset="pf-week">Clear week</button> ·
+        <button class="tick-reset" type="button" data-reset="pf-day">Clear day</button> ·
+        <button class="tick-reset" type="button" data-reset="pf-onday">Clear on-the-day</button>
+      </p>
+      <p class="subtle-note" lang="vi">Các mục đã tick chỉ lưu trong trình duyệt này.
+        <button class="tick-reset" type="button" data-reset="pf-week">Xoá mục tuần trước</button> ·
+        <button class="tick-reset" type="button" data-reset="pf-day">Xoá mục hôm trước</button> ·
+        <button class="tick-reset" type="button" data-reset="pf-onday">Xoá mục trong ngày</button>
+      </p>
+    </div>
+  </section>
+
+  <section class="block" id="blocked">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">07 · Contingency</span>
+      <span class="eyebrow" lang="vi">07 · Phương án dự phòng</span>
+      <h2 lang="en">If a platform is blocked</h2>
+      <h2 lang="vi">Nếu một nền tảng bị chặn</h2>
+    </div>
+    <div class="concept wide" lang="en">
+      <p>Every template here is portable plain text. In order of preference:</p>
+      <pre class="codeblock">Gemini Gems  →  ChatGPT Projects  →  Claude Projects  →  paste the template
+                                                          into any chat, each time</pre>
+      <p>The last option loses reusability and nothing else. The workflow and the quality-control loop
+        are carried by the prompt itself, not by the platform — which is the whole argument of
+        <a href="concepts.html">the concepts page</a>, and the reason this workshop does not depend on
+        any particular vendor surviving the year.</p>
+    </div>
+    <div class="concept wide" lang="vi">
+      <p>Mọi mẫu ở đây đều là văn bản thuần, mang đi đâu cũng chạy. Thứ tự ưu tiên:</p>
+      <pre class="codeblock">Gemini Gems  →  ChatGPT Projects  →  Claude Projects  →  dán mẫu vào bất kỳ
+                                                          khung chat nào, mỗi lần một lần</pre>
+      <p>Phương án cuối chỉ mất tính dùng lại, ngoài ra không mất gì. Quy trình và vòng kiểm soát chất lượng
+        nằm trong chính prompt chứ không nằm ở nền tảng — đó là toàn bộ lập luận của
+        <a href="concepts.html">trang khái niệm</a>, và là lý do buổi tập huấn này không phụ thuộc vào việc
+        một nhà cung cấp cụ thể có sống qua năm nay hay không.</p>
+    </div>
+  </section>
+
+  <section class="block" id="quiz">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">08 · Two minutes</span>
+      <span class="eyebrow" lang="vi">08 · Hai phút</span>
+      <h2 lang="en">Self-check</h2>
+      <h2 lang="vi">Tự kiểm tra</h2>
+    </div>
+    <div class="concept wide" lang="en">
+      <p>Not graded and not submitted anywhere — twelve questions to check that this page landed. The
+        options are deliberately close in length, so guessing by shape will not help you.</p>
+    </div>
+    <div class="concept wide" lang="vi">
+      <p>Không tính điểm, không nộp đi đâu cả — mười hai câu để kiểm tra xem trang này đã ngấm chưa. Các
+        phương án được cố ý viết dài gần bằng nhau, nên đoán theo hình thức sẽ không giúp được gì.</p>
+    </div>
+    <div class="quiz-block">
+      <!-- QUIZ -->
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question" lang="en">1. What must a platform do to be usable for these three exercises?</p>
+        <p class="quiz-question" lang="vi">1. Một nền tảng phải làm được gì mới dùng được cho ba bài thực hành này?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Save a reusable agent and hold your course documents</button>
+          <button class="quiz-opt" type="button">Support at least four different underlying AI models</button>
+          <button class="quiz-opt" type="button">Run on a phone as well as on a desktop computer</button>
+          <button class="quiz-opt" type="button">Offer a student-facing version you can publish to</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Lưu được agent dùng lại và giữ được tài liệu môn học</button>
+          <button class="quiz-opt" type="button">Hỗ trợ ít nhất bốn mô hình AI nền khác nhau</button>
+          <button class="quiz-opt" type="button">Chạy được trên điện thoại cũng như trên máy tính</button>
+          <button class="quiz-opt" type="button">Có phiên bản cho sinh viên để bạn công bố lên đó</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Save, ground, free. All three exercises need an instruction set you can re-open and a syllabus attached to it, on an account everyone in the room can create." data-explain-vi="Lưu, bám nguồn, miễn phí. Cả ba bài đều cần một bộ hướng dẫn mở lại được và một đề cương đính kèm, trên tài khoản mà mọi người trong phòng đều tạo được."></p>
+      </div>
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question" lang="en">2. Which feature is widely assumed to be free but is not?</p>
+        <p class="quiz-question" lang="vi">2. Tính năng nào thường bị tưởng là miễn phí nhưng thực ra không phải?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">ChatGPT Projects, which now requires the Go tier or above</button>
+          <button class="quiz-opt" type="button">The ChatGPT custom GPT builder, which needs a paid plan</button>
+          <button class="quiz-opt" type="button">Gemini Gems, which moved behind Google AI Pro in 2026</button>
+          <button class="quiz-opt" type="button">Claude Projects, which is limited to Team and Enterprise</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">ChatGPT Projects, nay đòi hỏi gói Go trở lên mới dùng được</button>
+          <button class="quiz-opt" type="button">Trình tạo GPT tuỳ chỉnh của ChatGPT, vốn đòi gói trả phí</button>
+          <button class="quiz-opt" type="button">Gemini Gems, đã chuyển vào gói Google AI Pro từ năm 2026</button>
+          <button class="quiz-opt" type="button">Claude Projects, vốn chỉ có ở gói Team và gói Enterprise</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Free accounts can use a GPT that someone shares with them, and can build the same thing with Projects, which are free. Only the builder itself is paid." data-explain-vi="Tài khoản miễn phí vẫn dùng được GPT do người khác chia sẻ, và dựng được thứ tương đương bằng Projects vốn miễn phí. Chỉ riêng trình tạo là tính phí."></p>
+      </div>
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question" lang="en">3. Why is NotebookLM recommended specifically for Exercise 3?</p>
+        <p class="quiz-question" lang="vi">3. Vì sao NotebookLM được đề xuất riêng cho Bài 3?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">It is the only tool that can be shared with students</button>
+          <button class="quiz-opt" type="button">It allows the longest custom instructions of any tool</button>
+          <button class="quiz-opt" type="button">It answers only from its sources and cites the passage</button>
+          <button class="quiz-opt" type="button">It has no daily limit on the number of questions asked</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Nó là công cụ duy nhất chia sẻ được cho sinh viên dùng</button>
+          <button class="quiz-opt" type="button">Nó cho phép viết hướng dẫn tuỳ chỉnh dài nhất hiện nay</button>
+          <button class="quiz-opt" type="button">Nó chỉ trả lời từ nguồn của nó và trích dẫn đúng đoạn</button>
+          <button class="quiz-opt" type="button">Nó không giới hạn số câu hỏi được đặt trong một ngày</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The grounding guardrail demonstrates itself rather than being promised. What it lacks is a role and guardrail prompt, so pair it with a Gem if you need those." data-explain-vi="Rào chắn bám nguồn tự chứng minh chính nó thay vì chỉ là lời hứa. Thứ nó thiếu là ô nhập vai trò và rào chắn, nên hãy ghép với một Gem nếu bạn cần."></p>
+      </div>
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question" lang="en">4. Where can a Gemini Gem be created or edited?</p>
+        <p class="quiz-question" lang="vi">4. Gemini Gem được tạo và chỉnh sửa ở đâu?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">In the mobile app first, then synced to the web</button>
+          <button class="quiz-opt" type="button">In any Gemini app, including on a phone or tablet</button>
+          <button class="quiz-opt" type="button">Only inside a Google Workspace institutional account</button>
+          <button class="quiz-opt" type="button">Only in the desktop web app, not on mobile</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Trên ứng dụng di động trước, rồi đồng bộ lên web</button>
+          <button class="quiz-opt" type="button">Trên mọi ứng dụng Gemini, kể cả điện thoại hay máy tính bảng</button>
+          <button class="quiz-opt" type="button">Chỉ trong tài khoản Google Workspace của tổ chức</button>
+          <button class="quiz-opt" type="button">Chỉ trên ứng dụng web máy tính, không phải di động</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="A saved Gem does appear in the mobile app afterwards and can be used there. It is the building and editing that needs a computer, which is why laptops are on the list." data-explain-vi="Gem đã lưu vẫn hiện trong ứng dụng di động và dùng được ở đó. Chỉ việc tạo và sửa mới cần máy tính, và đó là lý do laptop nằm trong danh sách cần mang."></p>
+      </div>
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question" lang="en">5. Which free-tier limit is most likely to bite during the session?</p>
+        <p class="quiz-question" lang="vi">5. Giới hạn nào của gói miễn phí dễ gây khó nhất ngay trong buổi học?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Claude's message cap, with a room generating long plans</button>
+          <button class="quiz-opt" type="button">Gemini's file size limit of one hundred megabytes</button>
+          <button class="quiz-opt" type="button">The eight thousand character cap on project instructions</button>
+          <button class="quiz-opt" type="button">NotebookLM's ceiling of one hundred notebooks per account</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Hạn mức tin nhắn của Claude, khi cả phòng sinh kế hoạch dài</button>
+          <button class="quiz-opt" type="button">Giới hạn dung lượng tệp một trăm megabyte của Gemini</button>
+          <button class="quiz-opt" type="button">Hạn mức tám nghìn ký tự cho phần hướng dẫn của dự án</button>
+          <button class="quiz-opt" type="button">Trần một trăm sổ tay mỗi tài khoản của NotebookLM</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The other three are generous enough that nobody meets them in two hours. Message caps are the one that stops a participant mid-exercise with no workaround." data-explain-vi="Ba giới hạn kia đủ rộng để không ai chạm tới trong hai giờ. Hạn mức tin nhắn mới là thứ chặn học viên giữa chừng mà không có cách nào lách."></p>
+      </div>
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question" lang="en">6. Where do you check whether ChatGPT trains on your conversations?</p>
+        <p class="quiz-question" lang="vi">6. Bạn kiểm tra việc ChatGPT có dùng hội thoại để huấn luyện ở đâu?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Settings, then Privacy, then Help improve the assistant</button>
+          <button class="quiz-opt" type="button">Settings, then Data Controls, then the improve setting</button>
+          <button class="quiz-opt" type="button">Your account page, under the subscription and billing tab</button>
+          <button class="quiz-opt" type="button">Apps Activity, where the Keep Activity toggle is located</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Settings, rồi Privacy, rồi tới mục giúp cải thiện trợ lý</button>
+          <button class="quiz-opt" type="button">Settings, rồi Data Controls, rồi tới mục cải thiện mô hình</button>
+          <button class="quiz-opt" type="button">Trang tài khoản, ở thẻ thuê bao và thông tin thanh toán</button>
+          <button class="quiz-opt" type="button">Apps Activity, nơi đặt công tắc giữ lại lịch sử hoạt động</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Each platform hides it somewhere different, which is half the reason to do it together on screen rather than telling participants to find it later." data-explain-vi="Mỗi nền tảng giấu nó ở một chỗ khác nhau, và đó là nửa lý do nên làm việc này cùng nhau trên màn hình thay vì dặn học viên tự tìm sau."></p>
+      </div>
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question" lang="en">7. Why test the platforms with an institutional account before the day?</p>
+        <p class="quiz-question" lang="vi">7. Vì sao phải thử các nền tảng bằng tài khoản của trường trước ngày dạy?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Personal accounts cannot upload documents at all</button>
+          <button class="quiz-opt" type="button">Institutional accounts get a larger free usage allowance</button>
+          <button class="quiz-opt" type="button">Universities routinely disable these features tenant-wide</button>
+          <button class="quiz-opt" type="button">The instructor's own account is rate-limited by then</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Tài khoản cá nhân hoàn toàn không tải tài liệu lên được</button>
+          <button class="quiz-opt" type="button">Tài khoản của trường được cấp hạn mức miễn phí lớn hơn</button>
+          <button class="quiz-opt" type="button">Các trường vẫn thường tắt những tính năng này toàn hệ thống</button>
+          <button class="quiz-opt" type="button">Đến lúc đó tài khoản của giảng viên đã bị giới hạn tần suất</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Gems sharing, Opal and Agent Builder are all things an administrator can switch off for everyone. Your personal account will tell you nothing about that." data-explain-vi="Chia sẻ Gem, Opal và Agent Builder đều là những thứ quản trị viên tắt được cho tất cả mọi người. Tài khoản cá nhân của bạn không nói lên điều gì về việc đó."></p>
+      </div>
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question" lang="en">8. What is the fallback if every saved-agent platform is blocked?</p>
+        <p class="quiz-question" lang="vi">8. Phương án dự phòng nếu mọi nền tảng lưu được agent đều bị chặn là gì?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Run the workshop as a discussion without any tools</button>
+          <button class="quiz-opt" type="button">Postpone the exercises until IT approves a platform</button>
+          <button class="quiz-opt" type="button">Have participants share the instructor's own account</button>
+          <button class="quiz-opt" type="button">Paste the template into any chat at the start each time</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Chạy buổi tập huấn thành một buổi thảo luận không công cụ</button>
+          <button class="quiz-opt" type="button">Hoãn các bài thực hành đến khi bộ phận CNTT phê duyệt</button>
+          <button class="quiz-opt" type="button">Cho học viên dùng chung tài khoản của chính giảng viên</button>
+          <button class="quiz-opt" type="button">Dán mẫu vào bất kỳ khung chat nào ở đầu mỗi lần dùng</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="You lose reusability and nothing else. The workflow and the quality-control loop live in the prompt, which is the reason the workshop is not tied to a vendor." data-explain-vi="Bạn chỉ mất tính dùng lại, ngoài ra không mất gì. Quy trình và vòng kiểm soát chất lượng nằm trong prompt, và đó là lý do buổi học không lệ thuộc nhà cung cấp nào."></p>
+      </div>
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question" lang="en">9. Why is Google Opal recommended for the concepts segment rather than the exercises?</p>
+        <p class="quiz-question" lang="vi">9. Vì sao Google Opal được đề xuất cho phần khái niệm chứ không phải phần thực hành?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">It shows a workflow executing, but it is a public beta</button>
+          <button class="quiz-opt" type="button">It is the only platform that can display a diagram at all</button>
+          <button class="quiz-opt" type="button">It refuses to accept uploaded course documents as input</button>
+          <button class="quiz-opt" type="button">It costs nothing during the demonstration but bills later</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Nó cho thấy quy trình đang chạy, nhưng vẫn là bản beta</button>
+          <button class="quiz-opt" type="button">Nó là nền tảng duy nhất hiển thị được sơ đồ trực quan</button>
+          <button class="quiz-opt" type="button">Nó từ chối nhận tài liệu môn học tải lên làm đầu vào</button>
+          <button class="quiz-opt" type="button">Nó không tính phí lúc demo nhưng sẽ tính phí về sau</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Watching plan, produce, verify and revise run as connected boxes is worth five minutes. Twenty people building their first agent in a beta tool under time pressure is not." data-explain-vi="Xem lập kế hoạch, tạo, kiểm tra và chỉnh sửa chạy thành các hộp nối nhau thì đáng năm phút. Hai mươi người xây agent đầu tiên trong một công cụ beta dưới áp lực thời gian thì không."></p>
+      </div>
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question" lang="en">10. What should the instructor announce in the first two minutes?</p>
+        <p class="quiz-question" lang="vi">10. Giảng viên nên tuyên bố điều gì trong hai phút đầu tiên?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">The full list of every platform that could be used today</button>
+          <button class="quiz-opt" type="button">Which platform the session will use, so nobody stalls</button>
+          <button class="quiz-opt" type="button">The pricing of each paid tier, for later reference</button>
+          <button class="quiz-opt" type="button">The privacy policy of the chosen vendor, read aloud</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Danh sách đầy đủ mọi nền tảng có thể dùng hôm nay</button>
+          <button class="quiz-opt" type="button">Buổi học dùng nền tảng nào, để không ai bị mắc kẹt</button>
+          <button class="quiz-opt" type="button">Bảng giá của từng gói trả phí, để tham khảo về sau</button>
+          <button class="quiz-opt" type="button">Chính sách riêng tư của nhà cung cấp, đọc to lên</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Participants who arrive without a preference will otherwise spend the opening of the session creating accounts instead of thinking about their own teaching." data-explain-vi="Nếu không, những người đến lớp mà chưa có lựa chọn sẽ dành phần mở đầu buổi học để lập tài khoản thay vì nghĩ về việc giảng dạy của chính mình."></p>
+      </div>
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question" lang="en">11. Why does the platform page carry a visible date?</p>
+        <p class="quiz-question" lang="vi">11. Vì sao trang nền tảng ghi rõ một mốc thời gian?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">It records when the workshop was last delivered</button>
+          <button class="quiz-opt" type="button">The vendors require attribution with a timestamp</button>
+          <button class="quiz-opt" type="button">Free tiers change, so the claims need re-checking</button>
+          <button class="quiz-opt" type="button">Accreditation bodies require dated documentation</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Nó ghi lại lần gần nhất buổi tập huấn được tổ chức</button>
+          <button class="quiz-opt" type="button">Nhà cung cấp yêu cầu ghi nguồn kèm theo mốc thời gian</button>
+          <button class="quiz-opt" type="button">Gói miễn phí thay đổi, nên các thông tin cần kiểm lại</button>
+          <button class="quiz-opt" type="button">Cơ quan kiểm định yêu cầu tài liệu phải có ghi ngày</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Everything on that page was checked against vendor documentation in August 2026. If a participant's screen disagrees with the table, believe the screen." data-explain-vi="Mọi thông tin trên trang đó được đối chiếu với tài liệu của nhà cung cấp vào tháng 8/2026. Nếu màn hình của học viên khác với bảng, hãy tin màn hình."></p>
+      </div>
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question" lang="en">12. A participant already uses Claude every day. What should they do?</p>
+        <p class="quiz-question" lang="vi">12. Một học viên vốn dùng Claude hằng ngày. Họ nên làm gì?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Wait for the instructor to share a Gem link with them</button>
+          <button class="quiz-opt" type="button">Switch to Gemini so the whole room matches the demo</button>
+          <button class="quiz-opt" type="button">Use both in parallel and compare the two outputs</button>
+          <button class="quiz-opt" type="button">Stay in Claude, since Projects meet the same need</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Chờ giảng viên chia sẻ link Gem rồi mới bắt đầu làm</button>
+          <button class="quiz-opt" type="button">Đổi sang Gemini để cả phòng khớp với phần demo</button>
+          <button class="quiz-opt" type="button">Dùng song song cả hai và so sánh hai kết quả với nhau</button>
+          <button class="quiz-opt" type="button">Cứ ở lại Claude, vì Projects đáp ứng đúng nhu cầu đó</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Every template in the workshop is portable plain text. The recommendation exists for the demonstration and for people with no preference, not as a requirement." data-explain-vi="Mọi mẫu trong buổi tập huấn đều là văn bản thuần, mang đi đâu cũng chạy. Đề xuất chỉ dành cho phần demo và cho người chưa có lựa chọn, không phải một yêu cầu bắt buộc."></p>
+      </div>
+      <!-- /QUIZ -->
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="index.html"><span class="dir" data-i18n="nav.back">← Back</span><span data-i18n="nav.overview">Overview</span></a>
+    <a href="concepts.html" class="next"><span class="dir" data-i18n="nav.next">Next →</span><span lang="en">From chatbot to agent</span><span lang="vi">Từ chatbot đến agent</span></a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>AI Agents</b> · for Lecturers</span>
+    <p data-i18n="foot.subtitle">Practical AI Agents for University Lecturers: Designing Safe and Effective Workflows for Teaching, Assessment, and Student Support</p>
+  </div>
+</footer>
+
+<script src="assets/i18n.js"></script>
+<script src="assets/course.js"></script>
+<script src="assets/workshop.js"></script>
+<script src="assets/quiz.js"></script>
+</body>
+</html>

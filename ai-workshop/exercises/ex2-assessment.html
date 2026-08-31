@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exercise 2 · Assessment and Feedback Agent</title>
+<meta name="title-en" content="Exercise 2 · Assessment and Feedback Agent">
+<meta name="title-vi" content="Bài 2 · Agent đánh giá và phản hồi">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Build an agent that drafts a four-level analytic rubric and evidence-based formative feedback on anonymized student work — without assigning the grade.">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('agentws-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+    if (localStorage.getItem('agentws-language') === 'vi') document.documentElement.dataset.lang = 'vi';
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../index.html"><b>AI Agents</b> · for Lecturers</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../index.html" class="always" data-i18n="nav.overview">Overview</a>
+      <a href="../concepts.html" data-i18n="nav.concepts">Concepts</a>
+      <a href="ex2-assessment.html" aria-current="page" data-i18n="nav.exercises">Exercises</a>
+      <a href="../tools.html" data-i18n="nav.tools">Tools &amp; data</a>
+      <a href="../platforms.html" data-i18n="nav.platforms">Platforms</a>
+      <a href="../responsible.html" data-i18n="nav.responsible">Responsible use</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="lang-toggle" type="button">VI</button>
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4 data-i18n="side.site">Site</h4>
+  <nav aria-label="Site">
+    <a href="../index.html" data-i18n="nav.overview">Overview</a>
+    <a href="../concepts.html" data-i18n="nav.concepts">Concepts</a>
+    <a href="ex1-lesson.html" data-i18n="nav.ex1">Exercise 1 · Lesson</a>
+    <a href="ex2-assessment.html" aria-current="page" data-i18n="nav.ex2">Exercise 2 · Assessment</a>
+    <a href="ex3-support.html" data-i18n="nav.ex3">Exercise 3 · Support</a>
+    <a href="../tools.html" data-i18n="nav.tools">Tools &amp; data</a>
+    <a href="../platforms.html" data-i18n="nav.platforms">Platforms</a>
+    <a href="../responsible.html" data-i18n="nav.responsible">Responsible use</a>
+  </nav>
+  <h4 data-i18n="side.onpage">On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#materials"><span lang="en">What you need</span><span lang="vi">Cần chuẩn bị gì</span></a>
+    <a href="#sample"><span lang="en">Synthetic sample</span><span lang="vi">Bài mẫu giả lập</span></a>
+    <a href="#build"><span lang="en">Build the agent</span><span lang="vi">Xây agent</span></a>
+    <a href="#template"><span lang="en">Plain template</span><span lang="vi">Mẫu dạng chữ</span></a>
+    <a href="#challenge"><span lang="en">Challenge it</span><span lang="vi">Vặn lại agent</span></a>
+    <a href="#evaluate"><span lang="en">Feedback quality</span><span lang="vi">Chất lượng phản hồi</span></a>
+    <a href="#deliverable"><span lang="en">Deliverable</span><span lang="vi">Sản phẩm</span></a>
+    <a href="#quiz"><span lang="en">Self-check</span><span lang="vi">Tự kiểm tra</span></a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow" lang="en">Exercise 2 · 01:20–01:40 · 20 minutes</span>
+      <span class="eyebrow" lang="vi">Bài 2 · 01:20–01:40 · 20 phút</span>
+      <h1 lang="en">Assessment and Feedback Agent</h1>
+      <h1 lang="vi">Agent đánh giá và phản hồi</h1>
+      <p class="lede" lang="en">Build an agent that turns one assessment task into a transparent four-level rubric,
+        then produces feedback that quotes the student's own words as evidence — and that is explicitly
+        forbidden from deciding the grade. The rubric is the reusable artefact; the feedback is the test
+        of whether the rubric is any good.</p>
+      <p class="lede" lang="vi">Xây một agent biến một nhiệm vụ đánh giá thành rubric bốn mức minh bạch, rồi tạo
+        phản hồi có trích dẫn chính lời của sinh viên làm bằng chứng — và bị cấm tường minh việc quyết định
+        điểm số. Rubric là sản phẩm dùng lại được; phản hồi là phép thử xem rubric đó có tốt hay không.</p>
+      <div class="meta-chips" lang="en">
+        <a class="chip" href="#sample">Synthetic sample included</a>
+        <a class="chip" href="#build">Interactive builder</a>
+        <a class="chip" href="#challenge">4 challenges</a>
+      </div>
+      <div class="meta-chips" lang="vi">
+        <a class="chip" href="#sample">Kèm bài mẫu giả lập</a>
+        <a class="chip" href="#build">Trình dựng tương tác</a>
+        <a class="chip" href="#challenge">4 câu vặn lại</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="materials">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">01 · Before you start</span>
+      <span class="eyebrow" lang="vi">01 · Trước khi bắt đầu</span>
+      <h2 lang="en">Three things, one of which must be anonymous</h2>
+      <h2 lang="vi">Ba thứ, trong đó một thứ bắt buộc phải ẩn danh</h2>
+    </div>
+    <div class="concept wide" lang="en">
+      <ul>
+        <li><strong>One learning outcome</strong> the task is meant to assess</li>
+        <li><strong>One assessment question or assignment brief</strong>, as students receive it</li>
+        <li><strong>One student response</strong> — anonymized, or synthetic</li>
+      </ul>
+      <p>Plus, if you have it, your marking guidance or expected-content notes. That is what stops the
+        rubric from being generic.</p>
+    </div>
+    <div class="concept wide" lang="vi">
+      <ul>
+        <li><strong>Một chuẩn đầu ra</strong> mà nhiệm vụ này dùng để đánh giá</li>
+        <li><strong>Một câu hỏi hoặc đề bài</strong>, đúng như sinh viên nhận được</li>
+        <li><strong>Một bài làm của sinh viên</strong> — đã ẩn danh, hoặc bài giả lập</li>
+      </ul>
+      <p>Thêm nữa, nếu có, là hướng dẫn chấm hoặc ghi chú về nội dung kỳ vọng. Chính thứ đó giữ cho rubric
+        không bị chung chung.</p>
+    </div>
+    <div class="note danger" lang="en">
+      <span class="note-tag">Anonymize before uploading, every time</span>
+      Remove the name, student number, email address, and anything that identifies the person —
+      including distinctive details in the text itself. Do not paste grades tied to an identifiable
+      student, and never paste health, disability, or disciplinary information. If in doubt, use the
+      synthetic response below: the exercise works identically.
+    </div>
+    <div class="note danger" lang="vi">
+      <span class="note-tag">Ẩn danh trước khi tải lên, lần nào cũng vậy</span>
+      Xoá họ tên, mã số sinh viên, địa chỉ email và mọi chi tiết nhận dạng được — kể cả những chi tiết đặc thù
+      nằm trong chính bài viết. Không dán điểm gắn với sinh viên nhận dạng được, và tuyệt đối không dán thông
+      tin sức khoẻ, khuyết tật hay kỷ luật. Nếu còn phân vân, hãy dùng bài giả lập bên dưới: bài thực hành
+      diễn ra y hệt.
+    </div>
+  </section>
+
+  <section class="block" id="sample">
+    <div class="sec-head foldable">
+      <span class="eyebrow" lang="en">02 · Fallback material</span>
+      <span class="eyebrow" lang="vi">02 · Tài liệu dự phòng</span>
+      <h2 lang="en">Synthetic sample — task and student response</h2>
+      <h2 lang="vi">Bài mẫu giả lập — đề bài và bài làm</h2>
+    </div>
+    <div class="fold-body">
+      <div class="concept wide" lang="en">
+        <p>Entirely invented for this workshop: no real student wrote it. It is deliberately mid-range —
+          a clear attempt with real strengths and three distinct, diagnosable weaknesses — because that
+          is where feedback actually has to do some work.</p>
+      </div>
+      <div class="concept wide" lang="vi">
+        <p>Hoàn toàn được dựng lên cho buổi tập huấn này: không sinh viên thật nào viết nó. Bài được cố ý đặt
+          ở mức trung bình khá — một nỗ lực rõ ràng, có điểm mạnh thật và ba điểm yếu tách bạch, chẩn đoán
+          được — vì đó mới là chỗ phản hồi thật sự phải làm việc.</p>
+      </div>
+      <div class="tpl t-teal">
+        <div class="tpl-bar">
+          <span class="tpl-name" lang="en">synthetic · outcome, task, and response</span>
+          <span class="tpl-name" lang="vi">giả lập · chuẩn đầu ra, đề bài và bài làm</span>
+          <button class="copy-btn" type="button" data-i18n="btn.copy">Copy</button>
+        </div>
+        <pre class="codeblock" lang="en">COURSE: Research Methodology (second-year undergraduate)
+
+LEARNING OUTCOME:
+Formulate a focused research question and justify an appropriate
+data-collection method, recognising its limitations.
+
+ASSESSMENT TASK (300-400 words):
+Propose a research question about the study habits of first-year students at
+your university. Justify one data-collection method you would use, and identify
+one limitation of that choice.
+
+STUDENT RESPONSE (synthetic, 312 words):
+My research question is: how do first-year students study? This is an important
+question because study habits affect academic results and many students struggle
+in their first year. Understanding this topic would help the university support
+students better.
+
+To collect data I would use a questionnaire. A questionnaire is a good method
+because it is quick and I can send it to many students at the same time using
+email or a QR code in class. Questionnaires are also cheap and they do not take
+much time for the students to complete, so more students will answer. I would
+ask questions about how many hours they study, where they study, and whether
+they study alone or in groups. I would use multiple-choice questions so the
+answers are easy to count. I would send the questionnaire to first-year students
+in my faculty and I would try to get at least 100 responses, which should be
+enough for the results to be reliable.
+
+One limitation is that some students may not answer honestly. For example, a
+student might say they study four hours a day when they actually study one hour,
+because they want to look good. This is a known problem with self-reported data.
+
+In conclusion, a questionnaire is the best method for this research question
+because it is efficient and gives numerical data that can be analysed easily.
+Interviews would give deeper information but they take too long, and observation
+is not practical because studying happens in private. Overall I believe this
+approach would produce useful results about first-year study habits that the
+university could act on.</pre>
+        <pre class="codeblock" lang="vi">MÔN HỌC: Phương pháp nghiên cứu khoa học (đại học năm hai)
+
+CHUẨN ĐẦU RA:
+Hình thành được một câu hỏi nghiên cứu có trọng tâm và biện luận được phương pháp
+thu thập dữ liệu phù hợp, đồng thời nhận ra hạn chế của lựa chọn đó.
+
+ĐỀ BÀI (300-400 từ):
+Đề xuất một câu hỏi nghiên cứu về thói quen học tập của sinh viên năm nhất tại
+trường bạn. Biện luận cho một phương pháp thu thập dữ liệu bạn sẽ dùng, và chỉ ra
+một hạn chế của lựa chọn đó.
+
+BÀI LÀM CỦA SINH VIÊN (giả lập, 312 từ):
+Câu hỏi nghiên cứu của em là: sinh viên năm nhất học như thế nào? Đây là câu hỏi
+quan trọng vì thói quen học tập ảnh hưởng đến kết quả học tập và nhiều sinh viên
+gặp khó khăn trong năm đầu tiên. Hiểu được chủ đề này sẽ giúp nhà trường hỗ trợ
+sinh viên tốt hơn.
+
+Để thu thập dữ liệu em sẽ dùng bảng hỏi. Bảng hỏi là phương pháp tốt vì nó nhanh
+và em có thể gửi cho nhiều sinh viên cùng lúc qua email hoặc mã QR trên lớp. Bảng
+hỏi cũng rẻ và không tốn nhiều thời gian của sinh viên nên sẽ có nhiều người trả
+lời hơn. Em sẽ hỏi về số giờ học mỗi ngày, học ở đâu, và học một mình hay học
+nhóm. Em sẽ dùng câu hỏi trắc nghiệm để dễ đếm kết quả. Em sẽ gửi bảng hỏi cho
+sinh viên năm nhất trong khoa của em và cố gắng thu ít nhất 100 phiếu trả lời,
+như vậy là đủ để kết quả đáng tin cậy.
+
+Một hạn chế là một số sinh viên có thể trả lời không trung thực. Ví dụ, một bạn
+có thể nói mình học bốn tiếng mỗi ngày trong khi thực tế chỉ học một tiếng, vì
+muốn trông có vẻ chăm chỉ. Đây là vấn đề đã biết của dữ liệu tự báo cáo.
+
+Tóm lại, bảng hỏi là phương pháp tốt nhất cho câu hỏi nghiên cứu này vì nó hiệu
+quả và cho ra dữ liệu số dễ phân tích. Phỏng vấn sẽ cho thông tin sâu hơn nhưng
+mất quá nhiều thời gian, còn quan sát thì không khả thi vì việc học diễn ra riêng
+tư. Nhìn chung em tin cách làm này sẽ cho kết quả hữu ích về thói quen học tập
+của sinh viên năm nhất để nhà trường có thể hành động.</pre>
+      </div>
+      <div class="note tip" lang="en">
+        <span class="note-tag">What a good agent should find</span>
+        The question is not focused ("how do first-year students study?" is a topic, not a research
+        question); the method justification is about convenience rather than fit to the question; the
+        limitation is stated but never connected back to the method choice or mitigated; and "100
+        responses should be enough to be reliable" is an unsupported claim. If the agent's feedback
+        misses these and praises the structure instead, your rubric criteria are too vague — that is
+        the real finding of this exercise.
+      </div>
+      <div class="note tip" lang="vi">
+        <span class="note-tag">Một agent tốt phải phát hiện được gì</span>
+        Câu hỏi chưa có trọng tâm ("sinh viên năm nhất học như thế nào?" là một chủ đề, không phải câu hỏi
+        nghiên cứu); phần biện luận phương pháp nói về sự tiện lợi chứ không nói về mức phù hợp với câu hỏi;
+        hạn chế được nêu ra nhưng không hề nối lại với lựa chọn phương pháp và cũng không có cách giảm thiểu;
+        còn "100 phiếu là đủ để đáng tin cậy" là khẳng định không có căn cứ. Nếu phản hồi của agent bỏ qua
+        những điểm này mà chỉ khen bố cục, thì tiêu chí rubric của bạn còn quá mơ hồ — đó mới là phát hiện
+        thật sự của bài thực hành này.
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="build">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">03 · Build it</span>
+      <span class="eyebrow" lang="vi">03 · Bắt tay xây</span>
+      <h2 lang="en">The agent builder</h2>
+      <h2 lang="vi">Trình dựng agent</h2>
+      <p lang="en">Same builder, different defaults. Note what changes in the guardrails: this agent is told, in
+        its own instructions, that it does not assign grades.</p>
+      <p lang="vi">Vẫn trình dựng đó, chỉ khác giá trị mặc định. Hãy để ý phần rào chắn thay đổi thế nào: agent
+        này được nói thẳng trong chính hướng dẫn của nó rằng nó không chấm điểm.</p>
+    </div>
+
+    <div class="bld-presets">
+      <a class="bld-preset" href="ex1-lesson.html"><span lang="en">1 · Lesson preparation</span><span lang="vi">1 · Soạn bài giảng</span></a>
+      <a class="bld-preset" href="ex2-assessment.html" aria-pressed="true"><span lang="en">2 · Assessment &amp; feedback</span><span lang="vi">2 · Đánh giá &amp; phản hồi</span></a>
+      <a class="bld-preset" href="ex3-support.html"><span lang="en">3 · Course support</span><span lang="vi">3 · Hỗ trợ môn học</span></a>
+    </div>
+
+    <div class="builder" id="builder" data-preset="assessment">
+      <form class="bld-form" onsubmit="return false">
+        <div class="bld-field">
+          <label for="f-role"><span lang="en">Role</span><span lang="vi">Vai trò</span></label>
+          <input id="f-role" name="role" type="text">
+        </div>
+        <div class="bld-field">
+          <label for="f-course"><span lang="en">Course</span><span lang="vi">Môn học</span></label>
+          <input id="f-course" name="course" type="text">
+        </div>
+        <div class="bld-field">
+          <label for="f-students"><span lang="en">Student level</span><span lang="vi">Trình độ sinh viên</span></label>
+          <textarea id="f-students" name="students" rows="2"></textarea>
+        </div>
+        <div class="bld-field">
+          <label for="f-focus">
+            <span lang="en">Assessment task<span class="hint">Paste the brief exactly as students receive it.</span></span>
+            <span lang="vi">Nhiệm vụ đánh giá<span class="hint">Dán đề bài đúng như sinh viên nhận được.</span></span>
+          </label>
+          <textarea id="f-focus" name="focus" rows="4"></textarea>
+        </div>
+        <div class="bld-field">
+          <label for="f-materials">
+            <span lang="en">Reference material<span class="hint">Marking guidance, expected content, or the relevant course notes.</span></span>
+            <span lang="vi">Tài liệu tham chiếu<span class="hint">Hướng dẫn chấm, nội dung kỳ vọng, hoặc ghi chú bài giảng liên quan.</span></span>
+          </label>
+          <textarea id="f-materials" name="materials" rows="4"></textarea>
+        </div>
+        <div class="bld-field">
+          <label for="f-constraints"><span lang="en">Constraints</span><span lang="vi">Ràng buộc</span></label>
+          <textarea id="f-constraints" name="constraints" rows="3"></textarea>
+        </div>
+        <div class="bld-field">
+          <label for="f-goal">
+            <span lang="en">Learning outcomes and goal<span class="hint">The outcomes this task assesses, then what you want the agent to produce.</span></span>
+            <span lang="vi">Chuẩn đầu ra và mục tiêu<span class="hint">Chuẩn đầu ra mà nhiệm vụ này đánh giá, rồi đến kết quả bạn muốn agent tạo ra.</span></span>
+          </label>
+          <textarea id="f-goal" name="goal" rows="4"></textarea>
+        </div>
+        <div class="bld-field">
+          <label for="f-workflow">
+            <span lang="en">Workflow<span class="hint">Step 9 is a refusal, not an omission. Keep it.</span></span>
+            <span lang="vi">Quy trình<span class="hint">Bước 9 là một lời từ chối, không phải chỗ bỏ sót. Hãy giữ lại.</span></span>
+          </label>
+          <textarea id="f-workflow" name="workflow" rows="10"></textarea>
+        </div>
+        <div class="bld-field">
+          <label for="f-output"><span lang="en">Output</span><span lang="vi">Kết quả đầu ra</span></label>
+          <textarea id="f-output" name="output" rows="8"></textarea>
+        </div>
+        <div class="bld-field">
+          <label for="f-guardrails"><span lang="en">Guardrails</span><span lang="vi">Rào chắn an toàn</span></label>
+          <textarea id="f-guardrails" name="guardrails" rows="6"></textarea>
+        </div>
+      </form>
+
+      <div class="bld-preview">
+        <div class="bld-head">
+          <span class="tpl-name" data-i18n="bld.title">your agent</span>
+          <div class="bld-actions">
+            <button class="copy-btn bld-reset" type="button" data-i18n="btn.reset">Reset</button>
+            <button class="copy-btn bld-copy" type="button" data-i18n="btn.copyPrompt">Copy prompt</button>
+          </div>
+        </div>
+        <pre class="bld-out"></pre>
+        <div class="bld-count"></div>
+      </div>
+    </div>
+    <p class="subtle-note" lang="en">Paste the student response as your <em>first message</em> to the agent, not
+      into the instructions — that keeps the reusable rubric agent separate from the one script you are
+      marking with it.</p>
+    <p class="subtle-note" lang="vi">Hãy dán bài làm của sinh viên như <em>tin nhắn đầu tiên</em> gửi cho agent,
+      đừng dán vào phần hướng dẫn — như vậy agent rubric dùng lại được sẽ tách khỏi bài cụ thể mà bạn đang chấm.</p>
+  </section>
+
+  <section class="block" id="template">
+    <div class="sec-head foldable">
+      <span class="eyebrow" lang="en">04 · Alternative</span>
+      <span class="eyebrow" lang="vi">04 · Cách khác</span>
+      <h2 lang="en">The plain template</h2>
+      <h2 lang="vi">Mẫu dạng chữ</h2>
+    </div>
+    <div class="fold-body">
+      <div class="tpl t-teal">
+        <div class="tpl-bar">
+          <span class="tpl-name" lang="en">exercise 2 · assessment and feedback agent</span>
+          <span class="tpl-name" lang="vi">bài 2 · agent đánh giá và phản hồi</span>
+          <button class="copy-btn" type="button" data-i18n="btn.copy">Copy</button>
+        </div>
+        <pre class="codeblock" lang="en">You are an assessment-design and feedback-support agent.
+
+COURSE:
+[Course name]
+
+STUDENT LEVEL:
+[Student profile]
+
+LEARNING OUTCOMES:
+[Paste the relevant outcomes]
+
+ASSESSMENT TASK:
+[Paste the task]
+
+REFERENCE MATERIAL:
+[Paste marking guidelines, course notes, or expected content]
+
+GOAL:
+Create a transparent rubric and provide evidence-based formative feedback
+on the supplied student response.
+
+WORKFLOW:
+1. Analyse the assessment task and learning outcomes.
+2. Identify the knowledge and skills that should be assessed.
+3. Create an analytic rubric with four performance levels.
+4. Check whether every criterion is observable and relevant.
+5. Analyse the student response criterion by criterion.
+6. Quote or point to evidence from the response.
+7. Separate strengths, weaknesses, and recommended next actions.
+8. Identify any uncertain judgement requiring lecturer review.
+9. Do not calculate or assign the final official grade.
+
+OUTPUT:
+A. Assessment interpretation
+B. Analytic rubric
+C. Criterion-by-criterion analysis
+D. Two specific strengths
+E. Two priority improvements
+F. Actionable revision advice
+G. Uncertain issues requiring lecturer judgement
+
+GUARDRAILS:
+- Use only anonymized student work.
+- Do not infer personal characteristics.
+- Do not make disciplinary or misconduct decisions.
+- Do not assign the official grade.
+- Do not criticize the student personally.
+- Base feedback on visible evidence from the response.</pre>
+        <pre class="codeblock" lang="vi">Bạn là một agent hỗ trợ thiết kế đánh giá và phản hồi.
+
+MÔN HỌC:
+[Tên môn học]
+
+TRÌNH ĐỘ SINH VIÊN:
+[Hồ sơ sinh viên]
+
+CHUẨN ĐẦU RA:
+[Dán các chuẩn đầu ra liên quan]
+
+NHIỆM VỤ ĐÁNH GIÁ:
+[Dán đề bài]
+
+TÀI LIỆU THAM CHIẾU:
+[Dán hướng dẫn chấm, ghi chú bài giảng hoặc nội dung kỳ vọng]
+
+MỤC TIÊU:
+Xây dựng một rubric minh bạch và đưa ra phản hồi quá trình dựa trên bằng chứng
+cho bài làm được cung cấp.
+
+QUY TRÌNH:
+1. Phân tích nhiệm vụ đánh giá và chuẩn đầu ra.
+2. Xác định kiến thức và kỹ năng cần được đánh giá.
+3. Xây dựng rubric phân tích với bốn mức năng lực.
+4. Kiểm tra xem mọi tiêu chí có quan sát được và có liên quan hay không.
+5. Phân tích bài làm của sinh viên theo từng tiêu chí.
+6. Trích dẫn hoặc chỉ ra bằng chứng trong bài làm.
+7. Tách riêng điểm mạnh, điểm yếu và hành động nên làm tiếp theo.
+8. Nêu rõ những nhận định chưa chắc chắn cần giảng viên xem lại.
+9. Không tính hay đưa ra điểm số chính thức.
+
+KẾT QUẢ ĐẦU RA:
+A. Cách hiểu về nhiệm vụ đánh giá
+B. Rubric phân tích
+C. Phân tích theo từng tiêu chí
+D. Hai điểm mạnh cụ thể
+E. Hai điểm cần cải thiện ưu tiên
+F. Lời khuyên chỉnh sửa có thể hành động được
+G. Những vấn đề chưa chắc chắn cần giảng viên quyết định
+
+RÀO CHẮN AN TOÀN:
+- Chỉ dùng bài làm đã được ẩn danh.
+- Không suy đoán đặc điểm cá nhân của người viết.
+- Không đưa ra kết luận về kỷ luật hay gian lận học thuật.
+- Không chấm điểm chính thức.
+- Không phê phán cá nhân sinh viên.
+- Chỉ phản hồi dựa trên bằng chứng nhìn thấy được trong bài làm.</pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="challenge">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">05 · The part that matters</span>
+      <span class="eyebrow" lang="vi">05 · Phần quan trọng nhất</span>
+      <h2 lang="en">Now challenge the agent</h2>
+      <h2 lang="vi">Giờ hãy vặn lại agent</h2>
+      <p lang="en">Running it once tells you little. These four follow-ups are where the weaknesses surface — ask
+        them in the same conversation, one at a time.</p>
+      <p lang="vi">Chạy một lần thì chưa nói lên điều gì. Bốn câu hỏi tiếp theo mới là chỗ các điểm yếu lộ ra —
+        hãy hỏi ngay trong cùng cuộc trò chuyện, mỗi lần một câu.</p>
+    </div>
+    <div class="checklist c-teal" lang="en">
+      <div class="check-item"><span class="rn">1</span><div><span class="stage">Justify</span><h4>"Justify your judgement on criterion 2, quoting the response."</h4><p>If it cannot point to specific words, it was pattern-matching on fluency rather than assessing against the criterion. Watch whether the quote actually supports the claim.</p></div></div>
+      <div class="check-item"><span class="rn">2</span><div><span class="stage">Overlap</span><h4>"Do any two rubric criteria overlap? Which, and how would you separate them?"</h4><p>Overlapping criteria double-penalise the same weakness. This is the most common defect in an AI-drafted rubric, and it is easy to fix once named.</p></div></div>
+      <div class="check-item"><span class="rn">3</span><div><span class="stage">Vagueness</span><h4>"Identify any feedback you gave that is too vague to act on."</h4><p>Agents are usually good at auditing their own vagueness when asked directly — and bad at avoiding it unprompted.</p></div></div>
+      <div class="check-item"><span class="rn">4</span><div><span class="stage">Actionable</span><h4>"Rewrite the feedback so the student knows exactly what to do next."</h4><p>Compare the two versions side by side. The difference is what you would otherwise have written by hand at 11pm.</p></div></div>
+    </div>
+    <div class="checklist c-teal" lang="vi">
+      <div class="check-item"><span class="rn">1</span><div><span class="stage">Biện minh</span><h4>"Hãy biện minh cho nhận định ở tiêu chí 2, có trích dẫn bài làm."</h4><p>Nếu nó không chỉ ra được câu chữ cụ thể, nghĩa là nó đang bắt theo độ trôi chảy chứ không đánh giá theo tiêu chí. Hãy xem trích dẫn đó có thật sự chứng minh cho nhận định không.</p></div></div>
+      <div class="check-item"><span class="rn">2</span><div><span class="stage">Chồng lấn</span><h4>"Có hai tiêu chí nào bị chồng lấn không? Những tiêu chí nào, và tách ra thế nào?"</h4><p>Tiêu chí chồng lấn khiến cùng một điểm yếu bị trừ hai lần. Đây là lỗi phổ biến nhất của rubric do AI soạn, và rất dễ sửa một khi đã gọi tên.</p></div></div>
+      <div class="check-item"><span class="rn">3</span><div><span class="stage">Mơ hồ</span><h4>"Hãy chỉ ra những phản hồi bạn vừa đưa mà quá mơ hồ, không hành động được."</h4><p>Agent thường rất giỏi tự soi sự mơ hồ của mình khi được hỏi thẳng — và rất dở trong việc tự tránh nó nếu không ai hỏi.</p></div></div>
+      <div class="check-item"><span class="rn">4</span><div><span class="stage">Hành động được</span><h4>"Hãy viết lại phản hồi sao cho sinh viên biết chính xác phải làm gì tiếp theo."</h4><p>Đặt hai bản cạnh nhau mà so. Khác biệt giữa chúng chính là thứ mà lẽ ra bạn phải tự viết tay lúc 11 giờ đêm.</p></div></div>
+    </div>
+    <div class="note warn" lang="en">
+      <span class="note-tag">Try the refusal too</span>
+      Ask it directly: "So what mark out of 10 does this deserve?" A correctly built agent declines and
+      explains that the grade is the lecturer's decision. If yours answers with a number, its guardrails
+      are not doing their job — strengthen the wording and try again. That failed test is a better
+      workshop outcome than a rubric.
+    </div>
+    <div class="note warn" lang="vi">
+      <span class="note-tag">Hãy thử cả phép thử từ chối</span>
+      Hỏi thẳng: "Vậy bài này đáng mấy điểm trên 10?" Một agent được xây đúng sẽ từ chối và giải thích rằng
+      điểm số là quyết định của giảng viên. Nếu agent của bạn trả lời bằng một con số, rào chắn của nó chưa
+      làm đúng việc — hãy viết chặt hơn rồi thử lại. Phép thử thất bại đó là kết quả tập huấn còn giá trị hơn
+      cả một cái rubric.
+    </div>
+  </section>
+
+  <section class="block" id="evaluate">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">06 · Judge the output</span>
+      <span class="eyebrow" lang="vi">06 · Thẩm định kết quả</span>
+      <h2 lang="en">Feedback quality checklist</h2>
+      <h2 lang="vi">Danh mục chất lượng phản hồi</h2>
+    </div>
+    <div class="ticklist" id="ex2-check">
+      <label class="tick"><input type="checkbox" data-k="aligned"><span lang="en">The rubric is <strong>aligned with the learning outcomes</strong> — not with generic "good writing".</span><span lang="vi">Rubric <strong>tương thích với chuẩn đầu ra</strong> — chứ không phải với khái niệm "viết hay" chung chung.</span></label>
+      <label class="tick"><input type="checkbox" data-k="distinct"><span lang="en">Criteria are <strong>distinct and observable</strong>; no two punish the same weakness.</span><span lang="vi">Các tiêu chí <strong>tách bạch và quan sát được</strong>; không có hai tiêu chí cùng phạt một điểm yếu.</span></label>
+      <label class="tick"><input type="checkbox" data-k="evidence"><span lang="en">Feedback <strong>refers to evidence</strong> from the response, by quotation or clear reference.</span><span lang="vi">Phản hồi <strong>dẫn ra bằng chứng</strong> trong bài làm, bằng trích dẫn hoặc chỉ dẫn rõ ràng.</span></label>
+      <label class="tick"><input type="checkbox" data-k="work"><span lang="en">Feedback addresses <strong>the work, not the student</strong> ("the justification relies on convenience" — not "you are careless").</span><span lang="vi">Phản hồi nhắm vào <strong>bài làm, không nhắm vào người</strong> ("phần biện luận dựa trên sự tiện lợi" — chứ không phải "em cẩu thả").</span></label>
+      <label class="tick"><input type="checkbox" data-k="action"><span lang="en">Recommendations are <strong>actionable</strong>: the student knows the next concrete step.</span><span lang="vi">Khuyến nghị <strong>hành động được</strong>: sinh viên biết bước cụ thể tiếp theo phải làm.</span></label>
+      <label class="tick"><input type="checkbox" data-k="uncertain"><span lang="en">The agent <strong>identifies its own uncertainty</strong> and what needs your judgement.</span><span lang="vi">Agent <strong>tự chỉ ra mức chưa chắc chắn</strong> và những gì cần bạn phán quyết.</span></label>
+      <label class="tick"><input type="checkbox" data-k="grade"><span lang="en">The <strong>lecturer retains the grade</strong>: the agent declined when pushed for a mark.</span><span lang="vi"><strong>Điểm số vẫn thuộc về giảng viên</strong>: agent đã từ chối khi bị ép cho điểm.</span></label>
+    </div>
+    <p class="subtle-note" lang="en">Saved in this browser only.
+      <button class="tick-reset" type="button" data-reset="ex2-check">Clear</button>
+    </p>
+    <p class="subtle-note" lang="vi">Chỉ lưu trong trình duyệt này.
+      <button class="tick-reset" type="button" data-reset="ex2-check">Xoá</button>
+    </p>
+  </section>
+
+  <section class="block" id="deliverable">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">07 · What you leave with</span>
+      <span class="eyebrow" lang="vi">07 · Bạn mang về những gì</span>
+      <h2 lang="en">Deliverable</h2>
+      <h2 lang="vi">Sản phẩm</h2>
+    </div>
+    <div class="checklist c-teal" lang="en">
+      <div class="check-item"><span class="rn">1</span><div><h4>A four-level analytic rubric</h4><p>Reusable for every submission of this task, and publishable to students in advance.</p></div></div>
+      <div class="check-item"><span class="rn">2</span><div><h4>Evidence-based feedback</h4><p>On one anonymized or synthetic response, quoting the text.</p></div></div>
+      <div class="check-item"><span class="rn">3</span><div><h4>The revised feedback</h4><p>After challenge 4 — keep both versions to see what "actionable" changed.</p></div></div>
+      <div class="check-item"><span class="rn">4</span><div><h4>A list of judgements needing you</h4><p>The agent's own section G. This is the handover point between the tool and the marker.</p></div></div>
+    </div>
+    <div class="checklist c-teal" lang="vi">
+      <div class="check-item"><span class="rn">1</span><div><h4>Một rubric phân tích bốn mức</h4><p>Dùng lại được cho mọi lượt nộp của nhiệm vụ này, và có thể công bố trước cho sinh viên.</p></div></div>
+      <div class="check-item"><span class="rn">2</span><div><h4>Phản hồi dựa trên bằng chứng</h4><p>Cho một bài làm đã ẩn danh hoặc giả lập, có trích dẫn nguyên văn.</p></div></div>
+      <div class="check-item"><span class="rn">3</span><div><h4>Bản phản hồi đã viết lại</h4><p>Sau câu vặn số 4 — giữ cả hai bản để thấy chữ "hành động được" đã thay đổi điều gì.</p></div></div>
+      <div class="check-item"><span class="rn">4</span><div><h4>Danh sách phán quyết cần đến bạn</h4><p>Chính mục G của agent. Đây là điểm bàn giao giữa công cụ và người chấm.</p></div></div>
+    </div>
+  </section>
+
+  <section class="block" id="quiz">
+    <div class="sec-head">
+      <span class="eyebrow" lang="en">08 · Two minutes</span>
+      <span class="eyebrow" lang="vi">08 · Hai phút</span>
+      <h2 lang="en">Self-check</h2>
+      <h2 lang="vi">Tự kiểm tra</h2>
+    </div>
+    <div class="concept wide" lang="en">
+      <p>Not graded and not submitted anywhere — twelve questions to check that this page landed. The
+        options are deliberately close in length, so guessing by shape will not help you.</p>
+    </div>
+    <div class="concept wide" lang="vi">
+      <p>Không tính điểm, không nộp đi đâu cả — mười hai câu để kiểm tra xem trang này đã ngấm chưa. Các
+        phương án được cố ý viết dài gần bằng nhau, nên đoán theo hình thức sẽ không giúp được gì.</p>
+    </div>
+    <div class="quiz-block">
+      <!-- QUIZ -->
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question" lang="en">1. What condition must the student response meet before you upload it?</p>
+        <p class="quiz-question" lang="vi">1. Bài làm của sinh viên phải đạt điều kiện gì trước khi bạn tải lên?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Anonymized or synthetic, with every identifier removed</button>
+          <button class="quiz-opt" type="button">Marked already, so the agent can check your grading</button>
+          <button class="quiz-opt" type="button">At least 800 words, so the rubric has enough to work on</button>
+          <button class="quiz-opt" type="button">Written this semester, so the material is still current</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Đã ẩn danh hoặc là bài giả lập, xoá hết thông tin nhận dạng</button>
+          <button class="quiz-opt" type="button">Đã được chấm sẵn, để agent kiểm tra lại cách bạn cho điểm</button>
+          <button class="quiz-opt" type="button">Dài ít nhất 800 từ, để rubric có đủ dữ liệu mà làm việc</button>
+          <button class="quiz-opt" type="button">Được viết trong học kỳ này, để nội dung còn tính thời sự</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Names, student numbers, email addresses and distinctive details all come out before the file leaves your machine. If that is hard, use the synthetic response instead." data-explain-vi="Họ tên, mã số sinh viên, email và các chi tiết đặc thù đều phải xoá trước khi tệp rời máy bạn. Nếu việc đó khó, hãy dùng bài giả lập."></p>
+      </div>
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question" lang="en">2. Where should the student response go?</p>
+        <p class="quiz-question" lang="vi">2. Bài làm của sinh viên nên được đưa vào đâu?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Inside the instructions, under REFERENCE MATERIAL</button>
+          <button class="quiz-opt" type="button">In your first message, not inside the instructions</button>
+          <button class="quiz-opt" type="button">As an attachment named after the assessment task</button>
+          <button class="quiz-opt" type="button">In a separate conversation from the rubric agent</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Vào trong phần hướng dẫn, mục TÀI LIỆU THAM CHIẾU</button>
+          <button class="quiz-opt" type="button">Vào tin nhắn đầu tiên, không nằm trong phần hướng dẫn</button>
+          <button class="quiz-opt" type="button">Dưới dạng tệp đính kèm đặt tên theo nhiệm vụ đánh giá</button>
+          <button class="quiz-opt" type="button">Vào một cuộc trò chuyện tách khỏi agent dựng rubric</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Keeping the response out of the instructions is what makes the rubric agent reusable: the same agent then marks the next thirty scripts without being rebuilt." data-explain-vi="Để bài làm nằm ngoài phần hướng dẫn chính là thứ khiến agent rubric dùng lại được: vẫn agent đó sẽ chấm ba mươi bài tiếp theo mà không phải dựng lại."></p>
+      </div>
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question" lang="en">3. Which instruction is deliberately written as a refusal?</p>
+        <p class="quiz-question" lang="vi">3. Chỉ dẫn nào được viết ra một cách có chủ ý như một lời từ chối?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Quote or point to evidence found in the response</button>
+          <button class="quiz-opt" type="button">Create an analytic rubric with four performance levels</button>
+          <button class="quiz-opt" type="button">Do not calculate or assign the final official grade</button>
+          <button class="quiz-opt" type="button">Separate strengths from the recommended next actions</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Trích dẫn hoặc chỉ ra bằng chứng tìm thấy trong bài làm</button>
+          <button class="quiz-opt" type="button">Xây dựng một rubric phân tích với bốn mức năng lực</button>
+          <button class="quiz-opt" type="button">Không tính toán hay đưa ra điểm số chính thức cuối cùng</button>
+          <button class="quiz-opt" type="button">Tách riêng điểm mạnh khỏi các hành động nên làm tiếp</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Step 9 is not an omission. It is the boundary written into the agent so that the tool declines rather than obliges when someone asks it for a mark." data-explain-vi="Bước 9 không phải chỗ bỏ sót. Đó là ranh giới được viết vào agent để công cụ từ chối thay vì chiều theo khi có người hỏi xin điểm."></p>
+      </div>
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question" lang="en">4. Why do overlapping rubric criteria matter?</p>
+        <p class="quiz-question" lang="vi">4. Vì sao các tiêu chí rubric bị chồng lấn lại là vấn đề?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">The criteria stop matching the learning outcomes</button>
+          <button class="quiz-opt" type="button">The rubric becomes too long for students to read</button>
+          <button class="quiz-opt" type="button">The agent will refuse to apply the rubric at all</button>
+          <button class="quiz-opt" type="button">The same weakness gets penalised twice over</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Các tiêu chí thôi khớp với chuẩn đầu ra môn học</button>
+          <button class="quiz-opt" type="button">Rubric trở nên quá dài để sinh viên chịu đọc</button>
+          <button class="quiz-opt" type="button">Agent sẽ từ chối áp dụng rubric đó hoàn toàn</button>
+          <button class="quiz-opt" type="button">Cùng một điểm yếu bị trừ điểm đến hai lần</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Overlap is the most common defect in an AI-drafted rubric, and it is easy to fix once named — which is why challenge 2 asks the agent to find it." data-explain-vi="Chồng lấn là lỗi phổ biến nhất của rubric do AI soạn, và rất dễ sửa một khi đã gọi tên — vì thế câu vặn số 2 yêu cầu agent tự tìm ra nó."></p>
+      </div>
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question" lang="en">5. Which feedback sentence follows the workshop's rule?</p>
+        <p class="quiz-question" lang="vi">5. Câu phản hồi nào tuân thủ nguyên tắc của buổi tập huấn?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">The justification relies on convenience, not on fit</button>
+          <button class="quiz-opt" type="button">You have been rather careless with your reasoning</button>
+          <button class="quiz-opt" type="button">This is a weak submission from a struggling student</button>
+          <button class="quiz-opt" type="button">You clearly did not spend much time on this section</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Phần biện luận dựa trên sự tiện lợi, không dựa trên độ phù hợp</button>
+          <button class="quiz-opt" type="button">Em đã khá cẩu thả trong cách lập luận của bài viết này</button>
+          <button class="quiz-opt" type="button">Đây là một bài nộp yếu của một sinh viên đang gặp khó khăn</button>
+          <button class="quiz-opt" type="button">Rõ ràng em đã không dành nhiều thời gian cho phần này</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Feedback addresses the work, not the person. The first names something in the text that the student can act on; the others describe the student instead." data-explain-vi="Phản hồi nhắm vào bài làm, không nhắm vào con người. Câu đầu chỉ ra một thứ trong bài mà sinh viên sửa được; các câu còn lại đang mô tả sinh viên."></p>
+      </div>
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question" lang="en">6. What does challenge 1, asking it to justify a judgement, reveal?</p>
+        <p class="quiz-question" lang="vi">6. Câu vặn số 1, yêu cầu biện minh cho một nhận định, cho thấy điều gì?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Whether the rubric has the right number of levels</button>
+          <button class="quiz-opt" type="button">Whether it assessed the criterion or the fluency</button>
+          <button class="quiz-opt" type="button">Whether the student understood the assignment brief</button>
+          <button class="quiz-opt" type="button">Whether the model has enough context left to work</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Rubric đã có đúng số mức năng lực cần thiết chưa</button>
+          <button class="quiz-opt" type="button">Nó đánh giá theo tiêu chí hay chỉ theo độ trôi chảy</button>
+          <button class="quiz-opt" type="button">Sinh viên có hiểu đúng yêu cầu của đề bài hay không</button>
+          <button class="quiz-opt" type="button">Mô hình còn đủ ngữ cảnh để tiếp tục làm việc không</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="If it cannot point to specific words, it was pattern-matching on how polished the writing sounded rather than testing the criterion you wrote." data-explain-vi="Nếu nó không chỉ ra được câu chữ cụ thể, nghĩa là nó đang bắt theo độ bóng bẩy của văn phong chứ không kiểm tra theo tiêu chí bạn đã viết."></p>
+      </div>
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question" lang="en">7. Your agent answers &quot;about 6 out of 10&quot; when pushed. What now?</p>
+        <p class="quiz-question" lang="vi">7. Agent của bạn trả lời &quot;khoảng 6 trên 10&quot; khi bị ép. Giờ làm gì?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">Report the platform for breaching its own policy</button>
+          <button class="quiz-opt" type="button">Accept it, since the number is only advisory anyway</button>
+          <button class="quiz-opt" type="button">Strengthen the guardrail wording and test it again</button>
+          <button class="quiz-opt" type="button">Delete the conversation and start the exercise over</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Báo cáo nền tảng vì đã vi phạm chính sách của chính họ</button>
+          <button class="quiz-opt" type="button">Chấp nhận, vì con số đó dù sao cũng chỉ mang tính tham khảo</button>
+          <button class="quiz-opt" type="button">Viết chặt hơn phần rào chắn rồi kiểm thử lại lần nữa</button>
+          <button class="quiz-opt" type="button">Xoá cuộc trò chuyện và bắt đầu lại bài thực hành từ đầu</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="A failed refusal test is a better workshop outcome than a rubric, because it shows you exactly which sentence in your instructions was not doing its job." data-explain-vi="Một phép thử từ chối bị trượt là kết quả tập huấn giá trị hơn cả cái rubric, vì nó chỉ ra chính xác câu nào trong hướng dẫn của bạn chưa làm đúng việc."></p>
+      </div>
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question" lang="en">8. In the synthetic sample, what is wrong with the research question?</p>
+        <p class="quiz-question" lang="vi">8. Trong bài giả lập, câu hỏi nghiên cứu sai ở chỗ nào?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">It repeats the wording of the assessment task exactly</button>
+          <button class="quiz-opt" type="button">It concerns first-year students rather than final-year</button>
+          <button class="quiz-opt" type="button">It cannot be answered with a questionnaire instrument</button>
+          <button class="quiz-opt" type="button">It states a broad topic rather than a focused question</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Nó lặp lại nguyên văn cách diễn đạt của chính đề bài</button>
+          <button class="quiz-opt" type="button">Nó nói về sinh viên năm nhất chứ không phải năm cuối</button>
+          <button class="quiz-opt" type="button">Nó không thể trả lời được bằng công cụ bảng hỏi khảo sát</button>
+          <button class="quiz-opt" type="button">Nó nêu một chủ đề rộng chứ không phải câu hỏi có trọng tâm</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="How do first-year students study? names an area of interest. A research question narrows to something a specific method could actually answer." data-explain-vi="&quot;Sinh viên năm nhất học như thế nào?&quot; chỉ nêu một mảng quan tâm. Câu hỏi nghiên cứu phải thu hẹp tới thứ mà một phương pháp cụ thể trả lời được."></p>
+      </div>
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question" lang="en">9. What is the flaw in the sample's justification of the questionnaire?</p>
+        <p class="quiz-question" lang="vi">9. Phần biện luận cho bảng hỏi trong bài mẫu hỏng ở chỗ nào?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">It argues from convenience instead of from fit</button>
+          <button class="quiz-opt" type="button">It never mentions the sample size it would need</button>
+          <button class="quiz-opt" type="button">It confuses questionnaires with structured interviews</button>
+          <button class="quiz-opt" type="button">It proposes a method the course has not yet taught</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Nó lập luận từ sự tiện lợi thay vì từ độ phù hợp</button>
+          <button class="quiz-opt" type="button">Nó không hề nhắc tới cỡ mẫu cần thiết phải có</button>
+          <button class="quiz-opt" type="button">Nó nhầm lẫn giữa bảng hỏi và phỏng vấn có cấu trúc</button>
+          <button class="quiz-opt" type="button">Nó đề xuất phương pháp mà môn học chưa hề dạy đến</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Quick, cheap and easy to count are all true and none of them answer the real question: does this instrument measure what the research question asks about?" data-explain-vi="Nhanh, rẻ và dễ đếm đều đúng cả, và không câu nào trả lời được câu hỏi thật: công cụ này có đo đúng thứ mà câu hỏi nghiên cứu quan tâm không?"></p>
+      </div>
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question" lang="en">10. &quot;At least 100 responses, which should be enough to be reliable&quot; is what?</p>
+        <p class="quiz-question" lang="vi">10. Câu &quot;ít nhất 100 phiếu, như vậy là đủ để đáng tin cậy&quot; là gì?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">A correct statement of the usual sampling convention</button>
+          <button class="quiz-opt" type="button">An unsupported claim presented as if it were settled</button>
+          <button class="quiz-opt" type="button">A limitation, correctly identified and then mitigated</button>
+          <button class="quiz-opt" type="button">A reasonable inference from the size of the faculty</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Một phát biểu đúng về quy ước chọn mẫu thông thường</button>
+          <button class="quiz-opt" type="button">Một khẳng định không căn cứ, trình bày như thể đã được chốt</button>
+          <button class="quiz-opt" type="button">Một hạn chế đã được nhận diện đúng và đã được giảm thiểu</button>
+          <button class="quiz-opt" type="button">Một suy luận hợp lý dựa trên quy mô của khoa hiện nay</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="It is asserted, not argued. A good rubric criterion makes the agent notice claims like this instead of rewarding the confident tone they are written in." data-explain-vi="Nó được khẳng định chứ không được lập luận. Một tiêu chí rubric tốt sẽ buộc agent nhận ra những câu như vậy thay vì thưởng cho giọng văn chắc nịch."></p>
+      </div>
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question" lang="en">11. What is section G of the output actually for?</p>
+        <p class="quiz-question" lang="vi">11. Mục G trong kết quả thực chất dùng để làm gì?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">A record of which rubric levels were awarded where</button>
+          <button class="quiz-opt" type="button">The grade band the agent thinks the work deserves</button>
+          <button class="quiz-opt" type="button">The judgements that need the lecturer to decide them</button>
+          <button class="quiz-opt" type="button">A summary of the feedback rewritten for the student</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Bản ghi lại mức rubric nào đã được cho ở tiêu chí nào</button>
+          <button class="quiz-opt" type="button">Khung điểm mà agent cho rằng bài làm này xứng đáng</button>
+          <button class="quiz-opt" type="button">Những phán quyết cần chính giảng viên đứng ra quyết định</button>
+          <button class="quiz-opt" type="button">Bản tóm tắt phản hồi được viết lại dành cho sinh viên</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Section G is the handover point between the tool and the marker. Read it first: it tells you where the agent stopped being able to stand behind its own analysis." data-explain-vi="Mục G là điểm bàn giao giữa công cụ và người chấm. Hãy đọc nó trước: nó cho biết agent hết khả năng đứng sau phân tích của chính nó từ chỗ nào."></p>
+      </div>
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question" lang="en">12. Which artefact from this exercise is the reusable one?</p>
+        <p class="quiz-question" lang="vi">12. Sản phẩm nào của bài thực hành này là thứ dùng lại được?</p>
+        <div class="quiz-options" lang="en">
+          <button class="quiz-opt" type="button">The challenge questions, saved for the next workshop</button>
+          <button class="quiz-opt" type="button">The feedback, which can be adapted for other students</button>
+          <button class="quiz-opt" type="button">The student response, kept as an exemplar for teaching</button>
+          <button class="quiz-opt" type="button">The rubric, which applies to every future submission</button>
+        </div>
+        <div class="quiz-options" lang="vi">
+          <button class="quiz-opt" type="button">Bộ câu vặn lại, để dành cho buổi tập huấn lần sau</button>
+          <button class="quiz-opt" type="button">Phản hồi, vì có thể chỉnh lại cho các sinh viên khác</button>
+          <button class="quiz-opt" type="button">Bài làm mẫu, giữ lại làm ví dụ minh hoạ khi giảng dạy</button>
+          <button class="quiz-opt" type="button">Rubric, vì nó áp dụng cho mọi lượt nộp bài về sau</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The rubric outlives the script it was tested on, and it can be published to students in advance — which is most of its value as an assessment-design artefact." data-explain-vi="Rubric sống lâu hơn bài làm dùng để thử nó, và có thể công bố trước cho sinh viên — đó là phần lớn giá trị của nó với tư cách sản phẩm thiết kế đánh giá."></p>
+      </div>
+      <!-- /QUIZ -->
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="ex1-lesson.html"><span class="dir" data-i18n="nav.back">← Back</span><span lang="en">Exercise 1 · Lesson Preparation</span><span lang="vi">Bài 1 · Soạn bài giảng</span></a>
+    <a href="ex3-support.html" class="next"><span class="dir" data-i18n="nav.next">Next →</span><span lang="en">Exercise 3 · Course Support</span><span lang="vi">Bài 3 · Hỗ trợ môn học</span></a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>AI Agents</b> · for Lecturers</span>
+    <p data-i18n="foot.subtitle">Practical AI Agents for University Lecturers: Designing Safe and Effective Workflows for Teaching, Assessment, and Student Support</p>
+  </div>
+</footer>
+
+<script src="../assets/i18n.js"></script>
+<script src="../assets/course.js"></script>
+<script src="../assets/workshop.js"></script>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>
