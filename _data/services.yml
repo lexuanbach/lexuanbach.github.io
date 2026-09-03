@@ -1,0 +1,85 @@
+# Academic services rendered by services.md
+#
+# Fields:
+#   venue       Short venue name with year, e.g. "AAAI 2027" (required)
+#   name        Full conference name
+#   year        Integer year, used for ordering (required)
+#   role        "pc" | "reviewer" | "subreviewer"  -> which section the entry appears in
+#   role_label  Text shown on the card, e.g. "Program Committee Member"
+#   track       Optional track, e.g. "AI Alignment Track"
+#   area        Optional short research-area tag
+
+# ------------------------------------------------------- Program committees ---
+
+- venue: "AAAI 2027"
+  name: "AAAI Conference on Artificial Intelligence"
+  year: 2027
+  role: "pc"
+  role_label: "Program Committee Member"
+  track: "AI Alignment Track"
+  area: "Artificial Intelligence"
+
+- venue: "APLAS 2022"
+  name: "Asian Symposium on Programming Languages and Systems"
+  year: 2022
+  role: "pc"
+  role_label: "Program Committee Member"
+  area: "Programming Languages"
+
+# ---------------------------------------------------------------- Reviewing ---
+
+- venue: "KDD 2027"
+  name: "ACM SIGKDD Conference on Knowledge Discovery and Data Mining"
+  year: 2027
+  role: "reviewer"
+  role_label: "Reviewer"
+  area: "Data Mining"
+
+- venue: "ICSOC 2026"
+  name: "International Conference on Service-Oriented Computing"
+  year: 2026
+  role: "subreviewer"
+  role_label: "Sub-reviewer"
+  area: "Services Computing"
+
+- venue: "VMCAI 2019"
+  name: "International Conference on Verification, Model Checking, and Abstract Interpretation"
+  year: 2019
+  role: "subreviewer"
+  role_label: "External Reviewer"
+  area: "Verification"
+
+- venue: "APLAS 2018"
+  name: "Asian Symposium on Programming Languages and Systems"
+  year: 2018
+  role: "subreviewer"
+  role_label: "External Reviewer"
+  area: "Programming Languages"
+
+- venue: "LICS 2018"
+  name: "ACM/IEEE Symposium on Logic in Computer Science"
+  year: 2018
+  role: "subreviewer"
+  role_label: "External Reviewer"
+  area: "Logic"
+
+- venue: "PLDI 2018"
+  name: "ACM SIGPLAN Conference on Programming Language Design and Implementation"
+  year: 2018
+  role: "subreviewer"
+  role_label: "External Reviewer"
+  area: "Programming Languages"
+
+- venue: "ICALP 2017"
+  name: "International Colloquium on Automata, Languages, and Programming"
+  year: 2017
+  role: "subreviewer"
+  role_label: "External Reviewer"
+  area: "Theory"
+
+- venue: "APLAS 2016"
+  name: "Asian Symposium on Programming Languages and Systems"
+  year: 2016
+  role: "subreviewer"
+  role_label: "External Reviewer"
+  area: "Programming Languages"

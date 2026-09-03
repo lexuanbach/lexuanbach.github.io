@@ -20,6 +20,8 @@ nav:
    link: "index"
  - name: "Students"
    link: "students"
+ - name: "Services"
+   link: "services"
  - name: "Resume"
    link: "cv.pdf"
  - name: "Contact"
