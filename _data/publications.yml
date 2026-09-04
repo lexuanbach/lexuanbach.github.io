@@ -40,7 +40,7 @@
   authors: "With Thi-Hong-Cuc Le, Huu-Vu-Phuong Tran & Duc-Thuan Mai"
   title: "LTM-RAG: Longitudinal Trust Mining for Poison-Resilient Retrieval-Augmented Generation"
   venue:
-    name: "ICDM 2026 (Applied Track, CORE Rank A*, Acceptance Rate: 392/1966, 20%)"
+    name: "ICDM 2026 (Research Track, CORE Rank A*, Acceptance Rate: 392/1966, 20%)"
     url: "https://www3.cs.stonybrook.edu/~icdm2026/"
     location: "Shenyang, China"
     date: "November 2026"
