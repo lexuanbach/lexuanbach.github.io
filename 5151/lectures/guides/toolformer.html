@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Toolformer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../../index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../../index.html">Overview</a>
+      <a href="../week-01.html">Lectures</a>
+      <a href="../../seminars.html">Seminars</a>
+      <a href="../../project.html">Project</a>
+      <a href="../../resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="../../index.html">Overview</a>
+    <a href="../../seminars.html">Seminars</a>
+    <a href="../../project.html">Project</a>
+    <a href="../../resources.html">Resources</a>
+  </nav>
+  <h4>Lectures</h4>
+  <nav aria-label="Lectures">
+    <a href="../week-01.html"><span class="ch-num">01</span>Introduction &amp; Methodology</a>
+    <a href="../week-02.html"><span class="ch-num">02</span>Reasoning &amp; Planning</a>
+    <a href="../week-03.html" aria-current="page"><span class="ch-num">03</span>Tools, MCP &amp; Evaluation</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#plain">In plain terms</a>
+    <a href="#mechanism">How it works</a>
+    <a href="#example">Worked example</a>
+    <a href="#talk">For your talk &amp; project</a>
+    <a href="#reading">Further reading</a>
+  </nav>
+  <h4>Also from Week 3</h4>
+  <nav aria-label="Other guides this week">
+    <a href="agent-skills.html">Agent Skills</a>
+    <a href="rag.html">RAG</a>
+    <a href="lost-in-the-middle.html">Lost in the Middle</a>
+    <a href="mcp.html">Model Context Protocol</a>
+    <a href="tau-bench.html">τ-bench</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Paper Guide · Week 3 &mdash; Tools, MCP & Evaluation</span>
+      <h1>Toolformer: Language Models Can Teach Themselves to Use Tools</h1>
+      <p class="lede">Before every commercial LLM API offered native function calling, this paper asked: can a model teach itself which API to call, when, and with what arguments — using its own prediction quality as the only supervision signal?</p>
+      <div class="meta-chips">
+        <a class="chip" href="https://arxiv.org/abs/2302.04761" target="_blank" rel="noopener"><strong>Read the paper ↗</strong></a>
+        <span class="chip">Schick, Dwivedi-Yu, Dessì, Raileanu, Lomeli, Zettlemoyer, Cancedda &amp; Scialom · NeurIPS 2023</span>
+        <a class="chip" href="../week-03.html">← Back to Tools, MCP & Evaluation</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="plain">
+    <div class="sec-head">
+      <span class="eyebrow">01 · In plain terms</span>
+      <h2>The model grades its own guesses about when a tool would help</h2>
+    </div>
+    <div class="concept wide">
+      <p>Toolformer's trick is self-supervision with no human-labeled examples of "when to call a
+        tool." Take a large corpus of plain text, and at many candidate positions, have the model
+        <em>propose</em> an API call it thinks might help predict what comes next (a calculator call
+        before a number, a search-engine call before a fact). Actually execute each candidate call,
+        insert its result into the text, and check: does having that result measurably improve the
+        model's own prediction of the following tokens, compared to not having it? Keep only the calls
+        that pass this test, throw away the rest, and fine-tune the model on the resulting
+        (call-augmented) text. The model ends up having taught itself tool use from its own
+        self-graded experiments — no human ever labeled a single example.</p>
+    </div>
+  </section>
+
+  <section class="block" id="mechanism">
+    <div class="sec-head">
+      <span class="eyebrow">02 · How it works</span>
+      <h2>Sample, execute, filter by perplexity, fine-tune</h2>
+    </div>
+    <div class="concept wide">
+      <p>Concretely: (1) prompt the base model with a few in-context examples of each tool's API
+        format, and sample candidate calls at many text positions across a large corpus; (2) execute
+        every candidate call against the real tool (a calculator, a Q&amp;A system, two search engines,
+        a machine-translation system, a calendar — five tools total in the original paper); (3) for each
+        candidate, compare the model's cross-entropy loss on the tokens that follow, with versus without
+        the call's result inserted — keep the call only if it reduces loss beyond a threshold; (4)
+        fine-tune the base model on the resulting filtered dataset, so the model learns to emit
+        <code>API(query)</code> tokens at the right positions unprompted, at inference time.</p>
+      <p>The key limitation to know cold: because tool use is baked into the fine-tuned weights, adding
+        a new tool means running this entire pipeline again and re-fine-tuning — you cannot hand a
+        deployed Toolformer model a new API description and expect it to use it. That single limitation
+        is the reason the field moved toward native function calling (a schema passed at inference time,
+        no fine-tuning needed) within about a year.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 640 160" width="100%" role="img" aria-label="Pipeline: sample candidate API calls, execute them, filter by whether they reduce prediction loss, then fine-tune the model on the kept examples.">
+        <defs>
+          <marker id="tf-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+        </defs>
+        <path d="M140,70 L170,70" class="arch-line" marker-end="url(#tf-arrow)"></path>
+        <path d="M300,70 L330,70" class="arch-line" marker-end="url(#tf-arrow)"></path>
+        <path d="M460,70 L490,70" class="arch-line" marker-end="url(#tf-arrow)"></path>
+
+        <a class="dag-node accent" href="https://arxiv.org/abs/2302.04761" target="_blank" rel="noopener"
+           data-functionality="Proposes candidate API calls at many positions across a large text corpus."
+           data-intuition="Casting a wide net here is cheap — most candidates will be discarded in the next step."
+           data-example="Proposing a Calculator(...) call right before a number appears in a sentence." aria-label="Sample candidate API calls at many positions in a text corpus"><rect x="10" y="40" width="130" height="60" rx="8"></rect><text x="75" y="65" text-anchor="middle" class="t">Sample calls</text><text x="75" y="80" text-anchor="middle" class="s">candidate positions</text></a>
+        <a class="dag-node teal" href="https://arxiv.org/abs/2302.04761" target="_blank" rel="noopener"
+           data-functionality="Actually executes each candidate call against the real API, for real."
+           data-intuition="No candidate is judged on guesswork — every one is tried for real before being scored."
+           data-example="Really calling Calculator(1883 - 1878) and getting back 5." aria-label="Execute each candidate call against the real API"><rect x="170" y="40" width="130" height="60" rx="8"></rect><text x="235" y="65" text-anchor="middle" class="t">Execute</text><text x="235" y="80" text-anchor="middle" class="s">real API call</text></a>
+        <a class="dag-node amber" href="https://arxiv.org/abs/2302.04761" target="_blank" rel="noopener"
+           data-functionality="Keeps a candidate call only if inserting its result reduces the model&#39;s loss on following tokens."
+           data-intuition="This is the entire self-supervision signal — no human ever labels &quot;this call is useful.&quot;"
+           data-example="Keeping the calculator call before &quot;5&quot; but discarding one that doesn&#39;t change the loss." aria-label="Keep only calls that reduce the model's loss on following tokens"><rect x="330" y="40" width="130" height="60" rx="8"></rect><text x="395" y="65" text-anchor="middle" class="t">Filter</text><text x="395" y="80" text-anchor="middle" class="s">by perplexity gain</text></a>
+        <a class="dag-node accent" href="https://arxiv.org/abs/2302.04761" target="_blank" rel="noopener"
+           data-functionality="Fine-tunes the base model on the corpus, now augmented with the kept, filtered calls."
+           data-intuition="This is why adding a new tool later means retraining — tool use ends up baked into these weights."
+           data-example="The model learns to emit API(query) tokens at the right positions, unprompted." aria-label="Fine-tune the base model on the filtered, call-augmented text"><rect x="490" y="40" width="130" height="60" rx="8"></rect><text x="555" y="65" text-anchor="middle" class="t">Fine-tune</text><text x="555" y="80" text-anchor="middle" class="s">on kept examples</text></a>
+      </svg>
+      <div class="cap">Toolformer's self-supervised training pipeline. Schick et al., NeurIPS 2023.</div>
+    </div>
+    <div class="note tip"><span class="note-tag">Key result</span> With five tools (calculator, Q&amp;A, two search engines, translation, calendar) and zero human-labeled call examples, Toolformer achieved <strong>substantially improved zero-shot performance</strong> on question-answering and math tasks — often competitive with much larger models — without hurting its core language-modeling ability.</div>
+  </section>
+
+  <section class="block" id="example">
+    <div class="example">
+      <div class="example-bar"><span class="example-tag">Worked example</span><span class="example-title">Self-supervision, one sentence at a time</span></div>
+      <div class="example-body">
+        <p>Corpus sentence: "The Brooklyn Bridge was completed in 1883, five years after construction
+          began in 1878." At the position before "five years," Toolformer's training pipeline tries
+          inserting a calculator call:</p>
+        <div class="trace">
+          <span class="trace-line"><span class="trace-role action">Candidate call</span><code>Calculator(1883 - 1878)</code></span>
+          <span class="trace-line"><span class="trace-role obs">Result</span>5</span>
+          <span class="trace-line"><span class="trace-role thought">Test</span>Does inserting "→ 5" before "five years" reduce the model's loss on predicting "five"? Yes, clearly — <strong>keep this example</strong>.</span>
+          <span class="trace-line"><span class="trace-role thought">Elsewhere</span>A candidate calculator call inserted mid-sentence where no number follows barely changes the loss — <strong>discard</strong>.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="talk">
+    <div class="sec-head">
+      <span class="eyebrow">04 · For your talk &amp; project</span>
+      <h2>What this buys you</h2>
+    </div>
+    <div class="concept wide">
+      <ul>
+        <li>If you present <strong>S1-2 Tool Use &amp; MCP</strong>: open with this paper precisely to
+          set up the contrast with native function calling and MCP — "baked into weights" versus
+          "passed as a schema at inference time" is the single most important distinction in this
+          topic's technical history.</li>
+        <li>For your <strong>project's tool integration (R2)</strong>: you will almost certainly use
+          native function calling or MCP, not Toolformer's fine-tuning approach — be ready to explain in
+          Q&amp;A <em>why</em> that's the right choice for a 10-week project (no training infrastructure
+          needed, tools addable without retraining).</li>
+        <li>A sharp critical question: Toolformer's filtering keeps calls that reduce loss on the
+          <em>next few tokens</em> — does that really guarantee the call was useful for getting a
+          correct final answer several steps later?</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="reading">
+    <div class="sec-head">
+      <span class="eyebrow">05 · Further reading</span>
+      <h2>Where to go next</h2>
+    </div>
+    <div class="concept wide">
+      <ul class="reading wide">
+          <li><a href="https://arxiv.org/abs/2302.04761" target="_blank" rel="noopener">Schick et al. — Toolformer: Language Models Can Teach Themselves to Use Tools (full paper)</a></li>
+          <li><a href="https://arxiv.org/abs/2307.16789" target="_blank" rel="noopener">Qin et al. — ToolLLM: the same problem at the scale of 16,000+ APIs</a></li>
+          <li><a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener">Anthropic — Introducing the Model Context Protocol: the inference-time alternative</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="../week-03.html"><span class="dir">← Back</span>Tools, MCP & Evaluation</a>
+    <a href="mcp.html" class="next"><span class="dir">Next guide →</span>Model Context Protocol</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="../../assets/course.js"></script>
+<script src="../../assets/dag.js"></script>
+</body>
+</html>

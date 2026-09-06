@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tree of Thoughts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../../index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../../index.html">Overview</a>
+      <a href="../week-01.html">Lectures</a>
+      <a href="../../seminars.html">Seminars</a>
+      <a href="../../project.html">Project</a>
+      <a href="../../resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="../../index.html">Overview</a>
+    <a href="../../seminars.html">Seminars</a>
+    <a href="../../project.html">Project</a>
+    <a href="../../resources.html">Resources</a>
+  </nav>
+  <h4>Lectures</h4>
+  <nav aria-label="Lectures">
+    <a href="../week-01.html"><span class="ch-num">01</span>Introduction &amp; Methodology</a>
+    <a href="../week-02.html" aria-current="page"><span class="ch-num">02</span>Reasoning &amp; Planning</a>
+    <a href="../week-03.html"><span class="ch-num">03</span>Tools, MCP &amp; Evaluation</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#plain">In plain terms</a>
+    <a href="#mechanism">How it works</a>
+    <a href="#example">Worked example</a>
+    <a href="#talk">For your talk &amp; project</a>
+    <a href="#reading">Further reading</a>
+  </nav>
+  <h4>Also from Week 2</h4>
+  <nav aria-label="Other guides this week">
+    <a href="chain-of-thought.html">Chain-of-Thought</a>
+    <a href="reflexion.html">Reflexion</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Paper Guide · Week 2 &mdash; Reasoning & Planning</span>
+      <h1>Tree of Thoughts: Deliberate Problem Solving with Large Language Models</h1>
+      <p class="lede">Chain-of-thought commits to one line of reasoning and never looks back. Tree of Thoughts explores several, evaluates them, and backtracks from dead ends — turning generation into search.</p>
+      <div class="meta-chips">
+        <a class="chip" href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener"><strong>Read the paper ↗</strong></a>
+        <span class="chip">Yao, Yu, Zhao, Shafran, Griffiths, Cao &amp; Narasimhan · NeurIPS 2023</span>
+        <a class="chip" href="../week-02.html">← Back to Reasoning & Planning</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="plain">
+    <div class="sec-head">
+      <span class="eyebrow">01 · In plain terms</span>
+      <h2>Explore several ideas at once, keep the promising ones</h2>
+    </div>
+    <div class="concept wide">
+      <p>Chain-of-thought produces one linear sequence of reasoning steps; if an early step is wrong,
+        everything downstream inherits the mistake with no way back. Tree of Thoughts (ToT) instead
+        treats each intermediate reasoning step as a node in a tree: at each point, the model generates
+        <em>several</em> candidate next thoughts, a separate evaluation step scores how promising each
+        one looks, and a classic search algorithm (breadth-first or depth-first search) decides which
+        branches to keep expanding and which to abandon. It's the difference between writing down the
+        first idea that comes to mind and sketching three approaches on scratch paper before committing
+        to one.</p>
+    </div>
+  </section>
+
+  <section class="block" id="mechanism">
+    <div class="sec-head">
+      <span class="eyebrow">02 · How it works</span>
+      <h2>Generate, evaluate, search — and the evaluator is the bottleneck</h2>
+    </div>
+    <div class="concept wide">
+      <p>ToT needs four things defined for any task: how to <strong>decompose</strong> the problem into
+        thought steps, how to <strong>generate</strong> candidate thoughts at each step (sample several,
+        or propose them sequentially), how to <strong>evaluate</strong> a partial solution's promise
+        (the model judges its own intermediate states — "is this on track?"), and which
+        <strong>search algorithm</strong> to run over the resulting tree (BFS keeps the best-k states at
+        each level; DFS goes deep on one branch and backtracks on failure). The evaluation step is the
+        one to scrutinize hardest: it's the same model doing the judging, with no ground truth to check
+        against, so ToT's gains are capped by how good the model actually is at recognizing its own
+        good ideas — a weak evaluator makes the whole search directionless.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 600 260" width="100%" role="img" aria-label="Tree diagram: a start state branches into three candidate thoughts; one is pruned as low-value, the other two are expanded further, one reaching a solution.">
+        <defs>
+          <marker id="tot-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+        </defs>
+        <path d="M300,54 L100,100" class="arch-line" marker-end="url(#tot-arrow)"></path>
+        <path d="M300,54 L300,100" class="arch-line" marker-end="url(#tot-arrow)"></path>
+        <path d="M300,54 L500,100" class="arch-line" marker-end="url(#tot-arrow)"></path>
+        <path d="M100,150 L100,190" class="arch-line" marker-end="url(#tot-arrow)"></path>
+        <path d="M500,150 L500,190" class="arch-line" marker-end="url(#tot-arrow)"></path>
+
+        <a class="dag-node accent" href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener"
+           data-functionality="The problem exactly as given, before any reasoning step has been taken."
+           data-intuition="Every branch below starts from this same point — that&#39;s what makes it a fair search."
+           data-example="The four numbers in a Game-of-24 puzzle, unsolved." aria-label="Start state: the problem as given"><rect x="220" y="10" width="160" height="44" rx="8"></rect><text x="300" y="37" text-anchor="middle" class="t">Start state</text></a>
+
+        <a class="dag-node teal" href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener"
+           data-functionality="One candidate next step, judged promising enough to keep exploring."
+           data-intuition="The evaluator&#39;s job is exactly this: decide which branches are worth spending more search budget on."
+           data-example="&quot;10 − 4 = 6, plausible&quot; — kept." aria-label="Thought A: evaluated as promising, kept for expansion"><rect x="20" y="100" width="160" height="50" rx="8"></rect><text x="100" y="122" text-anchor="middle" class="t">Thought A</text><text x="100" y="137" text-anchor="middle" class="s">evaluator: promising</text></a>
+        <a class="dag-node pruned" href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener"
+           data-functionality="A candidate next step, judged unlikely to lead anywhere useful."
+           data-intuition="Pruning is what makes search cheaper than exploring every branch to the end."
+           data-example="&quot;22, 4, 10 left, hard to reach 24 exactly&quot; — pruned." aria-label="Thought B: evaluated as low-value, pruned — no further expansion"><rect x="220" y="100" width="160" height="50" rx="8"></rect><text x="300" y="122" text-anchor="middle" class="t">Thought B</text><text x="300" y="137" text-anchor="middle" class="s">low value — pruned</text></a>
+        <a class="dag-node teal" href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener"
+           data-functionality="Another candidate next step, also judged promising enough to keep exploring."
+           data-intuition="Multiple branches can survive at once — this is what makes it a tree, not a single chain."
+           data-example="&quot;13 − 9 = 4, plausible&quot; — kept." aria-label="Thought C: evaluated as promising, kept for expansion"><rect x="420" y="100" width="160" height="50" rx="8"></rect><text x="500" y="122" text-anchor="middle" class="t">Thought C</text><text x="500" y="137" text-anchor="middle" class="s">evaluator: promising</text></a>
+
+        <a class="dag-node dashed" href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener"
+           data-functionality="A deeper expansion of Thought A that ran out of search budget without finding a solution."
+           data-intuition="Not every promising-looking branch pays off — this is a real dead end, not a mistake."
+           data-example="Thought A&#39;s line of reasoning didn&#39;t reach 24 within the steps explored." aria-label="Further expansion of Thought A did not reach a solution within the search budget"><rect x="20" y="190" width="160" height="50" rx="8"></rect><text x="100" y="212" text-anchor="middle" class="t">A.1</text><text x="100" y="227" text-anchor="middle" class="s">dead end</text></a>
+        <a class="dag-node accent" href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener"
+           data-functionality="A deeper expansion of Thought C that found a valid solution."
+           data-intuition="This is what backtracking buys you: the search found the answer via a branch that wasn&#39;t tried first."
+           data-example="13 − 9 = 4, then 10 − 4 = 6, then 6 × 4 = 24 — solved." aria-label="Further expansion of Thought C reached a valid solution"><rect x="420" y="190" width="160" height="50" rx="8"></rect><text x="500" y="212" text-anchor="middle" class="t">C.1</text><text x="500" y="227" text-anchor="middle" class="s">solution found</text></a>
+      </svg>
+      <div class="cap">Breadth-first search over a tree of thoughts, with pruning. Yao et al., NeurIPS 2023.</div>
+    </div>
+    <div class="note tip"><span class="note-tag">Key result</span> On the "Game of 24" arithmetic puzzle, GPT-4 with chain-of-thought prompting alone solved <strong>4%</strong> of instances; GPT-4 with Tree of Thoughts solved <strong>74%</strong> — the same base model, restructured only by search.</div>
+  </section>
+
+  <section class="block" id="example">
+    <div class="example">
+      <div class="example-bar"><span class="example-tag">Worked example</span><span class="example-title">Game of 24 — why chain-of-thought gets stuck</span></div>
+      <div class="example-body">
+        <p>Task: using the numbers 4, 9, 10, 13 exactly once each, reach 24 with +, −, ×, ÷.</p>
+        <div class="trace">
+          <span class="trace-line"><span class="trace-role thought">CoT (one line)</span>13 − 9 = 4, then 4 × 4 = 16, then 16 + 10 = 26. <em>Wrong, and no way back once committed.</em></span>
+          <span class="trace-line"><span class="trace-role thought">ToT branch A</span>10 − 4 = 6 → evaluator: "6, 9, 13 left, plausible" → keep exploring.</span>
+          <span class="trace-line"><span class="trace-role thought">ToT branch B</span>13 + 9 = 22 → evaluator: "22, 4, 10 left, hard to reach 24 exactly" → prune.</span>
+          <span class="trace-line"><span class="trace-role obs">ToT continues on A</span>13 − 9 = 4, then 10 − 4 = 6, then 6 × 4 = 24. <em>Solution found by backtracking from a pruned path.</em></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="talk">
+    <div class="sec-head">
+      <span class="eyebrow">04 · For your talk &amp; project</span>
+      <h2>What this buys you</h2>
+    </div>
+    <div class="concept wide">
+      <ul>
+        <li>If you present <strong>S1-1</strong>: use ToT as the pivot between "reasoning" and
+          "planning" — Graph of Thoughts generalizes the tree to a graph (thoughts can merge, not just
+          branch), and LATS adds real environment feedback into the same search skeleton. Say what each
+          one changes relative to this baseline.</li>
+        <li>The evaluator-is-the-bottleneck point is the strongest critical angle available: ask what
+          happens when the model's self-evaluation is unreliable — does the search still help, or does
+          it just spend more tokens confidently pruning the right branch?</li>
+        <li>For your <strong>project</strong>: ToT-style search is expensive (many more model calls per
+          decision) — if you use it, your evaluation (R5) needs to report that cost explicitly, per
+          the "AI Agents That Matter" critique.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="reading">
+    <div class="sec-head">
+      <span class="eyebrow">05 · Further reading</span>
+      <h2>Where to go next</h2>
+    </div>
+    <div class="concept wide">
+      <ul class="reading wide">
+          <li><a href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener">Yao et al. — Tree of Thoughts: Deliberate Problem Solving with Large Language Models (full paper)</a></li>
+          <li><a href="https://arxiv.org/abs/2308.09687" target="_blank" rel="noopener">Besta et al. — Graph of Thoughts: generalizes the tree to an arbitrary graph</a></li>
+          <li><a href="https://arxiv.org/abs/2310.04406" target="_blank" rel="noopener">Zhou et al. — Language Agent Tree Search (LATS): adds real environment feedback to the search</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="../week-02.html"><span class="dir">← Back</span>Reasoning & Planning</a>
+    <a href="agent-skills.html" class="next"><span class="dir">Next guide →</span>Agent Skills</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="../../assets/course.js"></script>
+<script src="../../assets/dag.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ReAct</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../../index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../../index.html">Overview</a>
+      <a href="../week-01.html">Lectures</a>
+      <a href="../../seminars.html">Seminars</a>
+      <a href="../../project.html">Project</a>
+      <a href="../../resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="../../index.html">Overview</a>
+    <a href="../../seminars.html">Seminars</a>
+    <a href="../../project.html">Project</a>
+    <a href="../../resources.html">Resources</a>
+  </nav>
+  <h4>Lectures</h4>
+  <nav aria-label="Lectures">
+    <a href="../week-01.html" aria-current="page"><span class="ch-num">01</span>Introduction &amp; Methodology</a>
+    <a href="../week-02.html"><span class="ch-num">02</span>Reasoning &amp; Planning</a>
+    <a href="../week-03.html"><span class="ch-num">03</span>Tools, MCP &amp; Evaluation</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#plain">In plain terms</a>
+    <a href="#mechanism">How it works</a>
+    <a href="#example">Worked example</a>
+    <a href="#talk">For your talk &amp; project</a>
+    <a href="#reading">Further reading</a>
+  </nav>
+  <h4>Also from Week 1</h4>
+  <nav aria-label="Other guides this week">
+    <a href="transformer.html">Transformer</a>
+    <a href="human-loop.html">Human-in/on-the-Loop</a>
+    <a href="coala.html">CoALA</a>
+    <a href="ai-agents-that-matter.html">AI Agents That Matter</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Paper Guide · Week 1 &mdash; Introduction & Methodology</span>
+      <h1>ReAct: Synergizing Reasoning and Acting</h1>
+      <p class="lede">The paper that gave the field its default agent loop — Thought, Action, Observation, repeat — and the one Week 1's simulator and DAG critique both build around.</p>
+      <div class="meta-chips">
+        <a class="chip" href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener"><strong>Read the paper ↗</strong></a>
+        <span class="chip">Yao, Zhao, Yu, Du, Shafran, Narasimhan &amp; Cao · ICLR 2023</span>
+        <a class="chip" href="../week-01.html">← Back to Introduction & Methodology</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="plain">
+    <div class="sec-head">
+      <span class="eyebrow">01 · In plain terms</span>
+      <h2>Think a little, act, look at what happened, repeat</h2>
+    </div>
+    <div class="concept wide">
+      <p>Before ReAct, researchers had two separate tricks: chain-of-thought prompting (make the model
+        "think out loud" before answering) and action-taking agents (have the model call tools, with no
+        visible reasoning). ReAct's insight was to interleave them explicitly, in the model's own
+        output: write a <em>Thought</em>, take an <em>Action</em> based on it, read the
+        <em>Observation</em> the action produced, then write the next Thought — now informed by what
+        actually happened, not just what the model assumed would happen. That interleaving is the
+        reason ReAct traces read like a person thinking out loud while using a search engine, and it's
+        the exact loop Week 1's interactive simulator plays out step by step.</p>
+    </div>
+  </section>
+
+  <section class="block" id="mechanism">
+    <div class="sec-head">
+      <span class="eyebrow">02 · How it works</span>
+      <h2>The Thought → Action → Observation loop</h2>
+    </div>
+    <div class="concept wide">
+      <p>Mechanically, ReAct is just a prompting pattern (no fine-tuning required, unlike Toolformer):
+        the prompt shows a few examples of the Thought/Action/Observation format, then the model
+        continues it for the real task. Each Action is a structured call (e.g. <code>Search[query]</code>,
+        <code>Lookup[string]</code>, <code>Finish[answer]</code>) that a wrapper program parses,
+        executes against a real API or environment, and feeds back as the next Observation — the model
+        never actually touches the API itself. The loop terminates when the model emits a terminal
+        action like <code>Finish[...]</code>.</p>
+      <p>The paper evaluated this on four very different benchmarks — HotpotQA and Fever (knowledge
+        question-answering and fact-checking, backed by a Wikipedia search API), ALFWorld (a text-based
+        embodied environment) and WebShop (webpage navigation) — precisely to show the pattern
+        generalizes across "look something up" and "act in a world" tasks, not just one benchmark. On
+        HotpotQA, interleaving reasoning with retrieval measurably reduced the hallucination and
+        error-propagation ReAct's ablation (chain-of-thought with no tools at all) suffered from; on
+        ALFWorld, ReAct beat imitation- and reinforcement-learning baselines by an absolute 34-point
+        success-rate margin using only 1–2 in-context examples — no task-specific training at all.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 420 260" width="100%" role="img" aria-label="Loop diagram: Thought leads to Action, Action is executed by the environment producing an Observation, and the Observation leads to the next Thought.">
+        <defs>
+          <marker id="react-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+        </defs>
+        <path d="M210,60 L80,170" class="arch-line" marker-end="url(#react-arrow)"></path>
+        <path d="M140,195 L280,195" class="arch-line" marker-end="url(#react-arrow)"></path>
+        <text x="210" y="186" text-anchor="middle" class="arch-label">environment executes</text>
+        <path d="M340,170 L250,60" class="arch-line" marker-end="url(#react-arrow)"></path>
+
+        <a class="dag-node accent" href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener"
+           data-functionality="Free-text reasoning about what to do next, written before any action is taken."
+           data-intuition="Writing it out gives the model a scratchpad — the next action is conditioned on this explicit reasoning."
+           data-example="&quot;I need to find out who directed the film that won Best Picture.&quot;" aria-label="Thought: reason about what to do next, in natural language"><rect x="150" y="10" width="120" height="50" rx="8"></rect><text x="210" y="32" text-anchor="middle" class="t">Thought</text><text x="210" y="47" text-anchor="middle" class="s">plan next step</text></a>
+        <a class="dag-node amber" href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener"
+           data-functionality="A structured call the environment can actually execute."
+           data-intuition="The Thought is never executed — only the Action is; the Thought just conditions it."
+           data-example="Search[&quot;2023 Best Picture Oscar winner&quot;]" aria-label="Action: a structured call, e.g. Search[query] or Finish[answer]"><rect x="20" y="170" width="120" height="50" rx="8"></rect><text x="80" y="192" text-anchor="middle" class="t">Action</text><text x="80" y="207" text-anchor="middle" class="s">a structured call</text></a>
+        <a class="dag-node teal" href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener"
+           data-functionality="Whatever the environment or tool returned after the Action ran."
+           data-intuition="This is what actually grounds the loop — the next Thought is conditioned on real feedback, not a guess."
+           data-example="&quot;Everything Everywhere All at Once&quot; won Best Picture at the 95th Academy Awards." aria-label="Observation: what the environment or tool returned"><rect x="280" y="170" width="120" height="50" rx="8"></rect><text x="340" y="192" text-anchor="middle" class="t">Observation</text><text x="340" y="207" text-anchor="middle" class="s">what comes back</text></a>
+      </svg>
+      <div class="cap">ReAct's core loop — the same three roles as Week 1's simulator log. Yao et al., ICLR 2023.</div>
+    </div>
+    <div class="note tip"><span class="note-tag">Key result</span> On ALFWorld, ReAct beat imitation- and reinforcement-learning baselines by <strong>+34 absolute points</strong> of success rate, using only 1–2 in-context examples and zero task-specific training.</div>
+  </section>
+
+  <section class="block" id="example">
+    <div class="example">
+      <div class="example-bar"><span class="example-tag">Worked example</span><span class="example-title">The exact trace from Week 1's simulator</span></div>
+      <div class="example-body">
+        <p>Task: "Who directed the film that won Best Picture at the 2023 Oscars?" — run with the
+          <code>react</code> scenario in the <a href="../week-01.html#simulator">Week 1 simulator</a>:</p>
+        <div class="trace">
+          <span class="trace-line"><span class="trace-role thought">Thought 1</span>I need to find out who directed the film that won Best Picture in 2023.</span>
+          <span class="trace-line"><span class="trace-role action">Action 1</span>Search["2023 Best Picture Oscar winner"]</span>
+          <span class="trace-line"><span class="trace-role obs">Observation 1</span>"Everything Everywhere All at Once" won Best Picture at the 95th Academy Awards.</span>
+          <span class="trace-line"><span class="trace-role thought">Thought 2</span>Now I need to find the director(s) of that film.</span>
+          <span class="trace-line"><span class="trace-role action">Action 2</span>Search["Everything Everywhere All at Once director"]</span>
+          <span class="trace-line"><span class="trace-role obs">Observation 2</span>Directed by Daniel Kwan and Daniel Scheinert.</span>
+          <span class="trace-line"><span class="trace-role thought">Thought 3</span>I have the answer.</span>
+          <span class="trace-line"><span class="trace-role action">Action 3</span>Finish["Daniel Kwan and Daniel Scheinert"]</span>
+        </div>
+        <p>Compare this against the simulator's <code>no-tools</code> scenario on the same task — the
+          model has to guess from parametric memory alone, with no Observation to correct it. That
+          contrast is the entire argument of the paper in one screen.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="talk">
+    <div class="sec-head">
+      <span class="eyebrow">04 · For your talk &amp; project</span>
+      <h2>What this buys you</h2>
+    </div>
+    <div class="concept wide">
+      <ul>
+        <li>If you present <strong>S1-1 Advanced Reasoning &amp; Planning</strong>: ReAct is the
+          baseline every later technique in that topic (Reflexion, ToT, LATS) is a modification
+          <em>of</em> — say explicitly what each later paper adds to this loop, which is exactly the
+          "must explain" checklist's ask.</li>
+        <li>Week 1's §5 critique already argues ReAct assumes actions are cheap and reversible — bring
+          a concrete counter-example from your own project domain (an action that is expensive or
+          irreversible) to Q&amp;A.</li>
+        <li>For your <strong>project architecture (R1)</strong>: if your system uses a ReAct-style loop,
+          say so explicitly and cite this paper — reviewers will assume ReAct by default unless you
+          name a different control-flow pattern.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="reading">
+    <div class="sec-head">
+      <span class="eyebrow">05 · Further reading</span>
+      <h2>Where to go next</h2>
+    </div>
+    <div class="concept wide">
+      <ul class="reading wide">
+          <li><a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">Yao et al. — ReAct: Synergizing Reasoning and Acting in Language Models (full paper)</a></li>
+          <li><a href="https://react-lm.github.io/" target="_blank" rel="noopener">Official ReAct project page — demos across all four benchmarks</a></li>
+          <li><a href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener">Shinn et al. — Reflexion: adds episodic memory of failures on top of this loop</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="../week-01.html"><span class="dir">← Back</span>Introduction & Methodology</a>
+    <a href="ai-agents-that-matter.html" class="next"><span class="dir">Next guide →</span>AI Agents That Matter</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="../../assets/course.js"></script>
+<script src="../../assets/dag.js"></script>
+</body>
+</html>

@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CO5151 · Advanced Agentic Artificial Intelligence</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="CO5151 — Advanced Agentic AI: a graduate research-seminar course on agent architectures, memory, tools, multi-agent systems, security and a group project.">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="index.html" aria-current="page">Overview</a>
+      <a href="lectures/week-01.html">Lectures</a>
+      <a href="seminars.html">Seminars</a>
+      <a href="project.html">Project</a>
+      <a href="resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Graduate elective · 3 credits (ECTS 6) · CO5151</span>
+        <h1>Advanced Agentic Artificial Intelligence</h1>
+        <p class="motto">Course motto: <em>learning through working.</em> Every idea in this course — the
+          agent loop, self-attention, memory, evaluation — is something you run, break, and rebuild,
+          not just read about.</p>
+        <p class="lede">
+          A research seminar on the architectures, memory, tools and multi-agent systems that turn
+          large language models into autonomous agents — paired with a group project that builds,
+          benchmarks and red-teams a complete agentic AI system. No midterm, no final exam:
+          the course is assessed entirely through two seminars and a project.
+        </p>
+        <div class="meta-chips">
+          <span class="chip"><strong>13</strong> sessions</span>
+          <span class="chip">Research seminar + project</span>
+          <span class="chip">No final exam</span>
+          <span class="chip">Groups of <strong>3–4</strong></span>
+        </div>
+      </div>
+      <div class="diagram-card">
+        <svg viewBox="0 0 400 230" width="100%" role="img" aria-label="Diagram: an agent as LLM reasoning connected to memory, tools, and a curved observe/act loop with the environment">
+          <defs>
+            <marker id="al-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path>
+            </marker>
+          </defs>
+          <line x1="200" y1="58" x2="105" y2="94" class="al-line" marker-end="url(#al-arrow)" marker-start="url(#al-arrow)"></line>
+          <line x1="200" y1="58" x2="295" y2="94" class="al-line" marker-end="url(#al-arrow)" marker-start="url(#al-arrow)"></line>
+          <path d="M180,58 C120,90 120,144 180,176" class="al-line" fill="none" marker-end="url(#al-arrow)"></path>
+          <path d="M220,176 C280,144 280,90 220,58" class="al-line" fill="none" marker-end="url(#al-arrow)"></path>
+          <text x="122" y="121" text-anchor="middle" class="al-label">act</text>
+          <text x="278" y="121" text-anchor="middle" class="al-label">obs.</text>
+          <rect x="140" y="14" width="120" height="44" rx="8" class="al-llm"></rect>
+          <text x="200" y="33" text-anchor="middle" class="al-text">LLM</text>
+          <text x="200" y="48" text-anchor="middle" class="al-label">reason · plan</text>
+          <rect x="10" y="94" width="95" height="42" rx="8" class="al-mem"></rect>
+          <text x="57" y="112" text-anchor="middle" class="al-text">Memory</text>
+          <text x="57" y="126" text-anchor="middle" class="al-label">short/long-term</text>
+          <rect x="295" y="94" width="95" height="42" rx="8" class="al-tool"></rect>
+          <text x="342" y="112" text-anchor="middle" class="al-text">Tools</text>
+          <text x="342" y="126" text-anchor="middle" class="al-label">calls · MCP</text>
+          <rect x="140" y="176" width="120" height="42" rx="8" class="al-env"></rect>
+          <text x="200" y="194" text-anchor="middle" class="al-text">Environment</text>
+          <text x="200" y="208" text-anchor="middle" class="al-label">observe / act loop</text>
+        </svg>
+        <p class="cap">The anatomy of an agent — Session 1</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="facts">
+    <div class="wrap">
+      <div class="fact"><div class="k">Course ID</div><div class="v">CO5151</div></div>
+      <div class="fact"><div class="k">Level</div><div class="v">Master's</div></div>
+      <div class="fact"><div class="k">Assessment</div><div class="v">Continuous</div></div>
+      <div class="fact"><div class="k">Group size</div><div class="v">3–4</div></div>
+    </div>
+  </div>
+
+  <section class="block" id="description">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">01 · What the course covers</span>
+        <h2>From LLM to autonomous agent</h2>
+        <p>Ten threads run through the semester: agent research foundations, reasoning &amp; planning
+          (ReAct, Reflexion, Tree/Graph-of-Thoughts), tool use &amp; MCP, agent memory, coding agents,
+          multi-agent systems, agent security &amp; safety, reinforcement learning for agents,
+          production &amp; governance, and research/presentation/critique skills.</p>
+      </div>
+      <div class="note tip">
+        <span class="note-tag">Coming from CO3131?</span>
+        CO3131 (Next-gen Software Engineering) teaches you to <strong>apply</strong> coding agents and MCP
+        inside the software process. CO5151 goes underneath that: the primary research literature on
+        reasoning, memory, multi-agent orchestration, and — critically — <strong>formal threat modeling and
+        defenses</strong> for agent security, not just recognizing that prompt injection exists. Prior
+        hands-on experience is an asset for the project; it is not a substitute for reading the papers.
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="outcomes">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">02 · Learning outcomes</span>
+        <h2>By the end of the course, you can</h2>
+      </div>
+      <div class="outcomes">
+        <div class="outcome-group">
+          <span class="tag">L.O.1 · Knowledge</span>
+          <h3>Analyze &amp; critique research</h3>
+          <ul>
+            <li>Synthesize and critique the main research directions in agentic AI from primary literature</li>
+            <li>Compare assumptions, strengths, and limits of competing agent techniques and architectures</li>
+          </ul>
+        </div>
+        <div class="outcome-group">
+          <span class="tag">L.O.2 · Skills</span>
+          <h3>Design &amp; build agents</h3>
+          <ul>
+            <li>Design agent/multi-agent architectures integrating memory, tools (MCP), and orchestration</li>
+            <li>Implement, experiment with, and benchmark an agent system on a real task</li>
+          </ul>
+        </div>
+        <div class="outcome-group">
+          <span class="tag">L.O.3 · Skills</span>
+          <h3>Assess security &amp; safety</h3>
+          <ul>
+            <li>Analyze and model agent-specific threats — prompt injection, tool misuse, memory poisoning</li>
+            <li>Propose defenses: guardrails, permission control, monitoring, and safety evaluation</li>
+          </ul>
+        </div>
+        <div class="outcome-group">
+          <span class="tag">L.O.4 · Autonomy</span>
+          <h3>Research &amp; lead</h3>
+          <ul>
+            <li>Deliver a thematic seminar from the literature; critique and defend technical arguments</li>
+            <li>Lead a project team; practice research ethics and responsible AI use</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="assessment">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">03 · How the final grade is calculated</span>
+        <h2>Two seminars, one project — no exam</h2>
+        <p>Assessment is entirely continuous: there is no midterm and no final exam. Every point comes
+          from delivering and defending a seminar, or from designing, building and defending a working
+          agentic AI system.</p>
+      </div>
+      <div class="grade-bar" role="img" aria-label="Grade distribution: Seminar 1, 25%; Seminar 2, 25%; Group project, 50%.">
+        <div class="seg sem1">25%</div>
+        <div class="seg sem2">25%</div>
+        <div class="seg prj">50%</div>
+      </div>
+      <div class="grade-cards">
+        <div class="grade-card">
+          <div class="dot-row"><span class="dot c-sem1"></span><span class="pct">25%</span></div>
+          <h3>Seminar 1 — core topics</h3>
+          <p>30′ talk + 15′ Q&amp;A on a foundations topic (reasoning/planning, tools/MCP, memory, RAG,
+            coding agents, self-improvement, design patterns, or evaluation). Weeks 3–6.</p>
+        </div>
+        <div class="grade-card">
+          <div class="dot-row"><span class="dot c-sem2"></span><span class="pct">25%</span></div>
+          <h3>Seminar 2 — advanced topics</h3>
+          <p>30′ talk + 15′ Q&amp;A on an advanced topic (multi-agent systems, security, alignment, RL,
+            embodied agents, or governance). Weeks 8–11.</p>
+        </div>
+        <div class="grade-card">
+          <div class="dot-row"><span class="dot c-prj"></span><span class="pct">50%</span></div>
+          <h3>Group project</h3>
+          <p>Design, build, and evaluate one complete agentic AI system: proposal (W2) → progress
+            checkpoint (W7) → two-round defense with report, code, and live demo (W12–13).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="structure">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">04 · Course structure</span>
+        <h2>Four phases across 13 real sessions</h2>
+        <p>The project runs in parallel with every phase — a proposal in Week 2, a checkpoint in Week 7,
+          and the defense in Weeks 12–13.</p>
+      </div>
+      <div class="note warn">
+        <span class="note-tag">Why the site lists 13 sessions</span>
+        The syllabus describes 15 sessions, but the registered HK261 timetable provides 13 class
+        meetings: Wednesdays, 18:00–20:29, in B4-305, with no class on 14 October during the
+        university midterm-exam week. To fit the registered calendar, the first two foundation
+        lectures share Week 1, and the Seminar 2 wrap-up is included in Week 11. Seminar presentation
+        time and both project-defense sessions remain unchanged.
+      </div>
+      <div class="phases">
+        <div class="phase ph-found">
+          <span class="tag">Weeks 1–2</span>
+          <h3>Foundations</h3>
+          <p>Instructor-led: agent anatomy, research methodology, reasoning &amp; planning (combined,
+            flipped-classroom), tools/MCP, evaluation methodology, project proposals.</p>
+          <ul><li>Agent anatomy</li><li>ReAct · Reflexion · ToT</li><li>MCP</li><li>Benchmarking</li></ul>
+        </div>
+        <div class="phase ph-sem1">
+          <span class="tag">Weeks 3–7</span>
+          <h3>Seminar 1</h3>
+          <p>Eight core-topic talks across four sessions, plus a wrap-up combined with the mid-term
+            project checkpoint.</p>
+          <ul><li>Reasoning/Planning</li><li>Memory</li><li>Coding agents</li><li>Evaluation</li></ul>
+        </div>
+        <div class="phase ph-sem2">
+          <span class="tag">Weeks 8–11</span>
+          <h3>Seminar 2</h3>
+          <p>Eight advanced-topic talks — multi-agent systems, security, alignment, RL, embodiment,
+            governance — the last session extends into a research-landscape wrap-up.</p>
+          <ul><li>Multi-agent</li><li>Security</li><li>Alignment &amp; RL</li><li>Governance</li></ul>
+        </div>
+        <div class="phase ph-proj">
+          <span class="tag">Weeks 12–13</span>
+          <h3>Project defense</h3>
+          <p>Two-round presentation, live demo, and critique. Round 2 must show the required revisions
+            from Round 1 were addressed.</p>
+          <ul><li>Round 1</li><li>Round 2 (final)</li><li>Course wrap-up</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="schedule">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">05 · Weekly schedule</span>
+        <h2>13 sessions at a glance</h2>
+        <p>Dates follow the registered timetable for class <code>20261_CO5151_CH01</code>. Check any
+          later announcements from the instructor or registrar for changes.</p>
+      </div>
+
+      <div class="phase-label found"><span class="name">Foundations</span><span class="rule"></span></div>
+      <div class="sched">
+        <div class="week found">
+          <span class="no">W1</span>
+          <span class="topic">Introduction to Agentic AI, research methodology &amp; reasoning/planning <span class="date">— Wed 9 Sep 2026</span>
+            <span class="sub">Flipped classroom: Lectures 1 and 2 share one meeting. Pre-read <a href="lectures/week-01.html">Introduction &amp; Methodology</a> and <a href="lectures/week-02.html">Reasoning &amp; Planning</a> · course organization &amp; group formation</span>
+          </span>
+        </div>
+        <div class="week found special proj">
+          <span class="no">W2</span>
+          <span class="topic">Foundations — tools, context &amp; evaluation <span class="date">— Wed 16 Sep 2026</span><span class="badge">Project proposal due</span>
+            <span class="sub">Tool use &amp; MCP · context management · benchmarking methodology · proposal pitches</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="phase-label sem1"><span class="name">Seminar 1 · core topics</span><span class="rule"></span></div>
+      <div class="sched">
+        <div class="week sem1">
+          <span class="no">W3</span>
+          <span class="topic">Seminar 1 — Session 1 <span class="date">— Wed 23 Sep 2026</span>
+            <span class="sub">S1-1 Advanced Reasoning &amp; Planning · S1-2 Tool Use &amp; MCP</span>
+          </span>
+        </div>
+        <div class="week sem1">
+          <span class="no">W4</span>
+          <span class="topic">Seminar 1 — Session 2 <span class="date">— Wed 30 Sep 2026</span>
+            <span class="sub">S1-3 Agent Memory · S1-4 Retrieval-Augmented Agents</span>
+          </span>
+        </div>
+        <div class="week sem1">
+          <span class="no">W5</span>
+          <span class="topic">Seminar 1 — Session 3 <span class="date">— Wed 7 Oct 2026</span>
+            <span class="sub">S1-5 Coding Agents &amp; Automated SE · S1-6 Self-improvement &amp; Reflection</span>
+          </span>
+        </div>
+        <div class="week found special red">
+          <span class="no">—</span>
+          <span class="topic">No class <span class="date">— Wed 14 Oct 2026</span><span class="badge">University midterm week</span>
+            <span class="sub">CO5151 has no midterm exam — the university blocks this week for every course</span>
+          </span>
+        </div>
+        <div class="week sem1">
+          <span class="no">W6</span>
+          <span class="topic">Seminar 1 — Session 4 <span class="date">— Wed 21 Oct 2026</span>
+            <span class="sub">S1-7 Design Patterns &amp; Orchestration · S1-8 Evaluation &amp; Benchmarking</span>
+          </span>
+        </div>
+        <div class="week sem1 special proj">
+          <span class="no">W7</span>
+          <span class="topic">Seminar 1 wrap-up <span class="date">— Wed 28 Oct 2026</span><span class="badge">Project checkpoint</span>
+            <span class="sub">Reference-architecture synthesis · mid-term project checkpoint: architecture + preliminary demo</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="phase-label sem2"><span class="name">Seminar 2 · advanced topics</span><span class="rule"></span></div>
+      <div class="sched">
+        <div class="week sem2">
+          <span class="no">W8</span>
+          <span class="topic">Seminar 2 — Session 1 <span class="date">— Wed 4 Nov 2026</span>
+            <span class="sub">S2-1 Multi-Agent Systems &amp; Orchestration · S2-2 Multi-Agent Communication &amp; Collaboration</span>
+          </span>
+        </div>
+        <div class="week sem2">
+          <span class="no">W9</span>
+          <span class="topic">Seminar 2 — Session 2 <span class="date">— Wed 11 Nov 2026</span>
+            <span class="sub">S2-3 Prompt Injection &amp; Attacks · S2-4 Advanced Security &amp; Isolation</span>
+          </span>
+        </div>
+        <div class="week sem2">
+          <span class="no">W10</span>
+          <span class="topic">Seminar 2 — Session 3 <span class="date">— Wed 18 Nov 2026</span>
+            <span class="sub">S2-5 Safety &amp; Alignment · S2-6 Reinforcement Learning for Agents</span>
+          </span>
+        </div>
+        <div class="week sem2 special">
+          <span class="no">W11</span>
+          <span class="topic">Seminar 2 — Session 4 + wrap-up <span class="date">— Wed 25 Nov 2026</span><span class="badge">Extended close</span>
+            <span class="sub">S2-7 Computer-use / GUI / Embodied Agents · S2-8 Production, Governance &amp; Ethics; extended close: research-landscape synthesis, open challenges, defense logistics (written defense-prep handout replaces a live mock defense)</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="phase-label proj"><span class="name">Project defense</span><span class="rule"></span></div>
+      <div class="sched">
+        <div class="week proj special">
+          <span class="no">W12</span>
+          <span class="topic">Project report — Round 1 <span class="date">— Wed 2 Dec 2026</span><span class="badge">v1 due Sun 29 Nov</span>
+            <span class="sub">Presentation, live demo &amp; critique — architecture, evaluation, security analysis</span>
+          </span>
+        </div>
+        <div class="week proj special">
+          <span class="no">W13</span>
+          <span class="topic">Project report — Round 2 (final) &amp; course wrap-up <span class="date">— Wed 9 Dec 2026</span><span class="badge">Final submission Fri 11 Dec</span>
+            <span class="sub">Defend the revisions and final results; submit the revised report and code after incorporating final feedback</span>
+          </span>
+        </div>
+      </div>
+      <p class="sched-note">Full minute-by-minute session plans, instructor synthesis points and the
+        seminar rota are in the <a href="seminars.html">Seminar program</a>; the project timeline,
+        rubric and templates are in the <a href="project.html">Project</a> page.</p>
+    </div>
+  </section>
+
+  <section class="block" id="explore">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">06 · Explore the course</span>
+        <h2>Lectures, seminars, project, and readings</h2>
+      </div>
+      <div class="materials-grid">
+        <a class="mat-card lec" href="lectures/week-01.html">
+          <div class="mat-num">Lectures</div>
+          <h3>Weeks 1–2 — Foundations</h3>
+          <p>Agent anatomy, the reasoning/planning paradigms (CoT, ReAct, Reflexion, ToT), tools &amp;
+            MCP, and evaluation methodology — with an interactive agent-loop simulator and a paper
+            dependency graph.</p>
+          <div class="mat-meta">3 lecture pages · interactive simulator</div>
+        </a>
+        <a class="mat-card" href="seminars.html">
+          <div class="mat-num">Seminars</div>
+          <h3>Seminar Program</h3>
+          <p>Mechanics, presentation rota, and the full 16-topic bank (core + extension readings,
+            discussion starters) for Seminar 1 and Seminar 2.</p>
+          <div class="mat-meta">16 topics · rubric · peer-critique form</div>
+        </a>
+        <a class="mat-card proj" href="project.html">
+          <div class="mat-num">Project</div>
+          <h3>Group Project</h3>
+          <p>Minimum requirements, milestones and deadlines, the grading rubric, suggested themes,
+            and report/proposal templates.</p>
+          <div class="mat-meta">9 requirements · 4 deliverables · 10 themes</div>
+        </a>
+        <a class="mat-card sem2" href="resources.html">
+          <div class="mat-num">Resources</div>
+          <h3>Reading List</h3>
+          <p>Textbooks and the full paper list for every seminar topic, organized by topic and tagged
+            core vs. extension.</p>
+          <div class="mat-meta">6 books · 60+ papers</div>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="assets/course.js"></script>
+</body>
+</html>

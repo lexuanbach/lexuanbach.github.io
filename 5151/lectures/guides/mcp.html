@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Model Context Protocol</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../../index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../../index.html">Overview</a>
+      <a href="../week-01.html">Lectures</a>
+      <a href="../../seminars.html">Seminars</a>
+      <a href="../../project.html">Project</a>
+      <a href="../../resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="../../index.html">Overview</a>
+    <a href="../../seminars.html">Seminars</a>
+    <a href="../../project.html">Project</a>
+    <a href="../../resources.html">Resources</a>
+  </nav>
+  <h4>Lectures</h4>
+  <nav aria-label="Lectures">
+    <a href="../week-01.html"><span class="ch-num">01</span>Introduction &amp; Methodology</a>
+    <a href="../week-02.html"><span class="ch-num">02</span>Reasoning &amp; Planning</a>
+    <a href="../week-03.html" aria-current="page"><span class="ch-num">03</span>Tools, MCP &amp; Evaluation</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#plain">In plain terms</a>
+    <a href="#mechanism">How it works</a>
+    <a href="#example">Worked example</a>
+    <a href="#playground">Try it yourself</a>
+    <a href="#talk">For your talk &amp; project</a>
+    <a href="#reading">Further reading</a>
+  </nav>
+  <h4>Also from Week 3</h4>
+  <nav aria-label="Other guides this week">
+    <a href="agent-skills.html">Agent Skills</a>
+    <a href="rag.html">RAG</a>
+    <a href="lost-in-the-middle.html">Lost in the Middle</a>
+    <a href="toolformer.html">Toolformer</a>
+    <a href="tau-bench.html">τ-bench</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Paper Guide · Week 3 &mdash; Tools, MCP & Evaluation</span>
+      <h1>Introducing the Model Context Protocol</h1>
+      <p class="lede">An open standard for how an AI application talks to the tools and data sources around it — replacing one custom integration per (application, tool) pair with one protocol every pair can share.</p>
+      <div class="meta-chips">
+        <a class="chip" href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener"><strong>Read the paper ↗</strong></a>
+        <span class="chip">Anthropic · November 2024</span>
+        <a class="chip" href="../week-03.html">← Back to Tools, MCP & Evaluation</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="plain">
+    <div class="sec-head">
+      <span class="eyebrow">01 · In plain terms</span>
+      <h2>USB-C for AI tool connections, roughly</h2>
+    </div>
+    <div class="concept wide">
+      <p>Before MCP, if you wanted your AI application to read files, query a database, and search the
+        web, you wrote three separate custom integrations — and if you had five applications each
+        needing those same three capabilities, that's fifteen integrations, all slightly different. MCP
+        replaces the <strong>M × N</strong> problem (M applications × N tools) with an <strong>M + N</strong>
+        one: any application that speaks MCP as a client can talk to any tool that exposes itself as an
+        MCP server, with no bespoke glue code per pair. The protocol itself is not novel cryptography or
+        a new wire format — it's JSON-RPC 2.0, a decades-old standard — the actual contribution is
+        agreeing on <em>what</em> gets exchanged: a small, fixed vocabulary of primitives every server
+        and client understands the same way.</p>
+    </div>
+  </section>
+
+  <section class="block" id="mechanism">
+    <div class="sec-head">
+      <span class="eyebrow">02 · How it works</span>
+      <h2>One server, four primitives</h2>
+    </div>
+    <div class="concept wide">
+      <p>Every MCP server exposes some combination of three <strong>server primitives</strong>:
+        <strong>Tools</strong> (functions the model can call, with sanctioned side effects — send an
+        email, run a query), <strong>Resources</strong> (read-only context addressable by URI — a file,
+        a database row, a log), and <strong>Prompts</strong> (parameterized templates a user can invoke
+        directly, often surfaced as slash commands). There is one <strong>client primitive</strong> in
+        the other direction, <strong>Sampling</strong>: a server can ask the host's own LLM for a
+        completion, useful when a server needs a small piece of reasoning without embedding its own
+        model. A <strong>host</strong> application (the thing the user interacts with — Claude Desktop,
+        an IDE, a custom agent) embeds one MCP <strong>client</strong> per server connection; each client
+        keeps one stateful 1:1 session, opened with an <code>initialize</code> handshake, over either
+        <strong>stdio</strong> (a local subprocess) or <strong>HTTP</strong> (a remote server).</p>
+      <p>A critical point for any security analysis (this course's R6): every Tool description and every
+        Resource's content is <strong>untrusted input</strong> from the model's perspective, exactly like
+        a webpage a browser renders — a malicious or compromised server can return content engineered to
+        manipulate the model, which is why permission control and least-privilege tool access matter as
+        much as the protocol's own correctness.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 560 260" width="100%" role="img" aria-label="Diagram: an MCP client connects over JSON-RPC to a server exposing four primitives — Tools, Resources, Prompts, and Sampling.">
+        <defs>
+          <marker id="mcp2-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+        </defs>
+        <path d="M180,120 L260,120" class="arch-line" marker-end="url(#mcp2-arrow)"></path>
+        <text x="220" y="112" text-anchor="middle" class="arch-label">JSON-RPC 2.0</text>
+        <text x="220" y="135" text-anchor="middle" class="arch-label">stdio / HTTP</text>
+
+        <a class="dag-node accent" href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener"
+           data-functionality="Embedded in the host application, keeping one stateful connection per server."
+           data-intuition="One client per server connection is what makes each session simple and independently manageable."
+           data-example="Claude Desktop&#39;s own embedded MCP client, connecting to a local database server." aria-label="MCP client, embedded in the host application"><rect x="20" y="90" width="160" height="60" rx="8"></rect><text x="100" y="115" text-anchor="middle" class="t">MCP Client</text><text x="100" y="130" text-anchor="middle" class="s">in the host app</text></a>
+
+        <a class="dag-node dashed" href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener"
+           data-functionality="A container: one stateful connection exposing the four primitives shown inside."
+           data-intuition="Everything a server offers funnels through this one session — no separate connections per capability."
+           data-example="Tools, Resources, Prompts, and Sampling, shown below." aria-label="MCP server — a single stateful connection exposing four primitives"><rect x="260" y="10" width="280" height="220" rx="10"></rect></a>
+        <a class="dag-node teal" href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener"
+           data-functionality="Functions the model can call, with real side effects."
+           data-intuition="This is the primitive MCP shares with native function calling — a schema, an execution, a result."
+           data-example="query_database(sql=...) — actually runs a query." aria-label="Tools: functions the model can call, with real side effects"><rect x="280" y="30" width="110" height="70" rx="6"></rect><text x="335" y="60" text-anchor="middle" class="t">Tools</text><text x="335" y="75" text-anchor="middle" class="s">functions to call</text></a>
+        <a class="dag-node teal" href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener"
+           data-functionality="Read-only context, addressable by URI."
+           data-intuition="No side effects here — just data the model can read, like a file or a database row."
+           data-example="file:///project/README.md, exposed as a readable resource." aria-label="Resources: read-only context, addressable by URI"><rect x="410" y="30" width="110" height="70" rx="6"></rect><text x="465" y="60" text-anchor="middle" class="t">Resources</text><text x="465" y="75" text-anchor="middle" class="s">read-only</text></a>
+        <a class="dag-node teal" href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener"
+           data-functionality="Reusable, parameterized templates a user can invoke directly."
+           data-intuition="These are user-triggered, not model-triggered — closer to a shortcut than an autonomous action."
+           data-example="A &quot;/summarize-ticket&quot; slash command, backed by a server-defined prompt template." aria-label="Prompts: reusable templates, often surfaced as slash commands"><rect x="280" y="120" width="110" height="70" rx="6"></rect><text x="335" y="150" text-anchor="middle" class="t">Prompts</text><text x="335" y="165" text-anchor="middle" class="s">templates</text></a>
+        <a class="dag-node amber dashed" href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener"
+           data-functionality="The server asks the host&#39;s own LLM for a completion."
+           data-intuition="The one primitive that flows the other way — server to host, not host to server."
+           data-example="A server needing a small piece of reasoning without embedding its own model." aria-label="Sampling: the server asks the host's own LLM for a completion — the one primitive that flows client-ward"><rect x="410" y="120" width="110" height="70" rx="6"></rect><text x="465" y="150" text-anchor="middle" class="t">Sampling</text><text x="465" y="165" text-anchor="middle" class="s">asks the LLM</text></a>
+      </svg>
+      <div class="cap">One MCP server's four primitives — three flow server→host, Sampling flows the other way. Anthropic, 2024.</div>
+    </div>
+  </section>
+
+  <section class="block" id="example">
+    <div class="example">
+      <div class="example-bar"><span class="example-tag">Worked example</span><span class="example-title">A minimal MCP exchange</span></div>
+      <div class="example-body">
+        <p>A host application (with its LLM mid-conversation) needs data from a database MCP server it
+          has already connected to:</p>
+        <div class="trace">
+          <span class="trace-line"><span class="trace-role thought">Host's LLM decides</span>To answer the user, I need to call <code>query_database(sql=...)</code>.</span>
+          <span class="trace-line"><span class="trace-role action">Client → Server</span><code>tools/call</code> request: <code>{"name": "query_database", "arguments": {"sql": "SELECT ..."}}</code></span>
+          <span class="trace-line"><span class="trace-role obs">Server → Client</span><code>tools/call</code> response: the query result, as structured content.</span>
+          <span class="trace-line"><span class="trace-role thought">Host's LLM</span>Incorporates the result into its next response to the user.</span>
+        </div>
+        <p>This is the same message flow Week 3's <a href="../week-03.html#mcp">sequence diagram</a>
+          walks through in full, including the earlier <code>initialize</code> handshake and
+          <code>tools/list</code> discovery call.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="playground">
+    <div class="sec-head">
+      <span class="eyebrow">03b · Try it yourself</span>
+      <h2>Step through a real client–server exchange</h2>
+    </div>
+    <div class="concept wide">
+      <p>Pick a server, then step through the exact JSON-RPC messages a host and an MCP server
+        exchange for one request — the handshake, the discovery call, and the actual invocation, with
+        real payloads at every step.</p>
+    </div>
+    <div class="mcp-sim">
+      <div class="mcp-nodes">
+        <div class="mcp-node client"><span class="mcp-node-label">Host / Client</span></div>
+        <div class="mcp-connector"></div>
+        <div class="mcp-node server"><span class="mcp-node-label">MCP Server</span></div>
+      </div>
+      <div class="tf-controls">
+        <select class="sim-select" id="mcp-scenario-select" aria-label="Choose a server"></select>
+        <button class="btn ghost" id="mcp-step" type="button">Step →</button>
+        <button class="btn primary" id="mcp-play" type="button">▶ Play</button>
+        <button class="btn ghost" id="mcp-reset" type="button">↺ Reset</button>
+      </div>
+      <div class="sim-stats">
+        <span>Step: <strong id="mcp-step-count">0 / 0</strong></span>
+        <span>Messages on the wire: <strong id="mcp-msg-count">0</strong></span>
+      </div>
+      <div class="mcp-log" id="mcp-log" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="block" id="talk">
+    <div class="sec-head">
+      <span class="eyebrow">04 · For your talk &amp; project</span>
+      <h2>What this buys you</h2>
+    </div>
+    <div class="concept wide">
+      <ul>
+        <li>If you present <strong>S1-2 Tool Use &amp; MCP</strong>: the M×N → M+N argument is the
+          single sentence that justifies the whole protocol's existence — lead with it, then show the
+          four primitives as what actually got standardized.</li>
+        <li>For your <strong>project's tool integration (R2)</strong>: using an existing MCP server (or
+          writing a minimal one — Tools + one Resource is often enough) satisfies this requirement more
+          convincingly than an ad-hoc function-calling setup, and gives you a natural place to add
+          permission checks for R6.</li>
+        <li>Compare against <strong>Google's A2A protocol</strong> in Q&amp;A if asked: MCP is
+          agent-to-tool, A2A is agent-to-agent — complementary, not competing standards.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="reading">
+    <div class="sec-head">
+      <span class="eyebrow">05 · Further reading</span>
+      <h2>Where to go next</h2>
+    </div>
+    <div class="concept wide">
+      <ul class="reading wide">
+          <li><a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener">Anthropic — Introducing the Model Context Protocol (announcement + spec overview)</a></li>
+          <li><a href="https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/" target="_blank" rel="noopener">Google — Announcing the Agent2Agent Protocol (A2A): the complementary agent-to-agent standard</a></li>
+          <li><a href="https://arxiv.org/abs/2307.16789" target="_blank" rel="noopener">Qin et al. — ToolLLM: the tool-selection-at-scale problem MCP's discovery primitives address</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="../week-03.html"><span class="dir">← Back</span>Tools, MCP & Evaluation</a>
+    <a href="tau-bench.html" class="next"><span class="dir">Next guide →</span>τ-bench</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="../../assets/course.js"></script>
+<script src="../../assets/mcp-sim.js"></script>
+<script src="../../assets/dag.js"></script>
+</body>
+</html>

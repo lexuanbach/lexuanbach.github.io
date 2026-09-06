@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CO5151 Lecture: Tools, MCP &amp; Evaluation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../index.html">Overview</a>
+      <a href="week-01.html">Lectures</a>
+      <a href="../seminars.html">Seminars</a>
+      <a href="../project.html">Project</a>
+      <a href="../resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="../index.html">Overview</a>
+    <a href="../seminars.html">Seminars</a>
+    <a href="../project.html">Project</a>
+    <a href="../resources.html">Resources</a>
+  </nav>
+  <h4>Lectures</h4>
+  <nav aria-label="Lectures">
+    <a href="week-01.html"><span class="ch-num">01</span>Introduction &amp; Methodology</a>
+    <a href="week-02.html"><span class="ch-num">02</span>Reasoning &amp; Planning</a>
+    <a href="week-03.html" aria-current="page"><span class="ch-num">03</span>Tools, MCP &amp; Evaluation</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#tools">Tool use &amp; function calling</a>
+    <a href="#mcp">Model Context Protocol</a>
+    <a href="#context">Context management</a>
+    <a href="#evaluation">Evaluation methodology</a>
+    <a href="#discussion">Discussion</a>
+    <a href="#takeaway">Takeaway</a>
+    <a href="#quiz">Quiz</a>
+  </nav>
+  <h4>Paper guides</h4>
+  <nav aria-label="Paper guides">
+    <a href="guides/agent-skills.html">Agent Skills</a>
+    <a href="guides/rag.html">RAG</a>
+    <a href="guides/lost-in-the-middle.html">Lost in the Middle</a>
+    <a href="guides/toolformer.html">Toolformer</a>
+    <a href="guides/mcp.html">Model Context Protocol</a>
+    <a href="guides/tau-bench.html">τ-bench</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Lecture 3 · Real Week 2 (Wed 16 Sep 2026) · Foundations</span>
+      <h1>Foundations: Tools, Context &amp; Evaluation</h1>
+      <p class="lede">Function calling and the Model Context Protocol at the level of what they
+        standardize (and where they're vulnerable); context-window management; and the benchmarking
+        methodology your project's own evaluation (Requirement R5) has to meet.</p>
+      <div class="note warn">
+        <span class="note-tag">Schedule note</span>
+        This is Lecture 3, taught in the second class meeting. Lectures 1 and 2 share Real Week 1,
+        so this page's number does not match the timetable week. This session also includes project
+        proposal pitches; see the <a href="../project.html">Project page</a>.
+      </div>
+      <div class="prereading">
+        <span class="note-tag">Pre-reading — complete before class</span>
+        <ol>
+          <li><strong>Schick et al. — <a href="https://arxiv.org/abs/2302.04761" target="_blank" rel="noopener">Toolformer</a></strong> (NeurIPS 2023).</li>
+          <li><strong>Anthropic — <a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener">Introducing the Model Context Protocol</a></strong> (2024) — read the launch announcement, then skim the <a href="https://modelcontextprotocol.io/docs/learn/architecture" target="_blank" rel="noopener">current architecture overview</a> and note what changed.</li>
+          <li><strong>Kapoor et al. — <a href="https://arxiv.org/abs/2407.01502" target="_blank" rel="noopener">AI Agents That Matter</a></strong> (arXiv 2024 / TMLR 2025) — directly shapes §4's evaluation checklist.</li>
+        </ol>
+      </div>
+      <div class="note">
+        <span class="note-tag">Recap — last week</span>
+        Week 1 gave every agent a common <strong>anatomy</strong> (LLM reasoning, memory, tools,
+        environment, wired by a loop) and a common critique method. That same session's second lecture
+        covered the <strong>reasoning/planning</strong> techniques that live inside the "reasoning"
+        component — Chain-of-Thought, ReAct, Reflexion, Tree/Graph-of-Thoughts — all trading
+        inference-time compute for accuracy, and the open objection that none of them is actually
+        <em>planning</em> in the classical sense. Today moves to the other two components: how the
+        <strong>tools</strong> component actually calls something real, and how the
+        <strong>memory/environment</strong> components stay trustworthy and measurable at scale.
+      </div>
+      <div class="note tip"><span class="note-tag">Paper guides — deep dives with figures and worked examples</span>
+        <a href="guides/agent-skills.html">Agent Skills →</a> · <a href="guides/rag.html">RAG →</a> · <a href="guides/lost-in-the-middle.html">Lost in the Middle →</a> · <a href="guides/toolformer.html">Toolformer →</a> · <a href="guides/mcp.html">Model Context Protocol →</a> · <a href="guides/tau-bench.html">τ-bench →</a>
+      </div>
+      <div class="meta-chips">
+        <a class="chip" href="#tools">Function calling</a>
+        <a class="chip" href="#mcp">MCP architecture</a>
+        <a class="chip" href="#context">Context &amp; memory</a>
+        <a class="chip" href="#evaluation">pass@k vs. pass^k</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="objectives">
+    <div class="sec-head">
+      <span class="eyebrow">Learning objectives</span>
+      <h2>By the end of this session, you can</h2>
+    </div>
+    <div class="concept wide">
+      <ol>
+        <li>Explain how native function calling works mechanically (schema → constrained generation →
+          execution → observation) and identify failure modes specific to <em>irreversible</em> or
+          <em>expensive</em> tools.</li>
+        <li>Describe MCP's architecture (host/client/server, the three core server primitives, and
+          capability discovery) and explain what problem it solves that per-tool custom integrations
+          do not.</li>
+        <li>Name at least three concrete context-management techniques and the failure mode each one
+          addresses.</li>
+        <li>Design a credible evaluation for an agent system: choose a metric, justify a baseline, and
+          specify what must be controlled for (seeds, cost, contamination) to make the result
+          trustworthy.</li>
+        <li>Defend a project proposal against exactly this methodology bar in the pitch segment of this
+          session.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="tools">
+    <div class="sec-head">
+      <span class="eyebrow">01 · Tool use and function calling</span>
+      <h2>From free text to constrained action</h2>
+    </div>
+    <div class="concept wide">
+      <p>LLMs naturally generate text, while tools require valid, typed calls. For an agent to
+        <em>act</em> — call an API, run a query, execute code — the application needs a reliable bridge
+        between those two forms. Three approaches are worth distinguishing because they make different
+        reliability trade-offs:</p>
+      <ul>
+        <li><strong><a href="https://arxiv.org/abs/2302.04761" target="_blank" rel="noopener">Toolformer</a></strong>
+          (Schick et al., NeurIPS 2023) — a model <em>fine-tuned</em> to insert tool-call tokens into its
+          own generated text, self-supervised by checking whether the call improves its own prediction of
+          following tokens. Tool use is baked into one model's weights — not something you can add a new
+          tool to without retraining.</li>
+        <li><strong><a href="https://arxiv.org/abs/2307.16789" target="_blank" rel="noopener">ToolLLM</a></strong>
+          (Qin et al., ICLR 2024) — scales tool use to 16,000+ real-world APIs via instruction-tuning,
+          plus a search procedure for tool <em>selection</em> when the candidate set is too large to
+          consider by brute force. First point where "which tool, out of thousands" becomes its own
+          sub-problem.</li>
+        <li><strong>Native function calling</strong> (current commercial LLM APIs) — the provider trains
+          the base model to reliably emit a structured call given a list of tool schemas in context, with
+          no extra fine-tuning by the developer. What nearly every framework you'll use calls under the
+          hood.</li>
+      </ul>
+      <h3>Native function calling, mechanically</h3>
+      <p>You provide the model with a <strong>schema per tool</strong> at inference time — name,
+        description, and a typed parameter specification:</p>
+    </div>
+    <pre class="codeblock"><code class="language-json">{
+  "name": "search_flights",
+  "description": "Search for available flights between two cities on a given date.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "origin": {"type": "string", "description": "IATA airport code, e.g. 'SGN'"},
+      "destination": {"type": "string", "description": "IATA airport code, e.g. 'HAN'"},
+      "date": {"type": "string", "description": "ISO 8601 date, e.g. '2026-09-14'"}
+    },
+    "required": ["origin", "destination", "date"]
+  }
+}</code></pre>
+    <div class="concept wide">
+      <p>At generation time, the model either produces ordinary text or a structured call matching one
+        of the provided schemas. The calling application validates the arguments, executes the call,
+        and appends the result back into context as an <code>Observation</code> — exactly the
+        <code>execute(decision.action, tools)</code> step from Lecture 1's control loop, made concrete.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 730 100" width="100%" role="img" aria-label="Pipeline: a tool schema is provided at inference time, the model generates a matching call, the application validates and executes it, and the result is fed back as an observation.">
+        <defs>
+          <marker id="toolspipe-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+        </defs>
+        <path d="M170,50 L190,50" class="arch-line" marker-end="url(#toolspipe-arrow)"></path>
+        <path d="M350,50 L370,50" class="arch-line" marker-end="url(#toolspipe-arrow)"></path>
+        <path d="M540,50 L560,50" class="arch-line" marker-end="url(#toolspipe-arrow)"></path>
+
+        <a class="dag-node" href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener"
+           data-functionality="Provides a schema per tool at inference time: name, description, and a typed parameter specification."
+           data-intuition="This is the only information the model has to decide which tool to call and with what arguments."
+           data-example="search_flights(origin, destination, date) — one schema among possibly many." aria-label="The application provides a schema per tool at inference time: name, description, and a typed parameter specification."><rect x="10" y="20" width="160" height="60" rx="8"></rect><text x="90" y="47" text-anchor="middle" class="t">Schema</text><text x="90" y="62" text-anchor="middle" class="s">name + typed params</text></a>
+        <a class="dag-node accent" href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener"
+           data-functionality="At generation time, the model produces a structured call matching one of the provided schemas."
+           data-intuition="The model either produces ordinary text or a structured call — never both at once."
+           data-example="The model emits a call to search_flights with concrete argument values." aria-label="At generation time, the model produces a structured call matching one of the provided schemas."><rect x="190" y="20" width="160" height="60" rx="8"></rect><text x="270" y="47" text-anchor="middle" class="t">Model call</text><text x="270" y="62" text-anchor="middle" class="s">matches a provided schema</text></a>
+        <a class="dag-node amber" href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener"
+           data-functionality="The calling application validates the arguments, then executes the call for real."
+           data-intuition="Validation happens before execution — this is the last checkpoint before something actually runs."
+           data-example="Checking the date is valid ISO 8601 before the flight search actually runs." aria-label="The calling application validates the arguments, then executes the call for real."><rect x="370" y="20" width="170" height="60" rx="8"></rect><text x="455" y="47" text-anchor="middle" class="t">Validate &amp; execute</text><text x="455" y="62" text-anchor="middle" class="s">app runs the real call</text></a>
+        <a class="dag-node teal" href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener"
+           data-functionality="The result is appended back into context as an Observation."
+           data-intuition="Exactly the execute(decision.action, tools) step from Lecture 1&#39;s control loop, made concrete."
+           data-example="The list of matching flights, appended to context for the model&#39;s next turn." aria-label="The result is appended back into context as an Observation — exactly the execute(decision.action, tools) step from Lecture 1's control loop."><rect x="560" y="20" width="150" height="60" rx="8"></rect><text x="635" y="47" text-anchor="middle" class="t">Observation</text><text x="635" y="62" text-anchor="middle" class="s">fed back to context</text></a>
+      </svg>
+      <div class="cap">Native function calling, mechanically.</div>
+    </div>
+    <div class="concept wide">
+      <div class="note danger">
+        <span class="note-tag">Treat schemas and tool results as part of the security boundary</span>
+        The model chooses among tools using their names, descriptions, parameter schemas, and the
+        surrounding instructions. Vague metadata can cause wrong selections or malformed arguments.
+        Tool descriptions and results may also contain untrusted text that tries to redirect the model;
+        instruction hierarchy helps, but it does not remove the need for validation, least privilege,
+        and approval before consequential actions.
+      </div>
+      <h3>Error handling, idempotency, and irreversibility</h3>
+      <p>Three properties of a tool call that must be designed for explicitly:</p>
+      <ul>
+        <li><strong>Idempotency</strong> — does calling the tool twice with the same arguments have the
+          same effect as calling it once? A <code>get_weather</code> call is idempotent; a
+          <code>charge_card</code> call is not. Agents retry on failure by design — a non-idempotent tool
+          called twice by accident during a retry is a real, common failure mode.</li>
+        <li><strong>Reversibility</strong> — can the effect be undone? Sending an email cannot be undone;
+          a draft order usually can be. The ReAct critique in Lecture 2 applies here directly.</li>
+        <li><strong>Error surfacing</strong> — a raw stack trace, a structured error the model can retry
+          differently, or a silent failure that looks like a valid empty result?</li>
+      </ul>
+      <p>For your own project (Requirement R2), each tool's permission level should record whether it is
+        read-only, reversible-write, or irreversible-write — the first input to your threat model
+        (Requirement R6).</p>
+      <p>Worth knowing as a pointer: the
+        <a href="https://gorilla.cs.berkeley.edu/leaderboard.html" target="_blank" rel="noopener">Berkeley Function-Calling Leaderboard</a>
+        (alongside Patil et al.'s <a href="https://arxiv.org/abs/2305.15334" target="_blank" rel="noopener">Gorilla</a>)
+        measures function-calling <em>correctness</em> — right function, right arguments, right format —
+        separately from whether the overall task succeeds.</p>
+    </div>
+  </section>
+
+  <section class="block" id="mcp">
+    <div class="sec-head">
+      <span class="eyebrow">02 · The Model Context Protocol</span>
+      <h2>Reducing an M×N integration problem toward M+N</h2>
+    </div>
+    <div class="concept wide">
+      <p>Before a standard protocol, every agent framework connecting to a database, a filesystem, and a
+        ticketing system had to write custom integration code for each pairing — an <strong>M × N</strong>
+        problem. <a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener">Anthropic's Model Context Protocol</a>
+        (2024) reduces those pairwise integrations toward <strong>M + N</strong>: each tool or data
+        source implements a server interface, and each application implements a client interface.
+        Authentication, permissions, and application policy still need integration work. MCP does not
+        make agents smarter; it makes tool integration a reusable engineering problem.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 540 320" width="100%" role="img" aria-label="Diagram: a host application containing two MCP clients, each connected over stdio or HTTP to its own MCP server (a database and a ticketing system).">
+        <defs>
+          <marker id="mcp-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path>
+          </marker>
+        </defs>
+        <path d="M155,124 L155,230" class="arch-line" marker-end="url(#mcp-arrow)"></path>
+        <path d="M385,124 L385,230" class="arch-line" marker-end="url(#mcp-arrow)"></path>
+        <text x="155" y="182" text-anchor="middle" class="arch-label">stdio / HTTP</text>
+        <text x="385" y="182" text-anchor="middle" class="arch-label">stdio / HTTP</text>
+
+        <a class="dag-node dashed" href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener"
+           data-functionality="The user-facing application that embeds the LLM and decides what to show the user."
+           data-intuition="Should enforce consent — this is the trust boundary between the user and everything the servers can do."
+           data-example="Claude Desktop, an IDE, or a custom agent application." aria-label="The Host: the user-facing application. Embeds the LLM, decides what to show the user, and should enforce consent.">
+          <rect x="20" y="10" width="500" height="110" rx="10"></rect>
+        </a>
+        <text x="40" y="32" class="arch-caption">HOST</text>
+        <text x="40" y="47" class="arch-label">the app the user interacts with — embeds the LLM,</text>
+        <text x="40" y="60" class="arch-label">decides what to show the user, enforces consent</text>
+
+        <a class="dag-node accent" href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener"
+           data-functionality="One dedicated channel between the host and a single server."
+           data-intuition="One client per server keeps each session simple and independently manageable."
+           data-example="The client connection to a database server, specifically." aria-label="MCP Client A: one dedicated channel to one server">
+          <rect x="70" y="70" width="170" height="50" rx="8"></rect>
+          <text x="155" y="92" text-anchor="middle" class="t">MCP Client A</text>
+          <text x="155" y="107" text-anchor="middle" class="s">dedicated channel</text>
+        </a>
+        <a class="dag-node accent" href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener"
+           data-functionality="One dedicated channel between the host and a single server."
+           data-intuition="One client per server keeps each session simple and independently manageable."
+           data-example="The client connection to a ticketing-system server, specifically." aria-label="MCP Client B: one dedicated channel to one server">
+          <rect x="300" y="70" width="170" height="50" rx="8"></rect>
+          <text x="385" y="92" text-anchor="middle" class="t">MCP Client B</text>
+          <text x="385" y="107" text-anchor="middle" class="s">dedicated channel</text>
+        </a>
+
+        <a class="dag-node teal" href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener"
+           data-functionality="Exposes a database&#39;s tools and resources over the protocol."
+           data-intuition="The server owns the actual capability — the client just relays requests to it."
+           data-example="A query_database tool, backed by a real database connection." aria-label="MCP Server exposing a database's tools/resources">
+          <rect x="70" y="230" width="170" height="60" rx="8"></rect>
+          <text x="155" y="254" text-anchor="middle" class="t">MCP Server</text>
+          <text x="155" y="269" text-anchor="middle" class="s">e.g. a database</text>
+        </a>
+        <a class="dag-node teal" href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener"
+           data-functionality="Exposes a ticketing system&#39;s tools and resources over the protocol."
+           data-intuition="A separate server per system keeps each integration&#39;s permissions and scope independent."
+           data-example="A create_ticket tool, backed by a real ticketing system." aria-label="MCP Server exposing a ticketing system's tools/resources">
+          <rect x="300" y="230" width="170" height="60" rx="8"></rect>
+          <text x="385" y="254" text-anchor="middle" class="t">MCP Server</text>
+          <text x="385" y="269" text-anchor="middle" class="s">e.g. a ticketing system</text>
+        </a>
+      </svg>
+      <p class="cap">One host creates a dedicated client for each server it uses</p>
+    </div>
+    <div class="concept wide">
+      <p>The <strong>host</strong> is user-facing and owns the LLM conversation — and, critically, is
+        where user consent should be enforced. The host creates one <strong>client</strong> for each
+        server it uses; that client maintains a dedicated communication channel. A local stdio server
+        usually serves one client, while a remote HTTP server can serve many. Each <strong>server</strong>
+        exposes one system's capabilities without needing to know which LLM or other servers the host
+        uses.</p>
+    </div>
+    <div class="tbl-scroll">
+      <table class="tbl">
+        <thead><tr><th>Primitive</th><th>Who controls it</th><th>Analogy</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Tools</strong></td><td>Model-controlled</td><td>A function the model can call</td><td class="mono">query_database(sql)</td></tr>
+          <tr><td><strong>Resources</strong></td><td>Application-controlled</td><td>A file the model can read</td><td class="mono">file:///project/README.md</td></tr>
+          <tr><td><strong>Prompts</strong></td><td>User-controlled</td><td>A reusable slash-command/template</td><td class="mono">/summarize-ticket</td></tr>
+          <tr><td><strong>Elicitation</strong></td><td>User-controlled through the host</td><td>A server asking the user for missing information or confirmation</td><td>Confirm an irreversible action</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="concept wide">
+      <p>Tools, resources, and prompts are the three core primitives a server can expose. Elicitation is
+        a client feature in the other direction: it lets a server request user input through the host.
+        This split acknowledges that not every decision should be delegated to the model. The current
+        protocol is stateless at the data layer and uses discovery metadata on requests; this differs
+        from the 2024 protocol described in the launch announcement, which used an
+        <code>initialize</code> handshake and included sampling. A simplified current message flow
+        (MCP uses JSON-RPC 2.0):</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 600 400" width="100%" role="img" aria-label="Sequence diagram between an MCP client and server: capability discovery, tools/list request and response, an annotation that the host's LLM decides to call query_database, then tools/call request and its result.">
+        <defs>
+          <marker id="seq-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path>
+          </marker>
+        </defs>
+        <line x1="150" y1="44" x2="150" y2="380" class="seq-life"></line>
+        <line x1="450" y1="44" x2="450" y2="380" class="seq-life"></line>
+        <g class="arch-box accent"><rect x="90" y="10" width="120" height="30" rx="6"></rect><text x="150" y="30" text-anchor="middle" class="t">Client</text></g>
+        <g class="arch-box teal"><rect x="390" y="10" width="120" height="30" rx="6"></rect><text x="450" y="30" text-anchor="middle" class="t">Server</text></g>
+
+        <line x1="150" y1="70" x2="450" y2="70" class="seq-arrow" marker-end="url(#seq-arrow)"></line>
+        <text x="300" y="64" text-anchor="middle" class="arch-label">server/discover + request metadata</text>
+        <line x1="450" y1="106" x2="150" y2="106" class="seq-arrow reply" marker-end="url(#seq-arrow)"></line>
+        <text x="300" y="100" text-anchor="middle" class="arch-label">versions, capabilities, identity</text>
+
+        <line x1="150" y1="160" x2="450" y2="160" class="seq-arrow" marker-end="url(#seq-arrow)"></line>
+        <text x="300" y="154" text-anchor="middle" class="arch-label">tools/list</text>
+        <line x1="450" y1="196" x2="150" y2="196" class="seq-arrow reply" marker-end="url(#seq-arrow)"></line>
+        <text x="300" y="190" text-anchor="middle" class="arch-label">tools/list (result)</text>
+
+        <line x1="60" y1="246" x2="540" y2="246" class="arch-line dashed"></line>
+        <text x="300" y="240" text-anchor="middle" class="arch-label" font-style="italic">host's LLM decides to call query_database(sql=…)</text>
+
+        <line x1="150" y1="292" x2="450" y2="292" class="seq-arrow" marker-end="url(#seq-arrow)"></line>
+        <text x="300" y="286" text-anchor="middle" class="arch-label">tools/call + request metadata</text>
+        <line x1="450" y1="328" x2="150" y2="328" class="seq-arrow reply" marker-end="url(#seq-arrow)"></line>
+        <text x="300" y="322" text-anchor="middle" class="arch-label">tools/call (result)</text>
+      </svg>
+      <p class="cap">MCP message flow — indigo arrows are client→server calls, teal arrows are server→client results</p>
+    </div>
+    <div class="concept wide">
+      <p><code>tools/list</code> is the schema-advertising step from §1, now standardized and served
+        dynamically by the tool provider. The host discovers what the server advertises; the
+        application can filter that list before exposing tools to the model. MCP is transport-agnostic:
+        a local <strong>stdio</strong>
+        server inherits the host process's own privileges directly; a remote <strong>HTTP</strong> server
+        is a genuine network boundary you must reason about separately.</p>
+      <div class="note danger">
+        <span class="note-tag">Security, previewed (covered in depth in S2-3/S2-4)</span>
+        <ul>
+          <li>Tool descriptions and results can contain untrusted instructions. They do not have the
+            same authority as the host's system instructions, but they can still manipulate model
+            behavior if the application treats them as ordinary context.</li>
+          <li>Scoping and consent belong in the <strong>host</strong>, not the model. Elicitation gives
+            a server a standard way to request confirmation, but the host still decides what to show,
+            what to authorize, and whether an irreversible call may proceed.</li>
+          <li>A "confused deputy" risk: an agent with legitimate access to multiple servers can be
+            tricked, via content from one server, into misusing its access to another — exactly Willison's
+            "lethal trifecta" framing (S2-3): untrusted content + private data + external communication,
+            together in one agent.</li>
+        </ul>
+      </div>
+      <h3>MCP vs. A2A, briefly</h3>
+      <p>MCP standardizes <strong>agent-to-tool/data</strong> communication. Google's
+        <a href="https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/" target="_blank" rel="noopener">Agent2Agent (A2A)</a>
+        protocol (2025) instead standardizes <strong>agent-to-agent</strong> communication — a different
+        problem (peer coordination). The two are complementary: a multi-agent system (S2-1) plausibly uses
+        A2A between agents and MCP from each agent to its own tools.</p>
+    </div>
+  </section>
+
+  <section class="block" id="context">
+    <div class="sec-head">
+      <span class="eyebrow">03 · Context management</span>
+      <h2>The window is finite, and position matters</h2>
+    </div>
+    <div class="concept wide">
+      <p>Everything an agent "knows" at decision time must fit in the model's context window. Two
+        distinct problems follow, worth keeping separate: <strong>capacity</strong> (a hard token limit)
+        and <strong>positional degradation</strong> — even within capacity,
+        <a href="https://arxiv.org/abs/2307.03172" target="_blank" rel="noopener">"lost in the middle" (Liu et al., TACL 2024)</a>
+        shows models are empirically less accurate at using information placed in the <em>middle</em> of a
+        long context than near the beginning or end.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 500 210" width="100%" role="img" aria-label="Illustrative U-shaped chart: accuracy at retrieving a fact is high when it is near the beginning or end of a long context, and low when it is in the middle.">
+        <line x1="40" y1="30" x2="40" y2="170" class="chart-axis"></line>
+        <line x1="40" y1="170" x2="460" y2="170" class="chart-axis"></line>
+        <path d="M40,170 L40,32 C140,32 165,150 250,150 C335,150 360,32 460,32 L460,170 Z" class="chart-area"></path>
+        <path d="M40,32 C140,32 165,150 250,150 C335,150 360,32 460,32" class="chart-line"></path>
+        <text x="30" y="36" text-anchor="end" class="arch-label">high</text>
+        <text x="30" y="174" text-anchor="end" class="arch-label">low</text>
+        <text x="40" y="192" text-anchor="start" class="arch-label">beginning</text>
+        <text x="250" y="192" text-anchor="middle" class="arch-label">middle</text>
+        <text x="460" y="192" text-anchor="end" class="arch-label">end</text>
+      </svg>
+      <p class="cap">Accuracy at retrieving a fact, by its position in a long context (illustrative shape)</p>
+    </div>
+    <div class="concept wide">
+      <p>This is the direct, practical reason "just put everything relevant into a giant context window"
+        is not a substitute for the memory and retrieval design in S1-3/S1-4 — a fact being
+        <em>present</em> in context is not the same as the model reliably <em>using</em> it.</p>
+    </div>
+    <div class="tbl-scroll">
+      <table class="tbl">
+        <thead><tr><th>Technique</th><th>What it does</th><th>Addresses</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Compaction / summarization</strong></td><td>Periodically replace older turns with a generated summary</td><td>Capacity over a long-lived session</td></tr>
+          <tr><td><strong>Scratchpads</strong></td><td>A designated area for the model's own intermediate working</td><td>Reasoning quality — same idea as CoT (Lecture 2)</td></tr>
+          <tr><td><strong>Retrieval instead of stuffing</strong></td><td>Store material outside the window; pull in only what's relevant, on demand</td><td>Capacity <em>and</em> positional degradation</td></tr>
+          <tr><td><strong>Structured context sections</strong></td><td>Explicitly label distinct kinds of content (system vs. retrieved vs. tool vs. user)</td><td>Confusability — partial mitigation for injection risk</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block" id="evaluation">
+    <div class="sec-head">
+      <span class="eyebrow">04 · Research and benchmarking methodology</span>
+      <h2>Design the evaluation before you build</h2>
+    </div>
+    <div class="concept wide">
+      <p>This goes before Seminar 1 and before most groups have working code — deliberately: an
+        evaluation plan designed <em>after</em> a system exists tends to be shaped to flatter what it
+        already does well.</p>
+      <h3>Metrics: task success, pass@k, and cost/latency together</h3>
+      <ul>
+        <li><strong>Task success rate</strong> — meaningless without stating <em>how</em> correctness is
+          checked; an LLM-judged "success" and a unit-test-verified "success" are different metrics
+          wearing the same name.</li>
+        <li><strong>pass@k</strong> — given k independent attempts, the fraction where <em>at least
+          one</em> succeeds. Assumes you can reliably <em>pick</em> the successful attempt in real
+          deployment — often the unsolved part of the problem.</li>
+        <li><strong>pass^k</strong> (<a href="https://arxiv.org/abs/2406.12045" target="_blank" rel="noopener">Yao et al., τ-bench, 2024</a>) —
+          given k attempts, the fraction where <em>all</em> k succeed. A much stricter, deployment-relevant
+          reliability measure: a technique succeeding 90% of the time on any one attempt can still be
+          unreliable across repeated calls.</li>
+        <li><strong>Cost and latency, always reported alongside success</strong> — a technique spending
+          10× the tokens (self-consistency, ToT — Lecture 2) is not unconditionally "better," it's a
+          different point on a cost-quality curve.</li>
+      </ul>
+      <div class="diagram-card inline">
+        <svg viewBox="0 0 460 220" width="100%" role="img" aria-label="Line chart: pass@k rises toward 1.0 as k increases, since any success counts, while pass^k declines as k increases, since every attempt must succeed.">
+          <line x1="50" y1="190" x2="430" y2="190" class="chart-axis"></line>
+          <line x1="50" y1="20" x2="50" y2="190" class="chart-axis"></line>
+          <path d="M90,140 C140,128 200,105 280,95 C330,88 370,80 400,75" class="chart-line"></path>
+          <path d="M90,88 C140,105 200,125 280,140 C330,150 370,158 400,165" class="chart-line teal"></path>
+          <circle cx="90" cy="140" r="4" class="chart-dot"></circle>
+          <circle cx="280" cy="95" r="4" class="chart-dot"></circle>
+          <circle cx="400" cy="75" r="4" class="chart-dot"></circle>
+          <circle cx="90" cy="88" r="4" class="chart-dot teal"></circle>
+          <circle cx="280" cy="140" r="4" class="chart-dot teal"></circle>
+          <circle cx="400" cy="165" r="4" class="chart-dot teal"></circle>
+          <text x="90" y="205" text-anchor="middle" class="arch-label">k=1</text>
+          <text x="280" y="205" text-anchor="middle" class="arch-label">k=4</text>
+          <text x="400" y="205" text-anchor="middle" class="arch-label">k=8</text>
+          <text x="365" y="68" text-anchor="middle" class="arch-caption">pass@k</text>
+          <text x="365" y="180" text-anchor="middle" class="arch-caption teal">pass^k</text>
+        </svg>
+        <div class="cap">Illustrative — same underlying success rate, opposite trend depending on which metric you report.</div>
+      </div>
+      <h3>Formal definitions</h3>
+      <p>Both metrics are usually computed with an <strong>unbiased estimator</strong>, not a naive
+        repeated trial — sample <code>n</code> attempts per task once (<code>n ≥ k</code>), count how
+        many succeeded, then compute every <code>k</code> you care about from that same batch of
+        samples. This avoids the high variance of literally re-running the task <code>k</code> times
+        over and over, and it's cheaper: one batch of <code>n</code> samples yields pass@1, pass@8, and
+        pass@100 alike.</p>
+      <div class="note">
+        <span class="note-tag">pass@k — probability at least one of k attempts succeeds</span>
+        <code>pass@k = 𝔼<sub>tasks</sub>&thinsp;[&thinsp;1 − C(n−c, k) / C(n, k)&thinsp;]</code>
+        <p class="mt-tight">For one task: sample <code>n</code> attempts, of which
+          <code>c</code> succeed. <code>C(n, k)</code> is "n choose k" — the number of ways to pick
+          <code>k</code> of the <code>n</code> samples. <code>C(n−c, k) / C(n, k)</code> is the
+          probability that a randomly chosen set of <code>k</code> samples contains <em>zero</em>
+          successes (all <code>k</code> drawn from the <code>n−c</code> failures); subtracting from 1
+          gives the probability at least one succeeds. Average over tasks. (Chen et al., 2021 — the
+          Codex paper that introduced this estimator.)</p>
+      </div>
+      <div class="note tip">
+        <span class="note-tag">pass^k — probability ALL k attempts succeed</span>
+        <code>pass^k = 𝔼<sub>tasks</sub>&thinsp;[&thinsp;C(c, k) / C(n, k)&thinsp;]</code>
+        <p class="mt-tight">Same <code>n</code> samples and <code>c</code> successes per task,
+          but now the numerator is the number of ways to pick <code>k</code> samples that are <em>all
+          successes</em> — the probability a random <code>k</code>-subset is entirely successful.
+          Structurally the mirror image of pass@k (successes and failures swap roles), and much
+          stricter: a task with 90% single-attempt success can still have a low pass^8 if that 10%
+          failure rate is spread independently across attempts. (Yao et al., τ-bench, 2024.)</p>
+      </div>
+      <div class="note">
+        <span class="note-tag">Reporting variance across seeds (Requirement R5)</span>
+        <code>p̄ = (1/m) Σᵢ pᵢ&emsp;&emsp;SE = s / √m</code>
+        <p class="mt-tight">Run <code>m ≥ 3</code> independent seeds, each giving a success
+          rate <code>pᵢ</code>. Report the mean <code>p̄</code> <em>and</em> the standard error
+          <code>SE</code> (sample standard deviation <code>s</code> divided by <code>√m</code>) —
+          a single number with no spread reported is a point estimate dressed up as a result. If two
+          configurations' means are within a standard error or two of each other, the comparison is not
+          decisive evidence of a real difference.</p>
+      </div>
+      <h3>Seeds, ablations, contamination, and LLM-as-judge</h3>
+      <ul>
+        <li><strong>Seeds/variance</strong> — a single run's success rate is a point estimate with
+          unknown variance. Requirement R5 asks for at least 3 independent runs so you can show
+          run-to-run variation; small effects may require more runs or confidence intervals.</li>
+        <li><strong>Ablations</strong> — isolate one variable (same system, module removed) — not a
+          comparison against an unrelated baseline that also differs in other ways.</li>
+        <li><strong>Contamination</strong> — public benchmarks may already be in a model's pretraining
+          data, inflating performance for reasons unrelated to the technique.</li>
+        <li><strong>LLM-as-judge</strong> — documented biases (verbosity, style-similarity, order
+          sensitivity). If you use one, state which model, what prompt, and ideally validate against a
+          small human-labeled sample.</li>
+      </ul>
+      <h3>Reproducibility packaging</h3>
+      <p>A result nobody else can reproduce is not yet a result the field can build on (Requirement R8):
+        pin dependency versions, record seeds, log the exact model version/date used, and provide a
+        one-command path from a clean checkout to the reported numbers.</p>
+    </div>
+    <div class="note tip">
+      <span class="note-tag">Requirement R5, made concrete</span>
+      A task set of ≥ 20 instances from a defined source · at least one success metric with cost and
+      latency reported alongside it · ≥ 2 system configurations compared (your ablation) · ≥ 3
+      independent runs/seeds with variance shown · an error analysis categorizing <em>why</em> failures
+      happened (wrong tool call, context overflow, hallucinated fact, evaluator too strict/lenient) —
+      usually the most informative part of an evaluation and the part most often skipped.
+    </div>
+  </section>
+
+  <section class="block" id="discussion">
+    <div class="sec-head">
+      <span class="eyebrow">05 · Discussion questions</span>
+      <h2>For this session</h2>
+    </div>
+    <div class="concept wide">
+      <ol>
+        <li>For a tool your project will expose: is it read-only, reversible-write, or
+          irreversible-write? What changes in your architecture if you got that classification wrong?</li>
+        <li>MCP's three-way split of tools/resources/prompts by who controls them — pick one primitive
+          and describe a scenario where using the wrong one creates a security or usability problem.</li>
+        <li>"Lost in the middle" suggests position matters independently of capacity. Would you expect a
+          shorter context with critical facts near the end to outperform a longer context with the same
+          facts buried in the middle? What would make you wrong?</li>
+        <li>Pick one paper you've read so far this semester and identify which of pass@1 / pass@k /
+          pass^k it reports (or should have reported) — does the choice match the claim being made?</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="takeaway">
+    <div class="sec-head">
+      <span class="eyebrow">Takeaway</span>
+      <h2>If you remember nothing else from today</h2>
+    </div>
+    <div class="note tip">
+      A tool call, a context window, and an evaluation number are all the same kind of claim: they look
+      solid until you check what they're <em>silently assuming</em>. A tool's description is untrusted
+      input, not documentation. A longer context is not evenly usable context. And a single accuracy
+      number with no cost, no variance, and no <code>pass^k</code> is not evidence — it's a demo. Your
+      own project's R2/R5/R6 requirements exist because each of these failure modes is real and common,
+      not because the rubric needed more rows.
+    </div>
+  </section>
+
+  <section class="block" id="quiz">
+    <div class="sec-head">
+      <span class="eyebrow">Self-check</span>
+      <h2>Quiz — 4 questions, then a code exercise</h2>
+    </div>
+    <div class="concept wide">
+      <p>Not graded — a two-minute check that today's ideas actually landed before you move on.</p>
+    </div>
+    <div class="quiz-block">
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">1. In MCP's architecture, what is the relationship between a host, its clients, and servers?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">One client connects to many servers, sharing one session</button>
+          <button class="quiz-opt" type="button">The host embeds one client per server, each a 1:1 connection</button>
+          <button class="quiz-opt" type="button">Servers connect directly to each other without a host</button>
+          <button class="quiz-opt" type="button">A single server can only ever be reached by one host</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Each MCP client keeps one stateful 1:1 session with one server, opened with an initialize handshake — a host embeds one client per server connection it needs."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">2. Why does native function calling reduce reliance on fine-tuning, compared to Toolformer?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">The schema is passed in context at inference, not baked into weights</button>
+          <button class="quiz-opt" type="button">Native function calling uses a smaller, faster base model architecture</button>
+          <button class="quiz-opt" type="button">It removes the need for the model to ever generate structured text</button>
+          <button class="quiz-opt" type="button">It requires the developer to retrain the model for every new tool</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Toolformer bakes tool use into fine-tuned weights — adding a tool means retraining. Native function calling passes the schema at inference time, so a new tool needs no retraining at all."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question">3. According to "Lost in the Middle," where does retrieval accuracy tend to be lowest?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">At the very beginning of a long context window</button>
+          <button class="quiz-opt" type="button">At the very end of a long context window</button>
+          <button class="quiz-opt" type="button">In the middle positions of a long context window</button>
+          <button class="quiz-opt" type="button">Accuracy is roughly uniform regardless of position</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The paper's U-shaped curve shows strong accuracy at the start and end of a context, and a 20-30 point drop when the relevant fact sits in the middle."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">4. What does pass^k measure that pass@k does not?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">The average cost in tokens across k independent attempts</button>
+          <button class="quiz-opt" type="button">Whether ALL k attempts succeed, not just at least one</button>
+          <button class="quiz-opt" type="button">The latency of the slowest of the k attempts made</button>
+          <button class="quiz-opt" type="button">Whether a human evaluator agrees with the model's answer</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="pass@k asks whether at least one of k attempts succeeds; pass^k is the stricter mirror image — the fraction of tasks where every one of the k attempts succeeds."></p>
+      </div>
+    </div>
+
+    <div class="code-exercise">
+      <p><strong>Code exercise.</strong> This function is supposed to implement the pass@k unbiased
+        estimator from §04 — but for a task with <code>c = 0</code> successes out of <code>n</code>
+        samples, it should always return <code>0.0</code>, and it doesn't. Find the bug.</p>
+      <pre class="codeblock"><code class="language-python">from math import comb
+
+def pass_at_k(n, c, k):
+    # n = samples drawn, c = how many succeeded, k = attempts we care about
+    # TODO: bug -- returns the WRONG value (try c=0 and see)
+    return comb(n - c, k) / comb(n, k)</code></pre>
+      <details>
+        <summary>Show solution</summary>
+        <p>The function is missing the <code>1 −</code> in front. <code>comb(n − c, k) / comb(n, k)</code>
+          is the probability that a random <code>k</code>-subset contains <em>zero</em> successes — for
+          <code>c = 0</code> that's the probability of drawing <code>k</code> zeros from an all-zero
+          set, which is <code>1.0</code>, not <code>0.0</code>. Subtracting from 1 flips it to "at
+          least one success," which is what pass@k actually means.</p>
+        <pre class="codeblock"><code class="language-python">def pass_at_k(n, c, k):
+    return 1 - comb(n - c, k) / comb(n, k)</code></pre>
+      </details>
+    </div>
+  </section>
+
+  <section class="block" id="reading">
+    <div class="sec-head">
+      <span class="eyebrow">Further reading</span>
+      <h2>Before Seminar 1 begins (Week 3)</h2>
+    </div>
+    <div class="concept wide">
+      <ul class="reading wide">
+        <li><a href="https://arxiv.org/abs/2302.04761" target="_blank" rel="noopener">Schick et al. — Toolformer: Language Models Can Teach Themselves to Use Tools</a> (NeurIPS 2023).</li>
+        <li><a href="https://arxiv.org/abs/2307.16789" target="_blank" rel="noopener">Qin et al. — ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs</a> (ICLR 2024).</li>
+        <li><a href="https://arxiv.org/abs/2305.15334" target="_blank" rel="noopener">Patil et al. — Gorilla: Large Language Model Connected with Massive APIs</a> (NeurIPS 2024).</li>
+        <li><a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener">Anthropic — Introducing the Model Context Protocol</a> (2024 launch), followed by the <a href="https://modelcontextprotocol.io/docs/learn/architecture" target="_blank" rel="noopener">current architecture overview and specification links</a>.</li>
+        <li><a href="https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/" target="_blank" rel="noopener">Google — Announcing the Agent2Agent Protocol (A2A)</a> (2025).</li>
+        <li><a href="https://arxiv.org/abs/2307.03172" target="_blank" rel="noopener">Liu et al. — Lost in the Middle: How Language Models Use Long Contexts</a> (TACL 2024).</li>
+        <li><a href="https://arxiv.org/abs/2406.12045" target="_blank" rel="noopener">Yao et al. — τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains</a> (2024) — the pass^k metric above.</li>
+        <li><a href="https://arxiv.org/abs/2407.01502" target="_blank" rel="noopener">Kapoor et al. — AI Agents That Matter</a> (arXiv 2024 / TMLR 2025) — methodology critique underlying most of §4.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="week-02.html"><span class="dir">← Back</span>Reasoning &amp; Planning</a>
+    <a href="../seminars.html" class="next"><span class="dir">Next →</span>Seminar program</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="../assets/course.js"></script>
+<script src="../assets/dag.js"></script>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>τ-bench</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../../index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../../index.html">Overview</a>
+      <a href="../week-01.html">Lectures</a>
+      <a href="../../seminars.html">Seminars</a>
+      <a href="../../project.html">Project</a>
+      <a href="../../resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="../../index.html">Overview</a>
+    <a href="../../seminars.html">Seminars</a>
+    <a href="../../project.html">Project</a>
+    <a href="../../resources.html">Resources</a>
+  </nav>
+  <h4>Lectures</h4>
+  <nav aria-label="Lectures">
+    <a href="../week-01.html"><span class="ch-num">01</span>Introduction &amp; Methodology</a>
+    <a href="../week-02.html"><span class="ch-num">02</span>Reasoning &amp; Planning</a>
+    <a href="../week-03.html" aria-current="page"><span class="ch-num">03</span>Tools, MCP &amp; Evaluation</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#plain">In plain terms</a>
+    <a href="#mechanism">How it works</a>
+    <a href="#example">Worked example</a>
+    <a href="#talk">For your talk &amp; project</a>
+    <a href="#reading">Further reading</a>
+  </nav>
+  <h4>Also from Week 3</h4>
+  <nav aria-label="Other guides this week">
+    <a href="agent-skills.html">Agent Skills</a>
+    <a href="rag.html">RAG</a>
+    <a href="lost-in-the-middle.html">Lost in the Middle</a>
+    <a href="toolformer.html">Toolformer</a>
+    <a href="mcp.html">Model Context Protocol</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Paper Guide · Week 3 &mdash; Tools, MCP & Evaluation</span>
+      <h1>τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains</h1>
+      <p class="lede">A single correct answer proves an agent can do a task once. τ-bench's pass^k metric asks the harder, more deployment-relevant question: can it do the same task correctly every time?</p>
+      <div class="meta-chips">
+        <a class="chip" href="https://arxiv.org/abs/2406.12045" target="_blank" rel="noopener"><strong>Read the paper ↗</strong></a>
+        <span class="chip">Yao, Shinn, Razavi &amp; Narasimhan · 2024</span>
+        <a class="chip" href="../week-03.html">← Back to Tools, MCP & Evaluation</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="plain">
+    <div class="sec-head">
+      <span class="eyebrow">01 · In plain terms</span>
+      <h2>Passing once is not the same as being reliable</h2>
+    </div>
+    <div class="concept wide">
+      <p>Most agent benchmarks measure <strong>pass@k</strong>: run the agent k times, count it as a
+        success if <em>any</em> of the k attempts succeeded. That number is generous — it hides an
+        agent that succeeds on attempt 1 but fails on attempts 2 through 8 due to inconsistency. τ-bench
+        instead measures <strong>pass^k</strong>: run the same task k times and require
+        <em>every single one</em> to succeed. The gap between an agent's pass@1 and its pass^8 is a
+        direct, uncomfortable measurement of how much its behavior varies across nominally identical
+        runs — exactly the property that matters if you're deploying this agent to actually talk to
+        customers.</p>
+    </div>
+  </section>
+
+  <section class="block" id="mechanism">
+    <div class="sec-head">
+      <span class="eyebrow">02 · How it works</span>
+      <h2>A simulated user, a policy document, and a strict grader</h2>
+    </div>
+    <div class="concept wide">
+      <p>τ-bench evaluates agents in two domains — retail and airline customer service — with 165 tasks
+        total (115 retail, 50 airline). Each task pairs the agent with an LLM playing a
+        <strong>simulated user</strong> who has a goal (return an item, change a flight) but has to be
+        asked the right questions to reveal the necessary details, and gives the agent a
+        <strong>policy document</strong> (a written "wiki" of company rules — refund windows, what
+        requires a supervisor, what's simply not allowed). Success requires <em>both</em> resolving the
+        user's request <em>and</em> following the policy exactly — an agent that makes the customer
+        happy by breaking a stated rule fails the task. Grading checks the final database state against
+        a ground-truth outcome, not just the conversation transcript, so a plausible-sounding but
+        factually wrong resolution is caught.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 460 220" width="100%" role="img" aria-label="Line chart: success rate on tau-bench declines from about 60% at k=1 to about 25% at k=8, as pass^k requires every one of k repeated attempts to succeed.">
+        <line x1="50" y1="20" x2="50" y2="190" class="chart-axis"></line>
+        <line x1="50" y1="190" x2="420" y2="190" class="chart-axis"></line>
+        <text x="20" y="105" text-anchor="middle" class="arch-label" transform="rotate(-90 20 105)">pass^k success rate</text>
+        <path d="M90,88 C120,95 140,100 160,105 C200,113 240,118 280,125 C320,132 360,138 400,148" class="chart-line"></path>
+        <circle cx="90" cy="88" r="5" class="chart-dot"><title>pass^1 ≈ 60%</title></circle>
+        <circle cx="160" cy="105" r="5" class="chart-dot"><title>pass^2 ≈ 50%</title></circle>
+        <circle cx="280" cy="125" r="5" class="chart-dot"><title>pass^4 ≈ 38%</title></circle>
+        <circle cx="400" cy="148" r="5" class="chart-dot"><title>pass^8 ≈ 25%</title></circle>
+        <text x="90" y="205" text-anchor="middle" class="arch-label">k=1</text>
+        <text x="160" y="205" text-anchor="middle" class="arch-label">k=2</text>
+        <text x="280" y="205" text-anchor="middle" class="arch-label">k=4</text>
+        <text x="400" y="205" text-anchor="middle" class="arch-label">k=8</text>
+      </svg>
+      <div class="cap">Illustrative retail-domain trend from the original 2024 benchmark run — a "consistency collapse" pass@k alone would hide. Yao et al., 2024.</div>
+    </div>
+    <div class="note tip"><span class="note-tag">Key result</span> In the original 2024 evaluation, a strong agent's retail pass^k fell from <strong>≈60% at k=1</strong> toward <strong>≈25% at k=8</strong> — the same agent, the same task, repeated. Treat these as a 2024 model snapshot illustrating the mechanism, not today's leaderboard numbers.</div>
+  </section>
+
+  <section class="block" id="example">
+    <div class="example">
+      <div class="example-bar"><span class="example-tag">Worked example</span><span class="example-title">Why pass@1 hides the problem</span></div>
+      <div class="example-body">
+        <p>Task: a customer wants to cancel a flight booked 20 hours ago; policy allows free cancellation
+          only within 24 hours of booking.</p>
+        <div class="trace">
+          <span class="trace-line"><span class="trace-role thought">Run 1</span>Agent checks the policy, confirms the 24-hour window, cancels correctly. <strong>Pass.</strong></span>
+          <span class="trace-line"><span class="trace-role thought">Run 2 (same task, same agent)</span>Agent skips the policy check this time, cancels anyway based on the user's insistence. <strong>Fail</strong> — the outcome check catches the missing policy verification.</span>
+          <span class="trace-line"><span class="trace-role obs">pass@2</span>1/2 runs succeeded → still counted a "pass" under pass@k (any success counts).</span>
+          <span class="trace-line"><span class="trace-role obs">pass^2</span>Not both runs succeeded → counted a <strong>failure</strong> — this is the number that would actually worry a deployment team.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="talk">
+    <div class="sec-head">
+      <span class="eyebrow">04 · For your talk &amp; project</span>
+      <h2>What this buys you</h2>
+    </div>
+    <div class="concept wide">
+      <ul>
+        <li>If you present <strong>S1-8 Agent Evaluation &amp; Benchmarking</strong>: pair this paper
+          directly with "AI Agents That Matter" — one supplies the reliability metric, the other
+          supplies the cost-awareness argument; together they're the strongest methodology case you can
+          build for that topic.</li>
+        <li>For your <strong>project's evaluation (R5)</strong>: if your task allows repeated trials on
+          the same input, reporting pass^k alongside pass@1 (even at a small k like 3) is a cheap,
+          credible way to show you understand the reliability-versus-lucky-run distinction the rubric's
+          "≥3 runs/seeds with variance" language is asking for.</li>
+        <li>A sharp Q&amp;A question for any agent demo: "what's the success rate if you run this exact
+          same task five times in a row?"</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="reading">
+    <div class="sec-head">
+      <span class="eyebrow">05 · Further reading</span>
+      <h2>Where to go next</h2>
+    </div>
+    <div class="concept wide">
+      <ul class="reading wide">
+          <li><a href="https://arxiv.org/abs/2406.12045" target="_blank" rel="noopener">Yao et al. — τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains (full paper)</a></li>
+          <li><a href="https://arxiv.org/abs/2407.01502" target="_blank" rel="noopener">Kapoor et al. — AI Agents That Matter: the cost-aware companion critique</a></li>
+          <li><a href="https://arxiv.org/abs/2308.03688" target="_blank" rel="noopener">Liu et al. — AgentBench: a broader multi-environment agent benchmark, worth contrasting</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="../week-03.html"><span class="dir">← Back</span>Tools, MCP & Evaluation</a>
+    <a href="transformer.html" class="next"><span class="dir">Next guide →</span>Transformer</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="../../assets/course.js"></script>
+</body>
+</html>

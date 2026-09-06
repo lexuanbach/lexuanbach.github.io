@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CO5151 Lecture: Reasoning &amp; Planning</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../index.html">Overview</a>
+      <a href="week-01.html">Lectures</a>
+      <a href="../seminars.html">Seminars</a>
+      <a href="../project.html">Project</a>
+      <a href="../resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="../index.html">Overview</a>
+    <a href="../seminars.html">Seminars</a>
+    <a href="../project.html">Project</a>
+    <a href="../resources.html">Resources</a>
+  </nav>
+  <h4>Lectures</h4>
+  <nav aria-label="Lectures">
+    <a href="week-01.html"><span class="ch-num">01</span>Introduction &amp; Methodology</a>
+    <a href="week-02.html" aria-current="page"><span class="ch-num">02</span>Reasoning &amp; Planning</a>
+    <a href="week-03.html"><span class="ch-num">03</span>Tools, MCP &amp; Evaluation</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#cot">Chain-of-Thought</a>
+    <a href="#react">ReAct</a>
+    <a href="#reflexion">Reflexion</a>
+    <a href="#tot">Tree/Graph-of-Thoughts</a>
+    <a href="#planning">Planning</a>
+    <a href="#demo">In-class demo</a>
+    <a href="#discussion">Discussion</a>
+    <a href="#takeaway">Takeaway</a>
+    <a href="#quiz">Quiz</a>
+  </nav>
+  <h4>Paper guides</h4>
+  <nav aria-label="Paper guides">
+    <a href="guides/chain-of-thought.html">Chain-of-Thought</a>
+    <a href="guides/reflexion.html">Reflexion</a>
+    <a href="guides/tree-of-thoughts.html">Tree of Thoughts</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Lecture 2 · Real Week 1 (Wed 9 Sep 2026, same session as Lecture 1) · Foundations</span>
+      <h1>Foundations: Agent Reasoning &amp; Planning</h1>
+      <p class="lede">Chain-of-Thought, ReAct, Reflexion, Tree/Graph-of-Thoughts, and the planning debate —
+        what each technique's mechanism actually is, what it assumes, where its cost goes, and how to
+        tell a genuine structural gain from a compute-budget artifact.</p>
+      <div class="note warn">
+        <span class="note-tag">Taught alongside Lecture 1</span>
+        The real HK261 timetable teaches this content and
+        <a href="week-01.html">Introduction &amp; Methodology</a> in one combined, flipped-classroom
+        session (Week 1, Sep 9) — pre-read both pages before class.
+      </div>
+      <div class="prereading">
+        <span class="note-tag">Pre-reading — complete before class</span>
+        <ol>
+          <li><strong>Wei et al. — <a href="https://arxiv.org/abs/2201.11903" target="_blank" rel="noopener">Chain-of-Thought Prompting</a></strong> (NeurIPS 2022).</li>
+          <li><strong>Yao et al. — <a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">ReAct: Synergizing Reasoning and Acting</a></strong> (ICLR 2023) — same paper as Lecture 1's pre-reading, read once for both.</li>
+          <li><strong>Shinn et al. — <a href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener">Reflexion</a></strong> (NeurIPS 2023).</li>
+          <li><strong>Yao et al. — <a href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener">Tree of Thoughts</a></strong> (NeurIPS 2023).</li>
+        </ol>
+      </div>
+      <div class="note">
+        <span class="note-tag">Recap — from Lecture 1, this same session</span>
+        An agent is a <strong>loop</strong> (perceive → decide → act → observe), placed on a 6-level
+        autonomy spectrum where the real threshold is Level 3: the model, not the developer, decides
+        what to do next. Every system decomposes into <strong>CoALA's four components</strong> —
+        reasoning, memory, tools, environment — wired by that loop. And ReAct's own critique (§5) is the
+        template for critical analysis all semester: name the untested assumption, check the baseline,
+        ask where the gain actually comes from.
+      </div>
+      <div class="note tip"><span class="note-tag">Paper guides — deep dives with figures and worked examples</span>
+        <a href="guides/chain-of-thought.html">Chain-of-Thought →</a> · <a href="guides/reflexion.html">Reflexion →</a> · <a href="guides/tree-of-thoughts.html">Tree of Thoughts →</a>
+      </div>
+      <div class="meta-chips">
+        <a class="chip" href="#cot">CoT &amp; self-consistency</a>
+        <a class="chip" href="#react">ReAct</a>
+        <a class="chip" href="#reflexion">Reflexion</a>
+        <a class="chip" href="#tot">ToT / GoT / LATS</a>
+        <a class="chip" href="#planning">Planning vs. decomposition</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="objectives">
+    <div class="sec-head">
+      <span class="eyebrow">Learning objectives</span>
+      <h2>By the end of this session, you can</h2>
+    </div>
+    <div class="concept wide">
+      <ol>
+        <li>Explain the mechanism — not just the name — of Chain-of-Thought, self-consistency, ReAct,
+          Reflexion, Tree-of-Thoughts, and Graph-of-Thoughts, and reproduce a worked trace for each.</li>
+        <li>Place each technique on a common cost/accuracy trade-off axis and state the assumption each
+          one makes about the availability of a reward or evaluation signal.</li>
+        <li>Distinguish "reasoning" from "planning" in the classical AI sense, and explain the core
+          objection to the claim that LLMs can plan on their own.</li>
+        <li>Choose, for a given project task, which reasoning/planning paradigm is appropriate and
+          justify the choice against at least one alternative.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="cot">
+    <div class="sec-head">
+      <span class="eyebrow">01 · Chain-of-Thought and its variants</span>
+      <h2>Why intermediate tokens help</h2>
+    </div>
+    <div class="concept wide">
+      <p><a href="https://arxiv.org/abs/2201.11903" target="_blank" rel="noopener">Wei et al. (NeurIPS 2022)</a>
+        showed that prompting a sufficiently large language model to produce intermediate reasoning
+        steps before its final answer — rather than answering directly — substantially improves
+        accuracy on multi-step arithmetic, symbolic, and commonsense reasoning tasks. The mechanism is
+        simple to state and easy to underestimate: the model's own previously-generated tokens become
+        part of its context for generating the next token, so writing out "step 1, step 2, step 3"
+        effectively gives the model a scratchpad, decomposing a hard single-shot prediction into several
+        easier ones conditioned on each other.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 400 230" width="100%" role="img" aria-label="Bar chart: on GSM8K with PaLM 540B, standard prompting reaches about 18% accuracy while chain-of-thought prompting reaches about 57%.">
+        <line x1="40" y1="200" x2="360" y2="200" class="chart-axis"></line>
+        <rect x="100" y="171" width="80" height="29" class="chart-bar"></rect>
+        <rect x="240" y="109" width="80" height="91" class="chart-bar accent"></rect>
+        <text x="140" y="163" text-anchor="middle" class="arch-caption">≈18%</text>
+        <text x="280" y="101" text-anchor="middle" class="arch-caption">≈57%</text>
+        <text x="140" y="216" text-anchor="middle" class="arch-label">standard prompting</text>
+        <text x="280" y="216" text-anchor="middle" class="arch-label">chain-of-thought</text>
+      </svg>
+      <div class="cap">GSM8K math word problems, PaLM 540B, 8-shot prompting. Wei et al., NeurIPS 2022.</div>
+    </div>
+    <pre class="codeblock">Direct prompting:
+  Q: Roger has 5 tennis balls. He buys 2 cans of 3 balls each. How many does he have now?
+  A: 11                                    <span class="c">← often wrong for weaker models, no visible working</span>
+
+Chain-of-Thought prompting:
+  Q: Roger has 5 tennis balls. He buys 2 cans of 3 balls each. How many does he have now?
+  A: Roger started with 5 balls. 2 cans of 3 balls each is 2 × 3 = 6 balls.
+     5 + 6 = 11. The answer is 11.</pre>
+    <div class="concept wide">
+      <p>Two nuances worth holding onto for the whole semester:</p>
+      <ul>
+        <li><strong>CoT is a capability that must already exist, elicited, not created.</strong> The
+          original paper shows the effect emerges only at sufficient model scale (an "emergent
+          ability") — CoT prompting a small model with weak reasoning does not help and can even hurt.
+          This is why "just add 'let's think step by step'" is not a universal fix — it surfaces a
+          capability, it does not install one.</li>
+        <li><strong>Explanations are not guaranteed to be faithful.</strong> There is no guarantee the
+          stated "steps" reflect the actual computation — treat CoT output as an artifact that
+          <em>helps</em> the model, not as a transparent log of its reasoning. This matters directly
+          for Reflexion and process-reward methods later in this note.</li>
+      </ul>
+      <h3>Zero-shot CoT and self-consistency</h3>
+      <p><strong>Zero-shot CoT</strong> (Kojima et al., 2022) showed that simply appending "Let's think
+        step by step" to a prompt — with <em>no</em> worked examples at all — recovers much of the
+        benefit of the original few-shot CoT prompting. This separates two contributions that are easy
+        to conflate: (a) <em>reasoning stepwise</em> helps, and (b) <em>few-shot exemplars</em> help —
+        zero-shot CoT shows (a) alone accounts for a large share of the gain.</p>
+      <p><strong>Self-consistency</strong> (<a href="https://arxiv.org/abs/2203.11171" target="_blank" rel="noopener">Wang et al., ICLR 2023</a>)
+        treats CoT as a <em>stochastic</em> process: sample multiple independent reasoning chains (via
+        temperature &gt; 0), then take a majority vote over their final answers, discarding the
+        individual chains.</p>
+    </div>
+    <pre class="codeblock"><code class="language-python">def self_consistency(question, model, n_samples=10):
+    answers = []
+    for _ in range(n_samples):
+        chain = model.generate(cot_prompt(question), temperature=0.7)
+        answers.append(extract_final_answer(chain))
+    return majority_vote(answers)</code></pre>
+    <div class="concept wide">
+      <p>The insight: individual chains can go wrong in different, largely uncorrelated ways, so voting
+        recovers a signal that a single deterministic chain would miss. The cost is explicit: `n_samples`
+        times the tokens and latency of a single chain, for a typically sub-linear accuracy gain — your
+        first concrete example of the <strong>test-time compute</strong> trade-off that recurs all
+        semester (ToT, LATS, and reasoning-RL models like o1/DeepSeek-R1 are all, at some level, ways of
+        spending more inference-time compute for a better answer).</p>
+    </div>
+  </section>
+
+  <section class="block" id="react">
+    <div class="sec-head">
+      <span class="eyebrow">02 · ReAct — synergizing reasoning and acting</span>
+      <h2>Reasoning grounded in real observations</h2>
+    </div>
+    <div class="concept wide">
+      <p>CoT reasons <em>about</em> a static context; it cannot acquire new information mid-reasoning.
+        <a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">ReAct (Yao et al., ICLR 2023)</a>
+        interleaves free-text reasoning ("thoughts") with concrete actions against an external
+        environment, feeding each action's observation back into context before the next thought.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 420 260" width="100%" role="img" aria-label="Loop diagram: Thought leads to Action, Action is executed by the environment producing an Observation, and the Observation leads to the next Thought.">
+        <defs>
+          <marker id="react-arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+        </defs>
+        <path d="M210,60 L80,170" class="arch-line" marker-end="url(#react-arrow2)"></path>
+        <path d="M140,195 L280,195" class="arch-line" marker-end="url(#react-arrow2)"></path>
+        <text x="210" y="186" text-anchor="middle" class="arch-label">environment executes</text>
+        <path d="M340,170 L250,60" class="arch-line" marker-end="url(#react-arrow2)"></path>
+
+        <a class="dag-node accent" href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener"
+           data-functionality="Free-text reasoning about what to do next, written before any action is taken."
+           data-intuition="Writing it out gives the model a scratchpad — the next action is conditioned on this explicit reasoning."
+           data-example="&quot;I need to find out who directed the film that won Best Picture.&quot;" aria-label="Thought: reason about what to do next, in natural language"><rect x="150" y="10" width="120" height="50" rx="8"></rect><text x="210" y="32" text-anchor="middle" class="t">Thought</text><text x="210" y="47" text-anchor="middle" class="s">plan next step</text></a>
+        <a class="dag-node amber" href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener"
+           data-functionality="A structured call the environment can actually execute."
+           data-intuition="The Thought is never executed — only the Action is; the Thought just conditions it."
+           data-example="Search[&quot;2023 Best Picture Oscar winner&quot;]" aria-label="Action: a structured call, e.g. Search[query] or Finish[answer]"><rect x="20" y="170" width="120" height="50" rx="8"></rect><text x="80" y="192" text-anchor="middle" class="t">Action</text><text x="80" y="207" text-anchor="middle" class="s">a structured call</text></a>
+        <a class="dag-node teal" href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener"
+           data-functionality="Whatever the environment or tool returned after the Action ran."
+           data-intuition="This is what actually grounds the loop — the next Thought is conditioned on real feedback, not a guess."
+           data-example="&quot;Everything Everywhere All at Once&quot; won Best Picture at the 95th Academy Awards." aria-label="Observation: what the environment or tool returned"><rect x="280" y="170" width="120" height="50" rx="8"></rect><text x="340" y="192" text-anchor="middle" class="t">Observation</text><text x="340" y="207" text-anchor="middle" class="s">what comes back</text></a>
+      </svg>
+      <div class="cap">ReAct's core loop. Yao et al., ICLR 2023.</div>
+    </div>
+    <pre class="codeblock">Thought 1: I need to find out who directed the film that won Best Picture in 2023.
+Action 1: Search["2023 Best Picture Oscar winner"]
+Observation 1: "Everything Everywhere All at Once" won Best Picture at the 95th Academy Awards.
+Thought 2: Now I need to find the director(s) of that film.
+Action 2: Search["Everything Everywhere All at Once director"]
+Observation 2: Directed by Daniel Kwan and Daniel Scheinert.
+Thought 3: I have the answer.
+Action 3: Finish["Daniel Kwan and Daniel Scheinert"]</pre>
+    <div class="concept wide">
+      <p>This is precisely the control loop from Lecture 1's anatomy section, with the reasoning step
+        split into an explicit <code>Thought</code> (why) and <code>Action</code> (what) pair. The
+        thought is not executed by anything — its only function is to condition the action on an
+        explicit intermediate justification, which the paper shows reduces hallucinated or off-task
+        actions compared to acting without a reasoning step, and reduces reasoning drift compared to
+        CoT without grounding in real observations.</p>
+      <h3>What ReAct assumes</h3>
+      <ul>
+        <li><strong>Actions are cheap and fast.</strong> A search API call is cheap; a paid transaction
+          or a multi-minute simulation is not — the paper's benchmarks all have cheap, fast, reversible
+          actions. Lecture 3's discussion of tool <em>irreversibility</em> is the direct sequel to this gap.</li>
+        <li><strong>The action space is small and well-specified.</strong> A handful of named actions
+          with clear semantics. Real agents (covered in Week 2 of this course) often expose dozens to
+          hundreds of tools — the tool-<em>selection</em> problem barely exists in ReAct's original
+          setting.</li>
+        <li><strong>Observations are immediately truthful and complete.</strong> No adversarial content
+          in tool results — an assumption Seminar 2's security topics (S2-3, S2-4) directly attack: if
+          an observation can contain attacker-controlled text, "feed the observation back into context"
+          is exactly the mechanism indirect prompt injection exploits.</li>
+      </ul>
+      <div class="note tip">
+        <span class="note-tag">Where does the gain come from?</span>
+        A healthily skeptical question for any reasoning-augmentation paper: is the improvement coming
+        from the technique's structure, or simply from spending more tokens? ReAct's own ablations show
+        acting-only and reasoning-only both underperform the combination — a genuine structural claim,
+        not just a compute-budget artifact. Demand this same ablation for every technique in this course.
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="reflexion">
+    <div class="sec-head">
+      <span class="eyebrow">03 · Reflexion — verbal reinforcement learning</span>
+      <h2>Learning across attempts without updating weights</h2>
+    </div>
+    <div class="concept wide">
+      <p><a href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener">Reflexion (Shinn et al., NeurIPS 2023)</a>
+        adds a second phase after a ReAct-style attempt fails: the agent reflects in natural language on
+        <em>why</em> it failed, and stores that reflection in an episodic memory buffer that is included
+        in context on the <em>next</em> attempt at the same or a similar task.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 460 260" width="100%" role="img" aria-label="Cycle diagram: the Actor acts in the Environment, the Evaluator scores the result, Self-Reflection writes a verbal lesson to episodic memory, and that memory informs the Actor's next attempt.">
+        <defs>
+          <marker id="refl-arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+        </defs>
+        <path d="M290,35 L395,95" class="arch-line" marker-end="url(#refl-arrow2)"></path>
+        <path d="M395,145 L290,205" class="arch-line" marker-end="url(#refl-arrow2)"></path>
+        <path d="M170,205 L80,145" class="arch-line" marker-end="url(#refl-arrow2)"></path>
+        <path d="M80,95 L170,35" class="arch-line" marker-end="url(#refl-arrow2)"></path>
+        <text x="105" y="60" text-anchor="middle" class="arch-label">episodic memory</text>
+
+        <a class="dag-node accent" href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener"
+           data-functionality="A ReAct-style policy that acts in the environment, attempting the task."
+           data-intuition="This is the part of Reflexion that&#39;s identical to plain ReAct — nothing new happens here."
+           data-example="Generates a Thought → Action → Observation trace, same as the ReAct guide." aria-label="Actor: a ReAct-style policy that acts in the environment"><rect x="170" y="10" width="120" height="50" rx="8"></rect><text x="230" y="32" text-anchor="middle" class="t">Actor</text><text x="230" y="47" text-anchor="middle" class="s">acts</text></a>
+        <a class="dag-node dashed" href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener"
+           data-functionality="Executes the Actor&#39;s actions and produces the trajectory the Evaluator will score."
+           data-intuition="A sandbox, a test suite, or a real API — whatever the Actor&#39;s actions actually run against."
+           data-example="A Python test suite the Actor&#39;s generated code is checked against." aria-label="Environment: executes the Actor's actions"><rect x="340" y="95" width="110" height="50" rx="8"></rect><text x="395" y="117" text-anchor="middle" class="t">Environment</text><text x="395" y="132" text-anchor="middle" class="s">sandbox, tests</text></a>
+        <a class="dag-node amber" href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener"
+           data-functionality="Scores the completed trajectory: did the attempt succeed or fail?"
+           data-intuition="Reflexion needs SOME external signal here — without it, there&#39;s nothing to reflect on."
+           data-example="Did the generated code pass the unit tests? Yes or no." aria-label="Evaluator: scores the trajectory — did it succeed?"><rect x="170" y="180" width="120" height="50" rx="8"></rect><text x="230" y="202" text-anchor="middle" class="t">Evaluator</text><text x="230" y="217" text-anchor="middle" class="s">pass/fail</text></a>
+        <a class="dag-node teal" href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener"
+           data-functionality="Writes a natural-language lesson from a failed attempt into episodic memory."
+           data-intuition="No weights change here — the &quot;learning&quot; is entirely this note, read back in on the next trial."
+           data-example="&quot;My solution didn&#39;t normalize the string first — strip and lowercase before comparing next time.&quot;" aria-label="Self-Reflection: writes a verbal lesson from the failure to episodic memory"><rect x="10" y="95" width="140" height="50" rx="8"></rect><text x="80" y="117" text-anchor="middle" class="t">Self-Reflection</text><text x="80" y="132" text-anchor="middle" class="s">writes a lesson</text></a>
+      </svg>
+      <div class="cap">Reflexion's multi-episode loop — no weights change, only what's in the prompt. Shinn et al., NeurIPS 2023.</div>
+    </div>
+    <pre class="codeblock"><code class="language-python">def reflexion(task, model, evaluator, max_trials=4):
+    memory = []                                    # episodic memory of past reflections
+    for trial in range(max_trials):
+        trajectory = react_loop(task, model, context_extra=memory)
+        outcome = evaluator(trajectory)             # success/failure signal -- see below
+        if outcome.success:
+            return trajectory
+        reflection = model.generate(reflect_prompt(trajectory, outcome))
+        memory.append(reflection)                   # persists to the next trial
+    return trajectory  # last attempt, possibly still failing</code></pre>
+    <div class="concept wide">
+      <p>The name "verbal reinforcement learning" is precise in one sense and misleading in another:
+        like RL, the agent improves across attempts at the <em>same</em> task using a feedback signal —
+        but no weights are updated; the "learning" is entirely the accumulation of natural-language
+        reflections in a growing context. This is why it belongs here rather than in S2-6 (RL for
+        Agents), which covers actual gradient-based training.</p>
+      <h3>The critical dependency: where does the evaluator come from?</h3>
+      <p>Reflexion's mechanism is only as good as its feedback signal, and this is the single most
+        important thing to interrogate in the paper and in any system that claims "self-improvement."
+        Three cases, in decreasing order of trust:</p>
+      <ol>
+        <li><strong>External, ground-truth evaluator</strong> (e.g., unit tests pass/fail). Strong,
+          reliable signal — Reflexion's coding-task results fall here.</li>
+        <li><strong>External, heuristic evaluator</strong> (e.g., an LLM judge scoring the trajectory).
+          Weaker — inherits whatever biases the judge model has.</li>
+        <li><strong>The same model reflecting on its own output with no external signal at all.</strong>
+          Shown to be unreliable by
+          <a href="https://arxiv.org/abs/2310.01798" target="_blank" rel="noopener">Huang et al. (ICLR 2024)</a>:
+          without external ground truth, models cannot reliably tell correct answers from incorrect ones
+          well enough to <em>usefully</em> revise them, and self-correction can even <em>decrease</em>
+          accuracy by talking the model out of a correct answer.</li>
+      </ol>
+      <div class="note warn">
+        <span class="note-tag">Rule of thumb for this course</span>
+        Whenever a paper or your own project claims "the agent reflects and improves," ask immediately
+        which case above the feedback signal falls into. Case 3 dressed up as case 1 is the most common
+        inflated claim you will encounter — directly relevant to your project's R6 security analysis and
+        R5 evaluation requirements: an agent that "self-verifies" its own security posture with no
+        external check has verified nothing.
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="tot">
+    <div class="sec-head">
+      <span class="eyebrow">04 · Tree-of-Thoughts and Graph-of-Thoughts</span>
+      <h2>Reasoning as search</h2>
+    </div>
+    <div class="concept wide">
+      <p>CoT and ReAct both commit to a single linear sequence of steps — once a thought is generated,
+        the model doesn't reconsider it.
+        <a href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener">Tree-of-Thoughts (Yao et al., NeurIPS 2023)</a>
+        instead treats reasoning as a <strong>search problem</strong> over a tree of partial solutions,
+        with four components: a thought generator, a state evaluator, a search algorithm (BFS/DFS in
+        the original paper), and a stopping rule.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 690 280" width="100%" role="img" aria-label="Tree diagram: the root state 4,9,10,13 branches into three candidate thoughts generated by the model; the evaluator marks the first as likely and the other two as impossible; the two impossible branches are pruned, and only the likely branch continues expanding.">
+        <defs>
+          <marker id="tot-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path>
+          </marker>
+        </defs>
+        <path d="M340,54 L110,110" class="arch-line" marker-end="url(#tot-arrow)"></path>
+        <path d="M340,54 L340,110" class="arch-line" marker-end="url(#tot-arrow)"></path>
+        <path d="M340,54 L570,110" class="arch-line" marker-end="url(#tot-arrow)"></path>
+        <path d="M110,160 L110,206" class="arch-line" marker-end="url(#tot-arrow)"></path>
+
+        <a class="dag-node accent" href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener"
+           data-functionality="The puzzle before any move has been made."
+           data-intuition="Every candidate thought below branches from this same starting point."
+           data-example="The four numbers 4, 9, 10, 13, unsolved." aria-label="Root state: the puzzle before any move">
+          <rect x="240" y="10" width="200" height="44" rx="8"></rect>
+          <text x="340" y="28" text-anchor="middle" class="t">Start: 4, 9, 10, 13</text>
+          <text x="340" y="43" text-anchor="middle" class="s">Game of 24</text>
+        </a>
+
+        <a class="dag-node" href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener"
+           data-functionality="One candidate first move: 4+9=13, leaving 13, 10, 13 remaining."
+           data-intuition="The evaluator judges this branch worth exploring further before committing to it."
+           data-example="Evaluator&#39;s verdict: &quot;likely&quot; — kept for expansion." aria-label="Candidate thought 1: 4+9=13, remaining 13,10,13 — evaluator: likely">
+          <rect x="10" y="110" width="200" height="50" rx="8"></rect>
+          <text x="110" y="130" text-anchor="middle" class="t">4+9=13 → 13,10,13</text>
+          <text x="110" y="145" text-anchor="middle" class="s">evaluator: likely</text>
+        </a>
+        <a class="dag-node pruned" href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener"
+           data-functionality="Another candidate first move: 10-4=6, leaving 6, 9, 13 remaining."
+           data-intuition="Pruning a branch early is what makes search cheaper than trying every path to the end."
+           data-example="Evaluator&#39;s verdict: &quot;impossible&quot; — pruned before any further expansion." aria-label="Candidate thought 2: 10-4=6, remaining 6,9,13 — evaluator: impossible, pruned">
+          <rect x="240" y="110" width="200" height="50" rx="8"></rect>
+          <text x="340" y="130" text-anchor="middle" class="t">10-4=6 → 6,9,13</text>
+          <text x="340" y="145" text-anchor="middle" class="s">evaluator: impossible ✗</text>
+        </a>
+        <a class="dag-node pruned" href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener"
+           data-functionality="A third candidate first move: 13-9=4, leaving 4, 4, 10 remaining."
+           data-intuition="Multiple branches get judged in parallel — this one just didn&#39;t survive evaluation."
+           data-example="Evaluator&#39;s verdict: &quot;impossible&quot; — pruned before any further expansion." aria-label="Candidate thought 3: 13-9=4, remaining 4,4,10 — evaluator: impossible, pruned">
+          <rect x="470" y="110" width="200" height="50" rx="8"></rect>
+          <text x="570" y="130" text-anchor="middle" class="t">13-9=4 → 4,4,10</text>
+          <text x="570" y="145" text-anchor="middle" class="s">evaluator: impossible ✗</text>
+        </a>
+
+        <a class="dag-node accent" href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener"
+           data-functionality="The one surviving branch continues to be expanded further."
+           data-intuition="This is the payoff of search over a single chain: bad branches are abandoned, good ones get more budget."
+           data-example="The &quot;likely&quot; branch (4+9=13) is explored to a full solution from here." aria-label="Only the &quot;likely&quot; branch survives pruning and keeps expanding">
+          <rect x="10" y="206" width="200" height="50" rx="8"></rect>
+          <text x="110" y="228" text-anchor="middle" class="t">continue expanding…</text>
+          <text x="110" y="244" text-anchor="middle" class="s">thought generator runs again</text>
+        </a>
+      </svg>
+      <p class="cap">Tree-of-Thoughts search: two branches pruned, one kept</p>
+    </div>
+    <div class="concept wide">
+      <p><a href="https://arxiv.org/abs/2308.09687" target="_blank" rel="noopener">Graph-of-Thoughts (Besta et al., AAAI 2024)</a>
+        generalizes further: thoughts form an arbitrary graph, allowing operations like <em>merging</em>
+        two partial solutions or <em>refining</em> a thought using another thought as feedback — useful
+        when a good solution is best assembled from combining several partial, individually-imperfect
+        thoughts.</p>
+      <h3>Where does ToT's gain actually come from?</h3>
+      <p>The single most important critical question for this topic: is the improvement coming from
+        exploring more of the solution space, or from the quality of the state evaluator that decides
+        what to prune? ToT's evaluator is <em>also an LLM call</em> — so it is only as reliable as the
+        same underlying model being asked a different question ("is this partial solution promising?").
+        ToT's real cost-benefit trade-off: spend O(branches × depth) extra LLM calls in exchange for a
+        search structure that can recover from a bad first guess — but the ceiling on how well it can
+        recover is set by how good the model already is at <em>judging</em> partial solutions, which is
+        not obviously easier than solving the problem directly.</p>
+      <p><strong><a href="https://arxiv.org/abs/2310.04406" target="_blank" rel="noopener">LATS</a></strong>
+        (Language Agent Tree Search, Zhou et al., ICML 2024) combines this tree search with actual
+        environment interaction — Monte Carlo Tree Search over ReAct-style trajectories, using real
+        observations rather than only LLM-judged simulation — the "what if the evaluator were partly
+        external/grounded" answer to the concern above.</p>
+    </div>
+    <div class="tbl-scroll">
+      <table class="tbl">
+        <thead><tr><th>Technique</th><th>Structure</th><th>Feedback signal required</th><th>Cost vs. single call</th><th>Best suited when</th></tr></thead>
+        <tbody>
+          <tr><td>CoT</td><td>Linear chain</td><td>None</td><td class="mono">~1×</td><td>Task benefits from explicit stepwise decomposition</td></tr>
+          <tr><td>Self-consistency</td><td>N independent chains, vote</td><td>None</td><td class="mono">N×</td><td>Errors are uncorrelated across samples</td></tr>
+          <tr><td>ReAct</td><td>Chain + external actions</td><td>Tool observations (real, not judged)</td><td class="mono">~1× per step, k steps</td><td>Task needs external information/actions</td></tr>
+          <tr><td>Reflexion</td><td>Chain(s) + reflection across trials</td><td>An evaluator — ideally external ground truth</td><td class="mono">trials × (1 chain + 1 reflection)</td><td>A cheap, reliable success/failure signal exists</td></tr>
+          <tr><td>Tree/Graph-of-Thoughts</td><td>Search over branching thoughts</td><td>An LLM-judged state evaluator (internal)</td><td class="mono">branches × depth</td><td>Problem decomposes into evaluable partial solutions</td></tr>
+          <tr><td>LATS</td><td>MCTS over ReAct trajectories</td><td>Real observations + value estimates</td><td class="mono">highest of this table</td><td>High-stakes tasks where grounded evaluation is available</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block" id="planning">
+    <div class="sec-head">
+      <span class="eyebrow">05 · Planning: task decomposition, hierarchical planning, and world models</span>
+      <h2>Why "planning" needs a precise meaning</h2>
+    </div>
+    <div class="concept wide">
+      <p>In classical AI, <strong>planning</strong> has a precise meaning: given a formal model of the
+        world (states, actions, preconditions, effects), find a sequence of actions that provably
+        transforms an initial state into a goal state, often with guarantees. This is a much stronger
+        claim than "the model produced a plausible-looking numbered list of steps." When a paper says an
+        LLM "plans," ask whether it means the classical sense (provable, verifiable) or the colloquial
+        sense (generated a sequential decomposition that is not verified against anything).</p>
+      <p>Useful patterns, roughly in order of how much of the "planning" is delegated to a verifiable
+        external system versus the LLM alone:</p>
+      <div class="diagram-card inline">
+        <svg viewBox="0 0 810 140" width="100%" role="img" aria-label="Five planning patterns in order of how much verification is delegated to an external system: task decomposition, plan-and-execute, hierarchical planning, LLM+P, and world models.">
+          <defs>
+            <marker id="planspec-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+          </defs>
+          <text x="405" y="16" text-anchor="middle" class="arch-caption">external verification increases →</text>
+          <path d="M150,65 L170,65" class="arch-line" marker-end="url(#planspec-arrow)"></path>
+          <path d="M310,65 L330,65" class="arch-line" marker-end="url(#planspec-arrow)"></path>
+          <path d="M470,65 L490,65" class="arch-line" marker-end="url(#planspec-arrow)"></path>
+          <path d="M630,65 L650,65" class="arch-line" marker-end="url(#planspec-arrow)"></path>
+
+          <a class="dag-node" href="https://arxiv.org/abs/2402.01817" target="_blank" rel="noopener"
+           data-functionality="The LLM breaks a goal into an ordered list of sub-tasks in natural language, with no formal verification."
+           data-intuition="The weakest and most common form — nothing here is checked against anything."
+           data-example="&quot;First do X, then Y, then Z&quot; — generated, never verified." aria-label="Task decomposition: the LLM breaks a goal into an ordered list of sub-tasks in natural language, with no formal verification. The weakest and most common form."><rect x="10" y="40" width="140" height="50" rx="8"></rect><text x="80" y="70" text-anchor="middle" class="t">Task decomp.</text></a>
+          <a class="dag-node" href="https://arxiv.org/abs/2402.01817" target="_blank" rel="noopener"
+           data-functionality="Explicitly separates a planning LLM call from execution LLM calls, rather than interleaving them as ReAct does."
+           data-intuition="Lets the plan be reviewed as a whole before any execution step is taken."
+           data-example="Wang et al. (ACL 2023) — produce the full sub-task list up front." aria-label="Plan-and-execute (Wang et al., ACL 2023): explicitly separate a planning LLM call from execution LLM calls, rather than interleaving them as ReAct does."><rect x="170" y="40" width="140" height="50" rx="8"></rect><text x="240" y="70" text-anchor="middle" class="t">Plan+execute</text></a>
+          <a class="dag-node" href="https://arxiv.org/abs/2402.01817" target="_blank" rel="noopener"
+           data-functionality="Decompose recursively — a high-level plan&#39;s steps are themselves sub-goals with their own sub-plans."
+           data-intuition="Bottoms out at directly executable actions, however many levels deep that takes."
+           data-example="&quot;Book a trip&quot; → &quot;book flights&quot; → &quot;search flights, then confirm.&quot;" aria-label="Hierarchical planning: decompose recursively — a high-level plan's steps are themselves sub-goals that get their own sub-plans, bottoming out at directly executable actions."><rect x="330" y="40" width="140" height="50" rx="8"></rect><text x="400" y="70" text-anchor="middle" class="t">Hierarchical</text></a>
+          <a class="dag-node teal" href="https://arxiv.org/abs/2402.01817" target="_blank" rel="noopener"
+           data-functionality="Uses the LLM only to translate a natural-language task into a formal PDDL problem description."
+           data-intuition="The actual search is handed off to a classical, sound-and-complete planner — the LLM never plans alone."
+           data-example="LLM+P (LLM-to-Planner) — translation only, no search." aria-label="LLM+P: use the LLM only to translate a natural-language task into a formal PDDL problem description, then hand the actual search off to a classical, sound-and-complete planner."><rect x="490" y="40" width="140" height="50" rx="8"></rect><text x="560" y="70" text-anchor="middle" class="t">LLM+P</text></a>
+          <a class="dag-node dashed" href="https://arxiv.org/abs/2402.01817" target="_blank" rel="noopener"
+           data-functionality="Learns or uses an explicit predictive model of how the environment&#39;s state changes in response to actions."
+           data-intuition="Least mature of these patterns for language agents — the model has to predict the future, not just the next step."
+           data-example="Search or reason over the model&#39;s own predicted future states." aria-label="World models: learn or use an explicit predictive model of how the environment's state changes in response to actions. Least mature of these patterns for language agents."><rect x="650" y="40" width="140" height="50" rx="8"></rect><text x="720" y="70" text-anchor="middle" class="t">World models</text></a>
+        </svg>
+        <div class="cap">LLM+P hands verification to a classical planner; world models are the least mature pattern here.</div>
+      </div>
+      <ul>
+        <li><strong>Task decomposition</strong> — the LLM breaks a goal into an ordered list of
+          sub-tasks in natural language, with no formal verification. The weakest and most common form.</li>
+        <li><strong>Plan-and-execute</strong> (<a href="https://arxiv.org/abs/2305.04091" target="_blank" rel="noopener">Wang et al., ACL 2023</a>) —
+          explicitly separate a planning LLM call (produce the full sub-task list up front) from
+          execution LLM calls, rather than interleaving them as ReAct does.</li>
+        <li><strong>Hierarchical planning</strong> — decompose recursively: a high-level plan's steps
+          are themselves sub-goals that get their own sub-plans, bottoming out at directly executable
+          actions.</li>
+        <li><strong>LLM+P</strong> (LLM-to-Planner) — use the LLM only to <em>translate</em> a
+          natural-language task into a formal PDDL problem description, then hand the actual search off
+          to a classical, sound-and-complete planner.</li>
+        <li><strong>World models</strong> — learn or use an explicit predictive model of how the
+          environment's state changes in response to actions, and search or reason over that model's
+          predicted future states. Least mature of these patterns for language agents.</li>
+      </ul>
+      <h3>The central objection: "LLMs can't plan, but can help planning"</h3>
+      <p><a href="https://arxiv.org/abs/2402.01817" target="_blank" rel="noopener">Kambhampati et al. (ICML 2024, "LLM-Modulo" frameworks)</a>
+        make an empirically-grounded argument that LLMs, used alone, are unreliable at classical planning
+        — they cannot verify their own plans against formal correctness criteria, and their apparent
+        "planning" performance degrades sharply on harder instances or adversarial rephrasing. Their
+        proposed <strong>LLM-Modulo</strong> framework keeps the LLM in an <em>idea-generation</em> role
+        while routing verification and refinement through external, sound critics.</p>
+      <div class="note tip">
+        <span class="note-tag">The position to defend or challenge</span>
+        "Planning" claims about LLMs split cleanly into (a) claims that are actually about <em>task
+        decomposition</em> — real and useful, but with no correctness guarantee — and (b) claims that
+        are actually about <em>classical planning</em>, which current evidence suggests LLMs alone do
+        not do reliably. When you encounter "planning" in a paper, or design a "planning module" for
+        your project, state explicitly which of these two you mean.
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="demo">
+    <div class="sec-head">
+      <span class="eyebrow">06 · In-class demo</span>
+      <h2>Same task, three paradigms</h2>
+    </div>
+    <div class="concept wide">
+      <p>Run the same small task (e.g., a Game-of-24-style puzzle, or a short multi-hop question) under
+        three conditions, with token and wall-clock cost logged for each: (1) plain CoT, single sample;
+        (2) ReAct with access to a calculator/search tool; (3) Tree-of-Thoughts with a small branching
+        factor. Discuss: which condition got the right answer? At what token/latency cost? Does the
+        accuracy gain of the more expensive condition justify its cost for <em>this specific task</em>,
+        or would a simpler technique plus a cheap external verifier have been better? You can replay this
+        exact comparison yourself in the <a href="week-01.html#simulator">agent loop simulator</a> on
+        Lecture 1's page.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 500 220" width="100%" role="img" aria-label="Illustrative chart: CoT is lowest cost and lowest accuracy, ReAct is mid-cost and mid-accuracy, Tree-of-Thoughts is highest cost and highest accuracy, on the same task.">
+        <line x1="50" y1="190" x2="460" y2="190" class="chart-axis"></line>
+        <line x1="50" y1="20" x2="50" y2="190" class="chart-axis"></line>
+        <text x="460" y="208" text-anchor="end" class="arch-label">cost →</text>
+        <text x="30" y="105" text-anchor="middle" class="arch-label" transform="rotate(-90 30 105)">accuracy →</text>
+        <path d="M110,150 C170,135 190,125 250,110 C300,98 340,85 390,70" class="chart-line"></path>
+        <circle cx="110" cy="150" r="5" class="chart-dot"><title>Plain CoT, single sample — cheapest, lowest accuracy of the three.</title></circle>
+        <circle cx="250" cy="110" r="5" class="chart-dot"><title>ReAct with a calculator/search tool — mid cost, mid accuracy.</title></circle>
+        <circle cx="390" cy="70" r="5" class="chart-dot"><title>Tree-of-Thoughts with a small branching factor — highest cost, highest accuracy on this task.</title></circle>
+        <text x="110" y="168" text-anchor="middle" class="arch-label">CoT</text>
+        <text x="250" y="128" text-anchor="middle" class="arch-label">ReAct</text>
+        <text x="390" y="88" text-anchor="middle" class="arch-label">ToT</text>
+      </svg>
+      <div class="cap">Illustrative — run the demo to get your own numbers for this specific task.</div>
+    </div>
+  </section>
+
+  <section class="block" id="discussion">
+    <div class="sec-head">
+      <span class="eyebrow">07 · Discussion questions</span>
+      <h2>For this session</h2>
+    </div>
+    <div class="concept wide">
+      <ol>
+        <li>For a task in your own project idea, which row of the cost/accuracy table fits best, and
+          what would make you switch to a different row after seeing real results?</li>
+        <li>Reflexion's feedback signal — for your project, what will the evaluator actually be, and
+          which of the three cases (external ground-truth / external heuristic / no external signal)
+          does it fall into? If it's case 3, what would you need to add to move it to case 1 or 2?</li>
+        <li>Kambhampati's objection targets "planning" specifically — does the same objection apply to
+          Reflexion's "reflection," or to ToT's "evaluation"? What would distinguish a reliable
+          self-assessment from an unreliable one in each case?</li>
+        <li>Self-consistency spends n× compute for a vote. Tree-of-Thoughts spends branches × depth
+          compute for a search. Under what condition would you expect self-consistency to <em>beat</em>
+          ToT despite being structurally simpler?</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="takeaway">
+    <div class="sec-head">
+      <span class="eyebrow">Takeaway</span>
+      <h2>If you remember nothing else from today</h2>
+    </div>
+    <div class="note tip">
+      Every technique in this lecture trades <strong>inference-time compute for accuracy</strong> along
+      the same axis — more tokens, more branches, more self-critique generally buys a better answer,
+      until it doesn't. The question that separates a real result from a compute-budget artifact is
+      always the same one: <em>where does the gain actually come from</em>, and is it worth the cost at
+      the scale your own project runs at? Ablate before you believe a technique — including the ones you
+      choose for your own architecture.
+    </div>
+  </section>
+
+  <section class="block" id="quiz">
+    <div class="sec-head">
+      <span class="eyebrow">Self-check</span>
+      <h2>Quiz — 4 questions, then a code exercise</h2>
+    </div>
+    <div class="concept wide">
+      <p>Not graded — a two-minute check that today's ideas actually landed before you move on.</p>
+    </div>
+    <div class="quiz-block">
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">1. What mechanism does Chain-of-Thought prompting rely on to improve accuracy?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">The model's own generated tokens become part of its later context</button>
+          <button class="quiz-opt" type="button">The prompt includes a larger number of few-shot training examples</button>
+          <button class="quiz-opt" type="button">The model calls an external calculator during generation</button>
+          <button class="quiz-opt" type="button">A separate verifier model checks each step before continuing</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Writing out intermediate steps gives the model a scratchpad — each new token is generated conditioned on the steps already written, not on any external tool or extra training data."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">2. Reflexion differs from plain ReAct primarily by adding:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">A tool that lets the agent search the web for information</button>
+          <button class="quiz-opt" type="button">A verbal reflection stored in memory, reused on the next attempt</button>
+          <button class="quiz-opt" type="button">A tree search over multiple candidate reasoning paths</button>
+          <button class="quiz-opt" type="button">A formal planner that verifies each action before it executes</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Reflexion adds a second phase after failure: a natural-language reflection is written to episodic memory and included in the next trial's context — no weights change."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">3. Tree-of-Thoughts differs from Chain-of-Thought mainly by:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Using a larger underlying language model for every step</button>
+          <button class="quiz-opt" type="button">Searching over multiple branching reasoning paths, not one</button>
+          <button class="quiz-opt" type="button">Requiring a human to approve each reasoning step manually</button>
+          <button class="quiz-opt" type="button">Replacing the language model with a symbolic planner</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="ToT generates several candidate next-thoughts, evaluates them, and searches (BFS/DFS) instead of committing to one linear chain — the model itself is unchanged."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">4. Kambhampati et al.'s LLM-Modulo critique argues the LLM should play which role in classical planning?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">The sole planner, verifying its own plans without external help</button>
+          <button class="quiz-opt" type="button">An idea-generator, with an external sound critic doing verification</button>
+          <button class="quiz-opt" type="button">A tool the human uses only after the plan is already verified</button>
+          <button class="quiz-opt" type="button">A component that is unnecessary once a formal planner exists</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="LLM-Modulo keeps the LLM as an idea-generator while routing verification and refinement through an external, sound critic — the LLM alone is not treated as a reliable planner."></p>
+      </div>
+    </div>
+
+    <div class="code-exercise">
+      <p><strong>Code exercise.</strong> The <code>reflexion</code> function below runs multiple trials
+        but never actually improves — every trial repeats the same mistake. One line is missing. What
+        is it, and where does it go?</p>
+      <pre class="codeblock"><code class="language-python">def reflexion(task, model, evaluator, max_trials=4):
+    memory = []                                    # episodic memory of past reflections
+    for trial in range(max_trials):
+        trajectory = react_loop(task, model, context_extra=memory)
+        outcome = evaluator(trajectory)             # success/failure signal
+        if outcome.success:
+            return trajectory
+        reflection = model.generate(reflect_prompt(trajectory, outcome))
+        # TODO: one line missing here
+    return trajectory  # last attempt, possibly still failing</code></pre>
+      <details>
+        <summary>Show solution</summary>
+        <p>The missing line is <code>memory.append(reflection)</code>. Without it, the reflection is
+          generated and then discarded — <code>context_extra=memory</code> on the next trial's
+          <code>react_loop</code> call sees the same empty list every time, so the agent has no way to
+          know it already tried (and failed at) this approach.</p>
+        <pre class="codeblock"><code class="language-python">        reflection = model.generate(reflect_prompt(trajectory, outcome))
+        memory.append(reflection)                   # persists to the next trial</code></pre>
+      </details>
+    </div>
+  </section>
+
+  <section class="block" id="reading">
+    <div class="sec-head">
+      <span class="eyebrow">Further reading</span>
+      <h2>Before proposing your project (Week 2)</h2>
+    </div>
+    <div class="concept wide">
+      <ul class="reading wide">
+        <li><a href="https://arxiv.org/abs/2201.11903" target="_blank" rel="noopener">Wei et al. — Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</a> (NeurIPS 2022).</li>
+        <li><a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">Yao et al. — ReAct: Synergizing Reasoning and Acting in Language Models</a> (ICLR 2023).</li>
+        <li><a href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener">Shinn et al. — Reflexion: Language Agents with Verbal Reinforcement Learning</a> (NeurIPS 2023).</li>
+        <li><a href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener">Yao et al. — Tree of Thoughts: Deliberate Problem Solving with Large Language Models</a> (NeurIPS 2023).</li>
+        <li><a href="https://arxiv.org/abs/2308.09687" target="_blank" rel="noopener">Besta et al. — Graph of Thoughts: Solving Elaborate Problems with Large Language Models</a> (AAAI 2024).</li>
+        <li><a href="https://arxiv.org/abs/2310.04406" target="_blank" rel="noopener">Zhou et al. — Language Agent Tree Search Unifies Reasoning, Acting, and Planning</a> (LATS, ICML 2024).</li>
+        <li><a href="https://arxiv.org/abs/2305.04091" target="_blank" rel="noopener">Wang et al. — Plan-and-Solve Prompting</a> (ACL 2023).</li>
+        <li><a href="https://arxiv.org/abs/2402.01817" target="_blank" rel="noopener">Kambhampati et al. — LLMs Can't Plan, But Can Help Planning in LLM-Modulo Frameworks</a> (ICML 2024).</li>
+        <li><a href="https://arxiv.org/abs/2310.01798" target="_blank" rel="noopener">Huang et al. — Large Language Models Cannot Self-Correct Reasoning Yet</a> (ICLR 2024) — the direct challenge to the self-correction claims above.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="week-01.html"><span class="dir">← Back</span>Introduction &amp; Methodology</a>
+    <a href="week-03.html" class="next"><span class="dir">Next →</span>Tools, MCP &amp; Evaluation</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="../assets/course.js"></script>
+<script src="../assets/dag.js"></script>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

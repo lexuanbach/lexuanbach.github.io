@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Agents That Matter</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../../index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../../index.html">Overview</a>
+      <a href="../week-01.html">Lectures</a>
+      <a href="../../seminars.html">Seminars</a>
+      <a href="../../project.html">Project</a>
+      <a href="../../resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="../../index.html">Overview</a>
+    <a href="../../seminars.html">Seminars</a>
+    <a href="../../project.html">Project</a>
+    <a href="../../resources.html">Resources</a>
+  </nav>
+  <h4>Lectures</h4>
+  <nav aria-label="Lectures">
+    <a href="../week-01.html" aria-current="page"><span class="ch-num">01</span>Introduction &amp; Methodology</a>
+    <a href="../week-02.html"><span class="ch-num">02</span>Reasoning &amp; Planning</a>
+    <a href="../week-03.html"><span class="ch-num">03</span>Tools, MCP &amp; Evaluation</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#plain">In plain terms</a>
+    <a href="#mechanism">How it works</a>
+    <a href="#example">Worked example</a>
+    <a href="#talk">For your talk &amp; project</a>
+    <a href="#reading">Further reading</a>
+  </nav>
+  <h4>Also from Week 1</h4>
+  <nav aria-label="Other guides this week">
+    <a href="transformer.html">Transformer</a>
+    <a href="human-loop.html">Human-in/on-the-Loop</a>
+    <a href="coala.html">CoALA</a>
+    <a href="react.html">ReAct</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Paper Guide · Week 1 &mdash; Introduction & Methodology</span>
+      <h1>AI Agents That Matter</h1>
+      <p class="lede">The methodology critique behind every rubric line in this course that says “accuracy alone is not evaluation” — required reading before you defend any benchmark number, your own or someone else's.</p>
+      <div class="meta-chips">
+        <a class="chip" href="https://arxiv.org/abs/2407.01502" target="_blank" rel="noopener"><strong>Read the paper ↗</strong></a>
+        <span class="chip">Kapoor, Stroebl et al. · arXiv 2024 / TMLR 2025</span>
+        <a class="chip" href="../week-01.html">← Back to Introduction & Methodology</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="plain">
+    <div class="sec-head">
+      <span class="eyebrow">01 · In plain terms</span>
+      <h2>A leaderboard number without a cost number is half an answer</h2>
+    </div>
+    <div class="concept wide">
+      <p>Agent benchmarks report one number: accuracy on some task set. Kapoor et al.'s argument is
+        that this is systematically misleading, because it's silent on cost. An agent that spends
+        $50 of API calls retrying, self-critiquing, and voting to gain one extra accuracy point over a
+        $2 baseline isn't "better" in any useful sense — it's a different point on a cost/accuracy
+        trade-off that the leaderboard hides. The paper's practical demonstration: they took an existing
+        HotpotQA agent (built with the DSPy framework) and re-optimized it for cost, cutting spend
+        substantially <em>while preserving accuracy</em> — proof that most published agent numbers are
+        not on the efficient frontier of what's actually possible.</p>
+    </div>
+  </section>
+
+  <section class="block" id="mechanism">
+    <div class="sec-head">
+      <span class="eyebrow">02 · How it works</span>
+      <h2>Pareto frontiers, not leaderboards</h2>
+    </div>
+    <div class="concept wide">
+      <p>The paper's fix is to plot every agent as a point in <strong>(cost, accuracy)</strong> space
+        and ask which points are <em>Pareto-optimal</em> — no other point beats them on both axes at
+        once. When Kapoor et al. did this across published agent designs (including Reflexion and
+        LATS, both already in your reading list), the result was uncomfortable: several sophisticated,
+        widely-cited agents sit <em>behind</em> the frontier traced by much simpler baselines. Their
+        added complexity (extra reasoning steps, self-critique passes, tree search) costs real money
+        and barely moves accuracy — the opposite of what the original papers' single-number tables
+        suggested.</p>
+      <p>The paper also raises three more concrete methodology failures worth naming individually:
+        benchmarks that don't control for contamination (the test set leaked into training data),
+        holdout sets too small to distinguish real improvement from noise, and evaluation protocols that
+        conflate "can this agent do the task at all" with "can this agent do the task reliably, every
+        time" — the same distinction Week 3's <code>pass^k</code> metric (τ-bench) is built to expose.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 500 220" width="100%" role="img" aria-label="Illustrative cost-versus-accuracy chart: a simple baseline sits near the Pareto frontier at low cost, while Reflexion and LATS spend much more for only a small accuracy gain.">
+        <line x1="50" y1="20" x2="50" y2="190" class="chart-axis"></line>
+        <line x1="50" y1="190" x2="460" y2="190" class="chart-axis"></line>
+        <text x="30" y="105" text-anchor="middle" class="arch-label" transform="rotate(-90 30 105)">accuracy →</text>
+        <text x="255" y="212" text-anchor="middle" class="arch-label">inference cost per task ($) →</text>
+        <path d="M110,140 C180,110 210,100 250,95 C300,90 350,85 400,80" class="chart-line"></path>
+        <circle cx="110" cy="140" r="5" class="chart-dot"><title>Simple, cost-optimized baseline</title></circle>
+        <circle cx="250" cy="95" r="5" class="chart-dot"><title>Reflexion: much higher cost, modest accuracy gain</title></circle>
+        <circle cx="400" cy="80" r="5" class="chart-dot"><title>LATS: highest cost, similar accuracy to Reflexion</title></circle>
+        <text x="110" y="160" text-anchor="middle" class="arch-label">simple baseline</text>
+        <text x="250" y="75" text-anchor="middle" class="arch-label">Reflexion</text>
+        <text x="400" y="60" text-anchor="middle" class="arch-label">LATS</text>
+      </svg>
+      <div class="cap">Illustrative reconstruction of the paper's argument (exact points vary by benchmark). Kapoor et al., 2024.</div>
+    </div>
+    <div class="note tip"><span class="note-tag">Key result</span> Re-optimizing a HotpotQA agent for cost using DSPy + Optuna hyperparameter search <strong>cut inference cost substantially while preserving accuracy</strong> — showing most published agents are not on the efficient frontier.</div>
+  </section>
+
+  <section class="block" id="example">
+    <div class="example">
+      <div class="example-bar"><span class="example-tag">Worked example</span><span class="example-title">Applying the critique to your own project</span></div>
+      <div class="example-body">
+        <p>Suppose your project's evaluation table reports: "our agent: 78% accuracy; baseline: 71%
+          accuracy." Kapoor et al.'s checklist forces three more columns before that comparison means
+          anything:</p>
+        <div class="trace">
+          <span class="trace-line"><span class="trace-role thought">Cost</span>$/task for each configuration — if your agent costs 6× more per task, a 7-point gain may not be a real win.</span>
+          <span class="trace-line"><span class="trace-role action">Seeds/variance</span>Is 78% the mean of ≥3 runs, or one lucky run? Report variance, not a single number.</span>
+          <span class="trace-line"><span class="trace-role obs">Contamination</span>Could any test task's answer have appeared in the model's training data or your few-shot examples?</span>
+        </div>
+        <p>This is exactly the shape of R5 (Quantitative evaluation) in your project's grading gate —
+          the rubric's "≥2 configurations, ≥3 seeds, cost and latency" language is this paper's
+          methodology, operationalized.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="talk">
+    <div class="sec-head">
+      <span class="eyebrow">04 · For your talk &amp; project</span>
+      <h2>What this buys you</h2>
+    </div>
+    <div class="concept wide">
+      <ul>
+        <li>If you present <strong>S1-8 Agent Evaluation &amp; Benchmarking</strong>: this paper is the
+          critical spine of the whole topic — every other benchmark (AgentBench, GAIA, WebArena) should
+          be evaluated <em>through</em> this paper's lens (does it report cost? variance? contamination
+          controls?), not next to it as an unrelated fourth reading.</li>
+        <li>For your <strong>project's D1 proposal and D3 report (R5, R9)</strong>: cite this paper by
+          name when you justify why your evaluation reports cost alongside accuracy — it is the
+          methodological authority the rubric's evaluation criterion is built on.</li>
+        <li>A sharp critical question for any seminar talk citing a benchmark leaderboard: "what would
+          this ranking look like if cost were held fixed across all agents?"</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="reading">
+    <div class="sec-head">
+      <span class="eyebrow">05 · Further reading</span>
+      <h2>Where to go next</h2>
+    </div>
+    <div class="concept wide">
+      <ul class="reading wide">
+          <li><a href="https://arxiv.org/abs/2407.01502" target="_blank" rel="noopener">Kapoor et al. — AI Agents That Matter (full paper)</a></li>
+          <li><a href="https://github.com/benediktstroebl/agent-evals" target="_blank" rel="noopener">Companion code — the cost-controlled agent-evaluation harness</a></li>
+          <li><a href="https://arxiv.org/abs/2406.12045" target="_blank" rel="noopener">Yao et al. — τ-bench: the pass^k reliability metric this critique motivates</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="../week-01.html"><span class="dir">← Back</span>Introduction & Methodology</a>
+    <a href="chain-of-thought.html" class="next"><span class="dir">Next guide →</span>Chain-of-Thought</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="../../assets/course.js"></script>
+</body>
+</html>

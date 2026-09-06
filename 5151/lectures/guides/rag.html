@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RAG</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../../index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../../index.html">Overview</a>
+      <a href="../week-01.html">Lectures</a>
+      <a href="../../seminars.html">Seminars</a>
+      <a href="../../project.html">Project</a>
+      <a href="../../resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="../../index.html">Overview</a>
+    <a href="../../seminars.html">Seminars</a>
+    <a href="../../project.html">Project</a>
+    <a href="../../resources.html">Resources</a>
+  </nav>
+  <h4>Lectures</h4>
+  <nav aria-label="Lectures">
+    <a href="../week-01.html"><span class="ch-num">01</span>Introduction &amp; Methodology</a>
+    <a href="../week-02.html"><span class="ch-num">02</span>Reasoning &amp; Planning</a>
+    <a href="../week-03.html" aria-current="page"><span class="ch-num">03</span>Tools, MCP &amp; Evaluation</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#plain">In plain terms</a>
+    <a href="#mechanism">How it works</a>
+    <a href="#example">Worked example</a>
+    <a href="#talk">For your talk &amp; project</a>
+    <a href="#reading">Further reading</a>
+  </nav>
+  <h4>Also from Week 3</h4>
+  <nav aria-label="Other guides this week">
+    <a href="agent-skills.html">Agent Skills</a>
+    <a href="lost-in-the-middle.html">Lost in the Middle</a>
+    <a href="toolformer.html">Toolformer</a>
+    <a href="mcp.html">Model Context Protocol</a>
+    <a href="tau-bench.html">τ-bench</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Paper Guide · Week 3 &mdash; Tools, MCP & Evaluation</span>
+      <h1>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</h1>
+      <p class="lede">The paper that made "look it up, then answer" part of generation itself, not a separate pipeline stage bolted on afterward — and the direct ancestor of nearly every agent's semantic-memory design.</p>
+      <div class="meta-chips">
+        <a class="chip" href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener"><strong>Read the paper ↗</strong></a>
+        <span class="chip">Lewis et al. (Facebook AI Research) · NeurIPS 2020</span>
+        <a class="chip" href="../week-03.html">← Back to Tools, MCP & Evaluation</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="plain">
+    <div class="sec-head">
+      <span class="eyebrow">01 · In plain terms</span>
+      <h2>A model's memorized knowledge is frozen the day training ends</h2>
+    </div>
+    <div class="concept wide">
+      <p>An LLM's parametric knowledge — whatever it absorbed during training — cannot change without
+        retraining it, and it was never designed to hold every fact reliably or keep facts up to date.
+        Retrieval-Augmented Generation's fix is to give the model an open book: before generating an
+        answer, search an external corpus for the handful of passages most relevant to the question, and
+        condition generation on those passages directly. The model doesn't have to have memorized the
+        fact — it just has to read it off the page it was just handed, the same way a person answers
+        better with a reference book open in front of them than from memory alone.</p>
+    </div>
+  </section>
+
+  <section class="block" id="mechanism">
+    <div class="sec-head">
+      <span class="eyebrow">02 · How it works</span>
+      <h2>A dense retriever and a generator, trained together</h2>
+    </div>
+    <div class="concept wide">
+      <p>Two components, trained jointly end-to-end: a <strong>retriever</strong> — a dense
+        passage-retrieval model that encodes the query and every candidate passage into the same
+        embedding space with two separate encoders (a "bi-encoder"), so relevance becomes a simple
+        vector similarity search — and a <strong>generator</strong> (the original paper used BART-large)
+        that conditions its output on the query concatenated with whichever passages the retriever
+        returned. Because the corpus can be millions of passages, the retriever's nearest-neighbor
+        search runs against a pre-built approximate index (FAISS in the original paper, over 21 million
+        Wikipedia passages) rather than comparing against every passage individually. Two variants differ
+        in exactly where the retrieved passages enter the picture: <em>RAG-Sequence</em> picks one set of
+        passages for the whole generated answer, while <em>RAG-Token</em> lets the model draw on a
+        different passage for each output token.</p>
+      <p>The key design choice worth naming in any critique: retrieval happens <em>once, up front</em>,
+        before generation starts — this is exactly the limitation Week 3's evaluation section and
+        Self-RAG / FLARE (cited alongside this paper in the seminar reading list) were built to address,
+        by making retrieval conditional on the model's own uncertainty rather than a fixed step.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 620 160" width="100%" role="img" aria-label="Pipeline: a query goes to a dense retriever that searches an indexed corpus, returning top passages that the generator conditions on to produce an answer.">
+        <defs>
+          <marker id="rag-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+        </defs>
+        <path d="M140,70 L170,70" class="arch-line" marker-end="url(#rag-arrow)"></path>
+        <path d="M300,70 L330,70" class="arch-line" marker-end="url(#rag-arrow)"></path>
+        <path d="M460,70 L490,70" class="arch-line" marker-end="url(#rag-arrow)"></path>
+
+        <a class="dag-node accent" href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener"
+           data-functionality="The user&#39;s question, exactly as asked."
+           data-intuition="This is what starts the pipeline — nothing has been retrieved or generated yet."
+           data-example="&quot;What&#39;s the capital of the country that won the 2022 World Cup?&quot;" aria-label="The user's question"><rect x="10" y="40" width="130" height="60" rx="8"></rect><text x="75" y="65" text-anchor="middle" class="t">Query</text><text x="75" y="80" text-anchor="middle" class="s">user's question</text></a>
+        <a class="dag-node teal" href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener"
+           data-functionality="Encodes the query and every candidate passage into the same embedding space, then ranks by similarity."
+           data-intuition="Turning retrieval into vector similarity is what makes searching millions of passages fast."
+           data-example="Ranks 21 million Wikipedia passages by relevance to the query, in the original paper." aria-label="Dense retriever: encodes query and passages into a shared embedding space"><rect x="170" y="40" width="130" height="60" rx="8"></rect><text x="235" y="65" text-anchor="middle" class="t">Retriever</text><text x="235" y="80" text-anchor="middle" class="s">searches the corpus</text></a>
+        <a class="dag-node amber" href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener"
+           data-functionality="The handful of passages the retriever judged most relevant."
+           data-intuition="Only a few passages are kept — the generator can&#39;t (and shouldn&#39;t) read everything."
+           data-example="&quot;Argentina won the 2022 World Cup&quot; and &quot;Buenos Aires is the capital of Argentina.&quot;" aria-label="Top-k retrieved passages"><rect x="330" y="40" width="130" height="60" rx="8"></rect><text x="395" y="65" text-anchor="middle" class="t">Top-k passages</text><text x="395" y="80" text-anchor="middle" class="s">e.g. Wikipedia</text></a>
+        <a class="dag-node accent" href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener"
+           data-functionality="Conditions its generated output on the query plus whatever passages were retrieved."
+           data-intuition="The model doesn&#39;t have to have memorized the fact — it just has to read it off the page it was handed."
+           data-example="Answers &quot;Buenos Aires,&quot; grounded in the retrieved passages, not recalled from training." aria-label="Generator: conditions its output on the query plus retrieved passages"><rect x="490" y="40" width="130" height="60" rx="8"></rect><text x="555" y="65" text-anchor="middle" class="t">Generator</text><text x="555" y="80" text-anchor="middle" class="s">grounded answer</text></a>
+      </svg>
+      <div class="cap">RAG's retrieve-then-generate pipeline. Lewis et al., NeurIPS 2020.</div>
+    </div>
+    <div class="note tip"><span class="note-tag">Key result</span> The original RAG model (BART-large generator + a dense retriever indexed over 21M Wikipedia passages) reached <strong>44.5 Exact Match on Natural Questions</strong>, outperforming comparable parametric-only language models on open-domain question answering.</div>
+    <div class="concept wide">
+      <h3>The fuller picture: an offline index and an online query, sharing one embedding space</h3>
+      <p>The four-box pipeline above compresses two things that actually run at very different times.
+        <strong>Offline</strong>, once, before any user ever asks a question: every passage in the corpus
+        is encoded into a vector and dropped into a nearest-neighbor index. <strong>Online</strong>, on
+        every query: the query is encoded into that <em>same</em> embedding space — the query and passage
+        encoders are trained together as a pair, which is what makes comparing them meaningful — and the
+        index is searched for the closest passage vectors, which the generator then conditions on.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 780 280" width="100%" role="img" aria-label="Diagram: RAG's full architecture, split into an offline path that builds a vector index over the corpus, and an online path that encodes the query, searches that index, and conditions generation on the retrieved passages.">
+        <defs>
+          <marker id="rag-arch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+        </defs>
+        <text x="15" y="22" class="arch-label">offline — indexed once</text>
+        <text x="15" y="187" class="arch-label">online — every query</text>
+
+        <path d="M145,62 L170,62" class="arch-line" marker-end="url(#rag-arch-arrow)"></path>
+        <path d="M330,62 L355,62" class="arch-line" marker-end="url(#rag-arch-arrow)"></path>
+        <path d="M145,227 L165,227" class="arch-line" marker-end="url(#rag-arch-arrow)"></path>
+        <path d="M305,227 L325,227" class="arch-line" marker-end="url(#rag-arch-arrow)"></path>
+        <path d="M465,227 L485,227" class="arch-line" marker-end="url(#rag-arch-arrow)"></path>
+        <path d="M615,227 L635,227" class="arch-line" marker-end="url(#rag-arch-arrow)"></path>
+        <path d="M425,90 L425,130 L395,130 L395,200" class="arch-line" marker-end="url(#rag-arch-arrow)"></path>
+        <path d="M250,90 L250,160 L235,160 L235,200" class="arch-line dashed"></path>
+        <text x="280" y="153" text-anchor="middle" class="arch-label">shared embedding space</text>
+
+        <a class="dag-node accent" href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener"
+           data-functionality="The full external text collection the system draws answers from — never modified at query time."
+           data-intuition="This is the &#39;open book&#39; itself — a store of documents built once, offline, before any query arrives."
+           data-example="21 million English Wikipedia passages, in the original paper." aria-label="Corpus: the external document collection"><rect x="15" y="35" width="130" height="55" rx="8"></rect><text x="80" y="60" text-anchor="middle" class="t">Corpus</text><text x="80" y="75" text-anchor="middle" class="s">raw documents</text></a>
+
+        <a class="dag-node teal" href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener"
+           data-functionality="Encodes every passage in the corpus into a dense vector, once, offline."
+           data-intuition="Doing this offline means query time only ever has to encode one short string — the query itself."
+           data-example="Each ~100-word Wikipedia passage becomes a single dense vector." aria-label="Passage encoder: embeds every passage once, offline"><rect x="170" y="35" width="160" height="55" rx="8"></rect><text x="250" y="60" text-anchor="middle" class="t">Passage encoder</text><text x="250" y="75" text-anchor="middle" class="s">embeds the corpus</text></a>
+
+        <a class="dag-node teal" href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener"
+           data-functionality="Stores every passage embedding in a structure built for fast approximate nearest-neighbor search."
+           data-intuition="Comparing a query to millions of passages one by one would be far too slow — the index trades exactness for speed."
+           data-example="A FAISS index over 21M passage vectors, in the original paper." aria-label="Vector index: a fast nearest-neighbor structure over passage embeddings"><rect x="355" y="35" width="140" height="55" rx="8"></rect><text x="425" y="60" text-anchor="middle" class="t">Vector index</text><text x="425" y="75" text-anchor="middle" class="s">FAISS, offline</text></a>
+
+        <a class="dag-node accent" href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener"
+           data-functionality="The user&#39;s question, exactly as asked."
+           data-intuition="This is what starts the online path — nothing has been retrieved or generated yet."
+           data-example="&quot;What&#39;s the capital of the country that won the 2022 World Cup?&quot;" aria-label="Query: the user's question"><rect x="15" y="200" width="130" height="55" rx="8"></rect><text x="80" y="225" text-anchor="middle" class="t">Query</text><text x="80" y="240" text-anchor="middle" class="s">user's question</text></a>
+
+        <a class="dag-node teal" href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener"
+           data-functionality="Encodes the query into the same embedding space the passage encoder uses."
+           data-intuition="Query and passage encoders are trained together as a pair (a &#39;bi-encoder&#39;) — that pairing is what makes vector similarity meaningful."
+           data-example="One dense vector representing the whole question." aria-label="Query encoder: embeds the query into the shared space"><rect x="165" y="200" width="140" height="55" rx="8"></rect><text x="235" y="225" text-anchor="middle" class="t">Query encoder</text><text x="235" y="240" text-anchor="middle" class="s">embeds the query</text></a>
+
+        <a class="dag-node amber" href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener"
+           data-functionality="Finds the passage vectors closest to the query vector inside the pre-built index."
+           data-intuition="This is the actual &#39;retrieval&#39; step — a nearest-neighbor lookup, not a keyword search."
+           data-example="Returns the IDs of the top-k closest passage vectors." aria-label="ANN search: nearest-neighbor lookup against the index"><rect x="325" y="200" width="140" height="55" rx="8"></rect><text x="395" y="225" text-anchor="middle" class="t">ANN search</text><text x="395" y="240" text-anchor="middle" class="s">queries the index</text></a>
+
+        <a class="dag-node amber" href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener"
+           data-functionality="The handful of passages the search judged most relevant, pulled back from the corpus by ID."
+           data-intuition="Only a few passages are kept — the generator can&#39;t (and shouldn&#39;t) read everything."
+           data-example="&quot;Argentina won the 2022 World Cup&quot; and &quot;Buenos Aires is the capital of Argentina.&quot;" aria-label="Top-k retrieved passages"><rect x="485" y="200" width="130" height="55" rx="8"></rect><text x="550" y="225" text-anchor="middle" class="t">Top-k passages</text><text x="550" y="240" text-anchor="middle" class="s">e.g. k = 5</text></a>
+
+        <a class="dag-node accent" href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener"
+           data-functionality="Conditions its generated output on the query plus whatever passages were retrieved."
+           data-intuition="The model doesn&#39;t have to have memorized the fact — it just has to read it off the page it was handed."
+           data-example="Answers &quot;Buenos Aires,&quot; grounded in the retrieved passages, not recalled from training." aria-label="Generator: conditions its output on the query plus retrieved passages"><rect x="635" y="200" width="130" height="55" rx="8"></rect><text x="700" y="225" text-anchor="middle" class="t">Generator</text><text x="700" y="240" text-anchor="middle" class="s">grounded answer</text></a>
+      </svg>
+      <div class="cap">RAG's full architecture: the offline path builds a vector index over the corpus once; the online path encodes each query into that same space, searches the index, and conditions generation on the result.</div>
+    </div>
+  </section>
+
+  <section class="block" id="example">
+    <div class="example">
+      <div class="example-bar"><span class="example-tag">Worked example</span><span class="example-title">Grounding a question the model alone might get wrong</span></div>
+      <div class="example-body">
+        <p><strong>Q:</strong> "What's the capital of the country that won the 2022 FIFA World Cup?"</p>
+        <div class="trace">
+          <span class="trace-line"><span class="trace-role thought">Parametric only</span>The model may answer from training-time memory alone — reliable only if it was trained after the event and recalls it correctly.</span>
+          <span class="trace-line"><span class="trace-role action">RAG retrieves</span>Passage 1: "Argentina won the 2022 FIFA World Cup, defeating France on penalties." Passage 2: "Buenos Aires is the capital and largest city of Argentina."</span>
+          <span class="trace-line"><span class="trace-role obs">Generator</span>Conditions on both passages directly — the answer ("Buenos Aires") is now grounded in retrieved text, not recalled from memory.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="talk">
+    <div class="sec-head">
+      <span class="eyebrow">04 · For your talk &amp; project</span>
+      <h2>What this buys you</h2>
+    </div>
+    <div class="concept wide">
+      <ul>
+        <li>If you present <strong>S1-4 Retrieval-Augmented &amp; Knowledge-grounded Agents</strong>:
+          this is the paper every later technique in that topic modifies — GraphRAG changes what gets
+          indexed, Self-RAG and FLARE change <em>when</em> retrieval happens. State explicitly what each
+          later paper changes relative to this fixed pipeline.</li>
+        <li>For your <strong>project's memory design (R3)</strong>: if your semantic memory is a vector
+          store you query before generating, you are building a RAG system whether or not you use that
+          name — cite this paper as the mechanism's origin and be ready to say which variant (retrieve
+          once vs. conditionally) you implemented.</li>
+        <li>A sharp critical question: what happens to answer quality when the retriever returns
+          confidently-ranked but irrelevant passages — does your system have any check before trusting
+          them?</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="reading">
+    <div class="sec-head">
+      <span class="eyebrow">05 · Further reading</span>
+      <h2>Where to go next</h2>
+    </div>
+    <div class="concept wide">
+      <ul class="reading wide">
+          <li><a href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener">Lewis et al. — Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks (full paper)</a></li>
+          <li><a href="https://arxiv.org/abs/2404.16130" target="_blank" rel="noopener">Edge et al. — GraphRAG: changes what gets indexed (community summaries, not raw passages)</a></li>
+          <li><a href="https://arxiv.org/abs/2310.11511" target="_blank" rel="noopener">Asai et al. — Self-RAG: changes retrieval from a fixed step to a model-decided one</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="../week-03.html"><span class="dir">← Back</span>Tools, MCP & Evaluation</a>
+    <a href="lost-in-the-middle.html" class="next"><span class="dir">Next guide →</span>Lost in the Middle</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="../../assets/course.js"></script>
+<script src="../../assets/dag.js"></script>
+</body>
+</html>

@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CO5151 Lecture 1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../index.html">Overview</a>
+      <a href="week-01.html" aria-current="page">Lectures</a>
+      <a href="../seminars.html">Seminars</a>
+      <a href="../project.html">Project</a>
+      <a href="../resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="../index.html">Overview</a>
+    <a href="../seminars.html">Seminars</a>
+    <a href="../project.html">Project</a>
+    <a href="../resources.html">Resources</a>
+  </nav>
+  <h4>Lectures</h4>
+  <nav aria-label="Lectures">
+    <a href="week-01.html" aria-current="page"><span class="ch-num">01</span>Introduction &amp; Methodology</a>
+    <a href="week-02.html"><span class="ch-num">02</span>Reasoning &amp; Planning</a>
+    <a href="week-03.html"><span class="ch-num">03</span>Tools, MCP &amp; Evaluation</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#spectrum">Autonomy spectrum</a>
+    <a href="#timeline">Research timeline</a>
+    <a href="#anatomy">Anatomy of an agent</a>
+    <a href="#simulator">Agent loop simulator</a>
+    <a href="#method">Reading &amp; critique method</a>
+    <a href="#example">Worked example</a>
+    <a href="#discussion">Discussion</a>
+    <a href="#takeaway">Takeaway</a>
+    <a href="#quiz">Quiz</a>
+  </nav>
+  <h4>Paper guides</h4>
+  <nav aria-label="Paper guides">
+    <a href="guides/transformer.html">Transformer</a>
+    <a href="guides/human-loop.html">Human-in/on-the-Loop</a>
+    <a href="guides/coala.html">CoALA</a>
+    <a href="guides/react.html">ReAct</a>
+    <a href="guides/ai-agents-that-matter.html">AI Agents That Matter</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Lecture 1 · Real Week 1 (Wed 9 Sep 2026) · Foundations</span>
+      <h1>Introduction to Agentic AI &amp; Research Methodology</h1>
+      <p class="lede">What "agent" means precisely enough to critique, the four components every
+        agentic system is built from, a map of where the field's key ideas sit in time, and how to
+        read, present, and critique a research paper — ending with a full worked critique of ReAct.</p>
+      <div class="note warn">
+        <span class="note-tag">This page is half of Week 1's real class meeting</span>
+        The real 13-session HK261 timetable compresses two originally-separate lectures into one
+        149-minute session: this content, plus Reasoning &amp; Planning (CoT, ReAct, Reflexion,
+        ToT/GoT, planning), are both taught live on Sep 9 — pre-read both before class. See the
+        course's Week 1 session plan for the combined, flipped-classroom timeline.
+      </div>
+      <div class="prereading">
+        <span class="note-tag">Pre-reading — complete before class</span>
+        <ol>
+          <li><strong>Sumers et al. — <a href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener">Cognitive Architectures for Language Agents</a></strong> (TMLR 2024) — the anatomy framework in §3; you don't need every detail, just the four-component split.</li>
+          <li><strong>Yao et al. — <a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">ReAct: Synergizing Reasoning and Acting</a></strong> (ICLR 2023) — read closely: §5 uses it for the in-class critique.</li>
+        </ol>
+      </div>
+      <div class="note tip"><span class="note-tag">Paper guides — deep dives with figures and worked examples</span>
+        <a href="guides/transformer.html">Transformer →</a> · <a href="guides/human-loop.html">Human-in/on-the-Loop →</a> · <a href="guides/coala.html">CoALA →</a> · <a href="guides/react.html">ReAct →</a> · <a href="guides/ai-agents-that-matter.html">AI Agents That Matter →</a>
+      </div>
+      <div class="meta-chips">
+        <a class="chip" href="#spectrum">Autonomy spectrum</a>
+        <a class="chip" href="#anatomy">Agent anatomy</a>
+        <a class="chip" href="#simulator">Try the agent loop live</a>
+        <a class="chip" href="#method">Three-pass reading</a>
+        <a class="chip" href="#example">Worked example: ReAct</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="objectives">
+    <div class="sec-head">
+      <span class="eyebrow">Learning objectives</span>
+      <h2>By the end of this session, you can</h2>
+    </div>
+    <div class="concept wide">
+      <ol>
+        <li>Define an "agent" precisely enough to distinguish it from a chatbot, a workflow, and a
+          script, and place a given system on an autonomy spectrum.</li>
+        <li>Decompose any agentic system into four functional components — perception/context,
+          reasoning, memory, action/tools — wired together by a control loop, and map each seminar
+          topic in the course onto this anatomy.</li>
+        <li>Apply a three-pass method to read a research paper, and reproduce the five-part structure
+          every seminar talk must follow.</li>
+        <li>Ask an assumption-level critical question about a paper's claims, rather than a
+          summary-level comprehension question.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="spectrum">
+    <div class="sec-head">
+      <span class="eyebrow">01 · From LLMs to autonomous agents</span>
+      <h2>A working definition, and an autonomy spectrum</h2>
+    </div>
+    <div class="concept wide">
+      <p>"Agent" is used loosely enough in industry marketing that, for a research course, it needs a
+        working definition or critique becomes impossible — there is no claim to hold a system to.</p>
+      <div class="note tip">
+        <span class="note-tag">Working definition</span>
+        An agent is a system in which a language model's output determines the next action taken in an
+        environment, and that action's result is fed back into the model's context before the next
+        decision. The defining property is the <strong>loop</strong> — perceive, decide, act, observe,
+        repeat — not any particular level of capability.
+      </div>
+      <p>Six points on the spectrum this definition spans, from least to most autonomous. When you
+        read a paper (or design your project), decide which level its system actually operates at —
+        many papers use the word "agent" for level-1 or level-2 systems, and the gap between the
+        claimed and actual level is often the paper's weakest point.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 800 260" width="100%" role="img" aria-label="Staircase diagram: six levels of autonomy rising from Single call to Open-ended, with levels 3 and up highlighted as genuinely autonomous agents.">
+        <text x="400" y="16" text-anchor="middle" class="arch-caption">autonomy increases →</text>
+        <path d="M65,190 L197,160" class="arch-line"></path>
+        <path d="M197,160 L329,130" class="arch-line"></path>
+        <path d="M329,130 L461,100" class="arch-line"></path>
+        <path d="M461,100 L593,70" class="arch-line"></path>
+        <path d="M593,70 L725,40" class="arch-line"></path>
+
+        <a class="dag-node" href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener"
+           data-functionality="One prompt, one completion, no loop at all."
+           data-intuition="Not an agent by this course&#39;s working definition — there&#39;s no decide-act-observe cycle to speak of."
+           data-example="Autocomplete, or a single classification call." aria-label="Level 0 — one prompt, one completion, no loop at all. Not an agent by this course's working definition."><rect x="10" y="190" width="110" height="46" rx="8"></rect><text x="65" y="210" text-anchor="middle" class="t">L0</text><text x="65" y="225" text-anchor="middle" class="s">Single call</text></a>
+        <a class="dag-node" href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener"
+           data-functionality="One reasoning step chooses zero or more tool calls, then answers."
+           data-intuition="Still no loop — the developer is in the loop on every single call."
+           data-example="&quot;What&#39;s the weather in Hanoi?&quot; answered via one function call." aria-label="Level 1 — one reasoning step chooses zero or more tool calls, then answers. Still no loop: the developer is in the loop on every call."><rect x="142" y="160" width="110" height="46" rx="8"></rect><text x="197" y="180" text-anchor="middle" class="t">L1</text><text x="197" y="195" text-anchor="middle" class="s">Tool call</text></a>
+        <a class="dag-node" href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener"
+           data-functionality="A fixed, human-designed sequence or graph — the path is hand-authored."
+           data-intuition="Only the step content is generated; the workflow&#39;s shape itself is not a model decision."
+           data-example="A prompt-chaining pipeline: extract → summarize → translate." aria-label="Level 2 — a fixed, human-designed sequence or graph. The path is hand-authored; only step content is generated. This is a workflow, not an agent, by the course's definition."><rect x="274" y="130" width="110" height="46" rx="8"></rect><text x="329" y="150" text-anchor="middle" class="t">L2</text><text x="329" y="165" text-anchor="middle" class="s">Workflow</text></a>
+        <a class="dag-node accent" href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener"
+           data-functionality="The model decides which steps to take and when to stop."
+           data-intuition="This is where &quot;agent&quot; starts being an accurate claim, not marketing."
+           data-example="A ReAct-style agent solving a multi-hop question on its own." aria-label="Level 3 — the model decides which steps to take and when to stop. This is where &quot;agent&quot; starts being an accurate claim, not marketing."><rect x="406" y="100" width="110" height="46" rx="8"></rect><text x="461" y="120" text-anchor="middle" class="t">L3</text><text x="461" y="135" text-anchor="middle" class="s">Agent</text></a>
+        <a class="dag-node accent" href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener"
+           data-functionality="Several autonomous agents interact, coordinated by protocol or a manager agent."
+           data-intuition="Multiplies Level 3&#39;s autonomy across several cooperating agents at once."
+           data-example="An AutoGen/MetaGPT-style software team." aria-label="Level 4 — several autonomous agents interact, coordinated by protocol or a manager agent."><rect x="538" y="70" width="110" height="46" rx="8"></rect><text x="593" y="90" text-anchor="middle" class="t">L4</text><text x="593" y="105" text-anchor="middle" class="s">Multi-agent</text></a>
+        <a class="dag-node accent" href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener"
+           data-functionality="Continuous operation with no fixed task boundary."
+           data-intuition="Only intermittent human oversight — the most autonomous point on this spectrum."
+           data-example="Voyager in Minecraft; a computer-use agent left running." aria-label="Level 5 — continuous operation with no fixed task boundary; only intermittent human oversight."><rect x="670" y="40" width="110" height="46" rx="8"></rect><text x="725" y="60" text-anchor="middle" class="t">L5</text><text x="725" y="75" text-anchor="middle" class="s">Open-ended</text></a>
+      </svg>
+      <div class="cap">L0–L2: the developer is in the loop every call or at design time. L3–L5 (highlighted): the model decides, per task.</div>
+    </div>
+    <div class="tbl-scroll">
+      <table class="tbl">
+        <thead><tr><th class="mono center">Level</th><th>Description</th><th>Example</th><th>Who is "in the loop"</th></tr></thead>
+        <tbody>
+          <tr><td class="mono center">0</td><td>Single call — one prompt, one completion, no loop</td><td>Autocomplete, a classification call</td><td>The developer, every call</td></tr>
+          <tr><td class="mono center">1</td><td>Tool-augmented call — one reasoning step chooses zero or more tool calls, then answers</td><td>"What's the weather in Hanoi?" via one function call</td><td>The developer, every call</td></tr>
+          <tr><td class="mono center">2</td><td>Workflow — a fixed, human-designed sequence/graph; the <em>path</em> is hand-authored, only step content is generated</td><td>A prompt-chaining pipeline: extract → summarize → translate</td><td>The developer, at design time</td></tr>
+          <tr><td class="mono center">3</td><td>Autonomous agent — the model decides <em>which</em> steps to take and <em>when to stop</em></td><td>A ReAct-style agent solving a multi-hop question</td><td>The user, per task</td></tr>
+          <tr><td class="mono center">4</td><td>Multi-agent system — several autonomous agents interact, coordinated by protocol or a manager agent</td><td>An AutoGen/MetaGPT-style software team</td><td>The user, per task; agents supervise each other</td></tr>
+          <tr><td class="mono center">5</td><td>Open-ended / embodied — continuous operation, no fixed task boundary</td><td>Voyager in Minecraft; a computer-use agent left running</td><td>Intermittent human oversight only</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      <span class="note-tag">Anthropic's distinction (previewed here, covered in S1-7)</span>
+      <em>Workflows</em> (level 2) are predictable for well-defined tasks; <em>agents</em> (level 3+)
+      trade predictability for flexibility at scale. "Find the simplest solution possible, and only
+      increase complexity when needed" — keep this in mind when you scope your project's architecture.
+    </div>
+  </section>
+
+  <section class="block" id="timeline">
+    <div class="sec-head">
+      <span class="eyebrow">02 · A short research timeline</span>
+      <h2>2022 → 2026, in three phases</h2>
+    </div>
+    <div class="concept wide">
+      <p>Orientation, not exam material — a map of where this semester's topics sit in time. Notice
+        the shape: 2022–2023 is dominated by <strong>prompting tricks</strong> that elicit behavior
+        from a frozen model (CoT, ReAct, Reflexion all work on off-the-shelf models). 2024 is dominated
+        by <strong>infrastructure</strong> — protocols and benchmarks that make agents buildable and
+        measurable at scale. 2025 is dominated by <strong>training and architecture</strong> — RL that
+        bakes behavior into the model rather than eliciting it, and security that constrains what an
+        agent can do rather than filtering what it's told.</p>
+    </div>
+    <pre class="codeblock">2022  <a href="https://arxiv.org/abs/2201.11903" target="_blank" rel="noopener">Chain-of-Thought prompting</a> (Wei) — reasoning emerges from prompting alone
+2022  <a href="https://arxiv.org/abs/2203.02155" target="_blank" rel="noopener">InstructGPT / RLHF</a> (Ouyang) — models start reliably following instructions
+2023  <a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">ReAct</a> (Yao) — interleave reasoning traces with actions
+2023  <a href="https://arxiv.org/abs/2302.04761" target="_blank" rel="noopener">Toolformer</a>, <a href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener">Reflexion</a>, <a href="https://arxiv.org/abs/2304.03442" target="_blank" rel="noopener">Generative Agents</a>, <a href="https://arxiv.org/abs/2308.08155" target="_blank" rel="noopener">AutoGen</a> / <a href="https://arxiv.org/abs/2308.00352" target="_blank" rel="noopener">MetaGPT</a> / <a href="https://arxiv.org/abs/2303.17760" target="_blank" rel="noopener">CAMEL</a>
+2023  <a href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener">Tree of Thoughts</a> (Yao) — search over reasoning paths
+2024  <a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener">Model Context Protocol</a> (Anthropic) — standardized tool/context interface
+2024  <a href="https://arxiv.org/abs/2310.06770" target="_blank" rel="noopener">SWE-bench</a> / <a href="https://arxiv.org/abs/2405.15793" target="_blank" rel="noopener">SWE-agent</a> — coding agents as a measurable research object
+2024  <a href="https://arxiv.org/abs/2308.03688" target="_blank" rel="noopener">AgentBench</a> / <a href="https://arxiv.org/abs/2311.12983" target="_blank" rel="noopener">GAIA</a> / <a href="https://arxiv.org/abs/2307.13854" target="_blank" rel="noopener">WebArena</a> — agent evaluation matures as its own subfield
+2024  <a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener">"Building Effective Agents"</a> (Anthropic) — workflows-vs-agents design guidance
+2024  <a href="https://arxiv.org/abs/2406.13352" target="_blank" rel="noopener">AgentDojo</a> / indirect prompt injection formalized as a benchmarked attack surface
+2024  <a href="https://arxiv.org/abs/2402.03300" target="_blank" rel="noopener">GRPO / DeepSeekMath</a> — reinforcement learning with verifiable rewards at scale
+2025  <a href="https://arxiv.org/abs/2501.12948" target="_blank" rel="noopener">DeepSeek-R1</a>, <a href="https://openai.com/index/learning-to-reason-with-llms/" target="_blank" rel="noopener">o1</a>/o3-class models — RL-trained reasoning replaces prompted CoT
+2025  Computer-use agents (<a href="https://www.anthropic.com/news/3-5-models-and-computer-use" target="_blank" rel="noopener">Anthropic</a>, <a href="https://openai.com/index/introducing-operator/" target="_blank" rel="noopener">OpenAI Operator</a>) — agents act on real GUIs
+2025  <a href="https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/" target="_blank" rel="noopener">Agent2Agent (A2A) protocol</a> — standardizing agent-to-agent communication
+2025  <a href="https://arxiv.org/abs/2503.18813" target="_blank" rel="noopener">CaMeL</a> / <a href="https://arxiv.org/abs/2506.08837" target="_blank" rel="noopener">"design patterns for securing agents"</a> — injection defenses move from
+      detection to architecture (capability control, information-flow tracking)</pre>
+
+    <div class="concept wide">
+      <h3>How these ideas build on each other</h3>
+      <p>A timeline tells you <em>when</em>; it doesn't tell you <em>what depends on what</em>. The
+        reasoning/planning papers you're pre-reading for this session form a real dependency graph, not
+        a flat list — LATS, for instance, has two parents: it takes ToT's search structure and ReAct's
+        grounded acting and combines them. Click any node to open the paper.</p>
+    </div>
+    <div class="dag-card">
+      <svg viewBox="0 0 660 430" width="100%" role="img" aria-label="Dependency graph of the reasoning and planning papers: Chain-of-Thought branches into ReAct, Tree of Thoughts, and Plan-and-Solve; ReAct and Tree of Thoughts both feed into LATS; Tree of Thoughts also leads to Graph of Thoughts; ReAct leads to Reflexion, which is critiqued by Huang et al.'s self-correction finding; Plan-and-Solve leads to Kambhampati's LLM-Modulo critique. Hover any node for a summary, novelty, and weakness; click to open the paper.">
+        <defs>
+          <marker id="dag-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path>
+          </marker>
+        </defs>
+
+        <path d="M330,64 L130,124" class="dag-edge" marker-end="url(#dag-arrow)"></path>
+        <path d="M330,64 L330,124" class="dag-edge" marker-end="url(#dag-arrow)"></path>
+        <path d="M330,64 L530,124" class="dag-edge" marker-end="url(#dag-arrow)"></path>
+        <path d="M130,178 L90,238" class="dag-edge" marker-end="url(#dag-arrow)"></path>
+        <path d="M130,178 L250,238" class="dag-edge" marker-end="url(#dag-arrow)"></path>
+        <path d="M330,178 L250,238" class="dag-edge" marker-end="url(#dag-arrow)"></path>
+        <path d="M330,178 L410,238" class="dag-edge" marker-end="url(#dag-arrow)"></path>
+        <path d="M530,178 L570,238" class="dag-edge" marker-end="url(#dag-arrow)"></path>
+        <path d="M90,292 L90,352" class="dag-edge critique" marker-end="url(#dag-arrow)"></path>
+
+        <a class="dag-node" href="https://arxiv.org/abs/2201.11903" target="_blank" rel="noopener"
+           data-summary="Prompting the model to write intermediate reasoning steps before its final answer."
+           data-novelty="Shows step-by-step reasoning emerges from prompting alone — no fine-tuning needed."
+           data-weakness="Only helps at sufficient model scale; the written steps aren't guaranteed to reflect the real computation." aria-label="Wei et al. — Chain-of-Thought Prompting (NeurIPS 2022)">
+          <rect x="260" y="10" width="140" height="54" rx="8"></rect>
+          <text x="330" y="34" text-anchor="middle" class="title">CoT</text>
+          <text x="330" y="50" text-anchor="middle" class="sub">Wei 2022</text>
+        </a>
+        <a class="dag-node" href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener"
+           data-summary="Interleaves free-text &quot;thoughts&quot; with tool actions and real observations in one loop."
+           data-novelty="First to ground reasoning in live environment feedback rather than static context."
+           data-weakness="Assumes actions are cheap, fast, and reversible — breaks down for costly or slow actions." aria-label="Yao et al. — ReAct: Synergizing Reasoning and Acting (ICLR 2023)">
+          <rect x="60" y="124" width="140" height="54" rx="8"></rect>
+          <text x="130" y="148" text-anchor="middle" class="title">ReAct</text>
+          <text x="130" y="164" text-anchor="middle" class="sub">Yao 2023</text>
+        </a>
+        <a class="dag-node" href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener"
+           data-summary="Treats reasoning as search over a branching tree of partial solutions, pruned by an evaluator."
+           data-novelty="Backtracking and exploration instead of committing to one linear chain."
+           data-weakness="The evaluator is itself an LLM call — gains may reflect evaluator quality, not search structure." aria-label="Yao et al. — Tree of Thoughts (NeurIPS 2023)">
+          <rect x="260" y="124" width="140" height="54" rx="8"></rect>
+          <text x="330" y="148" text-anchor="middle" class="title">Tree of Thoughts</text>
+          <text x="330" y="164" text-anchor="middle" class="sub">Yao 2023</text>
+        </a>
+        <a class="dag-node" href="https://arxiv.org/abs/2305.04091" target="_blank" rel="noopener"
+           data-summary="Separates an upfront planning call from later execution calls, instead of interleaving them."
+           data-novelty="Lets the plan be reviewed before any execution step is taken."
+           data-weakness="Loses ReAct's ability to adapt the plan mid-way as new information arrives." aria-label="Wang et al. — Plan-and-Solve Prompting (ACL 2023)">
+          <rect x="460" y="124" width="140" height="54" rx="8"></rect>
+          <text x="530" y="148" text-anchor="middle" class="title">Plan-and-Solve</text>
+          <text x="530" y="164" text-anchor="middle" class="sub">Wang 2023</text>
+        </a>
+        <a class="dag-node" href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener"
+           data-summary="After a failed attempt, the agent writes a natural-language reflection and retries with it in context."
+           data-novelty="&quot;Learns&quot; across attempts via memory, with no weight updates at all."
+           data-weakness="Only as good as its evaluator — without external ground truth, self-judged reflection is unreliable." aria-label="Shinn et al. — Reflexion (NeurIPS 2023)">
+          <rect x="20" y="238" width="140" height="54" rx="8"></rect>
+          <text x="90" y="262" text-anchor="middle" class="title">Reflexion</text>
+          <text x="90" y="278" text-anchor="middle" class="sub">Shinn 2023</text>
+        </a>
+        <a class="dag-node" href="https://arxiv.org/abs/2310.04406" target="_blank" rel="noopener"
+           data-summary="Combines Monte Carlo Tree Search with ReAct-style acting, using real observations as feedback."
+           data-novelty="Grounds the tree search in real environment feedback instead of only LLM-judged simulation."
+           data-weakness="The most expensive technique here — many real actions plus many search rollouts per task." aria-label="Zhou et al. — Language Agent Tree Search / LATS (ICML 2024)">
+          <rect x="180" y="238" width="140" height="54" rx="8"></rect>
+          <text x="250" y="262" text-anchor="middle" class="title">LATS</text>
+          <text x="250" y="278" text-anchor="middle" class="sub">Zhou 2024</text>
+        </a>
+        <a class="dag-node" href="https://arxiv.org/abs/2308.09687" target="_blank" rel="noopener"
+           data-summary="Generalizes ToT's tree into an arbitrary graph, allowing merging and refining thoughts."
+           data-novelty="Combines multiple partial solutions instead of only branching and discarding them."
+           data-weakness="Added structure increases prompting/orchestration complexity for often marginal gains over ToT." aria-label="Besta et al. — Graph of Thoughts (AAAI 2024)">
+          <rect x="340" y="238" width="140" height="54" rx="8"></rect>
+          <text x="410" y="262" text-anchor="middle" class="title">Graph of Thoughts</text>
+          <text x="410" y="278" text-anchor="middle" class="sub">Besta 2024</text>
+        </a>
+        <a class="dag-node" href="https://arxiv.org/abs/2402.01817" target="_blank" rel="noopener"
+           data-summary="Argues LLMs alone are unreliable planners and should only propose plans for external verifiers to check."
+           data-novelty="Reframes &quot;LLM planning&quot; as idea-generation feeding a sound external critic, not an autonomous claim."
+           data-weakness="A position paper more than one technique — the exact critic/verifier integration is left open." aria-label="Kambhampati et al. — LLM-Modulo planning frameworks (ICML 2024)">
+          <rect x="500" y="238" width="140" height="54" rx="8"></rect>
+          <text x="570" y="262" text-anchor="middle" class="title">LLM-Modulo</text>
+          <text x="570" y="278" text-anchor="middle" class="sub">Kambhampati 2024</text>
+        </a>
+        <a class="dag-node" href="https://arxiv.org/abs/2310.01798" target="_blank" rel="noopener"
+           data-summary="Tests whether LLMs can improve their own reasoning with no external feedback signal."
+           data-novelty="Systematically shows self-correction without ground truth often fails or even hurts accuracy."
+           data-weakness="Focuses on reasoning benchmarks — the finding may not generalize to every self-critique setting." aria-label="Huang et al. — Large Language Models Cannot Self-Correct Reasoning Yet (ICLR 2024)">
+          <rect x="20" y="352" width="140" height="54" rx="8"></rect>
+          <text x="90" y="376" text-anchor="middle" class="title">Self-Correct?</text>
+          <text x="90" y="392" text-anchor="middle" class="sub">Huang 2024</text>
+        </a>
+      </svg>
+      <div class="dag-legend">
+        <span><span class="swatch"></span>builds on</span>
+        <span><span class="swatch critique"></span>critiques / challenges</span>
+        <span>Hover a node for summary / novelty / weakness · click to open the paper</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="anatomy">
+    <div class="sec-head">
+      <span class="eyebrow">03 · Anatomy of an agent</span>
+      <h2>Four components, one loop</h2>
+    </div>
+    <div class="concept wide">
+      <p>Every system covered this semester — regardless of how it's marketed — can be described with
+        four components and one loop connecting them. This is a compressed version of Sumers et al.'s
+        <strong>CoALA</strong> (Cognitive Architectures for Language Agents, TMLR 2024) framework.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 400 230" width="100%" role="img" aria-label="Diagram: an agent as LLM reasoning connected to memory, tools, and a curved observe/act loop with the environment">
+        <defs>
+          <marker id="al-arrow2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path>
+          </marker>
+        </defs>
+        <line x1="200" y1="58" x2="105" y2="94" class="al-line" marker-end="url(#al-arrow2)" marker-start="url(#al-arrow2)"></line>
+        <line x1="200" y1="58" x2="295" y2="94" class="al-line" marker-end="url(#al-arrow2)" marker-start="url(#al-arrow2)"></line>
+        <path d="M180,58 C120,90 120,144 180,176" class="al-line" fill="none" marker-end="url(#al-arrow2)"></path>
+        <path d="M220,176 C280,144 280,90 220,58" class="al-line" fill="none" marker-end="url(#al-arrow2)"></path>
+        <text x="122" y="121" text-anchor="middle" class="al-label">act</text>
+        <text x="278" y="121" text-anchor="middle" class="al-label">obs.</text>
+        <rect x="140" y="14" width="120" height="44" rx="8" class="al-llm"></rect>
+        <text x="200" y="33" text-anchor="middle" class="al-text">LLM</text>
+        <text x="200" y="48" text-anchor="middle" class="al-label">reason · plan</text>
+        <rect x="10" y="94" width="95" height="42" rx="8" class="al-mem"></rect>
+        <text x="57" y="112" text-anchor="middle" class="al-text">Memory</text>
+        <text x="57" y="126" text-anchor="middle" class="al-label">short/long-term</text>
+        <rect x="295" y="94" width="95" height="42" rx="8" class="al-tool"></rect>
+        <text x="342" y="112" text-anchor="middle" class="al-text">Tools</text>
+        <text x="342" y="126" text-anchor="middle" class="al-label">calls · MCP</text>
+        <rect x="140" y="176" width="120" height="42" rx="8" class="al-env"></rect>
+        <text x="200" y="194" text-anchor="middle" class="al-text">Environment</text>
+        <text x="200" y="208" text-anchor="middle" class="al-label">observe / act loop</text>
+      </svg>
+      <p class="cap">The anatomy of an agent</p>
+    </div>
+    <div class="concept wide">
+      <h3>Memory, made concrete: three real apps</h3>
+      <p>"Memory" in the diagram above is easy to leave abstract. Three examples of what it actually
+        looks like inside a running application — notice each uses a different <em>kind</em> of memory
+        for a different reason:</p>
+      <div class="diagram-card inline">
+        <svg viewBox="0 0 590 170" width="100%" role="img" aria-label="Diagram: a coding assistant writes to working memory, a customer-support agent writes to episodic memory, and a research assistant writes to semantic memory.">
+          <defs>
+            <marker id="mem3-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+          </defs>
+          <path d="M95,60 L95,110" class="arch-line" marker-end="url(#mem3-arrow)"></path>
+          <path d="M305,60 L305,110" class="arch-line" marker-end="url(#mem3-arrow)"></path>
+          <path d="M515,60 L515,110" class="arch-line" marker-end="url(#mem3-arrow)"></path>
+
+          <a class="dag-node" href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener"
+           data-functionality="Writes project conventions to a scratch file, once, so it doesn&#39;t re-derive them every turn."
+           data-intuition="Cheap and session-scoped — nothing here needs to survive past the current context window."
+           data-example="&quot;This codebase uses 4-space indentation and snake_case,&quot; written once." aria-label="Writes project conventions to a scratch file, once, so it doesn't re-derive them every turn."><rect x="10" y="10" width="170" height="50" rx="8"></rect><text x="95" y="30" text-anchor="middle" class="t">Coding assistant</text><text x="95" y="45" text-anchor="middle" class="s">remembers conventions</text></a>
+          <a class="dag-node teal" href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener"
+           data-functionality="Working memory: cheap, session-scoped."
+           data-intuition="What context-window management (Week 3) is designed around — the most temporary kind of memory."
+           data-example="The current conversation turn&#39;s active context." aria-label="Working memory: cheap, session-scoped — what context-window management (Week 2) is designed around."><rect x="10" y="110" width="170" height="50" rx="8"></rect><text x="95" y="130" text-anchor="middle" class="t">Working memory</text><text x="95" y="145" text-anchor="middle" class="s">session-scoped</text></a>
+
+          <a class="dag-node" href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener"
+           data-functionality="Retrieves your ticket history from a database before responding, across sessions."
+           data-intuition="Doesn&#39;t re-read the whole knowledge base, and doesn&#39;t forget you when the session ends."
+           data-example="Your last three support tickets, pulled before the agent replies." aria-label="Retrieves your ticket history from a database before responding, across sessions."><rect x="220" y="10" width="170" height="50" rx="8"></rect><text x="305" y="30" text-anchor="middle" class="t">Customer support</text><text x="305" y="45" text-anchor="middle" class="s">remembers your tickets</text></a>
+          <a class="dag-node accent" href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener"
+           data-functionality="Episodic memory: specific past events, retrieved by relevance."
+           data-intuition="MemGPT and Generative Agents&#39; retrieval scoring (S1-3) both work on exactly this kind of memory."
+           data-example="&quot;Last time, this same question was asked three weeks ago.&quot;" aria-label="Episodic memory: specific past events, retrieved by relevance (MemGPT, Generative Agents — S1-3)."><rect x="220" y="110" width="170" height="50" rx="8"></rect><text x="305" y="130" text-anchor="middle" class="t">Episodic memory</text><text x="305" y="145" text-anchor="middle" class="s">past events, by relevance</text></a>
+
+          <a class="dag-node" href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener"
+           data-functionality="Writes a looked-up fact once and reuses it, instead of re-searching every time it&#39;s needed."
+           data-intuition="Paying the search-and-reasoning cost twice for the same fact is pure waste."
+           data-example="&quot;Who won the 2023 Nobel Prize in Physics&quot; — looked up once, reused." aria-label="Writes a looked-up fact once and reuses it, instead of re-searching every time it's needed."><rect x="430" y="10" width="150" height="50" rx="8"></rect><text x="505" y="30" text-anchor="middle" class="t">Research assistant</text><text x="505" y="45" text-anchor="middle" class="s">remembers facts found</text></a>
+          <a class="dag-node amber" href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener"
+           data-functionality="Semantic memory: general facts abstracted from the conversation that produced them."
+           data-intuition="Distinct from episodic &quot;what happened&quot; memory — closer to what a RAG pipeline fills."
+           data-example="A fact that&#39;s true regardless of which conversation surfaced it." aria-label="Semantic memory: general facts abstracted from the conversation that produced them."><rect x="430" y="110" width="150" height="50" rx="8"></rect><text x="505" y="130" text-anchor="middle" class="t">Semantic memory</text><text x="505" y="145" text-anchor="middle" class="s">facts, not events</text></a>
+        </svg>
+        <div class="cap">Same "memory" box in the diagram above, three different write/retrieval policies.</div>
+      </div>
+      <ul>
+        <li><strong>A coding assistant remembers your project's conventions.</strong> Mid-session,
+          nothing needs to persist beyond the current context window — but across a long refactor, the
+          agent writes "this codebase uses 4-space indentation and snake_case" to a scratch file once,
+          instead of re-deriving it (and risking a different answer) on every turn. This is
+          <em>short-term, working memory</em> — cheap, session-scoped, and the kind context-window
+          management (Lecture 3, taught in Real Week 2) is designed around.</li>
+        <li><strong>A customer-support agent remembers your last three tickets.</strong> When you
+          message again next month, the agent retrieves your ticket history from a database before
+          responding — it does not re-read the entire company knowledge base, and it does not forget you
+          the moment the session ends. This is <em>long-term, episodic memory</em>: specific past events,
+          retrieved by relevance (MemGPT and Generative Agents' retrieval scoring, S1-3).</li>
+        <li><strong>A research assistant remembers a fact it already looked up.</strong> If it searched
+          "who won the 2023 Nobel Prize in Physics" three questions ago, a well-designed agent writes
+          that fact to memory once and reuses it, rather than paying for the same search-and-reasoning
+          cost again. This is <em>semantic memory</em> — general facts abstracted away from the specific
+          conversation that produced them, distinct from the episodic "what happened" memory above.</li>
+      </ul>
+      <p>The common thread: memory is a deliberate <strong>write policy</strong> (what gets saved, and
+        when) plus a <strong>retrieval policy</strong> (what gets pulled back into context, and when) —
+        not just "a bigger context window." Getting either policy wrong is exactly how memory becomes a
+        liability instead of an asset: write the wrong thing and it's stale or misleading later; retrieve
+        the wrong thing and "lost in the middle" (S1-3) means it may not even get used. S1-3 covers the
+        write/retrieval policy design space in depth; S2-4 covers what happens when an attacker controls
+        what gets written.</p>
+    </div>
+    <div class="concept wide">
+      <p>In pseudocode, almost every agent in the literature is a variant of the loop below. What
+        differs between ReAct, Reflexion, Tree-of-Thoughts, and a multi-agent system is <em>what
+        happens inside this loop</em> — not whether the loop exists.</p>
+    </div>
+    <pre class="codeblock"><code class="language-python">def agent_loop(task, tools, memory, max_steps):
+    context = build_initial_context(task, memory)
+    for step in range(max_steps):
+        decision = llm(context)                     # REASONING
+        if decision.is_final_answer:
+            return decision.answer
+        result = execute(decision.action, tools)     # ACTION -> ENVIRONMENT
+        memory.maybe_write(step, decision, result)   # MEMORY
+        context = update_context(context, decision, result)  # next PERCEPTION
+    return fail("max steps exceeded")</code></pre>
+    <div class="tbl-scroll">
+      <table class="tbl">
+        <thead><tr><th>Component / loop property</th><th>Seminar 1 topics</th><th>Seminar 2 topics</th></tr></thead>
+        <tbody>
+          <tr><td>Reasoning (single loop)</td><td>S1-1 Reasoning &amp; Planning · S1-6 Self-improvement &amp; Reflection</td><td>S2-6 RL for Agents (trains this component)</td></tr>
+          <tr><td>Perception / context</td><td>S1-4 Retrieval-Augmented Agents</td><td>S2-7 Computer-use / Embodied (perception is pixels/DOM)</td></tr>
+          <tr><td>Memory</td><td>S1-3 Agent Memory</td><td>S2-4 Advanced Security (memory <em>poisoning</em>)</td></tr>
+          <tr><td>Action / tools</td><td>S1-2 Tool Use &amp; MCP · S1-5 Coding Agents</td><td>S2-3 / S2-4 Security (tools as attack surface)</td></tr>
+          <tr><td>Multiple loops / orchestration</td><td>S1-7 Design Patterns &amp; Orchestration</td><td>S2-1 / S2-2 Multi-Agent Systems &amp; Communication</td></tr>
+          <tr><td>Evaluating the whole loop</td><td>S1-8 Evaluation &amp; Benchmarking</td><td>S2-5 Safety &amp; Alignment · S2-8 Production &amp; Governance</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block" id="simulator">
+    <div class="sec-head">
+      <span class="eyebrow">03b · Try it yourself</span>
+      <h2>Agent loop simulator</h2>
+    </div>
+    <div class="concept wide">
+      <p>Three scripted (non-LLM, zero-cost) walkthroughs of the same question, so the difference
+        between "the model just answers" and "the model reasons, acts, and — if needed — reflects and
+        retries" is something you watch happen, not something you take on faith. Pick a scenario, then
+        <strong>Step</strong> through it or hit <strong>Play</strong>. Watch which box in the diagram
+        lights up at each move.</p>
+    </div>
+    <div class="sim" data-agent-sim>
+      <div class="sim-diagram">
+        <svg viewBox="0 0 400 230" width="100%" role="img" aria-label="Agent anatomy diagram used by the simulator — LLM, Memory, Tools, and Environment boxes light up as the scenario plays.">
+          <defs>
+            <marker id="al-arrow3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path>
+            </marker>
+          </defs>
+          <line x1="200" y1="58" x2="105" y2="94" class="al-line" marker-end="url(#al-arrow3)" marker-start="url(#al-arrow3)"></line>
+          <line x1="200" y1="58" x2="295" y2="94" class="al-line" marker-end="url(#al-arrow3)" marker-start="url(#al-arrow3)"></line>
+          <path d="M180,58 C120,90 120,144 180,176" class="al-line" fill="none" marker-end="url(#al-arrow3)"></path>
+          <path d="M220,176 C280,144 280,90 220,58" class="al-line" fill="none" marker-end="url(#al-arrow3)"></path>
+          <text x="122" y="121" text-anchor="middle" class="al-label">act</text>
+          <text x="278" y="121" text-anchor="middle" class="al-label">obs.</text>
+          <rect x="140" y="14" width="120" height="44" rx="8" class="al-llm"></rect>
+          <text x="200" y="33" text-anchor="middle" class="al-text">LLM</text>
+          <text x="200" y="48" text-anchor="middle" class="al-label">reason · plan</text>
+          <rect x="10" y="94" width="95" height="42" rx="8" class="al-mem"></rect>
+          <text x="57" y="112" text-anchor="middle" class="al-text">Memory</text>
+          <text x="57" y="126" text-anchor="middle" class="al-label">short/long-term</text>
+          <rect x="295" y="94" width="95" height="42" rx="8" class="al-tool"></rect>
+          <text x="342" y="112" text-anchor="middle" class="al-text">Tools</text>
+          <text x="342" y="126" text-anchor="middle" class="al-label">calls · MCP</text>
+          <rect x="140" y="176" width="120" height="42" rx="8" class="al-env"></rect>
+          <text x="200" y="194" text-anchor="middle" class="al-text">Environment</text>
+          <text x="200" y="208" text-anchor="middle" class="al-label">observe / act loop</text>
+        </svg>
+        <div class="sim-controls">
+          <select class="sim-task-select" aria-label="Task">
+            <option value="oscars" selected>Oscars director (fact lookup)</option>
+            <option value="ceo">Current CEO (staleness risk)</option>
+            <option value="train">Train arrival (arithmetic)</option>
+          </select>
+          <select class="sim-select" aria-label="Scenario">
+            <option value="no-tools">No tools — parametric guess</option>
+            <option value="react" selected>ReAct — reason + act</option>
+            <option value="reflexion">ReAct + reflection — retry after failure</option>
+          </select>
+          <div class="sim-btnrow">
+            <button class="btn ghost sim-step" type="button">Step →</button>
+            <button class="btn primary sim-play" type="button">▶ Play</button>
+            <button class="btn ghost sim-reset" type="button">↺ Reset</button>
+          </div>
+        </div>
+        <div class="sim-stats">
+          <span>Step <strong class="sim-stat-step">0 / 0</strong></span>
+          <span>LLM calls <strong class="sim-stat-llm">0</strong></span>
+          <span>Tool calls <strong class="sim-stat-tool">0</strong></span>
+        </div>
+        <div class="sim-task"><strong>Task:</strong> <span>Who directed the film that won Best Picture at the 2023 Oscars?</span></div>
+      </div>
+      <div>
+        <p class="sim-blurb subtle-note"></p>
+        <div class="trace sim-log" aria-live="polite"></div>
+        <div class="sim-final"></div>
+        <div class="sim-memory" hidden>
+          <h4>Memory</h4>
+          <ul></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="method">
+    <div class="sec-head">
+      <span class="eyebrow">04 · How to read, present, and critique a paper</span>
+      <h2>Three passes, five parts, six critique lenses</h2>
+    </div>
+
+    <div class="concept">
+      <h3>The three-pass method</h3>
+      <div class="diagram-card inline">
+        <svg viewBox="0 0 690 100" width="100%" role="img" aria-label="Diagram: three widening passes over a paper — Pass 1 skims in 5 to 10 minutes, Pass 2 reads in 30 to 60 minutes, Pass 3 reconstructs the method for core papers only.">
+          <defs>
+            <marker id="pass-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+          </defs>
+          <path d="M150,45 L180,45" class="arch-line" marker-end="url(#pass-arrow)"></path>
+          <path d="M380,45 L410,45" class="arch-line" marker-end="url(#pass-arrow)"></path>
+
+          <a class="dag-node" href="http://ccr.sigcomm.org/online/files/p83-keshavA.pdf" target="_blank" rel="noopener"
+           data-functionality="Title, abstract, headings, figures, conclusion."
+           data-intuition="After this you should be able to state the problem and the one-sentence contribution — nothing more."
+           data-example="5-10 minutes, skimming only." aria-label="Title, abstract, headings, figures, conclusion. After this you should be able to state the problem and the one-sentence contribution."><rect x="10" y="10" width="140" height="70" rx="8"></rect><text x="80" y="40" text-anchor="middle" class="t">Pass 1</text><text x="80" y="55" text-anchor="middle" class="s">5–10 min · skim</text></a>
+          <a class="dag-node teal" href="http://ccr.sigcomm.org/online/files/p83-keshavA.pdf" target="_blank" rel="noopener"
+           data-functionality="Read in order, skip proofs/derivations, treat figures as primary evidence."
+           data-intuition="Sketch the method from memory afterward — if you can&#39;t, you&#39;ve understood the marketing, not the mechanism."
+           data-example="30-60 minutes, for any paper you&#39;re actually citing." aria-label="Read in order, skip proofs/derivations, treat figures as primary evidence. Sketch the method from memory afterward — if you can't, you've understood the marketing, not the mechanism."><rect x="180" y="10" width="200" height="70" rx="8"></rect><text x="280" y="40" text-anchor="middle" class="t">Pass 2</text><text x="280" y="55" text-anchor="middle" class="s">30–60 min · read in order</text></a>
+          <a class="dag-node accent" href="http://ccr.sigcomm.org/online/files/p83-keshavA.pdf" target="_blank" rel="noopener"
+           data-functionality="Reconstruct the method, or run the released code."
+           data-intuition="This is where you find the gap between what a paper says and what it actually does."
+           data-example="Required for your own topic&#39;s core papers, not every paper you read." aria-label="Reconstruct the method, or run the released code. This is where you find the gap between what a paper says and what it does. Required for your topic's core papers."><rect x="410" y="10" width="270" height="70" rx="8"></rect><text x="545" y="40" text-anchor="middle" class="t">Pass 3</text><text x="545" y="55" text-anchor="middle" class="s">core papers only · reconstruct</text></a>
+        </svg>
+        <div class="cap">Each pass costs more time and reaches deeper — most papers only need Pass 1 or 2.</div>
+      </div>
+      <p><strong>Pass 1 (5–10 min)</strong> — title, abstract, headings, figures, conclusion. After
+        this you should be able to state the problem and the one-sentence contribution.</p>
+      <p><strong>Pass 2 (30–60 min)</strong> — read in order, skip proofs/derivations, treat figures as
+        primary evidence. Note the baseline, the metric, and what experimental knobs are varied. Sketch
+        the method from memory afterward — if you can't, you've understood the marketing, not the
+        mechanism.</p>
+      <p><strong>Pass 3 (core papers only)</strong> — reconstruct the method, or run the released code.
+        This is where you find the gap between what a paper says and what it does.</p>
+    </div>
+
+    <div class="concept wide">
+      <h3>Presentation structure (every seminar talk, no exceptions)</h3>
+      <ol>
+        <li><strong>Context &amp; problem</strong> — why this matters, what question the papers answer.</li>
+        <li><strong>Survey of main approaches</strong> — the mechanism, not just the name.</li>
+        <li><strong>Critical analysis</strong> — 25% of your seminar grade; see below.</li>
+        <li><strong>Demo / example</strong> — a worked trace or live demo makes an abstract claim checkable.</li>
+        <li><strong>Relation to projects &amp; open directions</strong> — a specific, falsifiable open question.</li>
+      </ol>
+    </div>
+
+    <div class="concept wide">
+      <h3>What counts as critical analysis, versus summary</h3>
+      <p>A summary answers "what does the paper say?" Analysis answers one of these instead:</p>
+      <ul>
+        <li><strong>Assumptions</strong> — what must be true about the environment/task/model that isn't stated as a limitation?</li>
+        <li><strong>Baseline validity</strong> — is the comparison fair at matched compute/cost?</li>
+        <li><strong>Metric validity</strong> — does the reported number measure the actual claim?</li>
+        <li><strong>Generalization</strong> — would this hold on a different model family or a harder task?</li>
+        <li><strong>Reproducibility &amp; contamination</strong> — seeds/variance reported? Is the test data plausibly in the training set?</li>
+        <li><strong>Comparison across papers</strong> — do two papers in the same topic sheet implicitly conflict?</li>
+      </ul>
+      <div class="note tip">
+        <span class="note-tag">A habit worth keeping</span>
+        For every core paper, write one sentence starting with "This paper's result would not hold
+        if…" — that sentence is usually most of a critical-analysis slide.
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="example">
+    <div class="sec-head">
+      <span class="eyebrow">05 · Worked example</span>
+      <h2>A live critique of ReAct, modeled for you</h2>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 470 90" width="100%" role="img" aria-label="Four critique lenses applied below: assumption check, baseline check, generalization check, and where does the gain come from.">
+        <a class="dag-node amber" href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener"
+           data-functionality="Actions are assumed cheap and fast — the paper doesn&#39;t test costly or slow actions."
+           data-intuition="Name this as an open assumption, not a settled result, whenever a paper&#39;s action space is unstated."
+           data-example="A paid transaction or a multi-minute simulation would break this assumption." aria-label="Actions are assumed cheap and fast. The paper doesn't test costly or slow actions — name it as an open assumption."><rect x="10" y="10" width="105" height="60" rx="8"></rect><text x="62" y="35" text-anchor="middle" class="t">Assumption</text><text x="62" y="50" text-anchor="middle" class="s">check</text></a>
+        <a class="dag-node amber" href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener"
+           data-functionality="Compared against CoT-only and Act-only at matched few-shot exemplars."
+           data-intuition="Fair on those terms, but not against a retrieve-then-answer pipeline at matched token budget."
+           data-example="A baseline that costs the same but was never actually tried." aria-label="Compared against CoT-only and Act-only at matched few-shot exemplars — fair, but not against a retrieve-then-answer pipeline at matched token budget."><rect x="125" y="10" width="105" height="60" rx="8"></rect><text x="177" y="35" text-anchor="middle" class="t">Baseline</text><text x="177" y="50" text-anchor="middle" class="s">check</text></a>
+        <a class="dag-node amber" href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener"
+           data-functionality="Results are on benchmarks with action spaces designed for those benchmarks."
+           data-intuition="Whether this still helps with today&#39;s much stronger base models is untested."
+           data-example="HotpotQA, FEVER, ALFWorld, WebShop — all from 2022." aria-label="Results are on benchmarks with action spaces designed for those benchmarks. Whether this still helps with today's stronger models is untested."><rect x="240" y="10" width="105" height="60" rx="8"></rect><text x="292" y="35" text-anchor="middle" class="t">General.</text><text x="292" y="50" text-anchor="middle" class="s">check</text></a>
+        <a class="dag-node amber" href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener"
+           data-functionality="The paper&#39;s own ablations show acting-only and reasoning-only both underperform the combination."
+           data-intuition="A genuine structural claim, not just a compute-budget artifact — demand this same ablation everywhere."
+           data-example="Removing either half of ReAct measurably hurts results." aria-label="The paper's own ablations show acting-only and reasoning-only both underperform the combination — a genuine structural claim, not a compute-budget artifact."><rect x="355" y="10" width="105" height="60" rx="8"></rect><text x="407" y="35" text-anchor="middle" class="t">Where's the</text><text x="407" y="50" text-anchor="middle" class="s">gain from?</text></a>
+      </svg>
+      <div class="cap">The four lenses applied below — hover each for the one-line version, full analysis in the cards.</div>
+    </div>
+    <div class="example">
+      <div class="example-bar">
+        <span class="example-tag">Worked example</span>
+        <span class="example-title">Yao et al. — ReAct: Synergizing Reasoning and Acting in Language Models (ICLR 2023)</span>
+      </div>
+      <div class="example-body">
+        <p><strong>Claim.</strong> Interleaving reasoning traces ("thoughts") with actions and
+          observations improves task success over reasoning-only (CoT) or acting-only baselines on
+          knowledge-intensive QA and interactive decision-making tasks.</p>
+        <p><strong>Mechanism, reconstructed.</strong> At each step the model generates a
+          <code>Thought</code> (free text), then an <code>Action</code> (a tool call from a fixed set),
+          receives an <code>Observation</code> (the tool's result appended to context), and repeats.
+          The thought is never executed — it exists only to condition the next action on an explicit
+          intermediate reasoning step:</p>
+        <div class="trace">
+          <span class="trace-line"><span class="trace-role thought">Thought 1</span>I need to find out who directed the film that won Best Picture in 2023.</span>
+          <span class="trace-line"><span class="trace-role action">Action 1</span>Search["2023 Best Picture Oscar winner"]</span>
+          <span class="trace-line"><span class="trace-role obs">Observation 1</span>"Everything Everywhere All at Once" won Best Picture at the 95th Academy Awards.</span>
+          <span class="trace-line"><span class="trace-role thought">Thought 2</span>Now I need to find the director(s) of that film.</span>
+          <span class="trace-line"><span class="trace-role action">Action 2</span>Search["Everything Everywhere All at Once director"]</span>
+          <span class="trace-line"><span class="trace-role obs">Observation 2</span>Directed by Daniel Kwan and Daniel Scheinert.</span>
+          <span class="trace-line"><span class="trace-role thought">Thought 3</span>I have the answer.</span>
+          <span class="trace-line"><span class="trace-role action">Action 3</span>Finish["Daniel Kwan and Daniel Scheinert"]</span>
+        </div>
+        <p>This is precisely the control loop from §3 above, with <code>decision</code> split into an
+          explicit <code>Thought</code> (why) and <code>Action</code> (what) pair.</p>
+        <div class="critique-grid">
+          <div class="critique-item">
+            <h4>Assumption check</h4>
+            <p>Actions are assumed cheap and fast (a search API call). What happens if actions are
+              expensive (a paid transaction) or slow (a multi-minute simulation)? The paper doesn't
+              test this — name it as an open assumption, not a settled result.</p>
+          </div>
+          <div class="critique-item">
+            <h4>Baseline check</h4>
+            <p>Compared against CoT-only and Act-only at roughly matched few-shot exemplars — fair —
+              but not against a "retrieve-then-answer" pipeline at matched <em>token budget</em>, which
+              later work suggests can be competitive on some of the same benchmarks.</p>
+          </div>
+          <div class="critique-item">
+            <h4>Generalization check</h4>
+            <p>Results are reported on benchmarks (HotpotQA, FEVER, ALFWorld, WebShop) with action
+              spaces designed for those benchmarks. Whether interleaving still helps with today's much
+              stronger base models — which already reason step-by-step unprompted — is untested.</p>
+          </div>
+          <div class="critique-item">
+            <h4>Where does the gain come from?</h4>
+            <p>The paper's own ablations show acting-only and reasoning-only both underperform the
+              combination — a genuine structural claim, not just a compute-budget artifact. Demand this
+              same ablation for every technique this semester.</p>
+          </div>
+          <div class="critique-item verdict">
+            <h4>Verdict for this semester</h4>
+            <p>ReAct is the ancestor of nearly every agent framework in S1-2 and S1-7 — the
+              <code>Thought → Action → Observation</code> loop is what most agent SDKs, and your own
+              project's control loop, will implement. Treat its specific empirical numbers as dated and
+              its action-cost assumption as the thing to <em>test</em>, not accept, in your own systems.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="discussion">
+    <div class="sec-head">
+      <span class="eyebrow">06 · Discussion questions</span>
+      <h2>For this session</h2>
+    </div>
+    <div class="concept wide">
+      <ol>
+        <li>Pick a system you've used that is marketed as "an AI agent." Where does it sit on the
+          autonomy spectrum, and what evidence would move it up or down a level?</li>
+        <li>Name one technique from the reading list that touches three or more anatomy components
+          simultaneously, versus one that touches only one.</li>
+        <li>The timeline argues the field moved prompting → tooling → training/architecture. What
+          evidence would argue the phases were concurrent research communities, not sequential?</li>
+        <li>Rewrite one sentence from any paper's abstract in your assigned topic as a falsifiable,
+          scoped claim, then identify what experiment does or doesn't support that scoped claim.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="takeaway">
+    <div class="sec-head">
+      <span class="eyebrow">Takeaway</span>
+      <h2>If you remember nothing else from today</h2>
+    </div>
+    <div class="note tip">
+      An agent is defined by a <strong>loop</strong>, not a capability level — perceive, decide, act,
+      observe, repeat. Every technique this semester (ReAct, Reflexion, multi-agent systems, RL-trained
+      reasoning) is a variant of the same four-component anatomy: what differs is <em>what happens
+      inside the loop</em>, not whether the loop exists. And critique beats summary: a paper's claim is
+      only as strong as its weakest untested assumption — "this paper's result would not hold if…" is
+      the sentence to keep asking, starting with your own project's design.
+    </div>
+  </section>
+
+  <section class="block" id="quiz">
+    <div class="sec-head">
+      <span class="eyebrow">Self-check</span>
+      <h2>Quiz — 4 questions, then a code exercise</h2>
+    </div>
+    <div class="concept wide">
+      <p>Not graded — a two-minute check that today's ideas actually landed before you move on.</p>
+    </div>
+    <div class="quiz-block">
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question">1. What is the defining property of an "agent," by this course's working definition?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">It uses a large language model to generate text</button>
+          <button class="quiz-opt" type="button">It can call external tools like search or code</button>
+          <button class="quiz-opt" type="button">Its output determines the next action in a loop</button>
+          <button class="quiz-opt" type="button">It operates without any human supervision at all</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The defining property is the loop — perceive, decide, act, observe, repeat — not any particular capability or tool.">​</p>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">2. In CoALA's four-component anatomy, which component decides what to do next?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Memory, which stores facts from earlier sessions</button>
+          <button class="quiz-opt" type="button">Reasoning, which processes context and picks an action</button>
+          <button class="quiz-opt" type="button">Tools, which execute calls to external systems</button>
+          <button class="quiz-opt" type="button">Environment, which returns results after each step</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Reasoning is the component that reads memory and context and selects the next action — memory, tools, and environment all just supply or receive information around it."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">3. Level 2 ("Workflow") differs from Level 3 ("Agent") on the autonomy spectrum mainly because:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Workflows use larger models than agents typically do</button>
+          <button class="quiz-opt" type="button">The execution path is hand-designed, not model-chosen</button>
+          <button class="quiz-opt" type="button">Workflows cannot call tools or reach the internet</button>
+          <button class="quiz-opt" type="button">Agents always need more compute than workflows do</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="A workflow's path is authored by a developer at design time; an agent's path is chosen by the model at run time — that's the real threshold, not scale or tool access."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">4. The worked ReAct critique (§5) argues the paper leaves which assumption largely untested?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">That actions taken by the agent are cheap and reversible</button>
+          <button class="quiz-opt" type="button">That language models reliably output valid JSON syntax</button>
+          <button class="quiz-opt" type="button">That larger models always outperform smaller models</button>
+          <button class="quiz-opt" type="button">That human evaluators agree consistently on correctness</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="ReAct's benchmarks (search, text games) all have cheap, fast, reversible actions — the paper never tests what happens when an action is expensive, slow, or irreversible."></p>
+      </div>
+    </div>
+
+    <div class="code-exercise">
+      <p><strong>Code exercise.</strong> The function below is supposed to implement the agent loop from
+        §03 — reasoning, action, memory, next perception — but one line is missing. Which CoALA
+        component's step got left out, and where does it belong?</p>
+      <pre class="codeblock"><code class="language-python">def agent_loop(task, tools, memory, max_steps):
+    context = build_initial_context(task, memory)
+    for step in range(max_steps):
+        decision = llm(context)                     # REASONING
+        if decision.is_final_answer:
+            return decision.answer
+        result = execute(decision.action, tools)     # ACTION -> ENVIRONMENT
+        # TODO: one line missing here
+        context = update_context(context, decision, result)  # next PERCEPTION
+    return fail("max steps exceeded")</code></pre>
+      <details>
+        <summary>Show solution</summary>
+        <p>The missing line is the <strong>memory</strong> write step — without it, nothing the agent
+          learns this turn (a tool result, a failed attempt) ever persists to influence a later step,
+          which is exactly the gap Reflexion (Week 2) and MemGPT (S1-3) are built to close.</p>
+        <pre class="codeblock"><code class="language-python">        result = execute(decision.action, tools)     # ACTION -> ENVIRONMENT
+        memory.maybe_write(step, decision, result)   # MEMORY
+        context = update_context(context, decision, result)  # next PERCEPTION</code></pre>
+      </details>
+    </div>
+  </section>
+
+  <section class="block" id="reading">
+    <div class="sec-head">
+      <span class="eyebrow">Further reading</span>
+      <h2>Before Week 2</h2>
+    </div>
+    <div class="concept wide">
+      <ul class="reading wide">
+        <li>Sumers, Yao, Narasimhan, Griffiths — <a href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener"><em>Cognitive Architectures for Language Agents</em></a> (TMLR 2024) — the CoALA framework in §3.</li>
+        <li>Wang et al. — <a href="https://arxiv.org/abs/2308.11432" target="_blank" rel="noopener"><em>A Survey on Large Language Model based Autonomous Agents</em></a> (Frontiers of Computer Science 2024).</li>
+        <li>Kapoor et al. — <a href="https://arxiv.org/abs/2407.01502" target="_blank" rel="noopener"><em>AI Agents That Matter</em></a> (arXiv 2024 / TMLR 2025) — previews the critique concerns in §4.</li>
+        <li>Yao et al. — <a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener"><em>ReAct: Synergizing Reasoning and Acting in Language Models</em></a> (ICLR 2023) — the paper critiqued in §5.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="../index.html"><span class="dir">← Back</span>Course overview</a>
+    <a href="week-02.html" class="next"><span class="dir">Next →</span>Reasoning &amp; Planning</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="../assets/course.js"></script>
+<script src="../assets/agent-sim.js"></script>
+<script src="../assets/dag.js"></script>
+<script src="../assets/quiz.js"></script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Reflexion</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../../index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../../index.html">Overview</a>
+      <a href="../week-01.html">Lectures</a>
+      <a href="../../seminars.html">Seminars</a>
+      <a href="../../project.html">Project</a>
+      <a href="../../resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="../../index.html">Overview</a>
+    <a href="../../seminars.html">Seminars</a>
+    <a href="../../project.html">Project</a>
+    <a href="../../resources.html">Resources</a>
+  </nav>
+  <h4>Lectures</h4>
+  <nav aria-label="Lectures">
+    <a href="../week-01.html"><span class="ch-num">01</span>Introduction &amp; Methodology</a>
+    <a href="../week-02.html" aria-current="page"><span class="ch-num">02</span>Reasoning &amp; Planning</a>
+    <a href="../week-03.html"><span class="ch-num">03</span>Tools, MCP &amp; Evaluation</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#plain">In plain terms</a>
+    <a href="#mechanism">How it works</a>
+    <a href="#example">Worked example</a>
+    <a href="#talk">For your talk &amp; project</a>
+    <a href="#reading">Further reading</a>
+  </nav>
+  <h4>Also from Week 2</h4>
+  <nav aria-label="Other guides this week">
+    <a href="chain-of-thought.html">Chain-of-Thought</a>
+    <a href="tree-of-thoughts.html">Tree of Thoughts</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Paper Guide · Week 2 &mdash; Reasoning & Planning</span>
+      <h1>Reflexion: Language Agents with Verbal Reinforcement Learning</h1>
+      <p class="lede">How an agent gets better across attempts without ever updating a single weight — by writing itself a note about what went wrong and reading it back on the next try.</p>
+      <div class="meta-chips">
+        <a class="chip" href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener"><strong>Read the paper ↗</strong></a>
+        <span class="chip">Shinn, Cassano, Berman, Gopinath, Narasimhan &amp; Yao · NeurIPS 2023</span>
+        <a class="chip" href="../week-02.html">← Back to Reasoning & Planning</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="plain">
+    <div class="sec-head">
+      <span class="eyebrow">01 · In plain terms</span>
+      <h2>Reinforcement learning, but the “reward signal” is a sentence in English</h2>
+    </div>
+    <div class="concept wide">
+      <p>Classic reinforcement learning improves an agent by adjusting its weights based on a numeric
+        reward. Reflexion keeps the model completely frozen and instead gives it a different kind of
+        memory: after a failed attempt, a second pass over the trace produces a short natural-language
+        <em>reflection</em> — "I made an off-by-one error indexing the array; next time check the
+        boundary condition explicitly" — which is stored and prepended to the prompt on the next
+        attempt. The model's behavior changes not because its parameters moved, but because its input
+        now contains an explicit lesson from its own last failure. This is CoALA's episodic memory,
+        made into the entire mechanism of a whole paper.</p>
+    </div>
+  </section>
+
+  <section class="block" id="mechanism">
+    <div class="sec-head">
+      <span class="eyebrow">02 · How it works</span>
+      <h2>Actor, Evaluator, Self-Reflection — three roles, one loop across trials</h2>
+    </div>
+    <div class="concept wide">
+      <p>Reflexion runs three components in a cycle across multiple <em>episodes</em> (attempts at the
+        same task): the <strong>Actor</strong> (the policy — usually a ReAct-style agent) acts in the
+        environment; the <strong>Evaluator</strong> scores the resulting trajectory (a test suite for
+        code, a heuristic or model judge for other tasks); if the score indicates failure, the
+        <strong>Self-Reflection</strong> component generates a verbal summary of what went wrong, which
+        is written into episodic memory. On the next episode, the Actor's prompt includes the
+        accumulated reflections from all prior failed attempts on this task, and tries again. Crucially,
+        this requires <em>some</em> external feedback signal (did the code pass the tests? did the
+        action succeed?) — Reflexion needs to know it failed before it can reflect on why, which is a
+        real limitation the paper is candid about and the next guide (Huang et al.) probes further.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 460 260" width="100%" role="img" aria-label="Cycle diagram: the Actor acts in the Environment, the Evaluator scores the result, Self-Reflection writes a verbal lesson to episodic memory, and that memory informs the Actor's next attempt.">
+        <defs>
+          <marker id="refl-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+        </defs>
+        <path d="M290,35 L395,95" class="arch-line" marker-end="url(#refl-arrow)"></path>
+        <path d="M395,145 L290,205" class="arch-line" marker-end="url(#refl-arrow)"></path>
+        <path d="M170,205 L80,145" class="arch-line" marker-end="url(#refl-arrow)"></path>
+        <path d="M80,95 L170,35" class="arch-line" marker-end="url(#refl-arrow)"></path>
+        <text x="105" y="60" text-anchor="middle" class="arch-label">episodic memory</text>
+
+        <a class="dag-node accent" href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener"
+           data-functionality="A ReAct-style policy that acts in the environment, attempting the task."
+           data-intuition="This is the part of Reflexion that&#39;s identical to plain ReAct — nothing new happens here."
+           data-example="Generates a Thought → Action → Observation trace, same as the ReAct guide." aria-label="Actor: a ReAct-style policy that acts in the environment"><rect x="170" y="10" width="120" height="50" rx="8"></rect><text x="230" y="32" text-anchor="middle" class="t">Actor</text><text x="230" y="47" text-anchor="middle" class="s">acts</text></a>
+        <a class="dag-node dashed" href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener"
+           data-functionality="Executes the Actor&#39;s actions and produces the trajectory the Evaluator will score."
+           data-intuition="A sandbox, a test suite, or a real API — whatever the Actor&#39;s actions actually run against."
+           data-example="A Python test suite the Actor&#39;s generated code is checked against." aria-label="Environment: executes the Actor's actions"><rect x="340" y="95" width="110" height="50" rx="8"></rect><text x="395" y="117" text-anchor="middle" class="t">Environment</text><text x="395" y="132" text-anchor="middle" class="s">sandbox, tests</text></a>
+        <a class="dag-node amber" href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener"
+           data-functionality="Scores the completed trajectory: did the attempt succeed or fail?"
+           data-intuition="Reflexion needs SOME external signal here — without it, there&#39;s nothing to reflect on."
+           data-example="Did the generated code pass the unit tests? Yes or no." aria-label="Evaluator: scores the trajectory — did it succeed?"><rect x="170" y="180" width="120" height="50" rx="8"></rect><text x="230" y="202" text-anchor="middle" class="t">Evaluator</text><text x="230" y="217" text-anchor="middle" class="s">pass/fail</text></a>
+        <a class="dag-node teal" href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener"
+           data-functionality="Writes a natural-language lesson from a failed attempt into episodic memory."
+           data-intuition="No weights change here — the &quot;learning&quot; is entirely this note, read back in on the next trial."
+           data-example="&quot;My solution didn&#39;t normalize the string first — strip and lowercase before comparing next time.&quot;" aria-label="Self-Reflection: writes a verbal lesson from the failure to episodic memory"><rect x="10" y="95" width="140" height="50" rx="8"></rect><text x="80" y="117" text-anchor="middle" class="t">Self-Reflection</text><text x="80" y="132" text-anchor="middle" class="s">writes a lesson</text></a>
+      </svg>
+      <div class="cap">Reflexion's multi-episode loop — no weights change, only what's in the prompt. Shinn et al., NeurIPS 2023.</div>
+    </div>
+    <div class="note tip"><span class="note-tag">Key result</span> On the HumanEval coding benchmark, Reflexion reached <strong>91% pass@1</strong>, versus <strong>80%</strong> for the GPT-4 baseline it built on — a gain from re-attempts and verbal self-correction alone, no fine-tuning.</div>
+  </section>
+
+  <section class="block" id="example">
+    <div class="example">
+      <div class="example-bar"><span class="example-tag">Worked example</span><span class="example-title">Two episodes on the same coding task</span></div>
+      <div class="example-body">
+        <div class="trace">
+          <span class="trace-line"><span class="trace-role thought">Episode 1</span>Actor writes <code>def is_palindrome(s): return s == s[::-1]</code></span>
+          <span class="trace-line"><span class="trace-role obs">Evaluator</span>Test fails on input "A man, a plan, a canal: Panama" — punctuation and case aren't handled.</span>
+          <span class="trace-line"><span class="trace-role mem">Self-Reflection</span>"My solution didn't normalize the string first. Next time, strip non-alphanumeric characters and lowercase before comparing."</span>
+          <span class="trace-line"><span class="trace-role thought">Episode 2</span>Actor (prompt now includes the reflection above) writes a version that filters and lowercases first, then compares. Tests pass.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="talk">
+    <div class="sec-head">
+      <span class="eyebrow">04 · For your talk &amp; project</span>
+      <h2>What this buys you</h2>
+    </div>
+    <div class="concept wide">
+      <ul>
+        <li>If you present <strong>S1-1</strong> or <strong>S1-6 Self-improvement &amp; Reflection</strong>:
+          the critical question the "must explain" checklist points at directly applies here — Huang et
+          al. (2024) later showed self-correction <em>without external feedback</em> often fails or
+          hurts accuracy, which is exactly Reflexion's Evaluator dependency. Contrast the two papers
+          explicitly.</li>
+        <li>For your <strong>project's evaluation design (R5)</strong>: if your agent retries or
+          self-corrects, Reflexion is the citation for the mechanism — but be ready to say what your
+          Evaluator's feedback signal actually is, since that's the part that makes or breaks it.</li>
+        <li>A sharp Q&amp;A question for any "self-improving agent" talk: "what happens to this
+          technique on a task with no cheap, reliable pass/fail signal?"</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="reading">
+    <div class="sec-head">
+      <span class="eyebrow">05 · Further reading</span>
+      <h2>Where to go next</h2>
+    </div>
+    <div class="concept wide">
+      <ul class="reading wide">
+          <li><a href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener">Shinn et al. — Reflexion: Language Agents with Verbal Reinforcement Learning (full paper)</a></li>
+          <li><a href="https://arxiv.org/abs/2310.01798" target="_blank" rel="noopener">Huang et al. — Large Language Models Cannot Self-Correct Reasoning Yet (the key counterpoint)</a></li>
+          <li><a href="https://arxiv.org/abs/2305.20050" target="_blank" rel="noopener">Lightman et al. — Let's Verify Step by Step: process supervision as a stronger feedback signal</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="../week-02.html"><span class="dir">← Back</span>Reasoning & Planning</a>
+    <a href="tree-of-thoughts.html" class="next"><span class="dir">Next guide →</span>Tree of Thoughts</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="../../assets/course.js"></script>
+<script src="../../assets/dag.js"></script>
+</body>
+</html>
