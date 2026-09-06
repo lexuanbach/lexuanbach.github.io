@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CO5151 Project</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="index.html">Overview</a>
+      <a href="lectures/week-01.html">Lectures</a>
+      <a href="seminars.html">Seminars</a>
+      <a href="project.html" aria-current="page">Project</a>
+      <a href="resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="index.html">Overview</a>
+    <a href="lectures/week-01.html">Lectures</a>
+    <a href="seminars.html">Seminars</a>
+    <a href="project.html" aria-current="page">Project</a>
+    <a href="resources.html">Resources</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#requirements">Requirements</a>
+    <a href="#milestones">Milestones</a>
+    <a href="#rubric">Rubric</a>
+    <a href="#themes">Suggested themes</a>
+    <a href="#templates">Templates</a>
+    <a href="#compute">Compute &amp; API policy</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Group Project · CO5151 · 50% of the final grade</span>
+      <h1>Design, build, and evaluate one agentic AI system</h1>
+      <p class="lede">Each group of 3–4 designs, implements, and evaluates a complete agentic AI system
+        for a real problem — proposed in Week 2, checkpointed in Week 7, and defended across two rounds
+        in Weeks 12–13. The topic itself must be novel, non-trivial, meaningful, and feasible in ~10
+        weeks; the system must apply at least three of the advanced axes covered in the seminars, and
+        both a quantitative evaluation and a security analysis are mandatory.</p>
+      <div class="meta-chips">
+        <a class="chip" href="#requirements">Topic-quality gate</a>
+        <a class="chip" href="#requirements">9 requirements</a>
+        <a class="chip" href="#milestones">4 deliverables</a>
+        <a class="chip" href="#rubric">Rubric</a>
+        <a class="chip" href="#themes">10 suggested themes</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="requirements">
+    <div class="sec-head foldable">
+      <span class="eyebrow">01 · Minimum technical requirements</span>
+      <h2>What every system must have</h2>
+    </div>
+    <div class="fold-body">
+      <h3 class="subhead">Topic-quality gate — checked at D1, before R1–R9 apply</h3>
+      <p class="subtle-note">R1–R9 below specify what the <em>system</em> must contain. These four
+        criteria gate what <em>topic</em> is acceptable in the first place — a proposal that satisfies
+        every R below on paper but fails one of these still comes back "changes required."</p>
+      <div class="gate-grid">
+        <div class="gate-item"><span class="gn">Novel</span><h4>Not a reproduction</h4><p>Not a direct copy of an existing tutorial, course example, or published demo — at least one element (task, axis combination, evaluation, or deployment context) is your own choice.</p></div>
+        <div class="gate-item"><span class="gn">Non-trivial</span><h4>Can't be vibe-coded in a day</h4><p>Requires genuine design decisions — real integration across ≥ 3 advanced axes, real failure handling, and an evaluation that surfaces a non-obvious trade-off.</p></div>
+        <div class="gate-item"><span class="gn">Meaningful</span><h4>Has real value</h4><p>Either a research contribution (tests a hypothesis, yields a reusable artifact or finding) or a practical application solving an actual problem — not a "hello world" agent with no audience.</p></div>
+        <div class="gate-item"><span class="gn">Feasible</span><h4>Fits ~10 weeks</h4><p>Achievable by your 3–4 person team between the D1 proposal (Week 2) and Round 1 (Week 12), given your stated skills and compute/API budget — your work plan must show this.</p></div>
+      </div>
+      <div class="checklist">
+        <div class="check-item"><span class="rn">R1</span><div><span class="stage">D1 · D2 · D3</span><h4>Clear agent architecture</h4><p>Reasoning–acting loop and/or planning and/or multi-agent orchestration, documented as a diagram plus a state/control-flow description.</p></div></div>
+        <div class="check-item"><span class="rn">R2</span><div><span class="stage">D2 · D3</span><h4>Tools / MCP integration</h4><p>At least one MCP server (your own or third-party) or an equivalent function-calling toolset, with tool permissions documented.</p></div></div>
+        <div class="check-item"><span class="rn">R3</span><div><span class="stage">D2 · D3</span><h4>Memory</h4><p>An explicit design — short-term/context management plus at least one long-term or episodic store — with a stated write/retrieve policy.</p></div></div>
+        <div class="check-item"><span class="rn">R4</span><div><span class="stage">D1 · D3</span><h4>≥ 3 advanced axes</h4><p>Beyond tools and memory: e.g., planning/search, reflection/verification, multi-agent, RAG, RL fine-tuning, computer use, or guardrails. Depth beats breadth.</p></div></div>
+        <div class="check-item"><span class="rn">R5</span><div><span class="stage">D2 · D3</span><h4>Quantitative evaluation</h4><p>A benchmark or curated task set (≥ 20 tasks), a success metric, cost and latency, ≥ 2 system configurations (ablation), ≥ 3 runs/seeds with variance, and an error analysis.</p></div></div>
+        <div class="check-item"><span class="rn">R6</span><div><span class="stage">D1 · D3</span><h4>Security &amp; safety analysis</h4><p>A threat model (assets, entry points, attacker capabilities); tests for direct + indirect prompt injection (≥ 10 attack cases); permission control / least privilege on tools; monitoring &amp; audit logging.</p></div></div>
+        <div class="check-item"><span class="rn">R7</span><div><span class="stage">W7 · W12 · W13</span><h4>Demo</h4><p>A live demo backed by a recorded video — network or API outages must not stop your defense.</p></div></div>
+        <div class="check-item"><span class="rn">R8</span><div><span class="stage">D4</span><h4>Reproducible code</h4><p>README, pinned dependencies, <code>.env.example</code>, a one-command run, evaluation scripts, seeds, traces/logs, and a cost report.</p></div></div>
+        <div class="check-item"><span class="rn">R9</span><div><span class="stage">D3</span><h4>Report</h4><p>6–8 pages, conference style, with an AI-use statement and a contribution statement.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="milestones">
+    <div class="sec-head foldable">
+      <span class="eyebrow">02 · Deliverables</span>
+      <h2>Milestones and deadlines</h2>
+    </div>
+    <div class="fold-body">
+      <div class="timeline">
+        <div class="tl-item">
+          <span class="when">before W2</span>
+          <div class="body"><h4>Idea 1-pager <span class="mono soft">(formative)</span></h4><p>Problem, users, why an agent (vs. a script or single prompt), and candidate advanced axes.</p></div>
+        </div>
+        <div class="tl-item">
+          <span class="when">due Sun 13 Sep · pitch W2</span>
+          <div class="body"><h4>D1 — Proposal (3–4 pp.) + 5′ pitch <span class="pill core">20% of PRJ</span></h4><p>Architecture sketch, tools/MCP + memory design, ≥ 3 axes, evaluation plan, a v0 threat model, work plan and risks. Verdict: approved / changes required / resubmit. If the proposal is still unapproved in Week 3, one point is deducted from the architecture criterion.</p></div>
+        </div>
+        <div class="tl-item">
+          <span class="when">due Sun 25 Oct · checkpoint W7</span>
+          <div class="body"><h4>D2 — Interim progress report (4–6 pp.) + 8′ live demo <span class="pill core">30% of PRJ</span></h4><p>Implemented architecture, first evaluation numbers (even on 5–10 tasks), threat model v1 with first injection tests, and a revised plan to W12. Status recorded as on track / at risk / re-scope.</p></div>
+        </div>
+        <div class="tl-item">
+          <span class="when">due Sun 29 Nov · defense W12</span>
+          <div class="body"><h4>D3 v1 + D4 — Final report v1 + code, tagged <code>v1</code> <span class="pill core">50% of PRJ, split below</span></h4><p>Round 1 defense: 10′ presentation with live demo + 5′ Q&amp;A, reviewed by a peer group and the instructor.</p></div>
+        </div>
+        <div class="tl-item">
+          <span class="when">W13 · Wed 9 Dec</span>
+          <div class="body"><h4>Round 2 defense + final submission</h4><p>Defend what changed since Round 1 and why, along with final results, limitations, and extensibility. Submit D3 v2, the contribution statements, the intra-group peer evaluation, and D4 tagged <code>final</code> by <strong>Fri 11 Dec, 23:59</strong>, after incorporating any final defense feedback.</p></div>
+        </div>
+      </div>
+      <p class="sched-note"><strong>Weighting inside the project component (PRJ, 50% of the course):</strong>
+        Proposal (D1) 20% · Interim progress report (D2) 30% · Final report + code + presentation (D3/D4, both defense rounds) 50%
+        &mdash; of that final 50%: report 30/50, reproducible code 10/50, presentation &amp; individual contribution 10/50 (Round&nbsp;1 60% / Round&nbsp;2 40% of the presentation share). The milestone weights say <em>when</em> marks are earned; the rubric below says <em>how</em> the submitted work is judged. 20 + 30 + 50 = 100% of PRJ.</p>
+      <p class="sched-note"><strong>Submission deadlines (all at 23:59):</strong> D1 — Sun 13 Sep ·
+        D2 — Sun 25 Oct · D3/D4 v1 — Sun 29 Nov · final D3/D4 — Fri 11 Dec. These dates follow the
+        current timetable; later instructor or registrar announcements take priority. Late submissions:
+        −10% per day for up to 3 days; after that, the submission receives 0.</p>
+    </div>
+  </section>
+
+  <section class="block" id="rubric">
+    <div class="sec-head foldable">
+      <span class="eyebrow">03 · Grading</span>
+      <h2>Project rubric — 50% of the final grade</h2>
+    </div>
+    <div class="fold-body">
+      <div class="tbl-scroll">
+        <table class="tbl">
+          <thead><tr><th>Criterion</th><th class="mono center">Weight</th><th>What earns a high score</th></tr></thead>
+          <tbody>
+            <tr><td>Architecture design &amp; technical difficulty</td><td class="mono center">25%</td><td>Well-motivated, non-trivial architecture; ≥ 3 axes integrated coherently; trade-offs justified against alternatives</td></tr>
+            <tr><td>Implementation &amp; demo</td><td class="mono center">25%</td><td>Robust end-to-end system; live demo works; failure handling; clean code</td></tr>
+            <tr><td>Quantitative evaluation &amp; security analysis</td><td class="mono center">25%</td><td>Credible benchmark with ablations, seeds, variance, cost/latency, error analysis; full threat model with injection tests, permission control, monitoring, and findings acted on</td></tr>
+            <tr><td>Report &amp; reproducibility</td><td class="mono center">15%</td><td>Conference-quality 6–8 pp.; claims match evidence; threats-to-validity section; one-command reproduction verified</td></tr>
+            <tr><td>Presentation, defense &amp; individual contribution</td><td class="mono center">10%</td><td>Clear talks in both rounds; Round-1 feedback fully addressed; contribution consistent with commits and peer evaluation</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note warn">
+        <span class="note-tag">Individual adjustment</span>
+        With documented evidence, intra-group peer evaluation, commit history, and Q&amp;A performance
+        can apply an individual factor from 0.8 to 1.1 to the group project score (capped at 10/10).
+        Round-1 feedback that is ignored in Round 2 costs points on presentation &amp; contribution.
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="themes">
+    <div class="sec-head foldable">
+      <span class="eyebrow">04 · Ideas</span>
+      <h2>Suggested project themes</h2>
+    </div>
+    <div class="fold-body">
+      <p class="subtle-note">
+        Deliberately open — propose your own theme if you prefer, as long as it satisfies the
+        requirements above.</p>
+      <div class="theme-grid">
+        <div class="theme-card"><span class="tnum">01</span><h4>Research assistant agent</h4><p>Literature search + retrieval (RAG/GraphRAG) + cross-session memory + MCP tools (arXiv, Semantic Scholar); injection tests through retrieved papers.</p></div>
+        <div class="theme-card"><span class="tnum">02</span><h4>Repository maintenance agent</h4><p>Issue triage → patch proposal → sandboxed test run; planning + reflection + permission-gated tools; evaluated with pass@1/pass^k.</p></div>
+        <div class="theme-card"><span class="tnum">03</span><h4>Data-analysis / BI agent</h4><p>Natural-language questions → SQL/pandas via MCP over a database; schema memory; SQL-level least privilege against injection via table contents.</p></div>
+        <div class="theme-card"><span class="tnum">04</span><h4>Multi-agent software team</h4><p>MetaGPT/ChatDev-style team vs. a single agent on the same tasks at matched budget; failure-mode and collusion analysis.</p></div>
+        <div class="theme-card"><span class="tnum">05</span><h4>Web/computer-use agent</h4><p>A bounded domain (university portal, e-commerce sandbox, WebArena subset); planning + memory; safety gates on irreversible actions.</p></div>
+        <div class="theme-card"><span class="tnum">06</span><h4>Customer-support agent with policies</h4><p>τ-bench-style tool use under rules with escalation to a human; security against user-side social engineering and data exfiltration.</p></div>
+        <div class="theme-card"><span class="tnum">07</span><h4>Secure agent gateway</h4><p>A defense-focused project: an MCP proxy implementing permission control or CaMeL-style taint tracking, evaluated on AgentDojo's utility/security trade-off.</p></div>
+        <div class="theme-card"><span class="tnum">08</span><h4>Long-horizon personal assistant</h4><p>Episodic/semantic memory design evaluated on long-conversation benchmarks; memory-poisoning attacks and detection.</p></div>
+        <div class="theme-card"><span class="tnum">09</span><h4>Agentic RAG for Vietnamese documents</h4><p>Legal/administrative/university regulations; a retrieval-decision policy, grounding evaluation, hallucination analysis.</p></div>
+        <div class="theme-card"><span class="tnum">10</span><h4>RL fine-tuning for tool use</h4><p>GRPO / verifiable rewards on a narrow tool-use task with a small open model, compared to prompting a larger model at equal cost.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="templates">
+    <div class="sec-head foldable">
+      <span class="eyebrow">05 · Writing</span>
+      <h2>Report &amp; proposal templates</h2>
+    </div>
+    <div class="fold-body">
+      <details class="acc" open>
+        <summary>Proposal (D1, 3–4 pages)</summary>
+        <div class="acc-body">
+          <p><strong>Topic-quality self-assessment</strong> (novel / non-trivial / meaningful / feasible
+            — see the gate above, in your own words, not left for the instructor to infer) · Title,
+            group &amp; roles · Problem &amp; users · Related systems &amp; papers (5–10 refs) ·
+            Proposed architecture (diagram, control loop, tools/MCP with permission levels, memory
+            design, orchestration — mark your ≥ 3 axes) · Evaluation plan (task set, metrics, baselines,
+            seeds) · Threat model v0 (assets, entry points, attacker capabilities, initial mitigations) ·
+            Work plan to W7 and W12 · Risks &amp; fallback scope · AI-use statement.</p>
+        </div>
+      </details>
+      <details class="acc">
+        <summary>Progress report (D2, 4–6 pages)</summary>
+        <div class="acc-body">
+          <p>Delta from proposal (scope changes, with reasons) · Implemented architecture (what runs
+            end-to-end today) · Tools/MCP and memory: implemented vs. planned · Evaluation harness with
+            first numbers and cost so far · Threat model v1 with first injection results · Plan to W12 ·
+            AI-use statement.</p>
+        </div>
+      </details>
+      <details class="acc">
+        <summary>Final report (D3, 6–8 pages, conference style)</summary>
+        <div class="acc-body">
+          <p>Abstract · 1 Introduction · 2 Background &amp; related work · 3 System design (architecture,
+            reasoning/planning, tools/MCP, memory, orchestration, and design rationale) · 4 Implementation
+            · 5 Evaluation (setup, metrics, results, ablations, cost/latency, error analysis) · 6 Security
+            &amp; safety analysis (threat model, attack cases and results, permission control, monitoring,
+            residual risks) · 7 Limitations, threats to validity, extensibility · 8 Ethics &amp;
+            responsible-use considerations · 9 Conclusion &amp; future work · References · Appendix:
+            reproducibility (commands, seeds, hardware, budget), contribution statement, AI-use statement.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="block" id="compute">
+    <div class="sec-head foldable">
+      <span class="eyebrow">06 · Logistics</span>
+      <h2>Compute &amp; API policy</h2>
+    </div>
+    <div class="fold-body">
+      <div class="concept wide">
+        <p>You may use hosted LLM APIs (course-provided credits, if available, or your own keys), local
+          open-weight models via Ollama/vLLM, or university GPU resources where available. The proposal
+          must state the model(s) you plan to use and an estimated budget; the final report must report
+          actual spend.</p>
+        <p>Frameworks are your choice — LangGraph, the Anthropic/OpenAI SDKs, AutoGen, CrewAI, smolagents,
+          or plain Python — but the report must explain what the framework does <em>for</em> your
+          architecture and what you built by hand.</p>
+      </div>
+      <div class="note danger">
+        <span class="note-tag">Non-negotiable</span>
+        No evaluation run without cost logging. Use local models during development; reserve API spend
+        for the evaluation runs that go into your report.
+      </div>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="seminars.html"><span class="dir">← Back</span>Seminar program</a>
+    <a href="resources.html" class="next"><span class="dir">Next →</span>Reading list</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="assets/course.js"></script>
+</body>
+</html>

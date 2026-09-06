@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CoALA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../../index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../../index.html">Overview</a>
+      <a href="../week-01.html">Lectures</a>
+      <a href="../../seminars.html">Seminars</a>
+      <a href="../../project.html">Project</a>
+      <a href="../../resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="../../index.html">Overview</a>
+    <a href="../../seminars.html">Seminars</a>
+    <a href="../../project.html">Project</a>
+    <a href="../../resources.html">Resources</a>
+  </nav>
+  <h4>Lectures</h4>
+  <nav aria-label="Lectures">
+    <a href="../week-01.html" aria-current="page"><span class="ch-num">01</span>Introduction &amp; Methodology</a>
+    <a href="../week-02.html"><span class="ch-num">02</span>Reasoning &amp; Planning</a>
+    <a href="../week-03.html"><span class="ch-num">03</span>Tools, MCP &amp; Evaluation</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#plain">In plain terms</a>
+    <a href="#mechanism">How it works</a>
+    <a href="#example">Worked example</a>
+    <a href="#talk">For your talk &amp; project</a>
+    <a href="#reading">Further reading</a>
+  </nav>
+  <h4>Also from Week 1</h4>
+  <nav aria-label="Other guides this week">
+    <a href="transformer.html">Transformer</a>
+    <a href="human-loop.html">Human-in/on-the-Loop</a>
+    <a href="react.html">ReAct</a>
+    <a href="ai-agents-that-matter.html">AI Agents That Matter</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Paper Guide · Week 1 &mdash; Introduction & Methodology</span>
+      <h1>CoALA: Cognitive Architectures for Language Agents</h1>
+      <p class="lede">A vocabulary for talking about any agent's design: what it remembers, what it can do, and how it decides — the framework Week 1's anatomy diagram and every seminar topic's memory/tool sections are built on.</p>
+      <div class="meta-chips">
+        <a class="chip" href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener"><strong>Read the paper ↗</strong></a>
+        <span class="chip">Sumers, Yao, Narasimhan &amp; Griffiths · TMLR 2024</span>
+        <a class="chip" href="../week-01.html">← Back to Introduction & Methodology</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="plain">
+    <div class="sec-head">
+      <span class="eyebrow">01 · In plain terms</span>
+      <h2>An agent is memory plus a decision loop, not a bigger prompt</h2>
+    </div>
+    <div class="concept wide">
+      <p>Before CoALA, "agent" papers each invented their own vocabulary — one called its scratchpad
+        a "buffer," another called the same thing a "trace." Sumers et al. borrowed a much older
+        vocabulary from cognitive science (Tulving's memory taxonomy, used to describe <em>human</em>
+        memory since the 1970s) and applied it to language agents. The claim is simple: every agent,
+        however it's built, can be described as (1) a set of <strong>memory modules</strong> holding
+        different kinds of information, (2) an <strong>action space</strong> of things it can do, and
+        (3) a <strong>decision procedure</strong> that reads memory and picks the next action. This
+        guide exists because Week 1's whole "anatomy of an agent" section (LLM · memory · tools ·
+        environment) is CoALA's vocabulary in different words — knowing the original taxonomy makes
+        every later seminar topic on memory (S1-3) and orchestration (S1-7) click faster.</p>
+    </div>
+  </section>
+
+  <section class="block" id="mechanism">
+    <div class="sec-head">
+      <span class="eyebrow">02 · How it works</span>
+      <h2>Four memories, one loop</h2>
+    </div>
+    <div class="concept wide">
+      <p><strong>The four memory modules</strong> — <em>working</em> memory holds whatever is active
+        right now (the current prompt, intermediate results); it resets often. The other three are
+        long-term: <em>episodic</em> memory is a record of the agent's own past experience ("last time
+        I tried X, it failed because Y"); <em>semantic</em> memory is general facts and world knowledge
+        (a knowledge base or vector store of documents); <em>procedural</em> memory is skills — for an
+        LLM agent, this is mostly the model's own weights, plus any code/tools it has learned to call
+        reliably. Splitting memory this way matters because each kind fails differently and needs a
+        different fix: a working-memory problem is a context-window problem (§ Week 3's "lost in the
+        middle"); an episodic-memory problem is "the agent keeps repeating the same mistake."</p>
+      <p><strong>The action space</strong> splits into <em>internal</em> actions (reasoning, retrieving
+        from memory, writing to memory — nothing leaves the model) and <em>external</em> actions
+        (grounding: calling a tool, sending a message, acting in an environment — this is where MCP,
+        Week 3's topic, lives). <strong>The decision procedure</strong> is the loop that ties it
+        together: propose one or more candidate actions, evaluate them (often just "pick the first
+        one," sometimes a real search as in Tree of Thoughts), and select one to execute. That
+        propose→evaluate→select cycle, repeated, <em>is</em> the agent loop from Week 1's simulator.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 620 230" width="100%" role="img" aria-label="Diagram: CoALA's four memory modules (working, episodic, semantic, procedural) connect to a central decision procedure, which selects internal reasoning actions or external actions on tools and the environment.">
+        <defs>
+          <marker id="coala-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+        </defs>
+        <path d="M180,105 L250,105" class="arch-line" marker-end="url(#coala-arrow)"></path>
+        <text x="215" y="98" text-anchor="middle" class="arch-label">retrieve</text>
+        <path d="M250,135 L180,135" class="arch-line" marker-end="url(#coala-arrow)"></path>
+        <text x="215" y="152" text-anchor="middle" class="arch-label">write</text>
+        <path d="M410,105 L460,105" class="arch-line" marker-end="url(#coala-arrow)"></path>
+        <text x="435" y="98" text-anchor="middle" class="arch-label">act</text>
+        <path d="M460,135 L410,135" class="arch-line" marker-end="url(#coala-arrow)"></path>
+        <text x="435" y="152" text-anchor="middle" class="arch-label">observe</text>
+
+        <a class="dag-node dashed" href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener"
+           data-functionality="A container for the four memory modules below, grouped by CoALA&#39;s taxonomy."
+           data-intuition="Borrowed from cognitive science&#39;s Tulving trichotomy — a decades-old, well-tested way to split memory by kind."
+           data-example="Working, episodic, semantic, and procedural memory, each shown below." aria-label="Memory: four modules, after Tulving's taxonomy"><rect x="10" y="10" width="170" height="210" rx="10"></rect></a>
+        <a class="dag-node teal" href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener"
+           data-functionality="Holds whatever is active right now — the current prompt, intermediate results."
+           data-intuition="It resets often, by design — this is the cheapest, most session-scoped kind of memory."
+           data-example="The current conversation turn&#39;s context window." aria-label="Working memory: the active context for the current reasoning step"><rect x="20" y="20" width="150" height="40" rx="6"></rect><text x="95" y="42" text-anchor="middle" class="t">Working</text><text x="95" y="55" text-anchor="middle" class="s">active context</text></a>
+        <a class="dag-node teal" href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener"
+           data-functionality="Stores specific past events the agent itself experienced, retrievable by relevance."
+           data-intuition="&quot;What happened&quot; memory — distinct from general facts, this is the agent&#39;s own history."
+           data-example="&quot;Last time I tried X, it failed because Y.&quot;" aria-label="Episodic memory: a record of the agent's own past experience"><rect x="20" y="70" width="150" height="40" rx="6"></rect><text x="95" y="92" text-anchor="middle" class="t">Episodic</text><text x="95" y="105" text-anchor="middle" class="s">past experience</text></a>
+        <a class="dag-node teal" href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener"
+           data-functionality="Stores general facts and world knowledge, abstracted away from any one conversation."
+           data-intuition="Not tied to a specific event — this is what a RAG pipeline (S1-4) typically fills."
+           data-example="A fact looked up once and reused, rather than re-derived every time." aria-label="Semantic memory: general facts and world knowledge"><rect x="20" y="120" width="150" height="40" rx="6"></rect><text x="95" y="142" text-anchor="middle" class="t">Semantic</text><text x="95" y="155" text-anchor="middle" class="s">facts, knowledge</text></a>
+        <a class="dag-node teal" href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener"
+           data-functionality="The agent&#39;s skills — mostly the model&#39;s own trained weights, plus any reliable tool code."
+           data-intuition="For an LLM agent this is rarely a separate module — mostly just what the model already knows how to do."
+           data-example="The base model&#39;s trained ability to write working code." aria-label="Procedural memory: skills — the model's own weights and code"><rect x="20" y="170" width="150" height="40" rx="6"></rect><text x="95" y="192" text-anchor="middle" class="t">Procedural</text><text x="95" y="205" text-anchor="middle" class="s">skills, code</text></a>
+
+        <a class="dag-node accent" href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener"
+           data-functionality="The propose → evaluate → select loop that reads memory and chooses the next action."
+           data-intuition="This loop, repeated, is the entire agent loop from Week 1&#39;s simulator, in different words."
+           data-example="Often just &quot;pick the first candidate action&quot; — sometimes a real search, as in Tree of Thoughts." aria-label="Decision procedure: the propose → evaluate → select loop that reads memory and chooses the next action"><rect x="250" y="95" width="160" height="50" rx="8"></rect><text x="330" y="115" text-anchor="middle" class="t">Decision</text><text x="330" y="130" text-anchor="middle" class="s">read → decide → act</text></a>
+
+        <a class="dag-node dashed" href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener"
+           data-functionality="A container for the two kinds of action the decision procedure can take, shown below."
+           data-intuition="Splitting actions this way separates &quot;thinking&quot; from &quot;doing something in the world.&quot;"
+           data-example="Internal reasoning actions and external grounding actions, shown below." aria-label="Action space: what the decision procedure can actually do"><rect x="460" y="10" width="150" height="210" rx="10"></rect></a>
+        <a class="dag-node amber" href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener"
+           data-functionality="Reasoning, retrieval, and learning — actions that only touch the agent&#39;s own memory."
+           data-intuition="Nothing leaves the model here — this is &quot;thinking,&quot; not &quot;doing.&quot;"
+           data-example="Retrieving a fact from semantic memory before answering." aria-label="Internal actions: reasoning, retrieval, learning — acting on the agent's own memory"><rect x="470" y="40" width="130" height="60" rx="6"></rect><text x="535" y="65" text-anchor="middle" class="t">Internal</text><text x="535" y="80" text-anchor="middle" class="s">reason &amp; retrieve</text></a>
+        <a class="dag-node amber" href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener"
+           data-functionality="Calling a tool or acting in an environment — grounding, in CoALA&#39;s terms."
+           data-intuition="This is where MCP (Week 3) and the whole &quot;action/tools&quot; component of the anatomy live."
+           data-example="Calling issue_refund(...) — an action with real, external consequences." aria-label="External actions: grounding — calling tools, acting in an environment"><rect x="470" y="140" width="130" height="60" rx="6"></rect><text x="535" y="165" text-anchor="middle" class="t">External</text><text x="535" y="180" text-anchor="middle" class="s">tools · environment</text></a>
+      </svg>
+      <div class="cap">CoALA's memory + action-space + decision-procedure framework. Sumers et al., TMLR 2024.</div>
+    </div>
+  </section>
+
+  <section class="block" id="example">
+    <div class="example">
+      <div class="example-bar"><span class="example-tag">Worked example</span><span class="example-title">Mapping a customer-support agent onto CoALA</span></div>
+      <div class="example-body">
+        <p>Take a support agent that answers billing questions. In CoALA's vocabulary:</p>
+        <div class="trace">
+          <span class="trace-line"><span class="trace-role mem">Working</span>The current ticket text and the last 2 turns of conversation.</span>
+          <span class="trace-line"><span class="trace-role mem">Episodic</span>A log of past tickets this agent resolved, retrievable by similarity ("a customer asked this exact refund question 3 weeks ago").</span>
+          <span class="trace-line"><span class="trace-role mem">Semantic</span>The company's refund policy documents, indexed for retrieval (this is what a RAG pipeline, S1-4, fills).</span>
+          <span class="trace-line"><span class="trace-role mem">Procedural</span>The base model's own trained ability to write a polite, on-policy reply — no separate module, just weights.</span>
+          <span class="trace-line"><span class="trace-role thought">Internal action</span>Retrieve the refund policy clause that applies to this ticket.</span>
+          <span class="trace-line"><span class="trace-role action">External action</span>Call <code>issue_refund(amount, order_id)</code> — an MCP tool with real financial consequences.</span>
+        </div>
+        <p>This is the exact exercise Week 1's "memory, made concrete" section repeats for a coding
+          assistant and a research assistant — CoALA is why those three examples all use the same four
+          labels.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="talk">
+    <div class="sec-head">
+      <span class="eyebrow">04 · For your talk &amp; project</span>
+      <h2>What this buys you</h2>
+    </div>
+    <div class="concept wide">
+      <ul>
+        <li>If you present <strong>S1-3 Agent Memory</strong>: open with CoALA's taxonomy, then show how
+          MemGPT, Generative Agents, and A-MEM each specialize <em>one part</em> of it (MemGPT ≈
+          engineering working memory's overflow; Generative Agents ≈ a retrieval-scored episodic
+          store) — this gives your audience one map to place every paper on, exactly what the "must
+          explain" checklist for that topic asks for.</li>
+        <li>For your <strong>project proposal (R3 memory requirement)</strong>: naming your design in
+          CoALA's terms ("we use working memory for X, episodic for Y, no semantic store") is a fast,
+          legible way to satisfy the "explicit design" bar the rubric checks for.</li>
+        <li>A sharp critical question to raise in Q&amp;A on any memory paper: "which of the four
+          modules does this actually implement, and which does it just assume away?"</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="reading">
+    <div class="sec-head">
+      <span class="eyebrow">05 · Further reading</span>
+      <h2>Where to go next</h2>
+    </div>
+    <div class="concept wide">
+      <ul class="reading wide">
+          <li><a href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener">Sumers et al. — Cognitive Architectures for Language Agents (full paper)</a></li>
+          <li><a href="https://arxiv.org/abs/2310.08560" target="_blank" rel="noopener">Packer et al. — MemGPT: engineering working memory's overflow</a></li>
+          <li><a href="https://arxiv.org/abs/2304.03442" target="_blank" rel="noopener">Park et al. — Generative Agents: a retrieval-scored episodic store</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="../week-01.html"><span class="dir">← Back</span>Introduction & Methodology</a>
+    <a href="react.html" class="next"><span class="dir">Next guide →</span>ReAct</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="../../assets/course.js"></script>
+<script src="../../assets/dag.js"></script>
+</body>
+</html>

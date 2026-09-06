@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Human-in/on-the-Loop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../../index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../../index.html">Overview</a>
+      <a href="../week-01.html">Lectures</a>
+      <a href="../../seminars.html">Seminars</a>
+      <a href="../../project.html">Project</a>
+      <a href="../../resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="../../index.html">Overview</a>
+    <a href="../../seminars.html">Seminars</a>
+    <a href="../../project.html">Project</a>
+    <a href="../../resources.html">Resources</a>
+  </nav>
+  <h4>Lectures</h4>
+  <nav aria-label="Lectures">
+    <a href="../week-01.html" aria-current="page"><span class="ch-num">01</span>Introduction &amp; Methodology</a>
+    <a href="../week-02.html"><span class="ch-num">02</span>Reasoning &amp; Planning</a>
+    <a href="../week-03.html"><span class="ch-num">03</span>Tools, MCP &amp; Evaluation</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#plain">In plain terms</a>
+    <a href="#mechanism">How it works</a>
+    <a href="#example">Worked example</a>
+    <a href="#talk">For your talk &amp; project</a>
+    <a href="#reading">Further reading</a>
+  </nav>
+  <h4>Also from Week 1</h4>
+  <nav aria-label="Other guides this week">
+    <a href="transformer.html">Transformer</a>
+    <a href="coala.html">CoALA</a>
+    <a href="react.html">ReAct</a>
+    <a href="ai-agents-that-matter.html">AI Agents That Matter</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Paper Guide · Week 1 &mdash; Introduction & Methodology</span>
+      <h1>Human-in-the-Loop vs. Human-on-the-Loop</h1>
+      <p class="lede">The autonomy spectrum from earlier in this lecture describes what a system can do. This is the design question that follows immediately: who has to sign off before it does it, and how often?</p>
+      <div class="meta-chips">
+        <a class="chip" href="https://openai.com/index/practices-for-governing-agentic-ai-systems/" target="_blank" rel="noopener"><strong>Read the paper ↗</strong></a>
+        <span class="chip">Shavit, Agarwal et al. (OpenAI) · 2023</span>
+        <a class="chip" href="../week-01.html">← Back to Introduction & Methodology</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="plain">
+    <div class="sec-head">
+      <span class="eyebrow">01 · In plain terms</span>
+      <h2>Approve every step, or watch the dashboard?</h2>
+    </div>
+    <div class="concept wide">
+      <p><strong>Human-in-the-loop (HITL)</strong> means no action executes without a human approving it
+        first — a checkpoint before every single step. <strong>Human-on-the-loop (HOTL)</strong> means
+        the agent acts on its own between check-ins; a human monitors status and can intervene, but
+        isn't asked to approve each individual action. The difference isn't how capable the agent is —
+        it's how the surrounding system is wired. The same ReAct-style agent can be deployed either way;
+        HITL and HOTL are deployment decisions layered on top of the agent's own autonomy level (§01
+        above), not properties of the agent itself.</p>
+      <p>Push HOTL far enough — no check-ins at all, indefinite unsupervised operation — and you get a
+        third point some literature names explicitly: <strong>human-out-of-the-loop</strong>. This
+        course's autonomy spectrum's Level 5 ("open-ended," only intermittent human oversight) sits right
+        at that edge.</p>
+    </div>
+  </section>
+
+  <section class="block" id="mechanism">
+    <div class="sec-head">
+      <span class="eyebrow">02 · How it works</span>
+      <h2>Where the spectrum forces the choice</h2>
+    </div>
+    <div class="concept wide">
+      <p>Levels 0–2 of the autonomy spectrum are HITL <em>by construction</em>: a single call or a
+        hand-authored workflow already has a human (the developer) approving every step, just at design
+        time rather than run time. The real design decision only appears at <strong>Level 3</strong>,
+        where the model starts choosing its own steps — this is exactly where a team has to decide
+        whether every action still gets a human gate, or whether the agent runs autonomously with
+        periodic oversight instead. Shavit et al.'s practical answer, concretely: don't leave that choice
+        implicit. Build actual mechanisms for it —</p>
+      <ul>
+        <li><strong>Approval gates</strong> for HITL: specific action types (irreversible, costly, or
+          high-stakes ones) are hard-blocked until a human explicitly approves, regardless of how
+          confident the agent is.</li>
+        <li><strong>Periodic reauthorization</strong> for HOTL: the agent is made to "time out"
+          automatically after N actions or T minutes, requiring a human to review and explicitly
+          reauthorize before it can continue — not waiting for something to visibly go wrong first.</li>
+      </ul>
+      <p>The trade-off is the same one Week 1's autonomy table already names: HITL caps how much work
+        the system can get through (a human reviews every step), while HOTL trades some of that
+        certainty for throughput — and inherits the risk that whatever happens <em>between</em>
+        check-ins goes unsupervised.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 620 260" width="100%" role="img" aria-label="Two diagrams side by side: human-in-the-loop gates every single action behind human approval before it executes; human-on-the-loop lets the agent act autonomously in a loop, with a periodic human checkpoint every N steps.">
+        <defs>
+          <marker id="hitl-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+        </defs>
+        <text x="140" y="12" text-anchor="middle" class="arch-caption">HUMAN-IN-THE-LOOP</text>
+        <text x="465" y="12" text-anchor="middle" class="arch-caption">HUMAN-ON-THE-LOOP</text>
+
+        <path d="M140,64 L140,104" class="arch-line" marker-end="url(#hitl-arrow)"></path>
+        <path d="M140,148 L140,188" class="arch-line" marker-end="url(#hitl-arrow)"></path>
+        <path d="M250,210 C300,210 300,42 250,42" class="arch-line" marker-end="url(#hitl-arrow)"></path>
+
+        <a class="dag-node" href="https://openai.com/index/practices-for-governing-agentic-ai-systems/" target="_blank" rel="noopener"
+           data-functionality="The agent decides what it wants to do next and proposes an action, without executing it yet."
+           data-intuition="Separating &quot;decide&quot; from &quot;do&quot; is what makes a human gate possible in the first place."
+           data-example="e.g. &quot;I&#39;m about to send this email&quot; — proposed, not sent." aria-label="The agent decides what it wants to do next and proposes it, but doesn't execute yet."><rect x="30" y="20" width="220" height="44" rx="8"></rect><text x="140" y="47" text-anchor="middle" class="t">Agent proposes action</text></a>
+        <a class="dag-node amber" href="https://openai.com/index/practices-for-governing-agentic-ai-systems/" target="_blank" rel="noopener"
+           data-functionality="A human reviews the proposed action and must explicitly approve it before anything happens."
+           data-intuition="No confidence score, however high, is allowed to skip this step — that&#39;s what makes it a real gate."
+           data-example="The developer clicks &quot;approve&quot; on a diff before it merges." aria-label="A human reviews the proposed action and must explicitly approve it — the gate. No confidence threshold skips this step."><rect x="30" y="104" width="220" height="44" rx="8"></rect><text x="140" y="131" text-anchor="middle" class="t">Human approves</text></a>
+        <a class="dag-node" href="https://openai.com/index/practices-for-governing-agentic-ai-systems/" target="_blank" rel="noopener"
+           data-functionality="The action finally executes, now that it has been approved."
+           data-intuition="Execution is the very last step — everything before it exists just to reach this point safely."
+           data-example="The email actually sends, only after approval." aria-label="Only now does the action actually run."><rect x="30" y="188" width="220" height="44" rx="8"></rect><text x="140" y="215" text-anchor="middle" class="t">Action executes</text></a>
+
+        <path d="M590,60 C625,60 625,120 590,120" class="arch-line" marker-end="url(#hitl-arrow)"></path>
+        <path d="M465,120 L465,200" class="arch-line dashed" marker-end="url(#hitl-arrow)"></path>
+        <text x="530" y="164" text-anchor="middle" class="arch-label">every N steps / T min</text>
+
+        <a class="dag-node accent" href="https://openai.com/index/practices-for-governing-agentic-ai-systems/" target="_blank" rel="noopener"
+           data-functionality="The agent proposes and executes actions in a loop, with no per-action human gate."
+           data-intuition="This is Level 3+ on the autonomy spectrum — the model decides, not a human, on every single step."
+           data-example="The coding agent reads, edits, and commits files on its own for the length of the loop." aria-label="The agent proposes and executes actions in a loop with no per-action human gate — this is Level 3+ on the autonomy spectrum."><rect x="340" y="50" width="250" height="70" rx="8"></rect><text x="465" y="80" text-anchor="middle" class="t">Agent acts</text><text x="465" y="98" text-anchor="middle" class="s">autonomously, in a loop</text></a>
+        <a class="dag-node amber dashed" href="https://openai.com/index/practices-for-governing-agentic-ai-systems/" target="_blank" rel="noopener"
+           data-functionality="The agent automatically pauses and requires a human to review and explicitly reauthorize."
+           data-intuition="The pause is scheduled in advance — it doesn&#39;t wait for something to visibly go wrong first."
+           data-example="Every 30 minutes or 20 commits, whichever comes first, per the worked example above." aria-label="The agent automatically pauses and requires a human to review and explicitly reauthorize before continuing — not waiting for a visible failure first."><rect x="340" y="200" width="250" height="44" rx="8"></rect><text x="465" y="227" text-anchor="middle" class="t">Human checkpoint</text></a>
+      </svg>
+      <div class="cap">Same underlying agent loop — HITL gates every step; HOTL checks in periodically.</div>
+    </div>
+  </section>
+
+  <section class="block" id="example">
+    <div class="example">
+      <div class="example-bar"><span class="example-tag">Worked example</span><span class="example-title">The same coding agent, deployed two ways</span></div>
+      <div class="example-body">
+        <p>A ReAct-style coding agent that can read files, write code, and run <code>git commit</code>:</p>
+        <div class="trace">
+          <span class="trace-line"><span class="trace-role thought">HITL deployment</span>Every file write and every commit is shown to the developer as a diff; nothing lands until they click approve. Slow, but nothing ships unreviewed.</span>
+          <span class="trace-line"><span class="trace-role action">HOTL deployment</span>The agent reads, writes, and commits freely to a feature branch for up to 30 minutes or 20 commits, then pauses and pings the developer with a summary to review before it's allowed to continue or open a PR.</span>
+          <span class="trace-line"><span class="trace-role obs">The failure each invites</span>HITL: developer approval fatigue — rubber-stamping diffs without really reading them. HOTL: a 30-minute window is enough time for a bad early decision to compound into a much bigger mess before anyone looks.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="talk">
+    <div class="sec-head">
+      <span class="eyebrow">04 · For your talk &amp; project</span>
+      <h2>What this buys you</h2>
+    </div>
+    <div class="concept wide">
+      <ul>
+        <li>If you present <strong>S2-5 Safety &amp; Alignment</strong> or <strong>S2-8 Production,
+          Governance &amp; Ethics</strong>: this HITL/HOTL distinction is the operational layer
+          underneath abstract "alignment" or "oversight" language — name which mechanism a paper
+          actually implements, not just that it claims "human oversight."</li>
+        <li>For your <strong>project's security analysis (R6)</strong>: state explicitly which of your
+          agent's action types are HITL-gated (and why those specifically) versus which run under HOTL
+          — an undifferentiated "a human can review the logs" is not a design, it's an absence of one.</li>
+        <li>A sharp critical question for any agent demo: what's the largest amount of unsupervised
+          action your design allows between one human check-in and the next, and what's the worst thing
+          that could happen inside that window?</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="reading">
+    <div class="sec-head">
+      <span class="eyebrow">05 · Further reading</span>
+      <h2>Where to go next</h2>
+    </div>
+    <div class="concept wide">
+      <ul class="reading wide">
+          <li><a href="https://openai.com/index/practices-for-governing-agentic-ai-systems/" target="_blank" rel="noopener">Shavit et al. — Practices for Governing Agentic AI Systems (full paper — approval gates, reauthorization timeouts)</a></li>
+          <li><a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener">Anthropic — Building Effective Agents (workflows-vs-agents design guidance, previewed in §01)</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="../week-01.html"><span class="dir">← Back</span>Introduction & Methodology</a>
+    <a href="coala.html" class="next"><span class="dir">Next guide →</span>CoALA</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="../../assets/course.js"></script>
+<script src="../../assets/dag.js"></script>
+</body>
+</html>

@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Transformer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../../index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../../index.html">Overview</a>
+      <a href="../week-01.html">Lectures</a>
+      <a href="../../seminars.html">Seminars</a>
+      <a href="../../project.html">Project</a>
+      <a href="../../resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="../../index.html">Overview</a>
+    <a href="../../seminars.html">Seminars</a>
+    <a href="../../project.html">Project</a>
+    <a href="../../resources.html">Resources</a>
+  </nav>
+  <h4>Lectures</h4>
+  <nav aria-label="Lectures">
+    <a href="../week-01.html" aria-current="page"><span class="ch-num">01</span>Introduction &amp; Methodology</a>
+    <a href="../week-02.html"><span class="ch-num">02</span>Reasoning &amp; Planning</a>
+    <a href="../week-03.html"><span class="ch-num">03</span>Tools, MCP &amp; Evaluation</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#plain">In plain terms</a>
+    <a href="#mechanism">How it works</a>
+    <a href="#example">Worked example</a>
+    <a href="#playground">Try it yourself</a>
+    <a href="#since">Since Transformer</a>
+    <a href="#talk">For your talk &amp; project</a>
+    <a href="#reading">Further reading</a>
+  </nav>
+  <h4>Also from Week 1</h4>
+  <nav aria-label="Other guides this week">
+    <a href="human-loop.html">Human-in/on-the-Loop</a>
+    <a href="coala.html">CoALA</a>
+    <a href="react.html">ReAct</a>
+    <a href="ai-agents-that-matter.html">AI Agents That Matter</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Paper Guide · Week 1 &mdash; Introduction & Methodology</span>
+      <h1>Attention Is All You Need: The Transformer Architecture</h1>
+      <p class="lede">The eight-page paper that deleted recurrence and convolution from sequence modeling entirely, replacing both with attention alone — the one architecture underneath every LLM, and therefore every agent, this course studies.</p>
+      <div class="meta-chips">
+        <a class="chip" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"><strong>Read the paper ↗</strong></a>
+        <span class="chip">Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser &amp; Polosukhin · NeurIPS 2017</span>
+        <a class="chip" href="../week-01.html">← Back to Introduction & Methodology</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="plain">
+    <div class="sec-head">
+      <span class="eyebrow">01 · In plain terms</span>
+      <h2>Stop passing notes down a line — let everyone read the whole page at once</h2>
+    </div>
+    <div class="concept wide">
+      <p>Before this paper, the standard way to process a sentence was an RNN or LSTM: read one word,
+        update a small "memory" vector, read the next word, update it again, and so on to the end —
+        like a game of telephone where each person only gets the whisper the previous person passed
+        along. Two problems follow directly from that: information from early words gets diluted by the
+        time you reach the end of a long sentence, and — just as importantly for anyone training these
+        models — you cannot process word 5 until you've finished processing word 4, so the whole
+        computation is stuck being sequential, one step at a time, no matter how many GPUs you own.</p>
+      <p>The Transformer's idea is almost provocatively simple: let every word look directly at every
+        other word in the sentence, all at once, and let the model itself learn which words matter to
+        which. No passing anything down a chain. No step-by-step bottleneck. Just one large,
+        fully-parallel computation per layer. That single change — replacing recurrence with direct,
+        all-to-all attention — is the entire technical content of the paper's title.</p>
+    </div>
+  </section>
+
+  <section class="block" id="mechanism">
+    <div class="sec-head">
+      <span class="eyebrow">02 · How it works</span>
+      <h2>What came before, and what self-attention actually computes</h2>
+    </div>
+    <div class="concept wide">
+      <p><strong>The state of the art this paper was replacing:</strong> Sutskever et al.'s
+        sequence-to-sequence model (2014) used an encoder RNN to compress an entire input sentence into
+        <em>one</em> fixed-length vector, which a decoder RNN then unpacked into the output sentence —
+        a hard bottleneck for anything longer than a short sentence. Bahdanau et al. (2014) fixed the
+        worst of that by adding <strong>attention</strong>: at each decoding step, instead of relying on
+        one compressed vector, the decoder computes a weighted combination over <em>all</em> of the
+        encoder's hidden states. This was a real breakthrough — but attention was bolted <em>onto</em> an
+        RNN backbone that was still fundamentally sequential. Encoding word 5 still had to wait for word
+        4. Training on long sequences was still slow, and GPUs — built for massive parallelism — sat
+        mostly idle waiting for each step to finish.</p>
+      <p><strong>What this paper removes:</strong> the recurrence itself. There is no RNN anywhere in
+        the Transformer. Instead:</p>
+      <ul>
+        <li><strong>Self-attention</strong> — every position computes a Query, a Key, and a Value vector
+          from its own embedding. A position's new representation is a weighted sum of <em>every</em>
+          position's Value vector, where the weight comes from how well that position's Query matches
+          each other position's Key (dot product, scaled, then softmax). This is one matrix
+          multiplication over the whole sequence — not a loop.</li>
+        <li><strong>Multi-head attention</strong> — this happens several times in parallel ("heads"),
+          each with its own learned projections, so different heads can specialize (one might track
+          syntactic dependency, another coreference); the results are concatenated and projected back
+          down.</li>
+        <li><strong>Positional encoding</strong> — since attention alone has no built-in sense of word
+          order (it treats the sentence as a set, not a sequence), a fixed sinusoidal position vector is
+          added to each word's embedding before anything else happens, so order information survives.</li>
+        <li><strong>Encoder and decoder stacks</strong> — the encoder is N identical layers, each
+          self-attention followed by a position-wise feed-forward network (with residual connections and
+          layer normalization around each). The decoder is the same, plus one more sub-layer:
+          <em>masked</em> self-attention (a position cannot attend to positions after it — necessary
+          because the decoder generates output one token at a time at inference) and a cross-attention
+          layer that attends over the encoder's output.</li>
+      </ul>
+      <p>Because every position is processed simultaneously within a layer, training parallelizes
+        completely across sequence length — the single biggest practical reason this architecture won.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 620 220" width="100%" role="img" aria-label="Two panels: an RNN processes four words in a strict one-at-a-time sequential chain, while the Transformer lets all four words attend directly to each other in parallel.">
+        <path d="M80,110 L90,110" class="arch-line"></path>
+        <path d="M150,110 L160,110" class="arch-line"></path>
+        <path d="M220,110 L230,110" class="arch-line"></path>
+        <text x="185" y="70" text-anchor="middle" class="arch-caption">RNN — sequential</text>
+        <text x="185" y="185" text-anchor="middle" class="arch-label">step t waits for step t−1</text>
+        <a class="dag-node dashed" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="One position in the sequence, processed one at a time by the RNN."
+           data-intuition="Position 4 can&#39;t start until position 3 is done — that&#39;s the sequential bottleneck this panel shows."
+           data-example="In a sentence, this could be any one word waiting its turn." aria-label="Position 1"><rect x="20" y="90" width="60" height="40" rx="6"></rect><text x="50" y="115" text-anchor="middle" class="t">w1</text></a>
+        <a class="dag-node dashed" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="One position in the sequence, processed one at a time by the RNN."
+           data-intuition="Position 4 can&#39;t start until position 3 is done — that&#39;s the sequential bottleneck this panel shows."
+           data-example="In a sentence, this could be any one word waiting its turn." aria-label="Position 2"><rect x="90" y="90" width="60" height="40" rx="6"></rect><text x="120" y="115" text-anchor="middle" class="t">w2</text></a>
+        <a class="dag-node dashed" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="One position in the sequence, processed one at a time by the RNN."
+           data-intuition="Position 4 can&#39;t start until position 3 is done — that&#39;s the sequential bottleneck this panel shows."
+           data-example="In a sentence, this could be any one word waiting its turn." aria-label="Position 3"><rect x="160" y="90" width="60" height="40" rx="6"></rect><text x="190" y="115" text-anchor="middle" class="t">w3</text></a>
+        <a class="dag-node dashed" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="One position in the sequence, processed one at a time by the RNN."
+           data-intuition="Position 4 can&#39;t start until position 3 is done — that&#39;s the sequential bottleneck this panel shows."
+           data-example="In a sentence, this could be any one word waiting its turn." aria-label="Position 4"><rect x="230" y="90" width="60" height="40" rx="6"></rect><text x="260" y="115" text-anchor="middle" class="t">w4</text></a>
+
+        <path d="M370,110 L440,110" class="arch-line"></path>
+        <path d="M370,110 L510,110" class="arch-line"></path>
+        <path d="M370,110 L580,110" class="arch-line"></path>
+        <path d="M440,110 L510,110" class="arch-line"></path>
+        <path d="M440,110 L580,110" class="arch-line"></path>
+        <path d="M510,110 L580,110" class="arch-line"></path>
+        <text x="475" y="70" text-anchor="middle" class="arch-caption">Transformer — parallel self-attention</text>
+        <text x="475" y="185" text-anchor="middle" class="arch-label">every position attends to every position at once</text>
+        <a class="dag-node accent" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="One position in the sequence, processed simultaneously with every other position."
+           data-intuition="No position waits for another — this is what full parallelization across the sequence looks like."
+           data-example="In a sentence, every word&#39;s representation is computed in the same pass." aria-label="Position 1"><rect x="340" y="90" width="60" height="40" rx="6"></rect><text x="370" y="115" text-anchor="middle" class="t">w1</text></a>
+        <a class="dag-node accent" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="One position in the sequence, processed simultaneously with every other position."
+           data-intuition="No position waits for another — this is what full parallelization across the sequence looks like."
+           data-example="In a sentence, every word&#39;s representation is computed in the same pass." aria-label="Position 2"><rect x="410" y="90" width="60" height="40" rx="6"></rect><text x="440" y="115" text-anchor="middle" class="t">w2</text></a>
+        <a class="dag-node accent" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="One position in the sequence, processed simultaneously with every other position."
+           data-intuition="No position waits for another — this is what full parallelization across the sequence looks like."
+           data-example="In a sentence, every word&#39;s representation is computed in the same pass." aria-label="Position 3"><rect x="480" y="90" width="60" height="40" rx="6"></rect><text x="510" y="115" text-anchor="middle" class="t">w3</text></a>
+        <a class="dag-node accent" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="One position in the sequence, processed simultaneously with every other position."
+           data-intuition="No position waits for another — this is what full parallelization across the sequence looks like."
+           data-example="In a sentence, every word&#39;s representation is computed in the same pass." aria-label="Position 4"><rect x="550" y="90" width="60" height="40" rx="6"></rect><text x="580" y="115" text-anchor="middle" class="t">w4</text></a>
+      </svg>
+      <div class="cap">The single change the paper's title refers to. Vaswani et al., NeurIPS 2017.</div>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 520 300" width="100%" role="img" aria-label="Diagram: an encoder stack of self-attention and feed-forward layers, and a decoder stack of masked self-attention, cross-attention to the encoder, and feed-forward layers.">
+        <defs>
+          <marker id="tr-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+        </defs>
+        <path d="M220,130 L320,140" class="arch-line" marker-end="url(#tr-arrow)"></path>
+        <text x="260" y="108" text-anchor="middle" class="arch-label">K, V from encoder</text>
+
+        <a class="dag-node dashed" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="A container: this whole stack (self-attention, then feed-forward) repeats N times."
+           data-intuition="One layer is not enough — stacking several lets each pass refine the representation further."
+           data-example="N=6 in the original paper." aria-label="Encoder: N identical layers"><rect x="20" y="20" width="200" height="220" rx="10"></rect></a>
+        <text x="120" y="15" text-anchor="middle" class="arch-caption">Encoder ×N</text>
+        <a class="dag-node teal" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="Every source position attends to every other source position, no masking."
+           data-intuition="The full input is known up front, so there&#39;s no reason to hide any part of it from any other part."
+           data-example="Computes a new representation for each word using every other word in the sentence." aria-label="Self-attention over the input sequence"><rect x="40" y="50" width="160" height="70" rx="6"></rect><text x="120" y="80" text-anchor="middle" class="t">Self-Attention</text><text x="120" y="95" text-anchor="middle" class="s">multi-head</text></a>
+        <a class="dag-node amber" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="A small two-layer network applied independently to each position."
+           data-intuition="Attention mixes information across positions; this is where each position does its own processing."
+           data-example="The same two weight matrices, reused at every position in the sequence." aria-label="Position-wise feed-forward network"><rect x="40" y="150" width="160" height="70" rx="6"></rect><text x="120" y="180" text-anchor="middle" class="t">Feed Forward</text><text x="120" y="195" text-anchor="middle" class="s">+ residual, layer norm</text></a>
+
+        <a class="dag-node dashed" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="A container: this whole stack (masked self-attention, cross-attention, feed-forward) repeats N times."
+           data-intuition="Matches the encoder&#39;s depth so the model has comparable capacity on both sides."
+           data-example="N=6 in the original paper." aria-label="Decoder: N identical layers"><rect x="300" y="20" width="200" height="260" rx="10"></rect></a>
+        <text x="400" y="15" text-anchor="middle" class="arch-caption">Decoder ×N</text>
+        <a class="dag-node teal" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="Self-attention over the target sequence so far, with future positions hidden."
+           data-intuition="Without the mask the model could just copy the answer it&#39;s supposed to predict."
+           data-example="Predicting word 3 can use words 1-2, never word 4." aria-label="Masked self-attention — cannot look at future positions"><rect x="320" y="40" width="160" height="60" rx="6"></rect><text x="400" y="65" text-anchor="middle" class="t">Masked Self-Attn</text><text x="400" y="80" text-anchor="middle" class="s">no peeking ahead</text></a>
+        <a class="dag-node accent" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="Queries from the decoder; Keys and Values from the encoder&#39;s output."
+           data-intuition="The one place information from the source sequence actually reaches the target sequence."
+           data-example="Generating a French word can attend back to the relevant English word." aria-label="Cross-attention: attends over the encoder's output"><rect x="320" y="110" width="160" height="60" rx="6"></rect><text x="400" y="135" text-anchor="middle" class="t">Cross-Attention</text><text x="400" y="150" text-anchor="middle" class="s">queries encoder output</text></a>
+        <a class="dag-node amber" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="A small two-layer network applied independently to each position, on the decoder side."
+           data-intuition="Identical mechanism to the encoder&#39;s feed-forward — no new idea, just reused."
+           data-example="The same two weight matrices, reused at every position in the sequence." aria-label="Position-wise feed-forward network"><rect x="320" y="180" width="160" height="60" rx="6"></rect><text x="400" y="205" text-anchor="middle" class="t">Feed Forward</text><text x="400" y="220" text-anchor="middle" class="s">+ residual, layer norm</text></a>
+      </svg>
+      <div class="cap">One layer of the encoder–decoder stack (repeated N=6 times in the original paper).</div>
+    </div>
+    <div class="note tip"><span class="note-tag">Key result</span> On WMT 2014 English→German, the Transformer reached <strong>28.4 BLEU</strong> — a new state of the art among single models at the time; on English→French it reached <strong>41.8 BLEU</strong>. The base model trained in roughly <strong>12 hours on 8 GPUs</strong> — dramatically less than comparable RNN-based systems, because training parallelized fully across sequence length.</div>
+  </section>
+
+  <section class="block" id="example">
+    <div class="example">
+      <div class="example-bar"><span class="example-tag">Worked example</span><span class="example-title">What "it" refers to — a self-attention illustration from Google's own explainer</span></div>
+      <div class="example-body">
+        <p>Google Research's companion blog post for this paper (Uszkoreit, 2017) used a now-famous pair
+          of sentences to show what self-attention weights actually capture:</p>
+        <div class="trace">
+          <span class="trace-line"><span class="trace-role thought">Sentence A</span>"The animal didn't cross the street because <strong>it</strong> was too tired."</span>
+          <span class="trace-line"><span class="trace-role obs">Self-attention</span>When computing the representation for "it", the model's attention weights concentrate heavily on <strong>"animal"</strong>.</span>
+          <span class="trace-line"><span class="trace-role thought">Sentence B</span>"The animal didn't cross the street because <strong>it</strong> was too wide."</span>
+          <span class="trace-line"><span class="trace-role obs">Self-attention</span>Same sentence structure, one word changed ("tired" → "wide") — attention for "it" now shifts to <strong>"street"</strong>.</span>
+        </div>
+        <p>Nothing about the model's weights differs between these two runs — the attention pattern
+          itself is computed fresh from context each time, which is exactly why this mechanism resolves
+          an ambiguity a purely sequential model would have to guess at.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="playground">
+    <div class="sec-head">
+      <span class="eyebrow">03 · Try it yourself</span>
+      <h2>Train a tiny Transformer, live in your browser</h2>
+    </div>
+    <div class="concept wide">
+      <p>This is a genuinely tiny Transformer — 1 layer, 2 attention heads, <strong>≈720 parameters</strong> —
+        that runs and trains entirely in your browser, no server involved. "Training" here means real
+        gradient descent: every number below comes from an actual forward pass through the exact
+        self-attention + feed-forward mechanism described above, and each training step nudges every
+        parameter by a real (numerically-estimated) gradient of the loss. Nothing is scripted or
+        pre-recorded — the model starts from random weights and has to earn its predictions.</p>
+      <p>It only ever learns two sentences, which is the point: small enough to watch the whole
+        training-then-inference arc in seconds.</p>
+    </div>
+            <div class="diagram-card inline">
+      <svg viewBox="0 0 510 632" width="100%" role="img" aria-label="The full Transformer encoder-decoder architecture from Vaswani et al., with the blocks the mini app below actually implements highlighted.">
+        <defs>
+          <marker id="archT-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+        </defs>
+        <path d="M120,52 L120,64" class="arch-line" marker-end="url(#archT-arrow)"></path>
+        <path d="M120,110 L120,138" class="arch-line" marker-end="url(#archT-arrow)"></path>
+        <path d="M120,188 L120,200" class="arch-line" marker-end="url(#archT-arrow)"></path>
+        <path d="M120,228 L120,240" class="arch-line" marker-end="url(#archT-arrow)"></path>
+        <path d="M120,290 L120,302" class="arch-line" marker-end="url(#archT-arrow)"></path>
+        <path d="M390,52 L390,64" class="arch-line" marker-end="url(#archT-arrow)"></path>
+        <path d="M390,110 L390,138" class="arch-line" marker-end="url(#archT-arrow)"></path>
+        <path d="M390,188 L390,200" class="arch-line" marker-end="url(#archT-arrow)"></path>
+        <path d="M390,228 L390,240" class="arch-line" marker-end="url(#archT-arrow)"></path>
+        <path d="M390,290 L390,302" class="arch-line" marker-end="url(#archT-arrow)"></path>
+        <path d="M390,330 L390,342" class="arch-line" marker-end="url(#archT-arrow)"></path>
+        <path d="M390,392 L390,404" class="arch-line" marker-end="url(#archT-arrow)"></path>
+        <path d="M390,432 L390,472" class="arch-line" marker-end="url(#archT-arrow)"></path>
+        <path d="M390,504 L390,516" class="arch-line" marker-end="url(#archT-arrow)"></path>
+        <path d="M390,548 L390,560" class="arch-line" marker-end="url(#archT-arrow)"></path>
+        <path d="M220,316 C260,316 250,265 290,265" class="arch-line dashed" marker-end="url(#archT-arrow)"></path>
+        <text x="255" y="272" text-anchor="middle" class="arch-label">K, V</text>
+        <a class="dag-node dashed" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="A container: this whole block repeats N times, each pass refining the representation further."
+           data-intuition="One layer isn&#39;t enough depth — stacking N of them is what gives the model its real capacity."
+           data-example="N=6 in the original paper; the mini app above uses just one layer." aria-label="Repeated N times (N=6 in the paper) — each layer refines the representation further. The mini app below uses just one layer."><rect x="4" y="122" width="232" height="224" rx="10"></rect></a>
+        <text x="222" y="138" text-anchor="end" class="arch-caption">×N</text>
+        <a class="dag-node dashed" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="A container: this whole block repeats N times, each pass refining the representation further."
+           data-intuition="One layer isn&#39;t enough depth — stacking N of them is what gives the model its real capacity."
+           data-example="N=6 in the original paper; the mini app above uses just one layer." aria-label="Repeated N times (N=6 in the paper) — each layer refines the representation further. The mini app below uses just one layer."><rect x="274" y="122" width="232" height="326" rx="10"></rect></a>
+        <text x="492" y="138" text-anchor="end" class="arch-caption">×N</text>
+        <text x="120" y="12" text-anchor="middle" class="arch-caption">ENCODER (unused below)</text>
+        <text x="390" y="12" text-anchor="middle" class="arch-caption">DECODER</text>
+        <a class="dag-node pruned" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="Holds the source sequence&#39;s raw tokens before anything is computed."
+           data-intuition="Every model needs a starting point — this is just the input as given, nothing derived yet."
+           data-example="The French sentence you&#39;re translating from. Not used in the mini app below (it has no encoder)." aria-label="Inputs">
+          <rect x="20" y="20" width="200" height="32" rx="8"></rect>
+          <text x="120" y="40" text-anchor="middle" class="title">Inputs</text>
+        </a>
+        <a class="dag-node pruned" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="Looks up each token in a learned embedding table, then adds a fixed positional-encoding vector."
+           data-intuition="Attention alone treats a sentence as an unordered set — this is the one place order gets built back in."
+           data-example="Token &quot;chat&quot; becomes a vector, plus a position-3 vector added on top. Not used below (no encoder)." aria-label="Input Embedding — + Positional Encoding">
+          <rect x="20" y="64" width="200" height="46" rx="8"></rect>
+          <text x="120" y="84" text-anchor="middle" class="title">Input Embedding</text>
+          <text x="120" y="99" text-anchor="middle" class="sub">+ Positional Encoding</text>
+        </a>
+        <a class="dag-node pruned" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="Every source position computes a weighted sum over every other source position&#39;s Value vector."
+           data-intuition="The whole sentence is known up front, so nothing is gained by hiding later words from earlier ones."
+           data-example="The word &quot;it&quot; can attend to &quot;animal&quot; anywhere else in the sentence. Not used below (no encoder)." aria-label="Multi-Head Attention — self, bidirectional">
+          <rect x="20" y="138" width="200" height="50" rx="8"></rect>
+          <text x="120" y="160" text-anchor="middle" class="title">Multi-Head Attention</text>
+          <text x="120" y="175" text-anchor="middle" class="sub">self, bidirectional</text>
+        </a>
+        <a class="dag-node pruned" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="Adds the sub-layer&#39;s input back to its output, then normalizes the result."
+           data-intuition="Deep stacks of layers are hard to train without this — it keeps values from exploding or vanishing."
+           data-example="x = LayerNorm(x + SelfAttention(x)). Not used below — the mini app skips LayerNorm for simplicity." aria-label="Add &amp; Norm">
+          <rect x="20" y="200" width="200" height="28" rx="8"></rect>
+          <text x="120" y="218" text-anchor="middle" class="title">Add &amp; Norm</text>
+        </a>
+        <a class="dag-node pruned" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="A two-layer network with a ReLU in between, applied to each position independently."
+           data-intuition="Attention mixes information across positions; this is where each position does its own &quot;thinking.&quot;"
+           data-example="The same two weight matrices reused at every position. Not used below (no encoder)." aria-label="Feed Forward">
+          <rect x="20" y="240" width="200" height="50" rx="8"></rect>
+          <text x="120" y="269" text-anchor="middle" class="title">Feed Forward</text>
+        </a>
+        <a class="dag-node pruned" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="The same residual-plus-normalize step, applied again after the feed-forward sub-layer."
+           data-intuition="Every sub-layer in the stack gets this same stabilizing treatment, not just the first one."
+           data-example="x = LayerNorm(x + FFN(x)). Not used below (no encoder)." aria-label="Add &amp; Norm">
+          <rect x="20" y="302" width="200" height="28" rx="8"></rect>
+          <text x="120" y="320" text-anchor="middle" class="title">Add &amp; Norm</text>
+        </a>
+        <a class="dag-node accent" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="The target sequence generated so far, shifted right by one position."
+           data-intuition="Shifting forces the model to predict the next token instead of simply copying the one it can see."
+           data-example="To predict word 4, the model sees words 1-3 as input, not word 4 itself — exactly the app&#39;s training corpus below." aria-label="Outputs — (shifted right)">
+          <rect x="290" y="20" width="200" height="32" rx="8"></rect>
+          <text x="390" y="33" text-anchor="middle" class="title">Outputs</text>
+          <text x="390" y="48" text-anchor="middle" class="sub">(shifted right)</text>
+        </a>
+        <a class="dag-node accent" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="The same embedding-plus-position lookup as the encoder&#39;s, applied to the target sequence."
+           data-intuition="The decoder needs the same order information the encoder needed, for the sequence it&#39;s generating."
+           data-example="Implemented exactly like this in the mini app below — one learned vector per position." aria-label="Output Embedding — + Positional Encoding">
+          <rect x="290" y="64" width="200" height="46" rx="8"></rect>
+          <text x="390" y="84" text-anchor="middle" class="title">Output Embedding</text>
+          <text x="390" y="99" text-anchor="middle" class="sub">+ Positional Encoding</text>
+        </a>
+        <a class="dag-node accent" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="Self-attention over the sequence so far, with future positions masked out."
+           data-intuition="If the model could see the token it&#39;s supposed to predict, it would just copy it — the mask prevents that."
+           data-example="Predicting word 3 can use words 1-2, never word 4. Exactly what the mini app&#39;s causal attention computes." aria-label="Masked Self-Attention — causal — no peeking ahead">
+          <rect x="290" y="138" width="200" height="50" rx="8"></rect>
+          <text x="390" y="160" text-anchor="middle" class="title">Masked Self-Attention</text>
+          <text x="390" y="175" text-anchor="middle" class="sub">causal — no peeking ahead</text>
+        </a>
+        <a class="dag-node pruned" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="Residual-plus-normalize, applied right after masked self-attention."
+           data-intuition="Same stabilizing role as every other Add &amp; Norm in the stack."
+           data-example="x = LayerNorm(x + MaskedSelfAttention(x)). Not used below — the mini app keeps the residual, skips LayerNorm." aria-label="Add &amp; Norm">
+          <rect x="290" y="200" width="200" height="28" rx="8"></rect>
+          <text x="390" y="218" text-anchor="middle" class="title">Add &amp; Norm</text>
+        </a>
+        <a class="dag-node pruned" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="Queries come from the decoder; Keys and Values come from the encoder&#39;s output."
+           data-intuition="The one connection point where information from the source sentence actually reaches the translation."
+           data-example="Generating the French word for &quot;cat&quot; attends back to &quot;cat&quot; in the English input. Not used below: no encoder to attend to." aria-label="Cross-Attention — queries the encoder output">
+          <rect x="290" y="240" width="200" height="50" rx="8"></rect>
+          <text x="390" y="262" text-anchor="middle" class="title">Cross-Attention</text>
+          <text x="390" y="277" text-anchor="middle" class="sub">queries the encoder output</text>
+        </a>
+        <a class="dag-node pruned" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="Residual-plus-normalize, applied after the cross-attention sub-layer specifically."
+           data-intuition="Cross-attention gets the same stabilizing treatment as self-attention and the feed-forward layer."
+           data-example="x = LayerNorm(x + CrossAttention(x)). Not used below (no cross-attention to begin with)." aria-label="Add &amp; Norm">
+          <rect x="290" y="302" width="200" height="28" rx="8"></rect>
+          <text x="390" y="320" text-anchor="middle" class="title">Add &amp; Norm</text>
+        </a>
+        <a class="dag-node accent" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="The identical per-position feed-forward network as the encoder&#39;s, reused on the decoder side."
+           data-intuition="No new idea here — just applying the same per-position &quot;thinking&quot; step to the decoder&#39;s representation."
+           data-example="The same two-layer ReLU network. Implemented exactly like this in the mini app below." aria-label="Feed Forward">
+          <rect x="290" y="342" width="200" height="50" rx="8"></rect>
+          <text x="390" y="371" text-anchor="middle" class="title">Feed Forward</text>
+        </a>
+        <a class="dag-node pruned" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="The third and final Add &amp; Norm in this decoder layer."
+           data-intuition="Every one of the three sub-layers above gets exactly this same treatment, no exceptions."
+           data-example="x = LayerNorm(x + FFN(x)). Not used below — the mini app keeps the residual, skips LayerNorm." aria-label="Add &amp; Norm">
+          <rect x="290" y="404" width="200" height="28" rx="8"></rect>
+          <text x="390" y="422" text-anchor="middle" class="title">Add &amp; Norm</text>
+        </a>
+        <a class="dag-node accent" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="A learned linear projection from the model&#39;s internal dimension to one score per vocabulary word."
+           data-intuition="The internal representation has to become a decision over actual words somehow — this is that step."
+           data-example="An 8-dimensional vector becomes 8 raw scores, one per vocabulary word. Implemented exactly like this below." aria-label="Linear">
+          <rect x="290" y="472" width="200" height="32" rx="8"></rect>
+          <text x="390" y="492" text-anchor="middle" class="title">Linear</text>
+        </a>
+        <a class="dag-node accent" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="Converts the raw per-word scores into a probability distribution that sums to 1."
+           data-intuition="Raw scores aren&#39;t directly comparable as probabilities — softmax is what makes &quot;most likely word&quot; well-defined."
+           data-example="What the Generate tab below actually displays as bars, and what gets sampled to pick the next word." aria-label="Softmax">
+          <rect x="290" y="516" width="200" height="32" rx="8"></rect>
+          <text x="390" y="536" text-anchor="middle" class="title">Softmax</text>
+        </a>
+        <a class="dag-node accent" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-functionality="The finished output: one probability per possible next token."
+           data-intuition="This is the actual deliverable of the whole forward pass — everything above exists to produce this."
+           data-example="This is precisely the &quot;next-word probabilities&quot; panel in the Generate tab below." aria-label="Output Probabilities">
+          <rect x="290" y="560" width="200" height="32" rx="8"></rect>
+          <text x="390" y="580" text-anchor="middle" class="title">Output Probabilities</text>
+        </a>
+      </svg>
+      <div class="cap">Accent = implemented by the mini app below. Dim/dashed = part of the paper's full architecture, not used here (no encoder — this is a decoder-only toy model, N=1 not N=6). Hover or click any block for what it does.</div>
+    </div>
+    <div class="tf-sim">
+      <div class="tf-tabs">
+        <button class="tf-tab active" type="button" data-tab="train">Train</button>
+        <button class="tf-tab" type="button" data-tab="generate">Generate</button>
+      </div>
+
+      <div class="tf-panel" data-panel="train">
+        <div class="tf-corpus">
+          <span class="tf-corpus-tag">Training corpus — the model's entire world</span>
+          <p class="mono">the cat sat on the mat</p>
+          <p class="mono">the dog ran on the road</p>
+        </div>
+        <div class="tf-controls">
+          <button class="btn primary" id="tf-train-1" type="button">Train 1 step</button>
+          <button class="btn primary" id="tf-train-20" type="button">Train 20 steps</button>
+          <button class="btn ghost" id="tf-reset" type="button">↺ Reset weights</button>
+          <span class="tf-training-flag" id="tf-training-flag" hidden>training…</span>
+        </div>
+        <div class="sim-stats">
+          <span>Step: <strong id="tf-step">0</strong></span>
+          <span>Loss: <strong id="tf-loss">–</strong></span>
+        </div>
+        <svg class="tf-loss-chart" id="tf-loss-chart" viewBox="0 0 400 100" width="100%" role="img" aria-label="Line chart of training loss over steps, decreasing as the model trains.">
+          <line x1="6" y1="94" x2="394" y2="94" class="chart-axis"></line>
+          <path id="tf-loss-path" class="chart-line"></path>
+        </svg>
+        <div class="tf-attn-peek">
+          <span class="tf-corpus-tag">Attention while predicting the missing word in "the cat sat on the ___"</span>
+          <div id="tf-attn-bars"></div>
+        </div>
+      </div>
+
+      <div class="tf-panel" data-panel="generate" hidden>
+        <p class="subtle-note">Build a prompt, then watch the model predict — one word at a time —
+          using whatever it has learned so far (train it first, from the Train tab, for it to predict
+          anything sensible).</p>
+        <div class="tf-vocab-buttons" id="tf-vocab-buttons"></div>
+        <div class="tf-sequence" id="tf-sequence"></div>
+        <div class="tf-controls">
+          <button class="btn primary" id="tf-gen-step" type="button">Generate next word →</button>
+          <button class="btn ghost" id="tf-gen-full" type="button">Generate to end</button>
+          <button class="btn ghost" id="tf-gen-reset" type="button">↺ Reset sequence</button>
+        </div>
+        <div class="tf-attn-peek">
+          <span class="tf-corpus-tag">Next-word probabilities</span>
+          <div id="tf-probs"></div>
+        </div>
+        <div class="tf-attn-peek">
+          <span class="tf-corpus-tag">Attention for the next position — which earlier words is it using?</span>
+          <div id="tf-gen-attn-bars"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="talk">
+    <div class="sec-head">
+      <span class="eyebrow">04 · For your talk &amp; project</span>
+      <h2>Why every guide after this one assumes you know this</h2>
+    </div>
+    <div class="concept wide">
+      <ul>
+        <li>Every "LLM" named anywhere in this course — the model inside every agent, every seminar
+          paper, every project — is a Transformer (almost always decoder-only, without the
+          cross-attention block described above). When a paper says "the model attends to earlier
+          tokens," this is the mechanism it means.</li>
+        <li>This is also <em>why</em> Week 3's "context window" and "lost in the middle" are real,
+          specific phenomena and not vague metaphors: attention weights are computed, not uniform, and
+          position affects them — a direct, mechanical consequence of self-attention, not an
+          implementation detail layered on top.</li>
+        <li>For any seminar talk: you can assume your audience already knows what "the Transformer" is
+          at this level of detail — spend your time on what your topic's paper adds on top, not on
+          re-explaining attention from scratch.</li>
+        <li>A sharp question this raises for your own project: does your chosen model's context window
+          actually behave the way you assume across its full length, or have you tested that?</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="reading">
+    <div class="sec-head">
+      <span class="eyebrow">05 · Further reading</span>
+      <h2>Where to go next</h2>
+    </div>
+    <div class="concept wide">
+      <ul class="reading wide">
+          <li><a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">Vaswani et al. — Attention Is All You Need (full paper)</a></li>
+          <li><a href="https://research.google/blog/transformer-a-novel-neural-network-architecture-for-language-understanding/" target="_blank" rel="noopener">Google Research — Transformer: A Novel Neural Network Architecture for Language Understanding (the "it" example, explained by the authors)</a></li>
+          <li><a href="https://arxiv.org/abs/1409.0473" target="_blank" rel="noopener">Bahdanau et al. — Neural Machine Translation by Jointly Learning to Align and Translate (the immediate predecessor: attention bolted onto an RNN)</a></li>
+          <li><a href="https://jalammar.github.io/illustrated-transformer/" target="_blank" rel="noopener">Jay Alammar — The Illustrated Transformer (a widely-used visual walkthrough)</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="since">
+    <div class="sec-head">
+      <span class="eyebrow">06 · Since Transformer</span>
+      <h2>A lineage, not a single leap</h2>
+    </div>
+    <div class="concept wide">
+      <p>The original paper described one architecture used one way: an encoder reading a full source
+        sequence, a decoder generating a target sequence, wired together by cross-attention — built for
+        machine translation. Almost every model since has kept the same core mechanism (self-attention,
+        multi-head, positional encoding) but kept only <em>part</em> of that shape, specialized to a
+        different job:</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 600 190" width="100%" role="img" aria-label="Diagram: the Transformer branches into three architecture families — encoder-only for understanding, decoder-only for generation, and encoder-decoder for sequence-to-sequence tasks.">
+        <defs>
+          <marker id="archFam-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+        </defs>
+        <path d="M300,60 L105,110" class="arch-line" marker-end="url(#archFam-arrow)"></path>
+        <path d="M300,60 L295,110" class="arch-line" marker-end="url(#archFam-arrow)"></path>
+        <path d="M300,60 L485,110" class="arch-line" marker-end="url(#archFam-arrow)"></path>
+
+        <a class="dag-node dashed" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-summary="The original architecture: an encoder and a decoder joined by cross-attention, built for machine translation."
+           data-novelty="Introduced self-attention as a full replacement for recurrence — the ancestor of every variant below."
+           data-weakness="The full encoder-decoder shape is heavier than needed for pure generation or pure understanding — hence the two specialized branches." aria-label="Vaswani et al. — Attention Is All You Need (NeurIPS 2017)">
+          <rect x="220" y="10" width="160" height="50" rx="8"></rect>
+          <text x="300" y="32" text-anchor="middle" class="title">Transformer</text>
+          <text x="300" y="47" text-anchor="middle" class="sub">Vaswani 2017</text>
+        </a>
+
+        <a class="dag-node teal" href="https://arxiv.org/abs/1810.04805" target="_blank" rel="noopener"
+           data-summary="Keeps only the bidirectional self-attention half — every position can see every other position, suited to classifying or scoring a whole input rather than generating new text."
+           data-novelty="Masked-language-model pretraining, then fine-tuned per task — BERT (Devlin et al.) is the canonical example."
+           data-weakness="Not built for open-ended generation — this is why it's a separate branch from every LLM this course studies." aria-label="Devlin et al. — BERT (NAACL 2019)">
+          <rect x="20" y="110" width="170" height="60" rx="8"></rect>
+          <text x="105" y="135" text-anchor="middle" class="title">Encoder-only</text>
+          <text x="105" y="150" text-anchor="middle" class="sub">e.g. BERT — understanding</text>
+        </a>
+
+        <a class="dag-node accent" href="https://arxiv.org/abs/2005.14165" target="_blank" rel="noopener"
+           data-summary="Keeps only the causal (masked) self-attention half, generating one token at a time from everything already generated."
+           data-novelty="The architecture behind the mini app above, and behind almost every LLM this entire course studies — GPT-3, InstructGPT, and everything in the DAG below."
+           data-weakness="Can't look bidirectionally within its own output while generating — each token only ever sees what came before it." aria-label="Brown et al. — GPT-3: Language Models are Few-Shot Learners (NeurIPS 2020)">
+          <rect x="210" y="110" width="170" height="60" rx="8"></rect>
+          <text x="295" y="135" text-anchor="middle" class="title">Decoder-only</text>
+          <text x="295" y="150" text-anchor="middle" class="sub">e.g. GPT — generation</text>
+        </a>
+
+        <a class="dag-node amber" href="https://arxiv.org/abs/1910.10683" target="_blank" rel="noopener"
+           data-summary="Keeps the full original shape — encoder, decoder, and cross-attention — suited to tasks that transform one full sequence into another."
+           data-novelty="T5 (Raffel et al.) reframed every NLP task as text-to-text on exactly this architecture."
+           data-weakness="Heavier than a decoder-only model for pure generation, since it maintains a whole separate encoder stack." aria-label="Raffel et al. — T5: Exploring the Limits of Transfer Learning (JMLR 2020)">
+          <rect x="400" y="110" width="170" height="60" rx="8"></rect>
+          <text x="485" y="135" text-anchor="middle" class="title">Encoder-Decoder</text>
+          <text x="485" y="150" text-anchor="middle" class="sub">e.g. T5 — seq2seq tasks</text>
+        </a>
+      </svg>
+      <div class="cap">Three ways to keep (or discard) half of the original architecture.</div>
+    </div>
+    <div class="concept wide">
+      <p>Every guide in this course — and the mini app above — lives entirely in the
+        <strong>decoder-only</strong> branch: next-token generation is the one job every agent's LLM is
+        actually doing underneath any prompting technique. The DAG below picks up that branch and
+        follows what got built on top of it — hover or click any node for what it added and where it
+        fell short.</p>
+    </div>
+    <div class="dag-card">
+      <svg viewBox="0 0 380 620" width="100%" role="img" aria-label="Dependency graph: Transformer leads to GPT-3 and Toolformer; GPT-3 leads to InstructGPT/RLHF and Chain-of-Thought; Chain-of-Thought leads to ReAct; ReAct leads to Reflexion and o1; o1 leads to DeepSeek-R1.">
+        <defs>
+          <marker id="dagT-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+        </defs>
+
+        <path d="M190,74 L100,124" class="dag-edge" marker-end="url(#dagT-arrow)"></path>
+        <path d="M190,74 L280,124" class="dag-edge" marker-end="url(#dagT-arrow)"></path>
+        <path d="M100,178 L100,228" class="dag-edge" marker-end="url(#dagT-arrow)"></path>
+        <path d="M100,178 L280,228" class="dag-edge" marker-end="url(#dagT-arrow)"></path>
+        <path d="M280,282 L190,332" class="dag-edge" marker-end="url(#dagT-arrow)"></path>
+        <path d="M190,386 L100,436" class="dag-edge" marker-end="url(#dagT-arrow)"></path>
+        <path d="M190,386 L280,436" class="dag-edge" marker-end="url(#dagT-arrow)"></path>
+        <path d="M280,490 L190,540" class="dag-edge" marker-end="url(#dagT-arrow)"></path>
+
+        <a class="dag-node" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"
+           data-summary="Replaces recurrence and convolution entirely with self-attention, letting every position attend to every other position in parallel."
+           data-novelty="First architecture to fully parallelize sequence processing across positions during training."
+           data-weakness="Quadratic attention cost in sequence length — a problem later long-context work has to manage." aria-label="Vaswani et al. — Attention Is All You Need (NeurIPS 2017)">
+          <rect x="120" y="20" width="140" height="54" rx="8"></rect>
+          <text x="190" y="44" text-anchor="middle" class="title">Transformer</text>
+          <text x="190" y="60" text-anchor="middle" class="sub">Vaswani 2017</text>
+        </a>
+        <a class="dag-node" href="https://arxiv.org/abs/2005.14165" target="_blank" rel="noopener"
+           data-summary="Scales a decoder-only Transformer to 175B parameters, showing strong few-shot performance from prompting alone."
+           data-novelty="First clear demonstration that scale alone unlocks few-shot, in-context learning with no fine-tuning."
+           data-weakness="No mechanism for reliably following instructions or refusing harmful requests — needed RLHF to become a usable assistant." aria-label="Brown et al. — Language Models are Few-Shot Learners / GPT-3 (NeurIPS 2020)">
+          <rect x="30" y="124" width="140" height="54" rx="8"></rect>
+          <text x="100" y="148" text-anchor="middle" class="title">GPT-3</text>
+          <text x="100" y="164" text-anchor="middle" class="sub">Brown 2020</text>
+        </a>
+        <a class="dag-node" href="https://arxiv.org/abs/2302.04761" target="_blank" rel="noopener"
+           data-summary="Self-supervised training that teaches a Transformer to insert its own API calls into generated text."
+           data-novelty="No human-labeled examples of tool use — the model grades its own candidate calls by whether they reduce its own prediction loss."
+           data-weakness="Tool use is baked into fine-tuned weights — adding a new tool means retraining, not just describing it." aria-label="Schick et al. — Toolformer (NeurIPS 2023)">
+          <rect x="210" y="124" width="140" height="54" rx="8"></rect>
+          <text x="280" y="148" text-anchor="middle" class="title">Toolformer</text>
+          <text x="280" y="164" text-anchor="middle" class="sub">Schick 2023</text>
+        </a>
+        <a class="dag-node" href="https://arxiv.org/abs/2203.02155" target="_blank" rel="noopener"
+           data-summary="Fine-tunes a pretrained LM to follow instructions using human preference comparisons and reinforcement learning."
+           data-novelty="First large-scale demonstration that human feedback, not just more pretraining, makes models reliably helpful."
+           data-weakness="Optimizes for what human raters prefer, which is not identical to what is true or safe — reward hacking is a known failure mode." aria-label="Ouyang et al. — InstructGPT / RLHF (NeurIPS 2022)">
+          <rect x="30" y="228" width="140" height="54" rx="8"></rect>
+          <text x="100" y="252" text-anchor="middle" class="title">InstructGPT / RLHF</text>
+          <text x="100" y="268" text-anchor="middle" class="sub">Ouyang 2022</text>
+        </a>
+        <a class="dag-node" href="https://arxiv.org/abs/2201.11903" target="_blank" rel="noopener"
+           data-summary="Prompting the model to write intermediate reasoning steps before its final answer."
+           data-novelty="Shows step-by-step reasoning emerges from prompting alone at sufficient scale — no fine-tuning needed."
+           data-weakness="Only reliably helps above a certain model scale; the written steps aren't guaranteed to reflect the model's real computation." aria-label="Wei et al. — Chain-of-Thought Prompting (NeurIPS 2022)">
+          <rect x="210" y="228" width="140" height="54" rx="8"></rect>
+          <text x="280" y="252" text-anchor="middle" class="title">Chain-of-Thought</text>
+          <text x="280" y="268" text-anchor="middle" class="sub">Wei 2022</text>
+        </a>
+        <a class="dag-node" href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener"
+           data-summary="Interleaves free-text &quot;thoughts&quot; with tool actions and real observations in one loop."
+           data-novelty="First to ground reasoning in live environment feedback rather than static context."
+           data-weakness="Assumes actions are cheap, fast, and reversible — breaks down for costly or slow actions." aria-label="Yao et al. — ReAct (ICLR 2023)">
+          <rect x="120" y="332" width="140" height="54" rx="8"></rect>
+          <text x="190" y="356" text-anchor="middle" class="title">ReAct</text>
+          <text x="190" y="372" text-anchor="middle" class="sub">Yao 2023</text>
+        </a>
+        <a class="dag-node" href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener"
+           data-summary="After a failed attempt, the agent writes a natural-language reflection and retries with it in context."
+           data-novelty="&quot;Learns&quot; across attempts via episodic memory, with no weight updates at all."
+           data-weakness="Only as good as its evaluator — without external ground truth, self-judged reflection is unreliable." aria-label="Shinn et al. — Reflexion (NeurIPS 2023)">
+          <rect x="30" y="436" width="140" height="54" rx="8"></rect>
+          <text x="100" y="460" text-anchor="middle" class="title">Reflexion</text>
+          <text x="100" y="476" text-anchor="middle" class="sub">Shinn 2023</text>
+        </a>
+        <a class="dag-node" href="https://openai.com/index/learning-to-reason-with-llms/" target="_blank" rel="noopener"
+           data-summary="Trains a model with reinforcement learning to produce long internal chains of reasoning before answering, extending single-pass CoT into inference-time search."
+           data-novelty="Reasoning length itself becomes something optimized by RL, not just elicited by a prompt."
+           data-weakness="Substantially more expensive per answer, and the disclosed reasoning trace's faithfulness to the model's real process is disputed." aria-label="OpenAI — Learning to Reason with LLMs / o1 (2024)">
+          <rect x="210" y="436" width="140" height="54" rx="8"></rect>
+          <text x="280" y="460" text-anchor="middle" class="title">o1</text>
+          <text x="280" y="476" text-anchor="middle" class="sub">OpenAI 2024</text>
+        </a>
+        <a class="dag-node" href="https://arxiv.org/abs/2501.12948" target="_blank" rel="noopener"
+           data-summary="Shows large-scale reinforcement learning alone (GRPO, no supervised reasoning traces to imitate) can induce strong reasoning behavior in an open-weight model."
+           data-novelty="Reproduces o1-style reasoning gains via a much simpler, published, fully open recipe."
+           data-weakness="Early training runs showed language-mixing and readability issues that had to be corrected with a small amount of supervised cold-start data." aria-label="DeepSeek-AI — DeepSeek-R1 (2025)">
+          <rect x="120" y="540" width="140" height="54" rx="8"></rect>
+          <text x="190" y="564" text-anchor="middle" class="title">DeepSeek-R1</text>
+          <text x="190" y="580" text-anchor="middle" class="sub">DeepSeek-AI 2025</text>
+        </a>
+      </svg>
+      <div class="dag-legend"><span><span class="swatch"></span>builds on / extends</span></div>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="../week-01.html"><span class="dir">← Back</span>Introduction & Methodology</a>
+    <a href="human-loop.html" class="next"><span class="dir">Next guide →</span>Human-in/on-the-Loop</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="../../assets/course.js"></script>
+<script src="../../assets/transformer-sim.js"></script>
+<script src="../../assets/dag.js"></script>
+</body>
+</html>

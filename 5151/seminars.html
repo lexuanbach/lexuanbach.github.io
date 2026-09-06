@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CO5151 Seminars</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="index.html">Overview</a>
+      <a href="lectures/week-01.html">Lectures</a>
+      <a href="seminars.html" aria-current="page">Seminars</a>
+      <a href="project.html">Project</a>
+      <a href="resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="index.html">Overview</a>
+    <a href="lectures/week-01.html">Lectures</a>
+    <a href="seminars.html" aria-current="page">Seminars</a>
+    <a href="project.html">Project</a>
+    <a href="resources.html">Resources</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#mechanics">Mechanics</a>
+    <a href="#rota">Presentation rota</a>
+    <a href="#seminar-1"><span class="ch-num">S1</span>Core topics</a>
+    <a href="#seminar-2"><span class="ch-num">S2</span>Advanced topics</a>
+    <a href="#rubric">Rubric</a>
+    <a href="#forms">Forms</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Seminar Program · CO5151</span>
+      <h1>Two seminars, sixteen topics</h1>
+      <p class="lede">Every group presents one core topic in Seminar 1 (Weeks 3–6) and one advanced
+        topic in Seminar 2 (Weeks 8–11): a 30-minute talk plus a mandatory 15-minute Q&amp;A/defense.
+        Seminar 1 and Seminar 2 are each 25% of the final grade.</p>
+      <div class="meta-chips">
+        <a class="chip" href="#mechanics">30′ + 15′ format</a>
+        <a class="chip" href="#rota">8-group rota</a>
+        <a class="chip" href="#rubric">Grading rubric</a>
+        <a class="chip" href="#forms">Peer-critique form</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="mechanics">
+    <div class="sec-head foldable">
+      <span class="eyebrow">01 · How a seminar session works</span>
+      <h2>Mechanics</h2>
+    </div>
+    <div class="fold-body">
+      <div class="concept">
+        <h3>Allocation</h3>
+        <p>In Week 1 you rank topic preferences; the instructor allocates one Seminar-1 topic and one
+          Seminar-2 topic per group (published within 3 days), balancing preferences against the
+          presentation rota below. Swaps are allowed only by mutual agreement before Week 2.</p>
+      </div>
+      <div class="concept">
+        <h3>The slot: 30′ talk + 15′ Q&amp;A</h3>
+        <p>The time budget is fixed by the syllabus. Talks are cut at 32 minutes — running over is
+          penalized under "structure &amp; delivery," so rehearse against a timer.</p>
+      </div>
+      <div class="concept wide">
+        <h3>Required talk structure</h3>
+        <p>Every talk — Seminar 1 or 2 — must cover, in this order:</p>
+        <ol>
+          <li><strong>Context &amp; problem</strong> — why this topic matters, what question the papers answer</li>
+          <li><strong>Survey of main approaches</strong> — the core papers, explained at the mechanism level</li>
+          <li><strong>Critical analysis</strong> — assumptions, evaluation weaknesses, comparisons across
+            methods (not a summary — this is 25% of your grade)</li>
+          <li><strong>Demo / example</strong> — a worked example, trace, or live demo when feasible</li>
+          <li><strong>Relation to projects &amp; open directions</strong> — how it connects to your own
+            project and what remains unsolved</li>
+        </ol>
+        <p>Target 18–22 slides, at least one table comparing methods, and one slide titled
+          <em>"What we don't believe / what the papers don't show."</em></p>
+      </div>
+      <div class="note tip">
+        <span class="note-tag">Submit 48 hours before your slot</span>
+        Slides (PDF), a 1-page annotated bibliography (one critical sentence per core + extension
+        paper), a demo link/video if applicable, and an AI-use statement. Everyone else submits reading
+        notes (≤ ½ page) and 2 critical questions 24 hours before, and fills a peer-critique form in class.
+      </div>
+      <div class="concept">
+        <h3>Discussant group</h3>
+        <p>Each talk has a designated discussant group (see the rota) who opens the Q&amp;A with two
+          prepared questions. In the rota below, the group presenting the following week discusses the
+          current talk — so read ahead.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="rota">
+    <div class="sec-head foldable">
+      <span class="eyebrow">02 · Who presents when</span>
+      <h2>Presentation rota</h2>
+    </div>
+    <div class="fold-body">
+      <p class="subtle-note">
+        Illustrative allocation for a nominal cohort of 8 groups (G1–G8) — the actual rota is published
+        after group registration in Week 1. Groups that present early in Seminar 1 present late in
+        Seminar 2, so preparation time is balanced across the semester.</p>
+      <div class="tbl-scroll">
+        <table class="tbl">
+          <thead><tr><th>Week</th><th>Talk A</th><th>Talk B</th><th>Discussants</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">W3</td><td>G1 — S1-1 Reasoning &amp; Planning</td><td>G2 — S1-2 Tool Use &amp; MCP</td><td>G3, G4</td></tr>
+            <tr><td class="mono">W4</td><td>G3 — S1-3 Agent Memory</td><td>G4 — S1-4 Retrieval-Augmented Agents</td><td>G5, G6</td></tr>
+            <tr><td class="mono">W5</td><td>G5 — S1-5 Coding Agents</td><td>G6 — S1-6 Self-improvement &amp; Reflection</td><td>G7, G8</td></tr>
+            <tr><td class="mono">W6</td><td>G7 — S1-7 Design Patterns &amp; Orchestration</td><td>G8 — S1-8 Evaluation &amp; Benchmarking</td><td>G1, G2</td></tr>
+            <tr><td class="mono">W8</td><td>G5 — S2-1 Multi-Agent Systems</td><td>G6 — S2-2 Multi-Agent Communication</td><td>G7, G8</td></tr>
+            <tr><td class="mono">W9</td><td>G7 — S2-3 Prompt Injection &amp; Attacks</td><td>G8 — S2-4 Advanced Security &amp; Isolation</td><td>G1, G2</td></tr>
+            <tr><td class="mono">W10</td><td>G1 — S2-5 Safety &amp; Alignment</td><td>G2 — S2-6 RL for Agents</td><td>G3, G4</td></tr>
+            <tr><td class="mono">W11</td><td>G3 — S2-7 Computer-use / Embodied Agents</td><td>G4 — S2-8 Production, Governance &amp; Ethics</td><td>G5, G6</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="seminar-1">
+    <div class="sec-head foldable">
+      <span class="eyebrow">03 · Seminar 1 — Weeks 3–6</span>
+      <h2>Core topics</h2>
+    </div>
+    <div class="fold-body">
+      <div class="topic-grid">
+
+        <div class="topic-card">
+          <div class="thead"><span class="tid">S1-1</span><h3>Advanced Reasoning &amp; Planning</h3></div>
+          <p class="tdesc">ReAct, Reflexion, Tree/Graph-of-Thoughts, LATS, and hierarchical planning — the
+            paradigms that turn a single LLM call into a reasoning process.</p>
+          <h4>Core readings</h4>
+          <ul class="reading">
+            <li>Wei et al. — <a href="https://arxiv.org/abs/2201.11903" target="_blank" rel="noopener">Chain-of-Thought Prompting</a> (NeurIPS 2022)</li>
+            <li>Yao et al. — <a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">ReAct: Synergizing Reasoning and Acting</a> (ICLR 2023)</li>
+            <li>Shinn et al. — <a href="https://arxiv.org/abs/2303.11366" target="_blank" rel="noopener">Reflexion</a> (NeurIPS 2023)</li>
+            <li>Yao et al. — <a href="https://arxiv.org/abs/2305.10601" target="_blank" rel="noopener">Tree of Thoughts</a> (NeurIPS 2023)</li>
+          </ul>
+          <h4>Extension (presenting group)</h4>
+          <ul class="reading">
+            <li>Besta et al. — <a href="https://arxiv.org/abs/2308.09687" target="_blank" rel="noopener">Graph of Thoughts</a> (AAAI 2024)</li>
+            <li>Zhou et al. — <a href="https://arxiv.org/abs/2310.04406" target="_blank" rel="noopener">Language Agent Tree Search / LATS</a> (ICML 2024)</li>
+            <li>Kambhampati et al. — <a href="https://arxiv.org/abs/2402.01817" target="_blank" rel="noopener">LLM-Modulo planning frameworks</a> (ICML 2024)</li>
+          </ul>
+          <h4>Must explain in your talk</h4>
+          <ul class="reading">
+            <li>Why intermediate CoT tokens actually help — and why it's an emergent, scale-dependent capability, not a universal fix</li>
+            <li>ReAct's Thought→Action→Observation loop, and what it assumes about action cost and reversibility</li>
+            <li>How Reflexion differs mechanically from ReAct: episodic memory of reflections, and what feedback signal it needs</li>
+            <li>ToT/GoT: what the search actually searches over, and where the evaluator becomes the bottleneck</li>
+            <li>The planning-vs-decomposition distinction — why "the model produced steps" ≠ "the model can plan"</li>
+            <li>A cost/accuracy comparison across at least 3 of these techniques (tokens, latency, or $ per task)</li>
+          </ul>
+          <div class="qbox">
+            <p>Be ready to defend: <em>What does ReAct assume about observation cost and reversibility?</em></p>
+            <p><em>Where does Tree-of-Thoughts' gain actually come from — search, or the evaluator?</em></p>
+          </div>
+        </div>
+
+        <div class="topic-card">
+          <div class="thead"><span class="tid">S1-2</span><h3>Tool Use &amp; MCP</h3></div>
+          <p class="tdesc">Function calling and the Model Context Protocol at the protocol level — not
+            "how to build an MCP server," but what MCP standardizes and where its security surface is.</p>
+          <h4>Core readings</h4>
+          <ul class="reading">
+            <li>Schick et al. — <a href="https://arxiv.org/abs/2302.04761" target="_blank" rel="noopener">Toolformer</a> (NeurIPS 2023)</li>
+            <li>Qin et al. — <a href="https://arxiv.org/abs/2307.16789" target="_blank" rel="noopener">ToolLLM</a> (ICLR 2024)</li>
+            <li>Anthropic — <a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener">Introducing the Model Context Protocol</a> (2024 launch) + <a href="https://modelcontextprotocol.io/docs/learn/architecture" target="_blank" rel="noopener">current MCP architecture and spec</a></li>
+          </ul>
+          <h4>Extension (presenting group)</h4>
+          <ul class="reading">
+            <li>Patil et al. — <a href="https://arxiv.org/abs/2305.15334" target="_blank" rel="noopener">Gorilla</a> (NeurIPS 2024)</li>
+            <li><a href="https://gorilla.cs.berkeley.edu/leaderboard.html" target="_blank" rel="noopener">Berkeley Function-Calling Leaderboard</a></li>
+            <li>Google — <a href="https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/" target="_blank" rel="noopener">Agent2Agent Protocol / A2A</a> (2025)</li>
+          </ul>
+          <h4>Must explain in your talk</h4>
+          <ul class="reading">
+            <li>The mechanics of native function calling: schema → constrained generation → execution → observation</li>
+            <li>Why tool selection at scale (thousands of APIs) is a distinct problem from calling one tool correctly</li>
+            <li>MCP's host/client/server architecture; tools, resources, and prompts; Elicitation; and current capability discovery</li>
+            <li>What changed since the 2024 launch protocol: stateless data layer, <code>server/discover</code>, and deprecated Sampling</li>
+            <li>What MCP standardizes that ad-hoc function calling did not, and where the M×N → M+N simplification still leaves integration work</li>
+            <li>Why a tool's description and result are untrusted input from the model's perspective</li>
+            <li>A2A vs. MCP: agent-to-agent vs. agent-to-tool, and why they're complementary, not competing</li>
+          </ul>
+          <div class="qbox">
+            <p>Be ready to defend: <em>Which MCP input creates the largest injection surface, and why?</em></p>
+            <p><em>What does MCP standardize that plain function calling did not?</em></p>
+          </div>
+        </div>
+
+        <div class="topic-card">
+          <div class="thead"><span class="tid">S1-3</span><h3>Agent Memory</h3></div>
+          <p class="tdesc">Short/long-term and episodic/semantic memory architectures — MemGPT's paging
+            model, Generative Agents' retrieval scoring, and what "forgetting" should mean.</p>
+          <h4>Core readings</h4>
+          <ul class="reading">
+            <li>Packer et al. — <a href="https://arxiv.org/abs/2310.08560" target="_blank" rel="noopener">MemGPT</a> (2023)</li>
+            <li>Park et al. — <a href="https://arxiv.org/abs/2304.03442" target="_blank" rel="noopener">Generative Agents</a> (UIST 2023)</li>
+          </ul>
+          <h4>Extension (presenting group)</h4>
+          <ul class="reading">
+            <li>Sumers et al. — <a href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener">CoALA memory taxonomy</a> (TMLR 2024)</li>
+            <li>Zhong et al. — <a href="https://arxiv.org/abs/2305.10250" target="_blank" rel="noopener">MemoryBank</a> (AAAI 2024)</li>
+            <li>Liu et al. — <a href="https://arxiv.org/abs/2307.03172" target="_blank" rel="noopener">Lost in the Middle</a> (TACL 2024)</li>
+            <li>Xu et al. — <a href="https://arxiv.org/abs/2502.12110" target="_blank" rel="noopener">A-MEM</a> (2025)</li>
+          </ul>
+          <h4>Must explain in your talk</h4>
+          <ul class="reading">
+            <li>The distinction between context-window ("short-term") and persistent ("long-term") memory</li>
+            <li>MemGPT's paging/virtual-context mechanism: what triggers eviction, and what the write policy is</li>
+            <li>Generative Agents' retrieval scoring (recency/importance/relevance) and how it was evaluated</li>
+            <li>CoALA's memory taxonomy (working vs. long-term; episodic/semantic/procedural)</li>
+            <li>Why "lost in the middle" means position matters independently of context capacity</li>
+            <li>How memory can be poisoned, and what a write-time or read-time defense would look like</li>
+          </ul>
+          <div class="qbox">
+            <p>Be ready to defend: <em>What is the write policy in MemGPT — who decides what is remembered?</em></p>
+            <p><em>How can memory be poisoned, and what would you log to detect it?</em></p>
+          </div>
+        </div>
+
+        <div class="topic-card">
+          <div class="thead"><span class="tid">S1-4</span><h3>Retrieval-Augmented &amp; Knowledge-grounded Agents</h3></div>
+          <p class="tdesc">RAG and GraphRAG as tools inside an agent loop — and when retrieval actively
+            hurts rather than helps.</p>
+          <h4>Core readings</h4>
+          <ul class="reading">
+            <li>Lewis et al. — <a href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener">Retrieval-Augmented Generation</a> (NeurIPS 2020)</li>
+            <li>Edge et al. — <a href="https://arxiv.org/abs/2404.16130" target="_blank" rel="noopener">GraphRAG</a> (2024)</li>
+          </ul>
+          <h4>Extension (presenting group)</h4>
+          <ul class="reading">
+            <li>Asai et al. — <a href="https://arxiv.org/abs/2310.11511" target="_blank" rel="noopener">Self-RAG</a> (ICLR 2024)</li>
+            <li>Jiang et al. — <a href="https://arxiv.org/abs/2305.06983" target="_blank" rel="noopener">Active Retrieval / FLARE</a> (EMNLP 2023)</li>
+            <li>Gao et al. — <a href="https://arxiv.org/abs/2312.10997" target="_blank" rel="noopener">RAG survey</a> (2024)</li>
+          </ul>
+          <h4>Must explain in your talk</h4>
+          <ul class="reading">
+            <li>The RAG mechanism: retrieve, then condition generation on the retrieved passages</li>
+            <li>Naive RAG's failure on "global" questions, and how GraphRAG's community-summary approach addresses it</li>
+            <li>Self-RAG: what the reflection tokens actually decide (whether to retrieve, and how to critique retrieved content)</li>
+            <li>FLARE: retrieval triggered by the model's own low-confidence tokens, not a fixed schedule</li>
+            <li>At least one concrete case where retrieval measurably hurts accuracy</li>
+            <li>How retrieval fits as one tool inside an agent's decision loop, not a separate pipeline stage</li>
+          </ul>
+          <div class="qbox">
+            <p>Be ready to defend: <em>When does retrieval reduce accuracy?</em></p>
+            <p><em>How should an agent decide whether to retrieve at all?</em></p>
+          </div>
+        </div>
+
+        <div class="topic-card">
+          <div class="thead"><span class="tid">S1-5</span><h3>Coding Agents &amp; Automated SE</h3></div>
+          <p class="tdesc">SWE-bench and SWE-agent as research objects: agent–computer interface design,
+            evaluation validity, and contamination — not tutorial use of an AI IDE.</p>
+          <h4>Core readings</h4>
+          <ul class="reading">
+            <li>Jimenez et al. — <a href="https://arxiv.org/abs/2310.06770" target="_blank" rel="noopener">SWE-bench</a> (ICLR 2024)</li>
+            <li>Yang et al. — <a href="https://arxiv.org/abs/2405.15793" target="_blank" rel="noopener">SWE-agent</a> (NeurIPS 2024)</li>
+          </ul>
+          <h4>Extension (presenting group)</h4>
+          <ul class="reading">
+            <li>Wang et al. — <a href="https://arxiv.org/abs/2407.16741" target="_blank" rel="noopener">OpenHands</a> (ICLR 2025)</li>
+            <li>Xia et al. — <a href="https://arxiv.org/abs/2407.01489" target="_blank" rel="noopener">Agentless</a> (2024)</li>
+            <li>Xia &amp; Zhang — <a href="https://arxiv.org/abs/2304.00385" target="_blank" rel="noopener">ChatRepair</a> (ISSTA 2024)</li>
+          </ul>
+          <h4>Must explain in your talk</h4>
+          <ul class="reading">
+            <li>SWE-bench's task format (real GitHub issues + hidden tests) and why "Verified" exists (contamination/flakiness filtering)</li>
+            <li>The agent–computer interface in SWE-agent: what custom tools it gives the model, and why that matters for the result</li>
+            <li>Agentless's three-phase (localize/repair/validate) pipeline as a counter-argument to "agents need autonomy"</li>
+            <li>What SWE-bench does <em>not</em> measure (maintainability, security, code-review quality)</li>
+            <li>ChatRepair's conversational repair loop: how test-failure feedback shapes the next patch attempt</li>
+            <li>One concrete ablation or contamination concern for any of these systems</li>
+          </ul>
+          <div class="qbox">
+            <p>Be ready to defend: <em>What does SWE-bench measure and not measure? Why does "Verified" exist?</em></p>
+            <p><em>Is the agent–computer interface or the underlying model responsible for SWE-agent's gain?</em></p>
+          </div>
+        </div>
+
+        <div class="topic-card">
+          <div class="thead"><span class="tid">S1-6</span><h3>Self-improvement &amp; Reflection</h3></div>
+          <p class="tdesc">Reflexion, Self-Refine, Self-Consistency — and the uncomfortable result that
+            self-correction without an external verifier is weak.</p>
+          <h4>Core readings</h4>
+          <ul class="reading">
+            <li>Madaan et al. — <a href="https://arxiv.org/abs/2303.17651" target="_blank" rel="noopener">Self-Refine</a> (NeurIPS 2023)</li>
+            <li>Wang et al. — <a href="https://arxiv.org/abs/2203.11171" target="_blank" rel="noopener">Self-Consistency</a> (ICLR 2023)</li>
+          </ul>
+          <h4>Extension (presenting group)</h4>
+          <ul class="reading">
+            <li>Huang et al. — <a href="https://arxiv.org/abs/2310.01798" target="_blank" rel="noopener">LLMs Cannot Self-Correct Reasoning Yet</a> (ICLR 2024)</li>
+            <li>Lightman et al. — <a href="https://arxiv.org/abs/2305.20050" target="_blank" rel="noopener">Let's Verify Step by Step</a> (ICLR 2024)</li>
+            <li>Zelikman et al. — <a href="https://arxiv.org/abs/2203.14465" target="_blank" rel="noopener">STaR</a> (NeurIPS 2022)</li>
+          </ul>
+          <h4>Must explain in your talk</h4>
+          <ul class="reading">
+            <li>Self-Refine's loop: the same model generates, critiques, and revises — no external signal</li>
+            <li>Self-Consistency: sampling + majority vote, and why that's a different mechanism from refinement</li>
+            <li>Huang et al.'s finding: why self-correction without external feedback often fails or hurts accuracy</li>
+            <li>The outcome-reward vs. process-reward distinction, and why process supervision helped in "Let's Verify Step by Step"</li>
+            <li>STaR's bootstrap loop: generate rationales, keep the ones reaching correct answers, fine-tune</li>
+            <li>Where each technique's feedback signal actually comes from (self vs. external) — the key critical question for this topic</li>
+          </ul>
+          <div class="qbox">
+            <p>Be ready to defend: <em>Under what conditions does self-refinement actually work?</em></p>
+            <p><em>What's the difference between an outcome and a process verifier, and why does it matter for search?</em></p>
+          </div>
+        </div>
+
+        <div class="topic-card">
+          <div class="thead"><span class="tid">S1-7</span><h3>Agent Design Patterns &amp; Orchestration</h3></div>
+          <p class="tdesc">Workflows vs. autonomous agents; prompt chaining, routing, orchestrator–worker,
+            evaluator–optimizer — and why the simplest pattern that works is usually the right one.</p>
+          <h4>Core readings</h4>
+          <ul class="reading">
+            <li>Anthropic — <a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener">Building Effective Agents</a> (2024)</li>
+          </ul>
+          <h4>Extension (presenting group)</h4>
+          <ul class="reading">
+            <li>Anthropic — <a href="https://www.anthropic.com/engineering/built-multi-agent-research-system" target="_blank" rel="noopener">How we built our multi-agent research system</a> (2025)</li>
+            <li>OpenAI — <a href="https://openai.com/business/guides-and-resources/a-practical-guide-to-building-ai-agents/" target="_blank" rel="noopener">A Practical Guide to Building Agents</a> (2025)</li>
+            <li><a href="https://docs.langchain.com/oss/python/langgraph/overview" target="_blank" rel="noopener">LangGraph documentation</a> — state graphs, checkpointing, human-in-the-loop</li>
+          </ul>
+          <h4>Must explain in your talk</h4>
+          <ul class="reading">
+            <li>The workflow-vs-agent distinction: fixed code path vs. model-directed control flow</li>
+            <li>At least three concrete patterns (prompt chaining, routing, orchestrator–worker, evaluator–optimizer) and what each buys/costs</li>
+            <li>Why Anthropic argues for the simplest pattern that works, and what triggers moving to a more complex one</li>
+            <li>What "durable execution" / checkpointing means for a long-running agent's failure recovery</li>
+            <li>How the multi-agent research system's lead/subagent split changes cost and latency, not just capability</li>
+            <li>A design-pattern decision your own project actually made, and the alternative you rejected</li>
+          </ul>
+          <div class="qbox">
+            <p>Be ready to defend: <em>Why does Anthropic recommend against agents for many tasks?</em></p>
+            <p><em>What does an orchestrator–worker pattern buy over one long context?</em></p>
+          </div>
+        </div>
+
+        <div class="topic-card">
+          <div class="thead"><span class="tid">S1-8</span><h3>Agent Evaluation &amp; Benchmarking</h3></div>
+          <p class="tdesc">AgentBench, GAIA, WebArena, τ-bench, and the recurring pitfalls: contamination,
+            judge bias, and cost-blind leaderboards. Directly useful for your project's evaluation.</p>
+          <h4>Core readings</h4>
+          <ul class="reading">
+            <li>Liu et al. — <a href="https://arxiv.org/abs/2308.03688" target="_blank" rel="noopener">AgentBench</a> (ICLR 2024)</li>
+            <li>Mialon et al. — <a href="https://arxiv.org/abs/2311.12983" target="_blank" rel="noopener">GAIA</a> (ICLR 2024)</li>
+            <li>Zhou et al. — <a href="https://arxiv.org/abs/2307.13854" target="_blank" rel="noopener">WebArena</a> (ICLR 2024)</li>
+          </ul>
+          <h4>Extension (presenting group)</h4>
+          <ul class="reading">
+            <li>Yao et al. — <a href="https://arxiv.org/abs/2406.12045" target="_blank" rel="noopener">τ-bench</a> (2024)</li>
+            <li>Kapoor et al. — <a href="https://arxiv.org/abs/2407.01502" target="_blank" rel="noopener">AI Agents That Matter</a> (2024)</li>
+            <li>Zheng et al. — <a href="https://arxiv.org/abs/2306.05685" target="_blank" rel="noopener">Judging LLM-as-a-Judge</a> (NeurIPS 2023)</li>
+          </ul>
+          <h4>Must explain in your talk</h4>
+          <ul class="reading">
+            <li>What AgentBench/GAIA/WebArena each actually measure, and on what kind of task</li>
+            <li>pass@k vs. pass^k: what each measures, and why pass^k is the stricter, deployment-relevant one</li>
+            <li>τ-bench's reliability finding: why even strong agents fail pass^8 despite a decent pass@1</li>
+            <li>The "AI Agents That Matter" critique: cost-blind leaderboards, inadequate holdouts, conflated benchmarking needs</li>
+            <li>LLM-as-judge's known biases (verbosity, position, self-enhancement) and how to audit for them</li>
+            <li>Contamination as a threat to any benchmark number, and how you'd test for it</li>
+          </ul>
+          <div class="qbox">
+            <p>Be ready to defend: <em>Why report pass^k instead of pass@k?</em></p>
+            <p><em>What are the failure modes of LLM-as-judge, and how would you audit one?</em></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="seminar-2">
+    <div class="sec-head foldable">
+      <span class="eyebrow">04 · Seminar 2 — Weeks 8–11</span>
+      <h2>Advanced topics</h2>
+    </div>
+    <div class="fold-body">
+      <div class="topic-grid">
+
+        <div class="topic-card sem2">
+          <div class="thead"><span class="tid">S2-1</span><h3>Multi-Agent Systems &amp; Orchestration</h3></div>
+          <p class="tdesc">AutoGen, MetaGPT, CAMEL — and when a team of agents genuinely beats one agent
+            with better tools.</p>
+          <h4>Core readings</h4>
+          <ul class="reading">
+            <li>Wu et al. — <a href="https://arxiv.org/abs/2308.08155" target="_blank" rel="noopener">AutoGen</a> (COLM 2024)</li>
+            <li>Hong et al. — <a href="https://arxiv.org/abs/2308.00352" target="_blank" rel="noopener">MetaGPT</a> (ICLR 2024)</li>
+            <li>Li et al. — <a href="https://arxiv.org/abs/2303.17760" target="_blank" rel="noopener">CAMEL</a> (NeurIPS 2023)</li>
+          </ul>
+          <h4>Extension (presenting group)</h4>
+          <ul class="reading">
+            <li>Qian et al. — <a href="https://arxiv.org/abs/2307.07924" target="_blank" rel="noopener">ChatDev</a> (ACL 2024)</li>
+            <li>Cemri et al. — <a href="https://arxiv.org/abs/2503.13657" target="_blank" rel="noopener">Why Do Multi-Agent LLM Systems Fail?</a> (2025)</li>
+          </ul>
+          <h4>Must explain in your talk</h4>
+          <ul class="reading">
+            <li>What AutoGen/MetaGPT/CAMEL actually add structurally (roles, conversation patterns) vs. a single agent with tools</li>
+            <li>At least 2–3 concrete failure categories from Cemri et al.'s taxonomy (system design, inter-agent misalignment, task verification)</li>
+            <li>A fair, cost-matched comparison design: multi-agent vs. single-agent on the same task and budget</li>
+            <li>When a single agent with better tools plausibly wins over a multi-agent team</li>
+            <li>ChatDev's chat-chain structure: how communication phases map onto SE lifecycle stages</li>
+          </ul>
+          <div class="qbox">
+            <p>Be ready to defend: <em>Is multi-agent buying capability, context isolation, or parallelism?</em></p>
+            <p><em>How do you evaluate a multi-agent system fairly against a single agent at matched cost?</em></p>
+          </div>
+        </div>
+
+        <div class="topic-card sem2">
+          <div class="thead"><span class="tid">S2-2</span><h3>Multi-Agent Communication &amp; Collaboration</h3></div>
+          <p class="tdesc">Debate, role-play, and negotiation protocols between agents — and where
+            emergent behaviour is real vs. an artifact of prompting.</p>
+          <h4>Core readings</h4>
+          <ul class="reading">
+            <li>Park et al. — <a href="https://arxiv.org/abs/2304.03442" target="_blank" rel="noopener">Generative Agents</a> (UIST 2023)</li>
+            <li>Du et al. — <a href="https://arxiv.org/abs/2305.14325" target="_blank" rel="noopener">Multiagent Debate</a> (ICML 2024)</li>
+          </ul>
+          <h4>Extension (presenting group)</h4>
+          <ul class="reading">
+            <li>Google — <a href="https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/" target="_blank" rel="noopener">A2A protocol</a> (2025)</li>
+            <li>Liang et al. — <a href="https://aclanthology.org/2024.emnlp-main.992/" target="_blank" rel="noopener">Divergent thinking via multi-agent debate</a> (EMNLP 2024)</li>
+          </ul>
+          <h4>Must explain in your talk</h4>
+          <ul class="reading">
+            <li>Multiagent Debate's mechanism: multiple instances propose and critique each other's answers over rounds</li>
+            <li>Whether debate gains hold up against self-consistency at matched token budget — the core critical question</li>
+            <li>Generative Agents' emergent behavior: what's genuinely emergent vs. an artifact of the simulation's prompting</li>
+            <li>What A2A standardizes for agent-to-agent messaging that MCP does not</li>
+            <li>How agents could collude, and what a detection/monitoring signal would look like</li>
+          </ul>
+          <div class="qbox">
+            <p>Be ready to defend: <em>At equal token budget, does debate actually beat self-consistency?</em></p>
+            <p><em>How could agents collude, and how would you detect it?</em></p>
+          </div>
+        </div>
+
+        <div class="topic-card sem2">
+          <div class="thead"><span class="tid">S2-3</span><h3>Prompt Injection &amp; Attacks</h3></div>
+          <p class="tdesc">Direct and indirect prompt injection as a <em>system</em> vulnerability, not a
+            model one — the OWASP LLM Top 10 and why prompt-level detectors fail.</p>
+          <h4>Core readings</h4>
+          <ul class="reading">
+            <li>Greshake et al. — <a href="https://arxiv.org/abs/2302.12173" target="_blank" rel="noopener">Indirect Prompt Injection</a> (AISec 2023)</li>
+            <li>Perez &amp; Ribeiro — <a href="https://arxiv.org/abs/2211.09527" target="_blank" rel="noopener">Ignore Previous Prompt</a> (2022)</li>
+            <li><a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" rel="noopener">OWASP — Top 10 for LLM Applications</a> (2025)</li>
+          </ul>
+          <h4>Extension (presenting group)</h4>
+          <ul class="reading">
+            <li>Zou et al. — <a href="https://arxiv.org/abs/2307.15043" target="_blank" rel="noopener">Universal adversarial attacks / GCG</a> (2023)</li>
+            <li>Liu et al. — <a href="https://arxiv.org/abs/2310.12815" target="_blank" rel="noopener">Formalizing prompt injection</a> (USENIX Security 2024)</li>
+            <li>Willison — <a href="https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/" target="_blank" rel="noopener">The lethal trifecta for AI agents</a> (2025)</li>
+          </ul>
+          <h4>Must explain in your talk</h4>
+          <ul class="reading">
+            <li>The direct/indirect injection distinction, and why indirect is the harder, more dangerous case</li>
+            <li>A concrete indirect-injection scenario for your <strong>own project's</strong> tools — not a generic example</li>
+            <li>Why "ignore previous instructions"-style detectors are fundamentally unreliable</li>
+            <li>GCG's mechanism at a conceptual level: gradient-guided suffix search, and why it transfers across models</li>
+            <li>The OWASP LLM Top 10 categories relevant to agents specifically, not just chatbots</li>
+            <li>Willison's "lethal trifecta": which of your own project's tools puts it at risk</li>
+          </ul>
+          <div class="note danger tight">
+            <span class="note-tag">Responsible red-teaming only</span>
+            Test injection and jailbreak techniques only against your own project's system or sanctioned
+            benchmarks (e.g., AgentDojo). Never test against third-party services.
+          </div>
+          <div class="qbox">
+            <p>Be ready to defend: <em>Which of your own project's tools could become an exfiltration channel?</em></p>
+          </div>
+        </div>
+
+        <div class="topic-card sem2">
+          <div class="thead"><span class="tid">S2-4</span><h3>Advanced Security &amp; Isolation</h3></div>
+          <p class="tdesc">Memory poisoning, multi-agent collusion, tool-supply-chain attacks, and defenses
+            by design — sandboxing, least privilege, and information-flow control.</p>
+          <h4>Core readings</h4>
+          <ul class="reading">
+            <li>Chen et al. — <a href="https://arxiv.org/abs/2407.12784" target="_blank" rel="noopener">AgentPoison</a> (NeurIPS 2024)</li>
+            <li>Debenedetti et al. — <a href="https://arxiv.org/abs/2406.13352" target="_blank" rel="noopener">AgentDojo</a> (NeurIPS 2024, D&amp;B)</li>
+          </ul>
+          <h4>Extension (presenting group)</h4>
+          <ul class="reading">
+            <li>Debenedetti et al. — <a href="https://arxiv.org/abs/2503.18813" target="_blank" rel="noopener">Defeating Prompt Injections by Design / CaMeL</a> (2025)</li>
+            <li>Beurer-Kellner et al. — <a href="https://arxiv.org/abs/2506.08837" target="_blank" rel="noopener">Design Patterns for Securing LLM Agents</a> (2025)</li>
+          </ul>
+          <h4>Must explain in your talk</h4>
+          <ul class="reading">
+            <li>AgentPoison's mechanism: poisoning memory/RAG stores so a trigger retrieves a malicious demonstration</li>
+            <li>AgentDojo's evaluation design: utility vs. attack-success-rate as two separate axes, not one</li>
+            <li>CaMeL's core idea: separating control flow from data flow so untrusted data can't redirect execution</li>
+            <li>The utility cost of CaMeL's defense, with concrete numbers — security is not free</li>
+            <li>At least 2 of Beurer-Kellner et al.'s design patterns and what each one rules out</li>
+            <li>The minimum permission model you'd apply to your own project's tools</li>
+          </ul>
+          <div class="qbox">
+            <p>Be ready to defend: <em>What does AgentDojo measure, and what is the utility cost of the best defenses?</em></p>
+            <p><em>What is the minimum permission model for your project's tools?</em></p>
+          </div>
+        </div>
+
+        <div class="topic-card sem2">
+          <div class="thead"><span class="tid">S2-5</span><h3>Safety &amp; Alignment</h3></div>
+          <p class="tdesc">Guardrails, Constitutional AI, human-in/on-the-loop, and action-boundary
+            enforcement — model alignment vs. system safety.</p>
+          <h4>Core readings</h4>
+          <ul class="reading">
+            <li>Bai et al. — <a href="https://arxiv.org/abs/2212.08073" target="_blank" rel="noopener">Constitutional AI</a> (2022)</li>
+            <li>Ouyang et al. — <a href="https://arxiv.org/abs/2203.02155" target="_blank" rel="noopener">RLHF</a> (NeurIPS 2022)</li>
+          </ul>
+          <h4>Extension (presenting group)</h4>
+          <ul class="reading">
+            <li>Shavit et al. — <a href="https://openai.com/index/practices-for-governing-agentic-ai-systems/" target="_blank" rel="noopener">Practices for Governing Agentic AI Systems</a> (2023)</li>
+            <li>Greenblatt et al. — <a href="https://arxiv.org/abs/2412.14093" target="_blank" rel="noopener">Alignment Faking in LLMs</a> (2024)</li>
+            <li>Meinke et al. — <a href="https://arxiv.org/abs/2412.04984" target="_blank" rel="noopener">In-context Scheming</a> (2024)</li>
+          </ul>
+          <h4>Must explain in your talk</h4>
+          <ul class="reading">
+            <li>Constitutional AI's mechanism: self-critique against a written constitution, no human harm labels</li>
+            <li>The model-alignment vs. system-safety distinction, with one concrete example of each failing independently</li>
+            <li>Alignment faking: what behavior was observed, and why it complicates "the model says it's aligned" as evidence</li>
+            <li>In-context scheming: at least one concrete strategic behavior models exhibited (disabling oversight, exfiltration)</li>
+            <li>What an "action boundary" or escalation policy would need to look like for your own project</li>
+          </ul>
+          <div class="qbox">
+            <p>Be ready to defend: <em>Which failures does model alignment address, and which need system-level safety?</em></p>
+            <p><em>What is an "action boundary," and how do you enforce it outside the prompt?</em></p>
+          </div>
+        </div>
+
+        <div class="topic-card sem2">
+          <div class="thead"><span class="tid">S2-6</span><h3>Reinforcement Learning for Agents</h3></div>
+          <p class="tdesc">Verifiable rewards, GRPO, and reasoning-RL (o1/R1-style) — plus reward hacking
+            as the recurring failure mode.</p>
+          <h4>Core readings</h4>
+          <ul class="reading">
+            <li>Sutton &amp; Barto — <a href="http://incompleteideas.net/book/the-book-2nd.html" target="_blank" rel="noopener">Reinforcement Learning: An Introduction</a> (ch. 1, 3, 13)</li>
+            <li>Ouyang et al. — <a href="https://arxiv.org/abs/2203.02155" target="_blank" rel="noopener">RLHF</a> (NeurIPS 2022)</li>
+            <li>Shao et al. — <a href="https://arxiv.org/abs/2402.03300" target="_blank" rel="noopener">GRPO / DeepSeekMath</a> (2024)</li>
+          </ul>
+          <h4>Extension (presenting group)</h4>
+          <ul class="reading">
+            <li>DeepSeek-AI — <a href="https://arxiv.org/abs/2501.12948" target="_blank" rel="noopener">DeepSeek-R1</a> (2025)</li>
+            <li>Lightman et al. — <a href="https://arxiv.org/abs/2305.20050" target="_blank" rel="noopener">Process reward models</a> (ICLR 2024)</li>
+            <li>Pan et al. — <a href="https://arxiv.org/abs/2412.21139" target="_blank" rel="noopener">SWE-Gym</a> (2024)</li>
+          </ul>
+          <h4>Must explain in your talk</h4>
+          <ul class="reading">
+            <li>Why verifiable rewards (not human preference alone) unlocked reasoning-RL at scale</li>
+            <li>GRPO's mechanism relative to PPO: what it removes (the critic) and why that matters for cost</li>
+            <li>DeepSeek-R1's training recipe at a high level: what changes between R1-Zero and R1</li>
+            <li>A concrete reward-hacking example for a tool-using agent — not a generic "reward hacking exists" claim</li>
+            <li>SWE-Gym's role: why a training environment with executable verification, not just more data, was the bottleneck</li>
+          </ul>
+          <div class="qbox">
+            <p>Be ready to defend: <em>Why did verifiable rewards unlock reasoning-RL?</em></p>
+            <p><em>Give a reward-hacking example for a tool-using agent.</em></p>
+          </div>
+        </div>
+
+        <div class="topic-card sem2">
+          <div class="thead"><span class="tid">S2-7</span><h3>Computer-use / GUI / Embodied Agents</h3></div>
+          <p class="tdesc">Web agents, computer-use agents, and embodied agents — where perception-action
+            grounding still fails on long horizons.</p>
+          <h4>Core readings</h4>
+          <ul class="reading">
+            <li>Wang et al. — <a href="https://arxiv.org/abs/2305.16291" target="_blank" rel="noopener">Voyager</a> (TMLR 2024)</li>
+            <li>Zhou et al. — <a href="https://arxiv.org/abs/2307.13854" target="_blank" rel="noopener">WebArena</a> (ICLR 2024)</li>
+          </ul>
+          <h4>Extension (presenting group)</h4>
+          <ul class="reading">
+            <li>Xie et al. — <a href="https://arxiv.org/abs/2404.07972" target="_blank" rel="noopener">OSWorld</a> (NeurIPS 2024)</li>
+            <li>Deng et al. — <a href="https://arxiv.org/abs/2306.06070" target="_blank" rel="noopener">Mind2Web</a> (NeurIPS 2023)</li>
+            <li>Ahn et al. — <a href="https://arxiv.org/abs/2204.01691" target="_blank" rel="noopener">SayCan</a> (CoRL 2022)</li>
+            <li>Brohan et al. — <a href="https://arxiv.org/abs/2307.15818" target="_blank" rel="noopener">RT-2</a> (CoRL 2023)</li>
+            <li>Anthropic — <a href="https://www.anthropic.com/news/3-5-models-and-computer-use" target="_blank" rel="noopener">Developing a computer use model</a> (2024)</li>
+          </ul>
+          <h4>Must explain in your talk</h4>
+          <ul class="reading">
+            <li>Voyager's three components (curriculum, skill library, iterative prompting) and what each solves</li>
+            <li>Why OSWorld/WebArena success rates remain low — name a specific failure mode, not "it's hard"</li>
+            <li>The perception-grounding problem: screenshots/pixels vs. accessibility trees/DOM as different action interfaces</li>
+            <li>What safety control an irreversible real-world action would need before an agent is allowed to take it</li>
+          </ul>
+          <div class="qbox">
+            <p>Be ready to defend: <em>Why are OSWorld success rates still low — what actually fails?</em></p>
+            <p><em>What safety controls are needed for irreversible real-world actions?</em></p>
+          </div>
+        </div>
+
+        <div class="topic-card sem2">
+          <div class="thead"><span class="tid">S2-8</span><h3>Production, Governance &amp; Ethics</h3></div>
+          <p class="tdesc">Observability, reliability, cost, and governance for non-deterministic agent
+            systems — reliability engineering meets agentic AI.</p>
+          <h4>Core readings</h4>
+          <ul class="reading">
+            <li>Huyen — <a href="https://huyenchip.com/2025/01/07/agents.html" target="_blank" rel="noopener">Agents</a> &amp; <a href="https://huyenchip.com/2024/07/25/genai-platform.html" target="_blank" rel="noopener">Building A Generative AI Platform</a> (free, adapted from AI Engineering, 2025)</li>
+            <li>Chan et al. — <a href="https://arxiv.org/abs/2401.13138" target="_blank" rel="noopener">Visibility into AI Agents</a> (FAccT 2024)</li>
+          </ul>
+          <h4>Extension (presenting group)</h4>
+          <ul class="reading">
+            <li>Shavit et al. — <a href="https://openai.com/index/practices-for-governing-agentic-ai-systems/" target="_blank" rel="noopener">Practices for Governing Agentic AI Systems</a> (2023)</li>
+            <li>Gabriel et al. — <a href="https://arxiv.org/abs/2404.16244" target="_blank" rel="noopener">The Ethics of Advanced AI Assistants</a> (2024)</li>
+            <li><a href="https://opentelemetry.io/docs/specs/semconv/gen-ai/" target="_blank" rel="noopener">OpenTelemetry — Semantic Conventions for Generative AI</a> (2024–25)</li>
+          </ul>
+          <h4>Must explain in your talk</h4>
+          <ul class="reading">
+            <li>What SLOs/error budgets mean for a system whose outputs are non-deterministic</li>
+            <li>The three visibility measures from Chan et al. (agent identifiers, real-time monitoring, activity logging) and which your project implements</li>
+            <li>What OpenTelemetry's GenAI semantic conventions standardize (spans for model calls / agent calls)</li>
+            <li>Cost-per-successful-task as a metric, and why raw accuracy alone is insufficient for a governance conversation</li>
+            <li>One concrete governance or ethical risk specific to your own project's deployment context</li>
+          </ul>
+          <div class="qbox">
+            <p>Be ready to defend: <em>Which SLOs make sense for a non-deterministic agent?</em></p>
+            <p><em>What must be logged for an audit trail (agent IDs, tool calls, approvals)?</em></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="rubric">
+    <div class="sec-head foldable">
+      <span class="eyebrow">05 · Grading</span>
+      <h2>Seminar rubric — 25% each</h2>
+    </div>
+    <div class="fold-body">
+      <div class="tbl-scroll">
+        <table class="tbl">
+          <thead><tr><th>Criterion</th><th class="mono center">Weight</th><th>What earns a high score</th></tr></thead>
+          <tbody>
+            <tr><td>Scientific accuracy &amp; depth</td><td class="mono center">30%</td><td>Core + extension papers correct in detail; mechanisms explained at algorithm level; recent results included</td></tr>
+            <tr><td>Critical analysis</td><td class="mono center">30%</td><td>Identifies assumptions, evaluation weaknesses, and contradictions between papers; a supported comparison table; your own position, argued</td></tr>
+            <tr><td>Structure &amp; delivery (30′)</td><td class="mono center">20%</td><td>Required structure followed; clear narrative; on time; slides readable; demo works</td></tr>
+            <tr><td>Q&amp;A &amp; defense (15′)</td><td class="mono center">20%</td><td>Answers precisely, concedes limits, argues with evidence; every member can answer</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note warn">
+        <span class="note-tag">Individual grading</span>
+        All four criteria are scored per group, except that Q&amp;A performance can move an
+        <strong>individual's</strong> score within the group: if you cannot defend your own slides,
+        expect a lower personal mark even if your group's talk was strong. There is no separate graded
+        "critique of other groups" line — see the participation bonus below for how asking good
+        questions is rewarded instead.
+      </div>
+      <div class="note tip">
+        <span class="note-tag">Participation bonus — asking questions, both rounds</span>
+        Asking a substantive, evidence-based question during Q&amp;A — as an assigned
+        <strong>discussant</strong> or simply from the floor during any other group's talk — earns
+        participation credit, tracked from live Q&amp;A plus your peer-critique forms. Accumulated
+        across Seminar 1 and Seminar 2, this converts into a <strong>bonus of up to +0.5 points added
+        to your final course grade</strong> (10-point scale) — on top of the 25/25/50 weighting, not a
+        substitute for it, and capped so your final grade can never exceed 10/10.
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="forms">
+    <div class="sec-head foldable">
+      <span class="eyebrow">06 · Peer critique</span>
+      <h2>What you fill in every session</h2>
+    </div>
+    <div class="fold-body">
+      <div class="concept wide">
+        <p>As a non-presenting student, submit one peer-critique form per talk:</p>
+        <ul>
+          <li>One claim in the talk you found <strong>well-supported</strong>, and why (2–3 sentences)</li>
+          <li>One claim you found <strong>unsupported or wrong</strong>, with the evidence or paper that contradicts it</li>
+          <li>One question you would ask the <strong>authors of the core paper</strong> — not the presenters</li>
+          <li>Scores 1–5 on: accuracy · critical depth · delivery · usefulness for your own project</li>
+        </ul>
+        <p>As the <strong>discussant group</strong> for a talk, prepare two questions in advance and open
+          the Q&amp;A with them. This form is also what the participation bonus above is based on — it
+          is no longer a separately graded rubric line, but asking good questions still pays off.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="index.html"><span class="dir">← Back</span>Course overview</a>
+    <a href="project.html" class="next"><span class="dir">Next →</span>Group project</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="assets/course.js"></script>
+</body>
+</html>

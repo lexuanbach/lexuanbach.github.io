@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lost in the Middle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../../index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../../index.html">Overview</a>
+      <a href="../week-01.html">Lectures</a>
+      <a href="../../seminars.html">Seminars</a>
+      <a href="../../project.html">Project</a>
+      <a href="../../resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="../../index.html">Overview</a>
+    <a href="../../seminars.html">Seminars</a>
+    <a href="../../project.html">Project</a>
+    <a href="../../resources.html">Resources</a>
+  </nav>
+  <h4>Lectures</h4>
+  <nav aria-label="Lectures">
+    <a href="../week-01.html"><span class="ch-num">01</span>Introduction &amp; Methodology</a>
+    <a href="../week-02.html"><span class="ch-num">02</span>Reasoning &amp; Planning</a>
+    <a href="../week-03.html" aria-current="page"><span class="ch-num">03</span>Tools, MCP &amp; Evaluation</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#plain">In plain terms</a>
+    <a href="#mechanism">How it works</a>
+    <a href="#example">Worked example</a>
+    <a href="#talk">For your talk &amp; project</a>
+    <a href="#reading">Further reading</a>
+  </nav>
+  <h4>Also from Week 3</h4>
+  <nav aria-label="Other guides this week">
+    <a href="agent-skills.html">Agent Skills</a>
+    <a href="rag.html">RAG</a>
+    <a href="toolformer.html">Toolformer</a>
+    <a href="mcp.html">Model Context Protocol</a>
+    <a href="tau-bench.html">τ-bench</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Paper Guide · Week 3 &mdash; Tools, MCP & Evaluation</span>
+      <h1>Lost in the Middle: How Language Models Use Long Contexts</h1>
+      <p class="lede">A bigger context window is not the same as uniformly usable context — this paper measured exactly how much worse a model is at using information buried in the middle, across six different model families.</p>
+      <div class="meta-chips">
+        <a class="chip" href="https://arxiv.org/abs/2307.03172" target="_blank" rel="noopener"><strong>Read the paper ↗</strong></a>
+        <span class="chip">Liu, Lin, Hewitt, Paranjape, Bevilacqua, Petroni &amp; Liang · TACL 2024 (arXiv 2023)</span>
+        <a class="chip" href="../week-03.html">← Back to Tools, MCP & Evaluation</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="plain">
+    <div class="sec-head">
+      <span class="eyebrow">01 · In plain terms</span>
+      <h2>"It fits in the context window" is not the same as "the model will use it"</h2>
+    </div>
+    <div class="concept wide">
+      <p>Context windows kept growing, and it was tempting to assume a model uses a 20,000-token context
+        the same way regardless of <em>where</em> in it the important fact sits. This paper tested that
+        assumption directly, with a simple, almost embarrassingly direct method: put the one document
+        that actually answers the question at different positions inside a long context, keep everything
+        else the same, and measure whether the model still gets the answer right. The result is a clean,
+        repeatable <strong>U-shape</strong> — strong at the very start of the context, strong at the very
+        end, and measurably worse in the middle. This is not one model's quirk; it showed up across every
+        model family the paper tested.</p>
+    </div>
+  </section>
+
+  <section class="block" id="mechanism">
+    <div class="sec-head">
+      <span class="eyebrow">02 · How it works</span>
+      <h2>Multi-document QA, with the answer's position as the only variable</h2>
+    </div>
+    <div class="concept wide">
+      <p>The core experiment: assemble a context containing about 20 documents, exactly one of which
+        contains the answer to a given question (the rest are plausible-looking distractors). Hold the
+        question and the documents themselves fixed, and vary only <em>where</em> the answer-bearing
+        document sits — position 1, 5, 10, 15, or 20 out of 20. Everything else about the task is
+        identical across runs, which is what makes the position effect isolable rather than confounded
+        with task difficulty. The paper reran the same logic with a synthetic <em>key-value retrieval</em>
+        task (find the value for a given key among many key-value pairs) specifically to rule out "maybe
+        it's just that QA is hard" as the explanation — the same U-shape showed up there too, which
+        points to something about how these models process position generally, not an artifact of one
+        task format.</p>
+      <p>Six model families were tested: GPT-3.5-Turbo, GPT-4, Claude 1.3, LongChat-13B, MPT-30B, and
+        Cohere Command — the U-shape held across all of them, though its depth varied by model.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 500 220" width="100%" role="img" aria-label="U-shaped chart: accuracy is high when the answer-bearing document is at position 1 or 20 out of 20, and drops sharply when it is in the middle positions.">
+        <line x1="45" y1="190" x2="470" y2="190" class="chart-axis"></line>
+        <line x1="45" y1="20" x2="45" y2="190" class="chart-axis"></line>
+        <path d="M70,55 C140,120 210,155 250,150 C290,145 360,115 440,60" class="chart-line"></path>
+        <circle cx="70" cy="55" r="5" class="chart-dot"><title>Position 1: high accuracy</title></circle>
+        <circle cx="160" cy="118" r="5" class="chart-dot"><title>Position 5: dropping</title></circle>
+        <circle cx="250" cy="150" r="5" class="chart-dot"><title>Position 10: lowest accuracy — the middle</title></circle>
+        <circle cx="345" cy="122" r="5" class="chart-dot"><title>Position 15: recovering</title></circle>
+        <circle cx="440" cy="60" r="5" class="chart-dot"><title>Position 20: high accuracy again</title></circle>
+        <text x="70" y="205" text-anchor="middle" class="arch-label">pos 1</text>
+        <text x="250" y="205" text-anchor="middle" class="arch-label">pos 10</text>
+        <text x="440" y="205" text-anchor="middle" class="arch-label">pos 20</text>
+        <text x="25" y="105" text-anchor="middle" class="arch-label" transform="rotate(-90 25 105)">accuracy</text>
+      </svg>
+      <div class="cap">Illustrative reconstruction of the U-shape (exact values vary by model). Liu et al., TACL 2024.</div>
+    </div>
+    <div class="note tip"><span class="note-tag">Key result</span> Accuracy dropped by <strong>20–30 points</strong> when the answer-bearing document sat in the middle positions (10/15 of 20) compared to position 1 or 20 — a gap observed across all six model families tested, including GPT-4 and Claude.</div>
+  </section>
+
+  <section class="block" id="example">
+    <div class="example">
+      <div class="example-bar"><span class="example-tag">Worked example</span><span class="example-title">A support agent's context, laid out badly</span></div>
+      <div class="example-body">
+        <div class="trace">
+          <span class="trace-line"><span class="trace-role thought">System prompt</span>15 company policy documents concatenated in alphabetical order: Billing, Cancellations, Data-retention, … Refunds (8th), Warranty.</span>
+          <span class="trace-line"><span class="trace-role action">User asks</span>"Can I get a refund for this order?"</span>
+          <span class="trace-line"><span class="trace-role obs">Risk</span>The Refunds policy sits at position 8 of 15 — squarely in the "lost" zone this paper measured — so the agent may answer from a vaguer general impression rather than the specific policy's actual terms.</span>
+          <span class="trace-line"><span class="trace-role mem">Fix</span>Retrieve and re-rank so the most relevant document for <em>this</em> query is placed first (or last), rather than relying on a fixed, alphabetical context order.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="talk">
+    <div class="sec-head">
+      <span class="eyebrow">04 · For your talk &amp; project</span>
+      <h2>What this buys you</h2>
+    </div>
+    <div class="concept wide">
+      <ul>
+        <li>If you present <strong>S1-3 Agent Memory</strong>: this is the citation for why "just put
+          everything in the context window" is not a neutral design choice — pair it directly with
+          MemGPT's paging mechanism as the two-sided argument (why context management is needed, and one
+          concrete way to do it).</li>
+        <li>For your <strong>project's memory design (R3) and evaluation (R5)</strong>: if your agent
+          concatenates retrieved passages or conversation history into a long prompt, this paper is
+          direct evidence you should test accuracy as a function of where the critical information ends
+          up — not just assume more context is strictly better.</li>
+        <li>A sharp critical question for any RAG or long-context demo: did you test what happens when
+          the correct passage is retrieved but placed in the middle of several others?</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="reading">
+    <div class="sec-head">
+      <span class="eyebrow">05 · Further reading</span>
+      <h2>Where to go next</h2>
+    </div>
+    <div class="concept wide">
+      <ul class="reading wide">
+          <li><a href="https://arxiv.org/abs/2307.03172" target="_blank" rel="noopener">Liu et al. — Lost in the Middle: How Language Models Use Long Contexts (full paper)</a></li>
+          <li><a href="https://arxiv.org/abs/2310.08560" target="_blank" rel="noopener">Packer et al. — MemGPT: an engineering response to the same context-management problem</a></li>
+          <li><a href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener">Lewis et al. — Retrieval-Augmented Generation: retrieval quality and ranking directly affect this problem</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="../week-03.html"><span class="dir">← Back</span>Tools, MCP & Evaluation</a>
+    <a href="toolformer.html" class="next"><span class="dir">Next guide →</span>Toolformer</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="../../assets/course.js"></script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Agent Skills</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../../index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../../index.html">Overview</a>
+      <a href="../week-01.html">Lectures</a>
+      <a href="../../seminars.html">Seminars</a>
+      <a href="../../project.html">Project</a>
+      <a href="../../resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="../../index.html">Overview</a>
+    <a href="../../seminars.html">Seminars</a>
+    <a href="../../project.html">Project</a>
+    <a href="../../resources.html">Resources</a>
+  </nav>
+  <h4>Lectures</h4>
+  <nav aria-label="Lectures">
+    <a href="../week-01.html"><span class="ch-num">01</span>Introduction &amp; Methodology</a>
+    <a href="../week-02.html"><span class="ch-num">02</span>Reasoning &amp; Planning</a>
+    <a href="../week-03.html" aria-current="page"><span class="ch-num">03</span>Tools, MCP &amp; Evaluation</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#plain">In plain terms</a>
+    <a href="#mechanism">How it works</a>
+    <a href="#example">Worked example</a>
+    <a href="#playground">Try it yourself</a>
+    <a href="#talk">For your talk &amp; project</a>
+    <a href="#reading">Further reading</a>
+  </nav>
+  <h4>Also from Week 3</h4>
+  <nav aria-label="Other guides this week">
+    <a href="rag.html">RAG</a>
+    <a href="lost-in-the-middle.html">Lost in the Middle</a>
+    <a href="toolformer.html">Toolformer</a>
+    <a href="mcp.html">Model Context Protocol</a>
+    <a href="tau-bench.html">τ-bench</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Paper Guide · Week 3 &mdash; Tools, MCP & Evaluation</span>
+      <h1>Equipping Agents for the Real World with Agent Skills</h1>
+      <p class="lede">MCP standardizes how an agent calls a tool. Agent Skills standardizes how an agent picks up domain expertise — folders of instructions, scripts and resources it loads only when a task actually needs them.</p>
+      <div class="meta-chips">
+        <a class="chip" href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" target="_blank" rel="noopener"><strong>Read the paper ↗</strong></a>
+        <span class="chip">Zhang, Lazuka &amp; Murag (Anthropic) · October 2025</span>
+        <a class="chip" href="../week-03.html">← Back to Tools, MCP & Evaluation</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="plain">
+    <div class="sec-head">
+      <span class="eyebrow">01 · In plain terms</span>
+      <h2>You can't pre-load every specialist manual into the prompt</h2>
+    </div>
+    <div class="concept wide">
+      <p>A general-purpose agent could, in principle, be handed hundreds of specialized procedures —
+        how to format a company's spreadsheets a particular way, how to follow a specific brand's style
+        guide, how to file a specific kind of report. Pasting all of that into the system prompt up
+        front doesn't work: it burns context budget on instructions for tasks the user isn't doing right
+        now, and — per Week 3's own "lost in the middle" finding — stuffing more into the context window
+        doesn't mean the model reliably uses all of it. <strong>Agent Skills</strong> is Anthropic's
+        answer: package each piece of expertise as its own small directory, and reveal it to the model in
+        stages, so the cost of "knowing about" a skill is tiny until the moment the model actually needs
+        to <em>use</em> it.</p>
+    </div>
+  </section>
+
+  <section class="block" id="mechanism">
+    <div class="sec-head">
+      <span class="eyebrow">02 · How it works</span>
+      <h2>Progressive disclosure, in three tiers</h2>
+    </div>
+    <div class="concept wide">
+      <p>A Skill is a directory containing a <code>SKILL.md</code> file: YAML frontmatter with two
+        required fields — <code>name</code> (max 64 characters, lowercase/numbers/hyphens only) and
+        <code>description</code> (max 1024 characters) — followed by the skill's actual instructions in
+        the file body, plus optionally scripts and reference files alongside it. What makes this scale to
+        dozens of skills without flooding the context window is that none of it loads at once:</p>
+      <ul>
+        <li><strong>Level 1 — metadata, always loaded.</strong> Just the <code>name</code> and
+          <code>description</code> for every installed skill, sitting in context the whole session.
+          Anthropic reports a median cost of <strong>≈80 tokens per skill</strong> at this tier — this is
+          the only information the model has to decide whether a skill is relevant, which is why a
+          precise, specific description matters more than anything else in the file.</li>
+        <li><strong>Level 2 — full instructions, loaded on trigger.</strong> Once the model judges a
+          skill relevant to the current task, it reads the rest of <code>SKILL.md</code> — ranging from
+          ~275 to ~8,000 tokens across Anthropic's own published skills, median around 2,000.</li>
+        <li><strong>Level 3 — reference files and scripts, loaded on demand.</strong> Anything else in
+          the skill's directory (a detailed style guide, a helper script) is read only at the point of
+          actually executing a step that needs it, never speculatively.</li>
+      </ul>
+      <p>Skills and MCP are complementary, not competing: MCP standardizes the mechanics of a tool
+        <em>call</em> (a schema, an execution, a result); a Skill's instructions are free to tell the
+        agent <em>which</em> MCP tool to call and how, for this specific specialized task.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 560 240" width="100%" role="img" aria-label="Three tiers of progressive disclosure: metadata always loaded, full instructions loaded when triggered, reference files loaded on demand during execution.">
+        <defs>
+          <marker id="sk-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="al-arrow"></path></marker>
+        </defs>
+        <path d="M280,74 L280,94" class="arch-line" marker-end="url(#sk-arrow)"></path>
+        <path d="M280,154 L280,174" class="arch-line" marker-end="url(#sk-arrow)"></path>
+
+        <a class="dag-node accent" href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" target="_blank" rel="noopener"
+           data-functionality="The name and description for every installed skill, kept in context at all times."
+           data-intuition="This is the only information the model has to decide relevance — cheap, but the only signal available."
+           data-example="≈80 tokens per skill, median, across Anthropic&#39;s own published skills." aria-label="Level 1: name + description for every installed skill, always in context (~80 tokens median)"><rect x="140" y="14" width="280" height="60" rx="8"></rect><text x="280" y="38" text-anchor="middle" class="t">Level 1 — Metadata</text><text x="280" y="55" text-anchor="middle" class="s">always loaded · ~80 tokens/skill</text></a>
+        <a class="dag-node teal" href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" target="_blank" rel="noopener"
+           data-functionality="The full SKILL.md body, loaded only once the model judges the skill relevant to the task."
+           data-intuition="The cost of a skill only shows up once it&#39;s actually needed — not before."
+           data-example="≈275 to 8,000 tokens across Anthropic&#39;s skills, median around 2,000." aria-label="Level 2: the full SKILL.md body, loaded once the model judges the skill relevant"><rect x="140" y="94" width="280" height="60" rx="8"></rect><text x="280" y="118" text-anchor="middle" class="t">Level 2 — Full instructions</text><text x="280" y="135" text-anchor="middle" class="s">on trigger · ~275–8,000 tokens</text></a>
+        <a class="dag-node amber" href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" target="_blank" rel="noopener"
+           data-functionality="Reference files and helper scripts, read only when a specific step actually needs them."
+           data-intuition="Even within a triggered skill, most of its content stays unread until the exact moment it&#39;s relevant."
+           data-example="A chart-generation script, opened only when the task actually needs a chart." aria-label="Level 3: reference files and scripts, read only when a step actually needs them"><rect x="140" y="174" width="280" height="60" rx="8"></rect><text x="280" y="198" text-anchor="middle" class="t">Level 3 — Reference files</text><text x="280" y="215" text-anchor="middle" class="s">on demand · during execution</text></a>
+      </svg>
+      <div class="cap">Progressive disclosure: the cost of knowing about a skill vs. using it. Anthropic, 2025.</div>
+    </div>
+  </section>
+
+  <section class="block" id="example">
+    <div class="example">
+      <div class="example-bar"><span class="example-tag">Worked example</span><span class="example-title">A spreadsheet-formatting skill, tier by tier</span></div>
+      <div class="example-body">
+        <div class="trace">
+          <span class="trace-line"><span class="trace-role mem">Level 1 (always)</span><code>name: excel-formatter</code> · <code>description: Creates and formats Excel spreadsheets following company conventions (currency columns, header styling, frozen panes).</code></span>
+          <span class="trace-line"><span class="trace-role thought">User asks</span>"Build me a budget spreadsheet for Q3."</span>
+          <span class="trace-line"><span class="trace-role action">Level 2 (triggered)</span>Model reads the full SKILL.md: which columns get currency formatting, header color conventions, which template to start from.</span>
+          <span class="trace-line"><span class="trace-role obs">Level 3 (on demand)</span>Only when it actually needs to generate a chart does it open the referenced <code>generate_chart.py</code> helper script — never before.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="playground">
+    <div class="sec-head">
+      <span class="eyebrow">03 · Try it yourself</span>
+      <h2>Watch progressive disclosure happen, task by task</h2>
+    </div>
+    <div class="concept wide">
+      <p>A small library of 4 installed skills below — each shown with only its Level 1 metadata,
+        exactly what a real agent has in context at all times. Pick a task and run it: watch which
+        skill's description matches (or doesn't), which tier actually loads, and what it costs — versus
+        what loading everything up front regardless of relevance would have cost.</p>
+    </div>
+    <div class="ask-sim">
+      <div class="ask-grid">
+        <div class="ask-card" data-skill="excel">
+          <span class="ask-card-name">Excel Formatter</span>
+          <p class="ask-card-desc">Creates and formats Excel spreadsheets following company conventions (currency columns, header styling, frozen panes).</p>
+          <div class="ask-tiers">
+            <span class="ask-tier l1 active" title="Level 1 — metadata, always resident">L1</span>
+            <span class="ask-tier l2" title="Level 2 — full instructions, loaded on trigger">L2</span>
+          </div>
+          <div class="ask-l3-files" aria-label="Level 3 reference files loaded"></div>
+        </div>
+        <div class="ask-card" data-skill="brand">
+          <span class="ask-card-name">Brand Voice</span>
+          <p class="ask-card-desc">Rewrites text to match the company's brand voice guide (tone, banned words, sentence length).</p>
+          <div class="ask-tiers">
+            <span class="ask-tier l1 active" title="Level 1 — metadata, always resident">L1</span>
+            <span class="ask-tier l2" title="Level 2 — full instructions, loaded on trigger">L2</span>
+          </div>
+          <div class="ask-l3-files" aria-label="Level 3 reference files loaded"></div>
+        </div>
+        <div class="ask-card" data-skill="pdf">
+          <span class="ask-card-name">PDF Report Builder</span>
+          <p class="ask-card-desc">Assembles a formatted PDF report from data tables and charts, using the company's cover-page template.</p>
+          <div class="ask-tiers">
+            <span class="ask-tier l1 active" title="Level 1 — metadata, always resident">L1</span>
+            <span class="ask-tier l2" title="Level 2 — full instructions, loaded on trigger">L2</span>
+          </div>
+          <div class="ask-l3-files" aria-label="Level 3 reference files loaded"></div>
+        </div>
+        <div class="ask-card" data-skill="review">
+          <span class="ask-card-name">Code Review Checklist</span>
+          <p class="ask-card-desc">Applies the team's code-review checklist (security, style, test coverage) when reviewing a pull request.</p>
+          <div class="ask-tiers">
+            <span class="ask-tier l1 active" title="Level 1 — metadata, always resident">L1</span>
+            <span class="ask-tier l2" title="Level 2 — full instructions, loaded on trigger">L2</span>
+          </div>
+          <div class="ask-l3-files" aria-label="Level 3 reference files loaded"></div>
+        </div>
+      </div>
+
+      <div class="tf-controls">
+        <select class="sim-select" id="ask-task-select" aria-label="Choose a task"></select>
+        <button class="btn primary" id="ask-run" type="button">Run task →</button>
+        <button class="btn ghost" id="ask-reset" type="button">↺ Reset</button>
+      </div>
+      <div class="sim-stats">
+        <span>Tokens spent this task: <strong id="ask-cost">–</strong></span>
+      </div>
+      <div class="trace" id="ask-log" aria-live="polite"></div>
+      <p class="subtle-note" id="ask-compare"></p>
+    </div>
+  </section>
+
+  <section class="block" id="talk">
+    <div class="sec-head">
+      <span class="eyebrow">04 · For your talk &amp; project</span>
+      <h2>What this buys you</h2>
+    </div>
+    <div class="concept wide">
+      <ul>
+        <li>If you present <strong>S1-2 Tool Use &amp; MCP</strong> or <strong>S1-3 Agent Memory</strong>:
+          Agent Skills is CoALA's <em>procedural memory</em> turned into a concrete, portable file
+          format — frame it that way and the connection to the rest of the seminar program becomes
+          obvious.</li>
+        <li>For your <strong>project's architecture (R1, R2)</strong>: if your agent needs several
+          distinct specialized behaviors, packaging each as a Skill-style directory (even without using
+          Anthropic's exact format) is a cleaner design than one giant system prompt — and it's a
+          concrete answer to "how does your design avoid the lost-in-the-middle problem?" in Q&amp;A.</li>
+        <li>A sharp critical question to raise: since only the <code>name</code>/<code>description</code>
+          decide whether a skill loads at all, what happens when two skills have similar-sounding
+          descriptions — how would you debug the agent picking the wrong one?</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="reading">
+    <div class="sec-head">
+      <span class="eyebrow">05 · Further reading</span>
+      <h2>Where to go next</h2>
+    </div>
+    <div class="concept wide">
+      <ul class="reading wide">
+          <li><a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills" target="_blank" rel="noopener">Anthropic — Equipping agents for the real world with Agent Skills (full announcement)</a></li>
+          <li><a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener">Anthropic — Introducing the Model Context Protocol (the complementary tool-calling standard)</a></li>
+          <li><a href="https://arxiv.org/abs/2309.02427" target="_blank" rel="noopener">Sumers et al. — Cognitive Architectures for Language Agents (the procedural-memory framing)</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="../week-03.html"><span class="dir">← Back</span>Tools, MCP & Evaluation</a>
+    <a href="rag.html" class="next"><span class="dir">Next guide →</span>RAG</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="../../assets/course.js"></script>
+<script src="../../assets/agent-skills-sim.js"></script>
+<script src="../../assets/dag.js"></script>
+</body>
+</html>

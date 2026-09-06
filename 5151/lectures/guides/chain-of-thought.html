@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chain-of-Thought</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../../index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="../../index.html">Overview</a>
+      <a href="../week-01.html">Lectures</a>
+      <a href="../../seminars.html">Seminars</a>
+      <a href="../../project.html">Project</a>
+      <a href="../../resources.html">Resources</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="../../index.html">Overview</a>
+    <a href="../../seminars.html">Seminars</a>
+    <a href="../../project.html">Project</a>
+    <a href="../../resources.html">Resources</a>
+  </nav>
+  <h4>Lectures</h4>
+  <nav aria-label="Lectures">
+    <a href="../week-01.html"><span class="ch-num">01</span>Introduction &amp; Methodology</a>
+    <a href="../week-02.html" aria-current="page"><span class="ch-num">02</span>Reasoning &amp; Planning</a>
+    <a href="../week-03.html"><span class="ch-num">03</span>Tools, MCP &amp; Evaluation</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#plain">In plain terms</a>
+    <a href="#mechanism">How it works</a>
+    <a href="#example">Worked example</a>
+    <a href="#talk">For your talk &amp; project</a>
+    <a href="#reading">Further reading</a>
+  </nav>
+  <h4>Also from Week 2</h4>
+  <nav aria-label="Other guides this week">
+    <a href="reflexion.html">Reflexion</a>
+    <a href="tree-of-thoughts.html">Tree of Thoughts</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Paper Guide · Week 2 &mdash; Reasoning & Planning</span>
+      <h1>Chain-of-Thought Prompting Elicits Reasoning in Large Language Models</h1>
+      <p class="lede">The single prompting trick underneath every reasoning technique in Week 2 — and the paper that first showed writing out intermediate steps is not decoration, it changes what a large model can actually solve.</p>
+      <div class="meta-chips">
+        <a class="chip" href="https://arxiv.org/abs/2201.11903" target="_blank" rel="noopener"><strong>Read the paper ↗</strong></a>
+        <span class="chip">Wei, Wang, Schuurmans, Bosma, Ichter, Xia, Chi, Le &amp; Zhou · NeurIPS 2022</span>
+        <a class="chip" href="../week-02.html">← Back to Reasoning & Planning</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="plain">
+    <div class="sec-head">
+      <span class="eyebrow">01 · In plain terms</span>
+      <h2>Show your work — it turns out the model needs to too</h2>
+    </div>
+    <div class="concept wide">
+      <p>Ask a model a multi-step math word problem and demand only the final number, and it often gets
+        it wrong. Ask the same model to write out its reasoning step by step <em>before</em> the answer,
+        and — with no retraining, no extra data, nothing but a change in the prompt's few-shot examples
+        — accuracy jumps dramatically. That is the entire finding. It sounds almost too simple to be a
+        landmark paper, but the mechanism matters: an autoregressive model generates each token
+        conditioned on everything before it, so forcing intermediate reasoning tokens into the output
+        literally gives the model more computation, spent on the problem, before it commits to an
+        answer. Skip straight to the answer, and that computation never happens.</p>
+    </div>
+  </section>
+
+  <section class="block" id="mechanism">
+    <div class="sec-head">
+      <span class="eyebrow">02 · How it works</span>
+      <h2>Few-shot exemplars, no fine-tuning</h2>
+    </div>
+    <div class="concept wide">
+      <p>Chain-of-thought (CoT) prompting is purely a prompt-construction technique: instead of few-shot
+        exemplars that show <code>(question, answer)</code> pairs, you show <code>(question, reasoning
+        steps, answer)</code> triples. The model, conditioned on this pattern, generates its own
+        reasoning steps for the new question before answering. No gradient update happens anywhere.</p>
+      <p>The effect is <strong>emergent</strong> — it appears reliably only past a certain model scale.
+        Wei et al. showed CoT barely helps (and sometimes hurts) small models, but produces large,
+        consistent gains once models are large enough (roughly 100B+ parameters at the time). This scale
+        dependence is itself an important critical point: CoT is not a universal free lunch you can
+        assume works for any model size, including many of today's smaller open-weight models run
+        locally for a course project.</p>
+    </div>
+    <div class="diagram-card inline">
+      <svg viewBox="0 0 400 230" width="100%" role="img" aria-label="Bar chart: on GSM8K with PaLM 540B, standard prompting reaches about 18% accuracy while chain-of-thought prompting reaches about 57%.">
+        <line x1="40" y1="200" x2="360" y2="200" class="chart-axis"></line>
+        <rect x="100" y="171" width="80" height="29" class="chart-bar"></rect>
+        <rect x="240" y="109" width="80" height="91" class="chart-bar accent"></rect>
+        <text x="140" y="163" text-anchor="middle" class="arch-caption">≈18%</text>
+        <text x="280" y="101" text-anchor="middle" class="arch-caption">≈57%</text>
+        <text x="140" y="216" text-anchor="middle" class="arch-label">standard prompting</text>
+        <text x="280" y="216" text-anchor="middle" class="arch-label">chain-of-thought</text>
+      </svg>
+      <div class="cap">GSM8K math word problems, PaLM 540B, 8-shot prompting. Wei et al., NeurIPS 2022.</div>
+    </div>
+    <div class="note tip"><span class="note-tag">Key result</span> On GSM8K, 8-shot chain-of-thought prompting with PaLM 540B reached <strong>≈57% accuracy</strong> (≈58% combined with an external calculator), versus <strong>≈18%</strong> for standard prompting — beating even a fine-tuned GPT-3 with a trained verifier, with zero fine-tuning.</div>
+  </section>
+
+  <section class="block" id="example">
+    <div class="example">
+      <div class="example-bar"><span class="example-tag">Worked example</span><span class="example-title">The same question, two prompting styles</span></div>
+      <div class="example-body">
+        <p><strong>Q:</strong> A juggler can juggle 16 balls. Half of the balls are golf balls, and half
+          of the golf balls are blue. How many blue golf balls are there?</p>
+        <div class="trace">
+          <span class="trace-line"><span class="trace-role action">Standard prompting</span>A: 8. <em>(wrong — skipped the second "half")</em></span>
+          <span class="trace-line"><span class="trace-role thought">Chain-of-thought</span>The juggler has 16 balls. Half are golf balls, so there are 16 / 2 = 8 golf balls. Half of the golf balls are blue, so there are 8 / 2 = 4 blue golf balls.</span>
+          <span class="trace-line"><span class="trace-role obs">Answer</span>4. <em>(correct)</em></span>
+        </div>
+        <p>Nothing about the model changed between these two runs — only whether the prompt asked it to
+          externalize the two-step division before answering.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="talk">
+    <div class="sec-head">
+      <span class="eyebrow">04 · For your talk &amp; project</span>
+      <h2>What this buys you</h2>
+    </div>
+    <div class="concept wide">
+      <ul>
+        <li>If you present <strong>S1-1 Advanced Reasoning &amp; Planning</strong> or
+          <strong>S1-6 Self-improvement &amp; Reflection</strong>: CoT is the common ancestor of both
+          topics — ReAct interleaves it with actions, Self-Consistency samples many CoT chains and
+          votes, ToT/GoT search over CoT-style intermediate steps. Naming this lineage explicitly is
+          exactly what "explained at the mechanism level" means in the required talk structure.</li>
+        <li>The emergence-at-scale finding is a genuine limitation worth raising in Q&amp;A: does your
+          project's chosen model (especially if it's a smaller local model) actually benefit from CoT
+          prompting, or do you need to verify that empirically rather than assume it?</li>
+        <li>For your <strong>project's prompting strategy</strong>: if your agent's reasoning quality is
+          weak, CoT-style prompt restructuring is often a cheaper fix to try before reaching for a more
+          expensive technique like ToT.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="reading">
+    <div class="sec-head">
+      <span class="eyebrow">05 · Further reading</span>
+      <h2>Where to go next</h2>
+    </div>
+    <div class="concept wide">
+      <ul class="reading wide">
+          <li><a href="https://arxiv.org/abs/2201.11903" target="_blank" rel="noopener">Wei et al. — Chain-of-Thought Prompting Elicits Reasoning in Large Language Models (full paper)</a></li>
+          <li><a href="https://arxiv.org/abs/2203.11171" target="_blank" rel="noopener">Wang et al. — Self-Consistency: sample many CoT chains, take a majority vote</a></li>
+          <li><a href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener">Yao et al. — ReAct: interleaves chain-of-thought with tool actions</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="../week-02.html"><span class="dir">← Back</span>Reasoning & Planning</a>
+    <a href="reflexion.html" class="next"><span class="dir">Next guide →</span>Reflexion</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="../../assets/course.js"></script>
+</body>
+</html>
