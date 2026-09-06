@@ -628,7 +628,7 @@ Action 3: Finish["Daniel Kwan and Daniel Scheinert"]</pre>
   <section class="block" id="quiz">
     <div class="sec-head">
       <span class="eyebrow">Self-check</span>
-      <h2>Quiz — 4 questions, then a code exercise</h2>
+      <h2>Quiz — 20 questions, then a code exercise</h2>
     </div>
     <div class="concept wide">
       <p>Not graded — a two-minute check that today's ideas actually landed before you move on.</p>
@@ -676,6 +676,182 @@ Action 3: Finish["Daniel Kwan and Daniel Scheinert"]</pre>
           <button class="quiz-opt" type="button">A component that is unnecessary once a formal planner exists</button>
         </div>
         <p class="quiz-feedback" hidden data-explain="LLM-Modulo keeps the LLM as an idea-generator while routing verification and refinement through an external, sound critic — the LLM alone is not treated as a reliable planner."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">5. Why does CoT prompting a small, weak model often fail to help?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">CoT elicits a capability that must already exist</button>
+          <button class="quiz-opt" type="button">Small models cannot fit longer prompts in context</button>
+          <button class="quiz-opt" type="button">CoT only works with an external verifier attached</button>
+          <button class="quiz-opt" type="button">The technique requires at least eight exemplars</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The effect emerges only at sufficient scale — CoT surfaces a capability, it does not install one; on weak models it can even hurt."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">6. What did zero-shot CoT (“Let's think step by step”) demonstrate?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Few-shot exemplars matter more than the reasoning</button>
+          <button class="quiz-opt" type="button">Stepwise reasoning alone drives much of the gain</button>
+          <button class="quiz-opt" type="button">Only fine-tuned models benefit from such prompts</button>
+          <button class="quiz-opt" type="button">The phrase works by recalling memorized examples</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="It separates two conflated contributions — reasoning stepwise (a) and few-shot exemplars (b) — showing (a) alone accounts for a large share of the benefit."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">7. Self-consistency improves accuracy by exploiting the fact that:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Individual chains fail in largely uncorrelated ways</button>
+          <button class="quiz-opt" type="button">Longer reasoning chains are always more accurate</button>
+          <button class="quiz-opt" type="button">Lower temperature makes each chain more reliable</button>
+          <button class="quiz-opt" type="button">Voting favors the most eloquently written chain</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Chains sampled at temperature > 0 go wrong differently, so a majority vote over final answers recovers signal a single deterministic chain would miss."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question">8. What is the explicit cost of self-consistency with n samples?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">One extra verifier call per sampled chain</button>
+          <button class="quiz-opt" type="button">A fine-tuning run to calibrate the voting</button>
+          <button class="quiz-opt" type="button">Quadratic context growth across the samples</button>
+          <button class="quiz-opt" type="button">About n times one chain's tokens and latency</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="n independent chains cost n× tokens and latency for a typically sub-linear gain — the course's first concrete test-time-compute trade-off."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">9. Why shouldn't CoT text be read as a transparent log of the model's reasoning?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Stated steps may not match the real computation</button>
+          <button class="quiz-opt" type="button">Intermediate tokens are deleted after answering</button>
+          <button class="quiz-opt" type="button">CoT output is compressed before users see it</button>
+          <button class="quiz-opt" type="button">Providers filter reasoning traces for safety</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Faithfulness is not guaranteed — CoT is an artifact that helps the model, not a log of what it computed. This matters for Reflexion and process rewards later."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question">10. In ReAct, what is the Thought's only functional role?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">It is executed by the environment like an action</button>
+          <button class="quiz-opt" type="button">It is scored by an external evaluator before use</button>
+          <button class="quiz-opt" type="button">It conditions the next action on explicit reasoning</button>
+          <button class="quiz-opt" type="button">It is written to long-term memory for later reuse</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Nothing executes the thought — it exists to make the next action depend on a stated intermediate step, reducing off-task actions and reasoning drift."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">11. Which ReAct assumption does indirect prompt injection directly exploit?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Observations fed back to context are truthful</button>
+          <button class="quiz-opt" type="button">The action space stays small and well-specified</button>
+          <button class="quiz-opt" type="button">Actions are cheap, fast, and easily reversible</button>
+          <button class="quiz-opt" type="button">The model emits well-formed calls every step</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="If an observation can contain attacker-controlled text, “feed the observation back into context” is exactly the mechanism injection exploits (S2-3/S2-4)."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">12. Reflexion is “verbal reinforcement learning” in the precise sense that:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">It applies gradient updates from a scalar reward</button>
+          <button class="quiz-opt" type="button">It improves across attempts with no weight updates</button>
+          <button class="quiz-opt" type="button">It trains a separate critic network on failures</button>
+          <button class="quiz-opt" type="button">It swaps in a new policy model after each trial</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Like RL there's a feedback signal across attempts — but the “learning” is only accumulated natural-language reflections in context; no weights change."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">13. Which feedback signal gives Reflexion its most trustworthy results?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">An external ground-truth check, like unit tests</button>
+          <button class="quiz-opt" type="button">An LLM judge scoring the whole trajectory</button>
+          <button class="quiz-opt" type="button">The same model grading its own answer alone</button>
+          <button class="quiz-opt" type="button">A vote among independently sampled chains</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The three cases in decreasing trust: external ground truth, external heuristic judge, pure self-assessment — the coding results fall in the first."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question">14. Huang et al. (ICLR 2024) found that self-correction without external ground truth:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Reliably improves accuracy given enough retries</button>
+          <button class="quiz-opt" type="button">Works only above a certain model compute scale</button>
+          <button class="quiz-opt" type="button">Can lower accuracy by revising correct answers</button>
+          <button class="quiz-opt" type="button">Helps on math but never on coding benchmarks</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Without external signal, models can't reliably tell right from wrong answers — self-correction can talk the model out of a correct one."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">15. Which four components define Tree-of-Thoughts?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Generator, evaluator, search method, stopping rule</button>
+          <button class="quiz-opt" type="button">Planner, executor, memory buffer, reflection step</button>
+          <button class="quiz-opt" type="button">Actor, critic, environment, and a replay buffer</button>
+          <button class="quiz-opt" type="button">Encoder, decoder, ranker, and a pruning heuristic</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="A thought generator, a state evaluator, a search algorithm (BFS/DFS originally), and a stopping rule — reasoning recast as search over partial solutions."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">16. The key skeptical question about ToT asks whether its gain comes from:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Model scale, or better sampling temperature</button>
+          <button class="quiz-opt" type="button">Search, or the quality of the pruning evaluator</button>
+          <button class="quiz-opt" type="button">More data, or test items leaking into training</button>
+          <button class="quiz-opt" type="button">Tree depth, or simply wider branching factors</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The evaluator is another LLM call on the same model — judging partial solutions is not obviously easier than solving the problem directly."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">17. Graph-of-Thoughts generalizes ToT by allowing:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Merging and refining thoughts across a graph</button>
+          <button class="quiz-opt" type="button">Parallel branch execution on separate models</button>
+          <button class="quiz-opt" type="button">Human feedback at every branching decision</button>
+          <button class="quiz-opt" type="button">Unlimited depth with no evaluator pruning</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Thoughts form an arbitrary graph, so partial, individually-imperfect solutions can be merged or refined using other thoughts as feedback."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question">18. LATS answers the concern about ToT's internal evaluator by:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Replacing the evaluator with a tuned reward model</button>
+          <button class="quiz-opt" type="button">Restricting the search to one verified branch only</button>
+          <button class="quiz-opt" type="button">Having a human score each partial solution instead</button>
+          <button class="quiz-opt" type="button">Grounding the search in real environment observations</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="LATS runs MCTS over ReAct-style trajectories, using real observations rather than only LLM-judged simulation — partly externalizing the evaluation."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">19. In LLM+P, the language model's only job is to:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Translate the task into PDDL for a classical planner</button>
+          <button class="quiz-opt" type="button">Search the plan space using learned value estimates</button>
+          <button class="quiz-opt" type="button">Verify every plan the classical planner produces</button>
+          <button class="quiz-opt" type="button">Simulate the environment as a learned world model</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The LLM translates natural language into a formal problem description; the sound-and-complete classical planner does the actual search."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">20. Kambhampati et al. report that LLM “planning” performance:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Matches classical planners once prompts are tuned</button>
+          <button class="quiz-opt" type="button">Degrades sharply on harder or rephrased instances</button>
+          <button class="quiz-opt" type="button">Exceeds human performance on standard domains</button>
+          <button class="quiz-opt" type="button">Is limited only by the context window's length</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="LLMs alone can't verify plans against formal criteria, and apparent planning ability collapses on harder or adversarially rephrased instances — hence LLM-Modulo."></p>
       </div>
     </div>
 

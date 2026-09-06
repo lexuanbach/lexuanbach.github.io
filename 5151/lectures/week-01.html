@@ -749,7 +749,7 @@
   <section class="block" id="quiz">
     <div class="sec-head">
       <span class="eyebrow">Self-check</span>
-      <h2>Quiz — 4 questions, then a code exercise</h2>
+      <h2>Quiz — 20 questions, then a code exercise</h2>
     </div>
     <div class="concept wide">
       <p>Not graded — a two-minute check that today's ideas actually landed before you move on.</p>
@@ -797,6 +797,182 @@
           <button class="quiz-opt" type="button">That human evaluators agree consistently on correctness</button>
         </div>
         <p class="quiz-feedback" hidden data-explain="ReAct's benchmarks (search, text games) all have cheap, fast, reversible actions — the paper never tests what happens when an action is expensive, slow, or irreversible."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question">5. On the autonomy spectrum, a fixed extract → summarize → translate prompt-chaining pipeline sits at which level?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Level 0, because each stage is a single completion</button>
+          <button class="quiz-opt" type="button">Level 1, because any stage may invoke an external tool</button>
+          <button class="quiz-opt" type="button">Level 2, because the path is authored by the developer</button>
+          <button class="quiz-opt" type="button">Level 3, because the model writes all intermediate text</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The steps are hand-designed at design time and only the step content is generated — the definition of a Level 2 workflow."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">6. Who is “in the loop” for a Level 3 autonomous agent, per the spectrum table?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">The developer, approving each intermediate call</button>
+          <button class="quiz-opt" type="button">The user, who assigns and oversees it per task</button>
+          <button class="quiz-opt" type="button">A manager agent, supervising every step it takes</button>
+          <button class="quiz-opt" type="button">Nobody, since Level 3 runs without any oversight</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="From Level 3 up, the model decides which steps to take; the human involvement shifts from the developer at design time to the user per task."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question">7. Which system is the course's example of Level 5, open-ended operation?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">AutoGen coordinating a simulated software team</button>
+          <button class="quiz-opt" type="button">A ReAct agent answering a multi-hop question</button>
+          <button class="quiz-opt" type="button">A single function call fetching Hanoi's weather</button>
+          <button class="quiz-opt" type="button">Voyager running continuously inside Minecraft</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Level 5 means continuous operation with no fixed task boundary — Voyager and a long-running computer-use agent are the examples; AutoGen is Level 4, ReAct Level 3."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">8. The research timeline describes 2022–2023, 2024, and 2025 as dominated, in order, by:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Prompting tricks, then infrastructure, then training</button>
+          <button class="quiz-opt" type="button">Infrastructure, then prompting tricks, then training</button>
+          <button class="quiz-opt" type="button">Training, then benchmark building, then prompting</button>
+          <button class="quiz-opt" type="button">Benchmarks, then security, then multi-agent systems</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="2022–23 elicits behavior from frozen models (CoT, ReAct, Reflexion); 2024 builds protocols and benchmarks (MCP, SWE-bench); 2025 bakes behavior in via RL and architecture."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">9. In the dependency graph, LATS is described as combining which two parents?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">ToT's search structure and ReAct's grounded acting</button>
+          <button class="quiz-opt" type="button">CoT's stepwise traces and Reflexion's episodic memory</button>
+          <button class="quiz-opt" type="button">Reflexion's retry loop and Toolformer's tool tokens</button>
+          <button class="quiz-opt" type="button">Plan-and-Solve's decomposition and GoT's merge step</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="LATS takes Tree-of-Thoughts' search over candidates and ReAct's real environment interaction, running Monte Carlo Tree Search over grounded trajectories."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question">10. A coding assistant writing “this repo uses snake_case” to a scratch file mid-refactor is using:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Semantic memory, holding general facts abstracted</button>
+          <button class="quiz-opt" type="button">Episodic memory, recalling events by relevance</button>
+          <button class="quiz-opt" type="button">Working memory, cheap and scoped to the session</button>
+          <button class="quiz-opt" type="button">Parametric memory, stored in the model's weights</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Nothing needs to outlive the refactor — it's short-term, session-scoped working memory, the kind context-window management is designed around."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">11. A support agent retrieving your last three tickets by relevance before replying uses:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Working memory scoped to this one conversation</button>
+          <button class="quiz-opt" type="button">Episodic memory of specific past interactions</button>
+          <button class="quiz-opt" type="button">Semantic memory of facts with no event history</button>
+          <button class="quiz-opt" type="button">The raw context window, with no retrieval step</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Specific past events, stored long-term and retrieved by relevance — the episodic pattern behind MemGPT and Generative Agents' retrieval scoring."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">12. The lecture argues “memory” fundamentally consists of:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">A deliberate write policy plus a retrieval policy</button>
+          <button class="quiz-opt" type="button">A large context window plus a fast vector index</button>
+          <button class="quiz-opt" type="button">A database schema fixed once at design time only</button>
+          <button class="quiz-opt" type="button">Whatever defaults the agent framework provides</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="What gets saved and when, plus what gets pulled back and when — getting either wrong is how memory becomes a liability instead of an asset."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">13. In the agent-loop pseudocode, which step comes immediately after executing the chosen action?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Termination, returning the final answer right away</button>
+          <button class="quiz-opt" type="button">The memory write, then the context/perception update</button>
+          <button class="quiz-opt" type="button">A reflection phase critiquing the failed trajectory</button>
+          <button class="quiz-opt" type="button">A fresh LLM call reusing the unchanged old context</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="execute(…) is followed by memory.maybe_write(…) and then update_context(…) — the exact line the code exercise below asks you to restore."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">14. What should you be able to do after Pass 1 (5–10 minutes) of the three-pass method?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">State the problem and the one-sentence contribution</button>
+          <button class="quiz-opt" type="button">Reproduce the method's core algorithm from memory</button>
+          <button class="quiz-opt" type="button">List every baseline and metric in the experiments</button>
+          <button class="quiz-opt" type="button">Run the released code and verify a reported number</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Pass 1 is titles, headings, figures, conclusion — enough to state the problem and contribution; the other abilities belong to Passes 2 and 3."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">15. During Pass 2, what does the method say to treat as primary evidence?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">The figures, plus which experimental knobs vary</button>
+          <button class="quiz-opt" type="button">The related-work section and citation coverage</button>
+          <button class="quiz-opt" type="button">The appendix, where honest results usually hide</button>
+          <button class="quiz-opt" type="button">The abstract, which distills the main findings</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Pass 2 reads in order, skips proofs, and treats figures as primary evidence — noting the baseline, the metric, and what knobs are varied."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">16. Which of these is critical analysis rather than summary, by §4's distinction?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Restating the paper's method in your own words</button>
+          <button class="quiz-opt" type="button">Asking if a comparison is fair at matched compute</button>
+          <button class="quiz-opt" type="button">Listing the benchmarks the paper reports against</button>
+          <button class="quiz-opt" type="button">Quoting the abstract's headline accuracy figure</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Summary answers “what does the paper say?”; analysis interrogates assumptions, baseline validity, metrics, generalization, or reproducibility."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">17. The habit §4 recommends for every core paper is writing one sentence starting:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">“This paper's result would not hold if…”</button>
+          <button class="quiz-opt" type="button">“The authors convincingly demonstrate…”</button>
+          <button class="quiz-opt" type="button">“Future work should explore whether…”</button>
+          <button class="quiz-opt" type="button">“This method beats all baselines when…”</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="That sentence forces you to name the weakest untested assumption — and it's usually most of a critical-analysis slide."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question">18. The worked critique's baseline check faults ReAct for not comparing against:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">A human expert on the same benchmark questions</button>
+          <button class="quiz-opt" type="button">A model fine-tuned directly on each task's data</button>
+          <button class="quiz-opt" type="button">A larger frozen model with plain few-shot CoT</button>
+          <button class="quiz-opt" type="button">Retrieve-then-answer at a matched token budget</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="The CoT-only and Act-only comparisons are roughly fair, but later work suggests a retrieve-then-answer pipeline at matched token budget can be competitive."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question">19. Why does the critique call ReAct's gain a genuine structural claim?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">It beats every baseline on all four benchmarks</button>
+          <button class="quiz-opt" type="button">ICLR reviewers accepted the paper's own framing</button>
+          <button class="quiz-opt" type="button">Its ablations show each half alone underperforms</button>
+          <button class="quiz-opt" type="button">Later agent frameworks all adopted its main loop</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Acting-only and reasoning-only both underperform the combination — so the gain comes from the structure, not just a bigger compute budget. Demand this ablation everywhere."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">20. The five-part seminar structure weights which part at 25% of the grade?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">The demo making abstract claims checkable</button>
+          <button class="quiz-opt" type="button">The critical analysis, going beyond summary</button>
+          <button class="quiz-opt" type="button">The survey of main approaches' mechanisms</button>
+          <button class="quiz-opt" type="button">The open directions tied to the projects</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Critical analysis — assumptions, baselines, metrics, generalization — is called out as 25% of the seminar grade; the other parts support it."></p>
       </div>
     </div>
 

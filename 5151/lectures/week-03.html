@@ -605,7 +605,7 @@
   <section class="block" id="quiz">
     <div class="sec-head">
       <span class="eyebrow">Self-check</span>
-      <h2>Quiz — 4 questions, then a code exercise</h2>
+      <h2>Quiz — 20 questions, then a code exercise</h2>
     </div>
     <div class="concept wide">
       <p>Not graded — a two-minute check that today's ideas actually landed before you move on.</p>
@@ -653,6 +653,182 @@
           <button class="quiz-opt" type="button">Whether a human evaluator agrees with the model's answer</button>
         </div>
         <p class="quiz-feedback" hidden data-explain="pass@k asks whether at least one of k attempts succeeds; pass^k is the stricter mirror image — the fraction of tasks where every one of the k attempts succeeds."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">5. How does Toolformer learn where to insert tool calls?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">It keeps calls that improve its own next-token prediction</button>
+          <button class="quiz-opt" type="button">Human annotators label useful call sites in the corpus</button>
+          <button class="quiz-opt" type="button">A reward model scores each candidate call's usefulness</button>
+          <button class="quiz-opt" type="button">The provider bakes fixed call sites into the tokenizer</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Self-supervised: candidate calls are kept only where the tool's result improves the model's own prediction of the following tokens."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">6. Toolformer's key limitation, compared with native function calling, is that:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">It can call at most one tool in a single response</button>
+          <button class="quiz-opt" type="button">Adding a new tool requires retraining the weights</button>
+          <button class="quiz-opt" type="button">It cannot express typed parameters in its calls</button>
+          <button class="quiz-opt" type="button">It only works with proprietary commercial models</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Tool use is baked into one model's weights; native function calling instead passes schemas in context at inference time, so tools can be added freely."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">7. Which sub-problem does ToolLLM's 16,000-API setting introduce?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Selecting tools when the list is too big to enumerate</button>
+          <button class="quiz-opt" type="button">Parsing responses from APIs with malformed schemas</button>
+          <button class="quiz-opt" type="button">Rate-limiting concurrent calls across the providers</button>
+          <button class="quiz-opt" type="button">Translating between REST and JSON-RPC conventions</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="With thousands of candidates, “which tool, out of thousands” becomes its own search problem — it barely exists in ReAct's handful-of-actions setting."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question">8. Why is a non-idempotent tool (like charge_card) especially risky in agent loops?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Its schema is harder for models to fill correctly</button>
+          <button class="quiz-opt" type="button">It always needs elevated network permissions set</button>
+          <button class="quiz-opt" type="button">Agents retry on failure, so a duplicate call recurs</button>
+          <button class="quiz-opt" type="button">It cannot return structured errors models can read</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Retrying is designed-in agent behavior — a non-idempotent tool accidentally called twice during a retry (a double charge) is a real, common failure mode."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">9. For Requirement R2, each tool's permission level should record whether it is:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Read-only, reversible-write, or irreversible-write</button>
+          <button class="quiz-opt" type="button">Local, remote, or hybrid in its execution context</button>
+          <button class="quiz-opt" type="button">Free, metered, or subscription-based in its billing</button>
+          <button class="quiz-opt" type="button">Synchronous, asynchronous, or streaming in output</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="That three-way classification is the first input to your threat model (R6): what the agent can merely observe versus what it can irreversibly change."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">10. What does the Berkeley Function-Calling Leaderboard measure, distinctly?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">End-to-end success across long agent trajectories</button>
+          <button class="quiz-opt" type="button">Right function, right arguments, and right format</button>
+          <button class="quiz-opt" type="button">The cost-efficiency of tool calls across providers</button>
+          <button class="quiz-opt" type="button">Tool robustness against injected instructions</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="It isolates function-calling correctness from overall task success — a model can pick the right call yet still fail the task, and vice versa."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">11. MCP reduces integration work from M×N toward M+N because:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Each tool implements a server once, each app a client</button>
+          <button class="quiz-opt" type="button">A single vendor maintains every integration centrally</button>
+          <button class="quiz-opt" type="button">All agents share one global registry of typed tools</button>
+          <button class="quiz-opt" type="button">All traffic passes through one hosted gateway service</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Each data source writes one server; each application writes one client — pairwise custom integrations disappear, though auth and policy still need work."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question">12. In MCP, which primitive is application-controlled, like a file the model can read?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Tools, functions the model chooses to invoke itself</button>
+          <button class="quiz-opt" type="button">Prompts, templates a user fires like slash-commands</button>
+          <button class="quiz-opt" type="button">Resources, data the application decides to expose</button>
+          <button class="quiz-opt" type="button">Elicitation, requests routed to users via the host</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Tools are model-controlled, prompts are user-controlled, and resources are application-controlled — the split exists because not every decision should go to the model."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">13. What does MCP's elicitation feature standardize?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">A server requesting user input through the host</button>
+          <button class="quiz-opt" type="button">A model requesting a server's full capability list</button>
+          <button class="quiz-opt" type="button">A host broadcasting policy updates to its servers</button>
+          <button class="quiz-opt" type="button">Two servers negotiating access to shared resources</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Elicitation lets a server ask the user — via the host — for missing information or confirmation, e.g. before an irreversible action proceeds."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="3">
+        <p class="quiz-question">14. The lecture flags a local stdio MCP server as notable because it:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Serves many concurrent clients over the network</button>
+          <button class="quiz-opt" type="button">Encrypts its channel end-to-end automatically</button>
+          <button class="quiz-opt" type="button">Runs the model inside a sandboxed subprocess</button>
+          <button class="quiz-opt" type="button">Inherits the host process's privileges directly</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="A local stdio server runs with the host process's own privileges; a remote HTTP server is a genuine network boundary you must reason about separately."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">15. Willison's “lethal trifecta” combines untrusted content, private data, and:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">External communication out of the system</button>
+          <button class="quiz-opt" type="button">A context window beyond the tested range</button>
+          <button class="quiz-opt" type="button">A multi-agent topology with shared memory</button>
+          <button class="quiz-opt" type="button">Unpinned dependencies in the tool servers</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="All three together in one agent enable the confused-deputy attack: content from one source tricks the agent into leaking or misusing access elsewhere."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="1">
+        <p class="quiz-question">16. “Lost in the middle” matters even below the token limit because:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Middle tokens are silently truncated by providers</button>
+          <button class="quiz-opt" type="button">Presence in context doesn't guarantee it gets used</button>
+          <button class="quiz-opt" type="button">Attention cost grows quadratically with the window</button>
+          <button class="quiz-opt" type="button">Older turns are compressed without any disclosure</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Positional degradation is separate from capacity — models use facts in the middle of long contexts less reliably than the same facts near either end."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">17. Which context technique partially mitigates injection by addressing confusability?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Labeled sections: system vs retrieved vs tool vs user</button>
+          <button class="quiz-opt" type="button">Compacting older turns into a generated summary</button>
+          <button class="quiz-opt" type="button">Giving the model a scratchpad for its working out</button>
+          <button class="quiz-opt" type="button">Retrieving material on demand instead of stuffing</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Structured context sections make the provenance of each span explicit, so retrieved or tool text is less easily confused with trusted instructions."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">18. Why report pass^k alongside pass@k for deployment-oriented claims?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">A 90% one-shot system can still fail across repeats</button>
+          <button class="quiz-opt" type="button">pass@k inflates cost because it needs more samples</button>
+          <button class="quiz-opt" type="button">pass^k is far cheaper to estimate from one batch</button>
+          <button class="quiz-opt" type="button">Human judges prefer stricter metrics in reviews</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="pass^k requires all k attempts to succeed — a deployment-relevant reliability bar that a high pass@k number can quietly miss."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="2">
+        <p class="quiz-question">19. The unbiased estimator computes pass@1, pass@8, and pass@100 from:</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">Separate re-runs of the task set per k value</button>
+          <button class="quiz-opt" type="button">A parametric fit to the success-rate curve</button>
+          <button class="quiz-opt" type="button">One batch of n sampled attempts per task</button>
+          <button class="quiz-opt" type="button">Bootstrap intervals over LLM-judge scores</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Sample n ≥ k attempts once, count successes c, then compute every k from that same batch — lower variance and far cheaper than literal repeated trials."></p>
+      </div>
+
+      <div class="quiz-q" data-correct="0">
+        <p class="quiz-question">20. Which part of an evaluation does R5 call the most informative and most often skipped?</p>
+        <div class="quiz-options">
+          <button class="quiz-opt" type="button">The error analysis categorizing why failures happened</button>
+          <button class="quiz-opt" type="button">The comparison against a second system configuration</button>
+          <button class="quiz-opt" type="button">The variance reported across three independent seeds</button>
+          <button class="quiz-opt" type="button">The cost and latency listed beside the success rates</button>
+        </div>
+        <p class="quiz-feedback" hidden data-explain="Categorizing failures (wrong tool call, context overflow, hallucinated fact, evaluator too strict) usually teaches more than the headline number."></p>
       </div>
     </div>
 
