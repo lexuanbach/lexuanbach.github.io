@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CO5151 Materials</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>
+  try {
+    var t = localStorage.getItem('co5151-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="index.html"><b>CO5151</b> · Advanced Agentic AI</a>
+    <nav class="topnav" aria-label="Site navigation">
+      <a href="index.html">Overview</a>
+      <a href="lectures/week-01.html">Lectures</a>
+      <a href="seminars.html">Seminars</a>
+      <a href="project.html">Project</a>
+      <a href="resources.html">Resources</a>
+      <a href="materials.html" aria-current="page">Materials</a>
+    </nav>
+    <div class="topbar-tools">
+      <button class="icon-btn" id="theme-toggle" type="button">☾ Dark</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="side">
+  <h4>Site</h4>
+  <nav aria-label="Site">
+    <a href="index.html">Overview</a>
+    <a href="lectures/week-01.html">Lectures</a>
+    <a href="seminars.html">Seminars</a>
+    <a href="project.html">Project</a>
+    <a href="resources.html">Resources</a>
+    <a href="materials.html" aria-current="page">Materials</a>
+  </nav>
+  <h4>On this page</h4>
+  <nav aria-label="On this page">
+    <a href="#this-week">Do this week</a>
+    <a href="#notes">Lecture notes</a>
+    <a href="#choosing">Choosing your topics</a>
+  </nav>
+</aside>
+
+<main>
+  <section class="ch-hero">
+    <div class="wrap">
+      <span class="eyebrow">Materials · CO5151</span>
+      <h1>Downloads</h1>
+      <p class="lede">Every handout for the course as a PDF: the lecture notes to pre-read before
+        each flipped session, the seminar topic list you rank in the registration form, and the
+        project guidelines that decide whether your topic is approved.</p>
+      <div class="meta-chips">
+        <span class="chip">3 lecture notes</span>
+        <span class="chip">16 seminar topics</span>
+        <span class="chip">1 project guideline</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="this-week">
+    <div class="sec-head">
+      <span class="eyebrow">01 · Week 1</span>
+      <h2>Do this week</h2>
+    </div>
+    <div class="note tip">
+      <span class="note-tag">Before Sunday 13 Sep</span>
+      Elect a group leader · rank your seminar topics in the registration form · send the project
+      idea 1-pager · submit D1. Read <b>Seminar topics</b> before the form and
+      <b>Project guidelines</b> before the 1-pager — both are below.
+    </div>
+  </section>
+
+  <section class="block" id="notes">
+    <div class="sec-head">
+      <span class="eyebrow">02 · Pre-reading</span>
+      <h2>Lecture notes</h2>
+    </div>
+    <p>This is a flipped course: read the notes <em>before</em> the session. Weeks 1 and 2 were
+      taught together in the combined first session on 9 September.</p>
+    <ul class="reading wide">
+      <li><a href="materials/week-01-introduction-and-research-methodology.pdf">
+        <em>Week 1 — Introduction to Agentic AI &amp; Research Methodology.</em></a>
+        <span class="pill core">pre-read</span>
+        Working definition of an agent, the autonomy spectrum, agent anatomy, and the three-pass
+        method for reading a paper.</li>
+      <li><a href="materials/week-02-reasoning-and-planning.pdf">
+        <em>Week 2 — Reasoning &amp; Planning.</em></a>
+        <span class="pill core">pre-read</span>
+        Chain-of-Thought, self-consistency, ReAct, Reflexion, Tree- and Graph-of-Thoughts, LATS,
+        and where planning claims outrun their evidence.</li>
+      <li><a href="materials/week-03-tools-mcp-context-and-evaluation.pdf">
+        <em>Week 3 — Tools, MCP, Context &amp; Evaluation.</em></a>
+        <span class="pill ext">read before 16 Sep</span>
+        Function calling, the Model Context Protocol, context engineering, and how to evaluate an
+        agent on more than final-answer accuracy.</li>
+    </ul>
+  </section>
+
+  <section class="block" id="choosing">
+    <div class="sec-head">
+      <span class="eyebrow">03 · Seminars &amp; project</span>
+      <h2>Choosing your topics</h2>
+    </div>
+    <ul class="reading wide">
+      <li><a href="materials/seminar-topics.pdf"><em>Seminar topics.</em></a>
+        <span class="pill core">read before the form</span>
+        All 16 topics — 8 core for Seminar 1, 8 advanced for Seminar 2 — with the core readings,
+        what every talk must explain, the presentation rota, and the grading rubric. Each seminar
+        is 25% of your grade, and the critical-analysis section is where the marks are.
+        The same content is on the <a href="seminars.html">Seminars</a> page.</li>
+      <li><a href="materials/project-guideline.pdf"><em>Project guidelines.</em></a>
+        <span class="pill core">read before the 1-pager</span>
+        The topic-quality gate (novel · non-trivial · meaningful · feasible in ~10 weeks),
+        requirements R1–R9, the deliverable schedule D1–D4, and the grading criteria including
+        the 0.8–1.1 individual factor. The same content is on the
+        <a href="project.html">Project</a> page.</li>
+    </ul>
+    <div class="note">
+      <span class="note-tag">Pick them together</span>
+      One group carries two seminar topics and one project all semester. Rank seminar topics that
+      feed the system you intend to build, not the ones that merely sound interesting — otherwise
+      you read twice as much and reuse none of it.
+    </div>
+  </section>
+
+  <div class="pagenav">
+    <a href="resources.html"><span class="dir">← Back</span>Reading list</a>
+    <a href="index.html" class="next"><span class="dir">Home →</span>Course overview</a>
+  </div>
+</main>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="brand"><b>CO5151</b> · Advanced Agentic Artificial Intelligence</span>
+    <p>HCMUT · Faculty of Computer Science and Engineering · Lecturer: Lê Xuân Bách</p>
+  </div>
+</footer>
+
+<script src="assets/course.js"></script>
+</body>
+</html>
