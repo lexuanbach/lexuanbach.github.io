@@ -1,3 +1,33 @@
+- id: "29"
+  pillar: "agents"
+  status: "To appear"
+  number: "[29]"
+  authors: "With Phat T. Tran-Truong & Duy Nguyen"
+  title: "When Grounding Hurts: Retrieval and Validation for LLM Repair of Quantum Programs"
+  venue:
+    name: "ICECCS 2026 (Short Paper Track, Acceptance Rate: 49/129, 38%)"
+    url: "https://formal-analysis.com/iceccs/2026/"
+    location: "Brisbane, Australia"
+    date: "November 2026"
+  tags:
+    - text: "Quantum Programs"
+      class: "quantum"
+    - text: "Program Repair"
+      class: "verification"
+    - text: "Retrieval-Augmented Generation"
+      class: "rag"
+  links: []
+  abstract: "Quantum programs exhibit failures that classical static analysers often miss. API migrations may break execution, whereas an incorrect gate or reversed qubit order can silently corrupt an otherwise valid circuit. A common engineering response is to ground a large language model (LLM) with static-analysis findings and retrieved documentation, then validate its patches by execution. Whether additional grounding consistently improves repair, however, remains unclear.<br><br>We present <strong>LintRepair-RAG-Q</strong>, which combines a static linter, a retrieval-grounded LLM detector, and an execution-validated repair loop. We evaluate it on <strong>Q-Defects40</strong>, a reproducible benchmark of 40 Qiskit programs from eight documented defect families, using eighteen proprietary and open-weight repair backbones (open weights 3B&ndash;72B). Grounding improves detection recall from 0.72 to 0.81 with no false positives on the benchmark.<br><br>For repair, its effect depends on model capability. Although grounding improves pooled accuracy by 16 points (p&nbsp;&lt;&nbsp;0.001), it raises GPT-4o-mini from 0% to 63% and lowers Sonnet from 96.9% to 87.5% (descriptive at n&nbsp;=&nbsp;32, corroborated on a powered synthetic set). Open-weight models exhibit the same crossover, and matched controls attribute the regression to the injected context rather than solely to the analyser's verdict.<br><br>A two-factor framework explains these results and supports a capability-gated policy: ground and validate lower-capability models, but avoid presenting analyser-cleanliness claims to higher-capability models. We release Q-Defects40, LintRepair-RAG-Q, and scripts that regenerate every reported result from a cached run.<br><br><strong>Keywords:</strong> Quantum software engineering, Automated program repair, Retrieval-augmented generation, Static analysis, Qiskit, LLM evaluation"
+  bibtex: |
+    @inproceedings{trantruong2026grounding,
+      author    = {Tran-Truong, Phat T. and Nguyen, Duy and Le, Xuan-Bach},
+      title     = {When Grounding Hurts: Retrieval and Validation for LLM Repair of Quantum Programs},
+      booktitle = {Proceedings of the 30th International Conference on Engineering of Complex Computer Systems (ICECCS 2026)},
+      year      = {2026},
+      address   = {Brisbane, Australia},
+      note      = {Short paper}
+    }
+
 - id: "28"
   pillar: "agents"
   status: "To appear"
