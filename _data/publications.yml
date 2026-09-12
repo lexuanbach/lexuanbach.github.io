@@ -117,7 +117,10 @@
       class: "nlp"
     - text: "False Discovery Control"
       class: "verification"
-  links: []
+  links:
+    - type: "paper"
+      url: "/publication/ICDM2026b.pdf"
+      icon: "📄"
   abstract: "Fluent LLM hypotheses are useful data-mining candidates, but unsafe as discoveries: a generated claim may be unsupported, confounded, multiplicity-induced, or unstable. We study LLM-guided verifiable discovery, where an LLM suggests constrained natural-language hypotheses and a separate verifier decides which claims deserve to be accepted as discoveries.<br><br><strong>VeraDM</strong> compiles temporal, sequence, treatment-effect, and conjunctive hypotheses into typed data-mining queries, then accepts them only after support checks, permutation testing, multiple-testing correction, matched-contrast validation, and held-out replication. Every accepted or rejected claim becomes an auditable evidence card.<br><br>Under split and firewall assumptions, we prove compiler-preservation and held-out FDR results, give BY and multi-round variants, and show a power-separation result explaining when an informative proposer preserves power where exhaustive BH collapses. Experiments on synthetic failure modes, semi-synthetic injections, statistically sound pattern-mining baselines, multi-provider proposer diagnostics, timestamped Bank, Bike, and Healthcare case studies, and audit controls show that VeraDM rejects plausible invalid claims while producing readable, replicated discoveries.<br><br><strong>Keywords:</strong> Statistically sound pattern mining, Trustworthy and interpretable data mining, Large language models for data mining, False discovery control, Held-out replication"
   bibtex: |
     @inproceedings{trantruong2026hypotheses,
