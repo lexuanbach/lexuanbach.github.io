@@ -5,7 +5,7 @@
   authors: "With Phat T. Tran-Truong & Duy Nguyen"
   title: "When Grounding Hurts: Retrieval and Validation for LLM Repair of Quantum Programs"
   venue:
-    name: "ICECCS 2026 (Short Paper Track, Acceptance Rate: 49/129, 38%)"
+    name: "ICECCS 2026 (Research Track)"
     url: "https://formal-analysis.com/iceccs/2026/"
     location: "Brisbane, Australia"
     date: "November 2026"
@@ -24,8 +24,7 @@
       title     = {When Grounding Hurts: Retrieval and Validation for LLM Repair of Quantum Programs},
       booktitle = {Proceedings of the 30th International Conference on Engineering of Complex Computer Systems (ICECCS 2026)},
       year      = {2026},
-      address   = {Brisbane, Australia},
-      note      = {Short paper}
+      address   = {Brisbane, Australia}
     }
 
 - id: "28"
