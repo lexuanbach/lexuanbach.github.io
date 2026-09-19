@@ -1,11 +1,11 @@
 - id: "34"
-  pillar: "verified"
+  pillar: "quantum"
   status: "To appear"
   number: "[34]"
   authors: "With Phat T. Tran-Truong, Duy Nguyen, Ngoc-Khanh-Tran Nguyen & Son Ha Xuan"
   title: "QuantumTrustKG: Provenance-Aware Control-Plane Orchestration for Quantum-Safe Microservices"
   venue:
-    name: "ICSOC 2026 (Main Research and Industry Track)"
+    name: "ICSOC 2026 (Main Track, CORE Rank A)"
     url: "https://icsoc2026.it.p.lodz.pl/"
     location: "Lodz, Poland"
     date: "December 2026"
@@ -34,7 +34,7 @@
   authors: "With Phat T. Tran-Truong, Duy Nguyen & Ngoc-Khanh-Tran Nguyen"
   title: "Deon: Runtime Guards for Policy-Safe Agentic Service Composition under Attack"
   venue:
-    name: "ICSOC 2026 (Main Research and Industry Track)"
+    name: "ICSOC 2026 (Main Track, CORE Rank A)"
     url: "https://icsoc2026.it.p.lodz.pl/"
     location: "Lodz, Poland"
     date: "December 2026"
@@ -63,7 +63,7 @@
   authors: "With Phat T. Tran-Truong, Duy Nguyen & Ngoc-Khanh-Tran Nguyen"
   title: "Lexi: Priority-First Service Orchestration"
   venue:
-    name: "ICSOC 2026 (Main Research and Industry Track)"
+    name: "ICSOC 2026 (Main Track, CORE Rank A)"
     url: "https://icsoc2026.it.p.lodz.pl/"
     location: "Lodz, Poland"
     date: "December 2026"
@@ -92,7 +92,7 @@
   authors: "With Phat T. Tran-Truong & Son Ha Xuan"
   title: "A Failure-Mode Taxonomy for LLM-Agent Services: An Empirical Mining Study"
   venue:
-    name: "ICSOC 2026 (Main Research and Industry Track)"
+    name: "ICSOC 2026 (Main Track, CORE Rank A)"
     url: "https://icsoc2026.it.p.lodz.pl/"
     location: "Lodz, Poland"
     date: "December 2026"
@@ -121,7 +121,7 @@
   authors: "With Son Ha Xuan, Phat T. Tran-Truong & Chi-Thanh Vi"
   title: "DTaaS: Digital Twin as a Service for Patient-Centric Healthcare"
   venue:
-    name: "ICSOC 2026 (Main Research and Industry Track)"
+    name: "ICSOC 2026 (Main Track, CORE Rank A)"
     url: "https://icsoc2026.it.p.lodz.pl/"
     location: "Lodz, Poland"
     date: "December 2026"
@@ -144,7 +144,7 @@
     }
 
 - id: "29"
-  pillar: "agents"
+  pillar: "quantum"
   status: "To appear"
   number: "[29]"
   authors: "With Phat T. Tran-Truong & Duy Nguyen"
@@ -943,7 +943,7 @@
 
 
 - id: "8"
-  pillar: "verified"
+  pillar: "quantum"
   number: "[8]"
   authors: "With Shang-Wei Lin, Sun Jun & David Sanan"
   title: "A Quantum Interpretation of Separating Conjunction for Local Reasoning of Quantum Programs Based on Separation Logic"

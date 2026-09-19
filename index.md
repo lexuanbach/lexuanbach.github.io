@@ -538,7 +538,7 @@ h2 {
 
 .pillars {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 18px;
     margin-top: 32px;
 }
@@ -608,6 +608,7 @@ h2 {
 .pillar-verified { --p-color: #c0392b; }
 .pillar-agents   { --p-color: #8e44ad; }
 .pillar-autonomy { --p-color: #27ae60; }
+.pillar-quantum  { --p-color: #2980b9; }
 .pillar-applied  { --p-color: #7f8c8d; }
 
 /* Publication filter bar */
@@ -801,7 +802,7 @@ function copyBibtex(id) {
 
 <p class="vision-statement">I develop methods for building AI systems that can <strong>reason</strong>, <strong>verify</strong> what they produce, and <strong>know when they are uncertain</strong>.</p>
 
-<p class="vision-note">My work sits at the intersection of formal methods, large language models, and software reliability: I use logic and verification to give evidence for what learned systems claim, and I use learned systems to reach problems that classical verification cannot. Three pillars carry that agenda, and every paper below is labelled with the one it belongs to &mdash; click a pillar to see only its papers.</p>
+<p class="vision-note">My work sits at the intersection of formal methods, large language models, and software reliability: I use logic and verification to give evidence for what learned systems claim, and I use learned systems to reach problems that classical verification cannot. Four pillars carry that agenda, and every paper below is labelled with the one it belongs to &mdash; click a pillar to see only its papers.</p>
 
 <div class="pillars">
     <a class="pillar pillar-verified" href="#publications" onclick="filterPillar('verified', true); return false;">
@@ -825,6 +826,13 @@ function copyBibtex(id) {
         <p class="pillar-desc">Autonomy that respects a specification: reinforcement learning under temporal-logic objectives, and detecting and recovering from anomalies before an autonomous system acts on them.</p>
         <span class="pillar-count">{{ site.data.publications | where: "pillar", "autonomy" | size }} papers &rarr;</span>
     </a>
+    <a class="pillar pillar-quantum" href="#publications" onclick="filterPillar('quantum', true); return false;">
+        <span class="pillar-index">04</span>
+        <h3>Quantum Reasoning</h3>
+        <p class="pillar-sub">Quantum programs &middot; quantum logic &middot; post-quantum security</p>
+        <p class="pillar-desc">Reasoning about quantum software when running it is not enough: separation logic for quantum state, retrieval-grounded repair of quantum programs, and the control-plane decisions that make services quantum-safe.</p>
+        <span class="pillar-count">{{ site.data.publications | where: "pillar", "quantum" | size }} papers &rarr;</span>
+    </a>
 </div>
 
 <div class="recruiting">
@@ -841,12 +849,13 @@ function copyBibtex(id) {
     <button class="filter-btn pillar-verified" data-pillar="verified" onclick="filterPillar('verified', false)">Verified AI</button>
     <button class="filter-btn pillar-agents" data-pillar="agents" onclick="filterPillar('agents', false)">Auditable AI Agents</button>
     <button class="filter-btn pillar-autonomy" data-pillar="autonomy" onclick="filterPillar('autonomy', false)">Safe Autonomous Systems</button>
+    <button class="filter-btn pillar-quantum" data-pillar="quantum" onclick="filterPillar('quantum', false)">Quantum Reasoning</button>
     <button class="filter-btn pillar-applied" data-pillar="applied" onclick="filterPillar('applied', false)">Applied &amp; Collaborative</button>
     <span class="filter-count" id="filter-count">{{ site.data.publications | size }} papers</span>
 </div>
 
 {% for pub in site.data.publications %}
-{% case pub.pillar %}{% when 'verified' %}{% assign pillar_name = 'Verified AI' %}{% when 'agents' %}{% assign pillar_name = 'Auditable AI Agents' %}{% when 'autonomy' %}{% assign pillar_name = 'Safe Autonomous Systems' %}{% else %}{% assign pillar_name = 'Applied &amp; Collaborative' %}{% endcase %}
+{% case pub.pillar %}{% when 'verified' %}{% assign pillar_name = 'Verified AI' %}{% when 'agents' %}{% assign pillar_name = 'Auditable AI Agents' %}{% when 'autonomy' %}{% assign pillar_name = 'Safe Autonomous Systems' %}{% when 'quantum' %}{% assign pillar_name = 'Quantum Reasoning' %}{% else %}{% assign pillar_name = 'Applied &amp; Collaborative' %}{% endcase %}
 <div class="publication pillar-{{ pub.pillar }}{% if pub.is_thesis %} thesis-publication{% endif %}" data-number="{{ pub.number }}" data-pillar="{{ pub.pillar }}">
     <div><span class="pub-pillar">{{ pillar_name }}</span></div>
     {% if pub.authors != "" %}
