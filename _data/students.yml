@@ -137,7 +137,7 @@
   affiliation: "HCMUT, Faculty of Computer Science and Engineering"
   period: ""
   topic: "Agent reliability, verified data-mining discovery, and program analysis with LLMs"
-  publications: ["28", "26", "25", "21", "17"]
+  publications: ["34", "33", "32", "31", "29", "28", "26", "25", "21", "17"]
   links: []
 
 - name: "Son Ha Xuan"
@@ -146,7 +146,7 @@
   affiliation: "RMIT University"
   period: ""
   topic: "Synthetic-data auditing, agent memory privacy, and verified discovery"
-  publications: ["28", "26", "25"]
+  publications: ["34", "31", "30", "28", "26", "25"]
   links: []
 
 # ------------------------------------------------------------------ To add ---
