@@ -20,17 +20,18 @@
     - type: "paper"
       url: "/publication/ICSOC2026a.pdf"
       icon: "📄"
-    - type: "code"
+    - type: "artifact"
       url: "https://github.com/lexuanbach/quantumtrustkg"
       icon: "💻"
-  abstract: "A service mesh can enforce a chosen cryptographic profile, but migration to post-quantum cryptography (PQC) asks a sharper question: which profile is justified for this service-to-service call right now? The answer differs per connection and changes over time &mdash; it depends on endpoint capabilities, trust boundaries, rollout state, provenance, and compliance obligations &mdash; so static mesh settings and policy-as-code, which pin one posture per namespace, cannot decide it per edge.<br><br>We present <strong>QuantumTrustKG</strong>, a provenance-aware, graph-backed control-plane framework supplying this missing decision layer for crypto-agile microservices. For each edge, its filter-before-rank procedure (<strong>QTPO</strong>) discards every profile that fails a capability, policy, threat, or freshness gate, ranks the survivors by cost, and blocks the edge when none qualifies. We mechanize QTPO&rsquo;s guarantees in Coq/Rocq and implement it as a Kubernetes controller integrated with Istio; these are control-plane guarantees over declared metadata, not a wire-level proof of the bytes on the connection.<br><br>On 50&ndash;200-service testbeds QuantumTrustKG reaches 99.1&ndash;99.4% policy compliance at 12&ndash;45&nbsp;ms selection latency, the only method with zero unsafe promotions, while service-level and opportunistic baselines incur 3.4&ndash;13.8%. The semantic core scales to 2000 services.<br><br><strong>Keywords:</strong> Service orchestration, Microservices, Knowledge graphs, Service mesh, Post-quantum cryptography, Crypto-agility"
+  abstract: "Post-quantum migration requires a service mesh to choose cryptographic profiles as endpoint capabilities, policies, threats, and evidence freshness change. Static mesh settings and policy-as-code enforce a posture once it is chosen, but neither makes that choice for each connection.<br><br>We present <strong>QuantumTrustKG</strong>, a provenance-aware, graph-backed control-plane framework for connection-specific selection. For each communication edge, its Quantum Trust Protocol Orchestration (<strong>QTPO</strong>) procedure removes profiles that fail a capability, policy, threat, or freshness gate, ranks the rest by cost, and blocks the edge if none is admissible. We mechanize the control-plane guarantees in Coq/Rocq and implement QTPO as a Kubernetes/Istio controller.<br><br>In a controlled comparison on 200-service meshes, QTPO records no unsafe promotions and 96.5% <em>declared-label policy compliance</em>, while service-level and opportunistic baselines promote unsafely on 3.4&ndash;13.8% of edges. On sampled production service graphs of up to 2000 services, these baselines reach 37&ndash;60% and QTPO stays at zero. The compliance metric reads the same declared labels that drive the controller. It therefore scores control-plane decisions and cannot show which cryptography is negotiated on the wire.<br><br><strong>Keywords:</strong> Service orchestration, Microservices, Knowledge graphs, Service mesh, Post-quantum cryptography, Crypto-agility"
   bibtex: |
     @inproceedings{le2026quantumtrustkg,
       author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Nguyen, Duy and Nguyen, Ngoc-Khanh-Tran and Ha Xuan, Son},
       title     = {QuantumTrustKG: Provenance-Aware Orchestration for Quantum-Safe Microservices},
       booktitle = {Proceedings of the 24th International Conference on Service-Oriented Computing (ICSOC 2026)},
       year      = {2026},
-      address   = {Lodz, Poland}
+      address   = {Lodz, Poland},
+      note      = {Artifact: \url{https://github.com/lexuanbach/quantumtrustkg}}
     }
 
 - id: "33"
@@ -55,17 +56,18 @@
     - type: "paper"
       url: "/publication/ICSOC2026b.pdf"
       icon: "📄"
-    - type: "code"
+    - type: "artifact"
       url: "https://github.com/lexuanbach/deon"
       icon: "💻"
-  abstract: "Large language models now drive agentic service compositions, but under attack they breach access control, leak data, skip mandatory steps, or exceed quotas, and prompting defences reduce such failures without removing them.<br><br>We present <strong>Deon</strong>, a runtime guard that wraps any untrusted proposer in two layers with different guarantees: a deontic policy automaton (DPA) and a conformal execution guard, with a first-class <em>Abstain</em>. The DPA enforces safety by blocking and detects unmet obligations, so any policy-expressible violation executes with probability 0, for any adversary. The guard admits an action only when a calibrated score keeps pass-through Pr[admit&nbsp;|&nbsp;violation]&nbsp;&le;&nbsp;&alpha;, a distribution-free finite-sample bound under exchangeable calibration, with an exact binomial-tail PAC variant at 1&nbsp;&minus;&nbsp;&delta;; an adaptive adversary who evades the scorer breaks this statistical bound, leaving abstention the fallback.<br><br>On <strong>Deon-Bench</strong> the DPA is exact on 100% of 900 traces across six violation classes. On content-egress it is blind, and the guard holds leaks &le;&nbsp;&alpha; when exchangeable but reaches 32.8% under adaptive obfuscation. Across a six-model ladder it drives every policy-expressible injection from 87&ndash;100% attack success to 0%, at microsecond overhead. We release Deon-Bench and the guard.<br><br><strong>Keywords:</strong> Agentic service composition, Runtime verification, Conformal prediction, Prompt injection, Deontic logic"
+  abstract: "Large language models increasingly orchestrate services, but attacker-controlled inputs can induce access-control violations, data leakage, omitted mandatory steps, and quota overruns. Prompt-based defences reduce these failures without eliminating them.<br><br>We place two runtime checks between an untrusted proposer and service execution. Our <strong>deontic policy automaton</strong> checks each proposed action against explicit permissions, prohibitions, and obligations. Under correct catalogue labels, complete mediation, and an adequate policy, no action violating the policy&rsquo;s safety fragment executes. Terminally pending obligations are detected but cannot be forced. A mislabelled action falls outside this guarantee. Our <strong>conformal guard</strong> handles residual violations, and we calibrate its detector threshold on labelled data. The pass-through bound holds only while deployment violation scores stay exchangeable with calibration scores, and adaptive low-scoring rewrites break it and are admitted.<br><br>On <strong>Deon-Bench</strong>, the automaton agrees with ground truth on 100% of 900 traces across six violation classes. For content egress that the policy cannot identify, the calibrated layer admits 8.9% of leaks against a 10% target, rising to 32.8% under adaptive obfuscation. Across six proposer models, our guard reduces attack success for policy-expressible injections from 87&ndash;100% to 0%, with microsecond-scale monitoring overhead.<br><br><strong>Keywords:</strong> Agentic service composition, Runtime verification, Conformal prediction, Prompt injection, Deontic logic"
   bibtex: |
     @inproceedings{le2026deon,
       author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Nguyen, Duy and Nguyen, Ngoc-Khanh-Tran},
       title     = {Deon: Runtime Guards for Policy-Safe Agentic Service Composition under Attack},
       booktitle = {Proceedings of the 24th International Conference on Service-Oriented Computing (ICSOC 2026)},
       year      = {2026},
-      address   = {Lodz, Poland}
+      address   = {Lodz, Poland},
+      note      = {Artifact: \url{https://github.com/lexuanbach/deon}}
     }
 
 - id: "32"
@@ -90,17 +92,18 @@
     - type: "paper"
       url: "/publication/ICSOC2026c.pdf"
       icon: "📄"
-    - type: "code"
+    - type: "artifact"
       url: "https://github.com/lexuanbach/lexi"
       icon: "💻"
-  abstract: "A service runs as a graph of stages across a cloud-edge-serverless continuum, and where each stage is placed trades off latency, privacy, carbon, and cost. Operators usually want these goals in a strict <em>priority</em> order: the latency target (SLO) first, then privacy, then carbon, then cost. A weighted sum cannot express this: tuned, it approximates the order only from a small, deployment-specific weight region that drifts once the goals&rsquo; numeric units are misjudged.<br><br>We present <strong>Lexi</strong>, a continuum orchestrator that selects on the goal <em>order</em> itself via a <em>thresholded lexicographic</em> rule (rank on the top goal, break near-ties by the next), fed by an off-policy counterfactual model that estimates un-taken placements from executed ones under one stated assumption (goals add across stages). We prove that strict lexicographic selection is invariant to rescaling a goal&rsquo;s units, that the thresholded rule is optimal on its near-tie bands, and that the top priority is tracked under those assumptions.<br><br>On a 15-seed simulator, Lexi uses <em>no</em> weights yet reaches 1.46% SLO violations and PII exposure 0.05, matching tuned weighted-sum and constrained-MDP baselines, while an untuned sum reaches 23% and 1.94; only one of 84 weightings meets the target, and only after tuning. Under 10&times; privacy under-scaling the tuned sum&rsquo;s PII exposure jumps to 1.85 of 2 stages while Lexi does not move, because it ranks the goals instead of pricing them.<br><br><strong>Keywords:</strong> Service orchestration, Cloud-edge-serverless continuum, Lexicographic optimisation, Multi-objective decision-making, Scale invariance, Carbon- and privacy-aware placement"
+  abstract: "A service spanning cloud, edge, and serverless nodes must balance latency, data exposure, carbon, and cost, which operators may rank strictly, e.g., meeting a latency SLO first. Weighted sums approximate such a ranking only with deployment-specific weights, and their decisions change when an objective&rsquo;s numerical scale is misestimated.<br><br>We present <strong>Lexi</strong>, a continuum orchestrator applying a thresholded lexicographic rule to predictions of an off-policy counterfactual outcome model, which assumes objectives decompose across stages. We instantiate the rule as SLO &succ; privacy &succ; carbon &succ; cost and use a simple topological privacy proxy only to separate placements already tied on the SLO.<br><br>In a 15-seed simulation, Lexi needs no weights and reaches 1.46% SLO violations with PII exposure 0.05, comparable to hand-calibrated and SLO-constrained weighted sums. An untuned sum reaches 23% SLO violations and 1.94 PII exposure, and only one of 84 tested weightings meets the target. Under-scaling privacy 10&times; raises the tuned and constrained baselines&rsquo; exposure to 1.85 and 1.84 of two stages, respectively. Lexi is unchanged. The evidence covers one simulated application under the additive no-interference assumption.<br><br><strong>Keywords:</strong> Service orchestration, Cloud-edge-serverless continuum, Lexicographic optimisation, Scale invariance"
   bibtex: |
     @inproceedings{le2026lexi,
       author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Nguyen, Duy and Nguyen, Ngoc-Khanh-Tran},
       title     = {Lexi: Priority-First Service Orchestration},
       booktitle = {Proceedings of the 24th International Conference on Service-Oriented Computing (ICSOC 2026)},
       year      = {2026},
-      address   = {Lodz, Poland}
+      address   = {Lodz, Poland},
+      note      = {Artifact: \url{https://github.com/lexuanbach/lexi}}
     }
 
 - id: "31"
