@@ -118,26 +118,26 @@
   pillar: "applied"
   status: "To appear"
   number: "[30]"
-  authors: "With Son Ha Xuan, Phat T. Tran-Truong & Chi-Thanh Vi"
-  title: "DTaaS: Digital Twin as a Service for Patient-Centric Healthcare"
+  authors: "With Son Ha Xuan, Phat T. Tran-Truong, Minh Nguyen-Binh & Thanh Pham-Chi"
+  title: "ACaaS: Privacy-Preserving Access Control as a Service for Healthcare on Cloud-Edge Continuum"
   venue:
     name: "ICSOC 2026 (Main Track, CORE Rank A, Acceptance Rate: 64/240, 27%)"
     url: "https://icsoc2026.it.p.lodz.pl/"
     location: "Lodz, Poland"
     date: "December 2026"
   tags:
-    - text: "Digital Twins"
-      class: "ai"
-    - text: "Privacy-Preserving Computation"
+    - text: "Access Control"
       class: "verification"
-    - text: "Blockchain Access Control"
+    - text: "Cloud-Edge Continuum"
+      class: "ai"
+    - text: "Blockchain"
       class: "verification"
   links: []
-  abstract: "Patient Digital Twins (PDTs) promise continuous, personalised healthcare analytics, yet existing service platforms do not jointly deliver fine-grained consent governance, privacy-preserving query execution, and verifiable service composition.<br><br>We present <strong>DTaaS</strong>, a Digital Twin as a Service architecture whose scientific contribution is a consent-gated, class-based privacy-routing service abstraction: each clinical request is a typed invocation whose admission is mediated by an on-chain consent oracle, and whose backend is drawn from a privacy-mechanism algebra {CKKS-HE, TEE, HE&oplus;DP} under provably order-sensitive composition rules. We prove the router sound (every admitted invocation satisfies its consent, purpose, confidentiality, differential-privacy, k-anonymity, and audit obligations) and complete (every compliant invocation is admitted), giving a decision procedure for the compliance predicate that we verify by property-based testing.<br><br>On 1,000 FHIR R4 synthetic PDTs, all five service classes meet clinical service-level objectives with &ge;10&times; headroom, differential-privacy error stays below 0.5%, consent verification adds &le;3.8&nbsp;ms p99, and throughput reaches 332.9 queries/s. Baselines quantify the cost of each guarantee, and a three-sealer ledger bounds cross-node divergence at one block with 0.31&nbsp;s failure recovery.<br><br><strong>Keywords:</strong> Digital Twin as a Service, Service composition, Privacy-preserving computation, Homomorphic encryption, Differential privacy, Blockchain access control, Healthcare"
+  abstract: "Enforcing consistent, privacy-aware access control across the healthcare cloud-edge continuum is unresolved: centralized enforcement suffers from WAN latency and outage fragility, while replicating full authorization engines at every edge exceeds device capabilities and offers no evidence that replicas agree.<br><br>We propose <strong>ACaaS</strong>, an Access Control as a Service architecture that decomposes the XACML roles into microservices with typed, partition-tolerant RPC contracts, deploys a lightweight Policy Decision Point at the edge, minimizes records before they leave the device (pseudonymization, k-anonymity, role-driven redaction), and uses a permissioned ledger as a synchronization substrate &mdash; not merely an audit log &mdash; so that every edge provably enforces the policy version committed by cloud administrators.<br><br>Five HIPAA/GDPR-derived security goals are discharged semi-formally (a substitution-resistance lemma, five theorems, a knapsack-optimality placement argument, and a closed-form reconciliation bound) and validated by twelve experiments, including an executable conformance suite mechanizing all theorems, a re-identification attack within one percentage point of the analytic 1/k bound, an ablation in which only the ledger detects tampered policy pushes, Byzantine fault injection, and a three-site partition/soak emulation sustaining 100% local availability with zero audit-log loss across 37 WAN partitions.<br><br><strong>Keywords:</strong> Access Control, Cloud-Edge Continuum, Blockchain, Privacy, Microservices, Healthcare"
   bibtex: |
-    @inproceedings{haxuan2026dtaas,
-      author    = {Ha Xuan, Son and Tran-Truong, Phat T. and Le, Xuan-Bach and Vi, Chi-Thanh},
-      title     = {DTaaS: Digital Twin as a Service for Patient-Centric Healthcare},
+    @inproceedings{haxuan2026acaas,
+      author    = {Ha Xuan, Son and Tran-Truong, Phat T. and Le, Xuan-Bach and Nguyen-Binh, Minh and Pham-Chi, Thanh},
+      title     = {ACaaS: Privacy-Preserving Access Control as a Service for Healthcare on Cloud-Edge Continuum},
       booktitle = {Proceedings of the 24th International Conference on Service-Oriented Computing (ICSOC 2026)},
       year      = {2026},
       address   = {Lodz, Poland}
