@@ -26,10 +26,12 @@
   abstract: "Post-quantum migration requires a service mesh to choose cryptographic profiles as endpoint capabilities, policies, threats, and evidence freshness change. Static mesh settings and policy-as-code enforce a posture once it is chosen, but neither makes that choice for each connection.<br><br>We present <strong>QuantumTrustKG</strong>, a provenance-aware, graph-backed control-plane framework for connection-specific selection. For each communication edge, its Quantum Trust Protocol Orchestration (<strong>QTPO</strong>) procedure removes profiles that fail a capability, policy, threat, or freshness gate, ranks the rest by cost, and blocks the edge if none is admissible. We mechanize the control-plane guarantees in Coq/Rocq and implement QTPO as a Kubernetes/Istio controller.<br><br>In a controlled comparison on 200-service meshes, QTPO records no unsafe promotions and 96.5% <em>declared-label policy compliance</em>, while service-level and opportunistic baselines promote unsafely on 3.4&ndash;13.8% of edges. On sampled production service graphs of up to 2000 services, these baselines reach 37&ndash;60% and QTPO stays at zero. The compliance metric reads the same declared labels that drive the controller. It therefore scores control-plane decisions and cannot show which cryptography is negotiated on the wire.<br><br><strong>Keywords:</strong> Service orchestration, Microservices, Knowledge graphs, Service mesh, Post-quantum cryptography, Crypto-agility"
   bibtex: |
     @inproceedings{le2026quantumtrustkg,
-      author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Nguyen, Duy and Nguyen, Ngoc-Khanh-Tran and Ha Xuan, Son},
+      author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Nguyen, Duy and Nguyen, Ngoc Khanh Tran and Ha, Xuan Son},
       title     = {QuantumTrustKG: Provenance-Aware Orchestration for Quantum-Safe Microservices},
       booktitle = {Proceedings of the 24th International Conference on Service-Oriented Computing (ICSOC 2026)},
       year      = {2026},
+      series    = {Lecture Notes in Computer Science},
+      publisher = {Springer},
       address   = {Lodz, Poland},
       note      = {Artifact: \url{https://github.com/lexuanbach/quantumtrustkg}}
     }
@@ -62,10 +64,12 @@
   abstract: "Large language models increasingly orchestrate services, but attacker-controlled inputs can induce access-control violations, data leakage, omitted mandatory steps, and quota overruns. Prompt-based defences reduce these failures without eliminating them.<br><br>We place two runtime checks between an untrusted proposer and service execution. Our <strong>deontic policy automaton</strong> checks each proposed action against explicit permissions, prohibitions, and obligations. Under correct catalogue labels, complete mediation, and an adequate policy, no action violating the policy&rsquo;s safety fragment executes. Terminally pending obligations are detected but cannot be forced. A mislabelled action falls outside this guarantee. Our <strong>conformal guard</strong> handles residual violations, and we calibrate its detector threshold on labelled data. The pass-through bound holds only while deployment violation scores stay exchangeable with calibration scores, and adaptive low-scoring rewrites break it and are admitted.<br><br>On <strong>Deon-Bench</strong>, the automaton agrees with ground truth on 100% of 900 traces across six violation classes. For content egress that the policy cannot identify, the calibrated layer admits 8.9% of leaks against a 10% target, rising to 32.8% under adaptive obfuscation. Across six proposer models, our guard reduces attack success for policy-expressible injections from 87&ndash;100% to 0%, with microsecond-scale monitoring overhead.<br><br><strong>Keywords:</strong> Agentic service composition, Runtime verification, Conformal prediction, Prompt injection, Deontic logic"
   bibtex: |
     @inproceedings{le2026deon,
-      author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Nguyen, Duy and Nguyen, Ngoc-Khanh-Tran},
+      author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Nguyen, Duy and Nguyen, Ngoc Khanh Tran},
       title     = {Deon: Runtime Guards for Policy-Safe Agentic Service Composition under Attack},
       booktitle = {Proceedings of the 24th International Conference on Service-Oriented Computing (ICSOC 2026)},
       year      = {2026},
+      series    = {Lecture Notes in Computer Science},
+      publisher = {Springer},
       address   = {Lodz, Poland},
       note      = {Artifact: \url{https://github.com/lexuanbach/deon}}
     }
@@ -98,10 +102,12 @@
   abstract: "A service spanning cloud, edge, and serverless nodes must balance latency, data exposure, carbon, and cost, which operators may rank strictly, e.g., meeting a latency SLO first. Weighted sums approximate such a ranking only with deployment-specific weights, and their decisions change when an objective&rsquo;s numerical scale is misestimated.<br><br>We present <strong>Lexi</strong>, a continuum orchestrator applying a thresholded lexicographic rule to predictions of an off-policy counterfactual outcome model, which assumes objectives decompose across stages. We instantiate the rule as SLO &succ; privacy &succ; carbon &succ; cost and use a simple topological privacy proxy only to separate placements already tied on the SLO.<br><br>In a 15-seed simulation, Lexi needs no weights and reaches 1.46% SLO violations with PII exposure 0.05, comparable to hand-calibrated and SLO-constrained weighted sums. An untuned sum reaches 23% SLO violations and 1.94 PII exposure, and only one of 84 tested weightings meets the target. Under-scaling privacy 10&times; raises the tuned and constrained baselines&rsquo; exposure to 1.85 and 1.84 of two stages, respectively. Lexi is unchanged. The evidence covers one simulated application under the additive no-interference assumption.<br><br><strong>Keywords:</strong> Service orchestration, Cloud-edge-serverless continuum, Lexicographic optimisation, Scale invariance"
   bibtex: |
     @inproceedings{le2026lexi,
-      author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Nguyen, Duy and Nguyen, Ngoc-Khanh-Tran},
+      author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Nguyen, Duy and Nguyen, Ngoc Khanh Tran},
       title     = {Lexi: Priority-First Service Orchestration},
       booktitle = {Proceedings of the 24th International Conference on Service-Oriented Computing (ICSOC 2026)},
       year      = {2026},
+      series    = {Lecture Notes in Computer Science},
+      publisher = {Springer},
       address   = {Lodz, Poland},
       note      = {Artifact: \url{https://github.com/lexuanbach/lexi}}
     }
