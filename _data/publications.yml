@@ -145,8 +145,8 @@
   pillar: "applied"
   status: "To appear"
   number: "[30]"
-  authors: "With Son Ha Xuan, Phat T. Tran-Truong, Minh Nguyen-Binh & Thanh Pham-Chi"
-  title: "ACaaS: Privacy-Preserving Access Control as a Service for Healthcare on Cloud-Edge Continuum"
+  authors: "With Son Ha Xuan, Phat T. Tran-Truong, Minh B. Nguyen & Thanh Pham"
+  title: "ACaaS: Privacy-Preserving Access Control as a Service for Healthcare on the Cloud-Edge Continuum"
   venue:
     name: "ICSOC 2026 (Main Track, CORE Rank A, Acceptance Rate: 64/240, 27%)"
     url: "https://icsoc2026.it.p.lodz.pl/"
@@ -159,15 +159,24 @@
       class: "ai"
     - text: "Blockchain"
       class: "verification"
-  links: []
-  abstract: "Enforcing consistent, privacy-aware access control across the healthcare cloud-edge continuum is unresolved: centralized enforcement suffers from WAN latency and outage fragility, while replicating full authorization engines at every edge exceeds device capabilities and offers no evidence that replicas agree.<br><br>We propose <strong>ACaaS</strong>, an Access Control as a Service architecture that decomposes the XACML roles into microservices with typed, partition-tolerant RPC contracts, deploys a lightweight Policy Decision Point at the edge, minimizes records before they leave the device (pseudonymization, k-anonymity, role-driven redaction), and uses a permissioned ledger as a synchronization substrate &mdash; not merely an audit log &mdash; so that every edge provably enforces the policy version committed by cloud administrators.<br><br>Five HIPAA/GDPR-derived security goals are discharged semi-formally (a substitution-resistance lemma, five theorems, a knapsack-optimality placement argument, and a closed-form reconciliation bound) and validated by twelve experiments, including an executable conformance suite mechanizing all theorems, a re-identification attack within one percentage point of the analytic 1/k bound, an ablation in which only the ledger detects tampered policy pushes, Byzantine fault injection, and a three-site partition/soak emulation sustaining 100% local availability with zero audit-log loss across 37 WAN partitions.<br><br><strong>Keywords:</strong> Access Control, Cloud-Edge Continuum, Blockchain, Privacy, Microservices, Healthcare"
+  links:
+    - type: "paper"
+      url: "/publication/ICSOC2026d.pdf"
+      icon: "📄"
+    - type: "artifact"
+      url: "https://github.com/SonHaXuan/ACaaS"
+      icon: "💻"
+  abstract: "Enforcing consistent, privacy-aware access control across the healthcare cloud-edge continuum&mdash;a core service-composition challenge&mdash;is unresolved: centralized enforcement suffers WAN latency and outage fragility, while replicating full authorization engines at every edge exceeds device capabilities and offers no evidence that replicas agree.<br><br>We propose <strong>ACaaS</strong>, an Access Control as a Service architecture that decomposes the XACML roles into microservices with typed, partition-tolerant RPC contracts, deploys a lightweight Policy Decision Point at the edge, minimizes records before they leave the device (pseudonymization, k-anonymity, role-driven redaction), and uses a permissioned ledger as a synchronization substrate &mdash; not merely an audit log &mdash; so that every edge provably enforces the policy version committed by cloud administrators.<br><br>Five HIPAA/GDPR-derived security goals are discharged semi-formally (a substitution-resistance lemma, five theorems, a knapsack-optimality placement argument, and a closed-form reconciliation bound) and validated by twelve experiments, including an executable conformance suite mechanizing all theorems, a re-identification attack within one percentage point of the analytic 1/k bound, an ablation in which only the ledger detects tampered policy pushes, Byzantine fault injection, and a three-site partition/soak emulation sustaining 100% local availability with zero audit-log loss across 37 WAN partitions.<br><br><strong>Keywords:</strong> Access Control, Cloud-Edge Continuum, Blockchain, Privacy, Microservices, Healthcare"
   bibtex: |
     @inproceedings{haxuan2026acaas,
-      author    = {Ha Xuan, Son and Tran-Truong, Phat T. and Le, Xuan-Bach and Nguyen-Binh, Minh and Pham-Chi, Thanh},
-      title     = {ACaaS: Privacy-Preserving Access Control as a Service for Healthcare on Cloud-Edge Continuum},
+      author    = {Ha Xuan, Son and Tran-Truong, Phat T. and Le, Xuan-Bach and Nguyen, Minh B. and Pham, Thanh},
+      title     = {ACaaS: Privacy-Preserving Access Control as a Service for Healthcare on the Cloud-Edge Continuum},
       booktitle = {Proceedings of the 24th International Conference on Service-Oriented Computing (ICSOC 2026)},
       year      = {2026},
-      address   = {Lodz, Poland}
+      series    = {Lecture Notes in Computer Science},
+      publisher = {Springer},
+      address   = {Lodz, Poland},
+      note      = {Artifact: \url{https://github.com/SonHaXuan/ACaaS}}
     }
 
 - id: "29"
