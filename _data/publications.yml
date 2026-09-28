@@ -2,7 +2,7 @@
   pillar: "quantum"
   status: "To appear"
   number: "[34]"
-  authors: "With Phat T. Tran-Truong, Duy Nguyen, Ngoc-Khanh-Tran Nguyen & Son Ha Xuan"
+  authors: "With Phat T. Tran-Truong, Duy Nguyen, Ngoc Khanh Tran Nguyen & Xuan Son Ha"
   title: "QuantumTrustKG: Provenance-Aware Orchestration for Quantum-Safe Microservices"
   venue:
     name: "ICSOC 2026 (Main Track, CORE Rank A, Acceptance Rate: 64/240, 27%)"
@@ -40,7 +40,7 @@
   pillar: "agents"
   status: "To appear"
   number: "[33]"
-  authors: "With Phat T. Tran-Truong, Duy Nguyen & Ngoc-Khanh-Tran Nguyen"
+  authors: "With Phat T. Tran-Truong, Duy Nguyen & Ngoc Khanh Tran Nguyen"
   title: "Deon: Runtime Guards for Policy-Safe Agentic Service Composition under Attack"
   venue:
     name: "ICSOC 2026 (Main Track, CORE Rank A, Acceptance Rate: 64/240, 27%)"
@@ -78,7 +78,7 @@
   pillar: "applied"
   status: "To appear"
   number: "[32]"
-  authors: "With Phat T. Tran-Truong, Duy Nguyen & Ngoc-Khanh-Tran Nguyen"
+  authors: "With Phat T. Tran-Truong, Duy Nguyen & Ngoc Khanh Tran Nguyen"
   title: "Lexi: Priority-First Service Orchestration"
   venue:
     name: "ICSOC 2026 (Main Track, CORE Rank A, Acceptance Rate: 64/240, 27%)"
