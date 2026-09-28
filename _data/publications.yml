@@ -130,15 +130,24 @@
       class: "verification"
     - text: "Service-Oriented Computing"
       class: "nlp"
-  links: []
-  abstract: "LLM-agent frameworks now sit behind retrieval, tool invocation, and multi-step automation services. Service-oriented computing (SOC) has mature resilience patterns for service boundaries, but it lacks a shared empirical vocabulary for the failures users report against these frameworks.<br><br>We introduce <strong>FMTAX</strong>, a failure-mode taxonomy built from <em>n</em>&nbsp;=&nbsp;720 public issues across six LangChain/LangGraph, LlamaIndex/Model Context Protocol (MCP), and CrewAI repositories. FMTAX assigns each issue one primary label from a 22-class codebook organized into seven groups: control, tool/composition, state/memory, service-boundary, reliability/concurrency, integration, and generic. A stratified 30-issue anchor coded by Expert A and Expert B is the main calibration signal; both automated rule-based coders reach &kappa;&nbsp;=&nbsp;0.700 against it. On the full corpus, the same coders reach &kappa;&nbsp;=&nbsp;0.897 at code level and &kappa;&nbsp;=&nbsp;0.877 at group level, showing stable replay under two decision orders.<br><br>In this snapshot, 40.0% of issues are agent-specific, led by B2 tool-argument malformation (13.06% [10.56, 15.56]), D4 provider-error propagation (9.72% [7.64, 11.94]), and D3 network/transport failures (5.42% [3.75, 7.08]). Under our conceptual mapping, every agent-specific class has at least one established SOC resilience-pattern name. The result frames agent-service reliability as an adoption problem at the service boundary: much of the vocabulary exists, but agent frameworks have not yet made it a standard design practice.<br><br><strong>Keywords:</strong> LLM agents, Service-oriented computing, Failure-mode taxonomy, Empirical study, Resilience patterns"
+  links:
+    - type: "paper"
+      url: "/publication/ICSOC2026e.pdf"
+      icon: "📄"
+    - type: "artifact"
+      url: "https://github.com/LeoTTTPhat/FMTAX"
+      icon: "💻"
+  abstract: "LLM-agent frameworks increasingly run as service components that call remote model providers and tool servers, yet service-oriented computing (SOC) lacks an empirically grounded vocabulary for how they fail.<br><br>We present <strong>FMTAX</strong>, a taxonomy of 22 failure classes in seven groups, built by coding 720 closed GitHub issues from six repositories of four ecosystems (LangChain, LlamaIndex, MCP, CrewAI) and checked for coverage on 240 held-out issues from four further ecosystems. Labels from two rule coders are calibrated against a human-coded anchor (&kappa;&nbsp;=&nbsp;0.70) and an independent LLM annotator.<br><br>Up to 40% of the issues are agent-specific; both references indicate that the rule coders over- rather than under-assign such codes. Across all raters, 66&ndash;82% of agent-specific failures arise at the agent&rsquo;s service boundaries &mdash; the tool contract and the provider and tool-server links &mdash; led by tool-argument malformation and provider-error propagation. Ecosystems differ in their agent-specific share and in two classes that survive a like-for-like sampling check. Weighting a mapping from failure classes to SOC resilience patterns by observed prevalence, three boundary patterns (schema validation, error normalisation, timeout with retry) are candidate mitigations for 70% of agent-specific issues &mdash; a testable hypothesis for framework design. Corpus, codebook, and pipeline are released.<br><br><strong>Keywords:</strong> LLM agents, Service-oriented computing, Failure-mode taxonomy, Mining software repositories, Resilience patterns"
   bibtex: |
     @inproceedings{trantruong2026fmtax,
-      author    = {Tran-Truong, Phat T. and Le, Xuan-Bach and Ha Xuan, Son},
+      author    = {Tran-Truong, Phat T. and Le, Xuan-Bach and Ha, Xuan Son},
       title     = {A Failure-Mode Taxonomy for {LLM}-Agent Services: An Empirical Mining Study},
       booktitle = {Proceedings of the 24th International Conference on Service-Oriented Computing (ICSOC 2026)},
       year      = {2026},
-      address   = {Lodz, Poland}
+      series    = {Lecture Notes in Computer Science},
+      publisher = {Springer},
+      address   = {Lodz, Poland},
+      note      = {Artifact: \url{https://github.com/LeoTTTPhat/FMTAX}}
     }
 
 - id: "30"
