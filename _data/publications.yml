@@ -1,3 +1,42 @@
+- id: "38"
+  pillar: "agents"
+  status: "To appear"
+  number: "[38]"
+  authors: "With Phat T. Tran-Truong & Son Ha Xuan"
+  title: "RelationalRAG-Tables: A Learned Join Verifier for QA over Tables and Knowledge Graphs"
+  venue:
+    name: "ACML 2026 (Journal Track) &mdash; Machine Learning journal (Springer, Scimago Q1, Impact Factor 2.9)"
+    url: "https://link.springer.com/collections/ihabiaicjh"
+    location: "Melbourne, Australia"
+    date: "December 2026"
+  tags:
+    - text: "Retrieval-Augmented Generation"
+      class: "rag"
+    - text: "Knowledge Graphs"
+      class: "ai"
+    - text: "Selective Prediction"
+      class: "theory"
+  links:
+    - type: "paper"
+      url: "/publication/ACML2026.pdf"
+      icon: "📄"
+    - type: "supplement"
+      url: "/publication/ACML2026-supplement.pdf"
+      icon: "📎"
+    - type: "artifact"
+      url: "https://github.com/lxbachcs/relationalrag-tables"
+      icon: "💻"
+  abstract: "Answering questions over relational tables joined with knowledge graphs breaks when identifiers drift across formats, hierarchies, and vocabularies: systems that rely on exact matching fail silently, returning confident wrong answers instead of signaling doubt.<br><br>We propose <strong>RelationalRAG-Tables</strong>, where an execution-aware planner consults a small learned verifier before committing any join, and a calibrated uncertainty estimate lets the planner abstain when evidence is weak, turning silent errors into explicit refusals with logged verifier scores. The contribution is not a new matching architecture; it is an auditable planner decision and a systematic characterization of when standard learned matching is worth using.<br><br>We evaluate on a controlled synthetic benchmark (20 seeds), an ICD-10 to Wikidata table+KG benchmark we construct and run end to end through the planner, value linking and text-to-SQL on BIRD, and evidence retrieval on HybridQA. After correcting BIRD table attribution through SQL-alias resolution, learned verification recovers matches that exact tools miss (five-seed recall on drifted values 0.91 vs. 0.00) and converts wrong answers into calibrated abstentions: on the constructed table+KG benchmark the gated planner returns 0.7% silently wrong answers against 14.0% ungated. Two conditional theorems characterize when learned verification beats exact matching and when abstention pays; both are checked against measured error rates. We also report the boundaries: hierarchy rules, lexical overlap, and a tuned rule cascade tie or beat the verifier in their regimes, and text-to-SQL gains are bounded by column grounding rather than by pair matching. We provide a dependency-light core implementation, benchmark generator, evaluation harness, and label-audit package.<br><br><strong>Keywords:</strong> Data integration, Entity matching, Record linkage, Knowledge graphs, Retrieval-augmented generation, Value linking, Uncertainty calibration, Selective prediction, Text-to-SQL"
+  bibtex: |
+    @article{le2026relationalrag,
+      author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Ha Xuan, Son},
+      title     = {{RelationalRAG-Tables}: A Learned Join Verifier for {QA} over Tables and Knowledge Graphs},
+      journal   = {Machine Learning},
+      publisher = {Springer},
+      year      = {2026},
+      note      = {ACML 2026 Journal Track. Artifact: \url{https://github.com/lxbachcs/relationalrag-tables}}
+    }
+
 - id: "37"
   pillar: "agents"
   status: "To appear"
