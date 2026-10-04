@@ -56,7 +56,7 @@
   affiliation: "HCMUT, Faculty of Computer Science and Engineering"
   period: ""
   topic: "Poison-resilient retrieval-augmented generation and longitudinal trust mining"
-  publications: ["27"]
+  publications: ["37", "36", "35", "27"]
   links: []
 
 - name: "Khoa Phan"
@@ -125,7 +125,7 @@
   affiliation: "HCMUT, Faculty of Computer Science and Engineering"
   period: ""
   topic: "Examination room usage optimization via greedy and exact methods"
-  publications: ["18"]
+  publications: ["37", "36", "35", "18"]
   links: []
 
 # ----------------------------------------------------------- Collaborators ---
@@ -160,4 +160,13 @@
 #   period: ""
 #   topic: "Event extraction with large language models"
 #   publications: ["19", "15"]
+#   links: []
+#
+# - name: "Phung-Trung-Nguyen Nguyen"
+#   level: "undergraduate"   # ?
+#   status: "current"        # ?
+#   affiliation: "HCMUT, Faculty of Computer Science and Engineering"
+#   period: ""
+#   topic: "Cost-aware LLM test generation with reinforcement learning"
+#   publications: ["37", "36", "35"]
 #   links: []

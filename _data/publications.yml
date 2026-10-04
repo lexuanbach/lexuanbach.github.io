@@ -1,3 +1,117 @@
+- id: "37"
+  pillar: "agents"
+  status: "To appear"
+  number: "[37]"
+  authors: "With Phung-Trung-Nguyen Nguyen, Minh-Hieu Le, Duc-Thuan Mai & Ngoc Khanh Tran Nguyen"
+  title: "MDP-Guided Reinforcement Learning for Cost-Aware LLM-Based Test Generation"
+  venue:
+    name: "CSoNet 2026"
+    url: "https://csonet-conf.github.io/"
+    location: "Ho Chi Minh City, Vietnam"
+    date: "November 2026"
+  tags:
+    - text: "Test Generation"
+      class: "verification"
+    - text: "Reinforcement Learning"
+      class: "rl"
+    - text: "Large Language Models"
+      class: "nlp"
+  links:
+    - type: "paper"
+      url: "/publication/CSoNet2026c.pdf"
+      icon: "📄"
+    - type: "artifact"
+      url: "https://github.com/nguyennguyen938-debug/MDP"
+      icon: "💻"
+  abstract: "LLM-based test generation is often framed as prompt design, but its operational core is sequential budget allocation: after each execution, a system must decide whether boundary generation, fuzzing, LLM synthesis, oracle refinement, repair-context retesting, or stopping is worth the next unit of budget.<br><br>We present <strong>TestGenRL</strong>, an MDP-guided framework for cost-aware LLM test generation: it records evidence, masks infeasible or unaffordable actions, rewards failure discovery, coverage, uncertainty reduction, and repair-relevant evidence against cost, and trains an action-masked Double-DQN on the logged transitions. Because it is trained offline, a vanilla learner over-estimates actions under-represented in the buffer; we train it conservatively, which in our held-out evaluation removes this over-exploration while preserving regime-dependent adaptation.<br><br>On a 74-subject Python benchmark (Gemini 2.5 Flash Lite caches) with a held-out test split, the value of planning depends on the workload regime. On the full-pilot split, Greedy, a contextual bandit (Bandit), and the conservative Double-DQN all recover the cheap boundary strategy, reaching 18.2% failure-found rate and 97.3% coverage. When duplicate penalties and action-family saturation make boundary tests less useful, the adaptive planners avoid Greedy&rsquo;s over-commitment: Bandit and the Double-DQN reach 66.7% failure-found rate on stress subjects and 58.3%/55.6% on action-balanced subjects, versus Greedy&rsquo;s 25.0% and 16.7%, by reallocating toward fuzzing. We deliver a concrete planning interface, and a calibration lesson, for when evidence changes which action is feasible, affordable, and useful.<br><br><strong>Keywords:</strong> LLM test generation, Reinforcement learning, Markov decision processes, Budgeted testing, Fuzzing, Test repair"
+  bibtex: |
+    @inproceedings{nguyen2026testgenrl,
+      author    = {Nguyen, Phung Trung Nguyen and Le, Minh Hieu and Mai, Duc Thuan and Nguyen, Ngoc Khanh Tran and Le, Xuan-Bach},
+      title     = {{MDP}-Guided Reinforcement Learning for Cost-Aware {LLM}-Based Test Generation},
+      booktitle = {Proceedings of the 15th International Conference on Computational Science and Network Intelligence (CSoNet 2026)},
+      year      = {2026},
+      series    = {Lecture Notes in Computer Science},
+      publisher = {Springer},
+      address   = {Ho Chi Minh City, Vietnam},
+      note      = {Artifact: \url{https://github.com/nguyennguyen938-debug/MDP}}
+    }
+
+- id: "36"
+  pillar: "verified"
+  status: "To appear"
+  number: "[36]"
+  authors: "With Duc-Thuan Mai, Minh-Hieu Le & Phung-Trung-Nguyen Nguyen"
+  title: "Source-Obligation-Guided Validation of LLM-Based Code Translation"
+  venue:
+    name: "CSoNet 2026"
+    url: "https://csonet-conf.github.io/"
+    location: "Ho Chi Minh City, Vietnam"
+    date: "November 2026"
+  tags:
+    - text: "Translation Validation"
+      class: "verification"
+    - text: "Differential Testing"
+      class: "verification"
+    - text: "LLM Code Translation"
+      class: "nlp"
+  links:
+    - type: "paper"
+      url: "/publication/CSoNet2026b.pdf"
+      icon: "📄"
+    - type: "artifact"
+      url: "https://github.com/Water2ing/SageTransVal"
+      icon: "💻"
+  abstract: "LLM-translated code can compile, look idiomatic, and pass shallow tests while still changing boundary behavior.<br><br>We present <strong>SageTransVal</strong>, a validation layer that extracts branch, boundary/type, API, and exception obligations from source programs, turns them into validation cases, compares matched source and target executions, and emits structured counterexample packets. We evaluate 100 Python-to-Java subjects (200 subject-provider trials) and a 30-subject C-to-Rust corpus (60 trials), translated by GPT-4o-mini and Gemini 2.5 Flash Lite.<br><br>On Python-to-Java, obligation-guided validation detects mismatches in 79.0% of trials, compared with 81.0% for the generic boundary-test baseline; the paired comparison finds no statistically significant difference (McNemar p&nbsp;=&nbsp;0.42). Guided suites average 4.92 tests per trial, compared with 5.77 for the baseline (14.7% fewer; Wilcoxon p&nbsp;=&nbsp;2.0&times;10<sup>&minus;6</sup>). On C-to-Rust, the observed rates are 11.7% (7/60) for obligation-guided validation and 10.0% (6/60) for the generic baseline. These results are descriptive. Disabling the primary UB-safe policy changes the C-to-Rust detection rate to 41.7%, primarily through A-integer cases; D-string detection remains 33.3%. We report packet availability and contents, but do not evaluate downstream repair effectiveness.<br><br><strong>Keywords:</strong> LLM code translation, Translation validation, Static analysis, Differential testing, Fuzzing, Program repair"
+  bibtex: |
+    @inproceedings{mai2026sagetransval,
+      author    = {Mai, Duc Thuan and Le, Minh Hieu and Nguyen, Phung Trung Nguyen and Le, Xuan-Bach},
+      title     = {Source-Obligation-Guided Validation of {LLM}-Based Code Translation},
+      booktitle = {Proceedings of the 15th International Conference on Computational Science and Network Intelligence (CSoNet 2026)},
+      year      = {2026},
+      series    = {Lecture Notes in Computer Science},
+      publisher = {Springer},
+      address   = {Ho Chi Minh City, Vietnam},
+      note      = {Artifact: \url{https://github.com/Water2ing/SageTransVal}}
+    }
+
+- id: "35"
+  pillar: "applied"
+  status: "To appear"
+  number: "[35]"
+  authors: "With Minh-Hieu Le, Phung-Trung-Nguyen Nguyen, Duc-Thuan Mai & Ngoc Khanh Tran Nguyen"
+  title: "Network-Aware Post-Timetabling Examination Room Allocation with Screened-Pool Repair"
+  venue:
+    name: "CSoNet 2026"
+    url: "https://csonet-conf.github.io/"
+    location: "Ho Chi Minh City, Vietnam"
+    date: "November 2026"
+  tags:
+    - text: "Optimization"
+      class: "ai"
+    - text: "Integer Linear Programming"
+      class: "theory"
+    - text: "Educational Timetabling"
+      class: "ai"
+  links:
+    - type: "paper"
+      url: "/publication/CSoNet2026a.pdf"
+      icon: "📄"
+    - type: "artifact"
+      url: "https://github.com/hieukendu/CSonet"
+      icon: "💻"
+  abstract: "Universities often fix the examination timetable before finalizing room allocation. We start from this fixed timetable and an incumbent room allocation; examination sessions are not rescheduled. We study the downstream post-timetabling examination-room repair problem on real anonymized data from a large public university, covering 81 examination sessions over 19 days, 115,641 candidates, and 3,392 incumbent room assignments. The incumbent plan uses 38.1% of active capacity and has 39.4% mean-room physical utilization.<br><br>We formulate the task as bipartite network repair with two operational regimes: <strong>Legacy-room repair</strong>, which reassigns packages among incumbent active rooms, and <strong>Screened-pool repair</strong>, which expands the candidate-room set with a small controlled pool of unused rooms. We compare a weighted ILP-based policy with transparent repair heuristics.<br><br>The ILP-family policy reaches 57.6% room reduction under Legacy-room repair and 62.1% under Screened-pool repair, with solver status reported explicitly. Screened greedy reaches 45.3%, robust repair trades savings for higher stress-test feasibility, and adaptive repair recovers 41.8% reduction with millisecond-scale median runtime. We complement the deterministic institutional evaluation with controlled attendance-buffer and room-loss stress tests, which assess feasibility under perturbed assumptions rather than probabilistic attendance forecasts, and with a synthetic-room public-benchmark cross-check. The contribution is an applied, operational repair framework and artifact-driven evaluation for fixed-timetable examination room allocation, rather than a new general-purpose optimization algorithm.<br><br><strong>Keywords:</strong> Examination room allocation, Educational timetabling, Integer linear programming, Greedy matheuristics, Computational networks"
+  bibtex: |
+    @inproceedings{le2026screenedpool,
+      author    = {Le, Minh Hieu and Nguyen, Phung Trung Nguyen and Mai, Duc Thuan and Nguyen, Ngoc Khanh Tran and Le, Xuan-Bach},
+      title     = {Network-Aware Post-Timetabling Examination Room Allocation with Screened-Pool Repair},
+      booktitle = {Proceedings of the 15th International Conference on Computational Science and Network Intelligence (CSoNet 2026)},
+      year      = {2026},
+      series    = {Lecture Notes in Computer Science},
+      publisher = {Springer},
+      address   = {Ho Chi Minh City, Vietnam},
+      note      = {Artifact: \url{https://github.com/hieukendu/CSonet}}
+    }
+
 - id: "34"
   pillar: "quantum"
   status: "To appear"
