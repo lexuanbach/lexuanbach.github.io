@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Services — Xuan-Bach Le"
-description: "Academic services of Xuan-Bach Le: program committee membership and reviewing for conferences in artificial intelligence, data mining, programming languages, and formal verification."
+description: "Academic services of Xuan-Bach Le: program committee membership and reviewing for conferences in artificial intelligence, machine learning, multi-agent systems, data mining, software engineering, programming languages, and formal verification."
 ---
 
 <style>
@@ -168,7 +168,7 @@ body {
 
 <div class="services-intro">
     <h1>Academic Services</h1>
-    <p>I serve on program committees and review for conferences in artificial intelligence, data mining, programming languages, and formal verification. Earlier reviewing was done during my PhD and postdoctoral years in programming-language theory and verification; recent service follows the shift of my <a href="{{ site.baseurl }}">research</a> toward safe and reliable AI systems.</p>
+    <p>I serve on program committees and review for conferences in artificial intelligence, machine learning, multi-agent systems, data mining, software engineering, programming languages, and formal verification. Earlier reviewing was done during my PhD and postdoctoral years in programming-language theory and verification; recent service follows the shift of my <a href="{{ site.baseurl }}">research</a> toward safe and reliable AI systems.</p>
 </div>
 
 {% assign pc = site.data.services | where: "role", "pc" | sort: "year" | reverse %}

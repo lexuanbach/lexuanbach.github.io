@@ -19,6 +19,13 @@
   track: "AI Alignment Track"
   area: "Artificial Intelligence"
 
+- venue: "EASE 2027"
+  name: "International Conference on Evaluation and Assessment in Software Engineering"
+  year: 2027
+  role: "pc"
+  role_label: "Program Committee Member"
+  area: "Software Engineering"
+
 - venue: "APLAS 2022"
   name: "Asian Symposium on Programming Languages and Systems"
   year: 2022
@@ -33,7 +40,29 @@
   year: 2027
   role: "reviewer"
   role_label: "Reviewer"
+  track: "Datasets and Benchmarks Track"
   area: "Data Mining"
+
+- venue: "ICLR 2027"
+  name: "International Conference on Learning Representations"
+  year: 2027
+  role: "reviewer"
+  role_label: "Reviewer"
+  area: "Machine Learning"
+
+- venue: "AAMAS 2027"
+  name: "International Conference on Autonomous Agents and Multiagent Systems"
+  year: 2027
+  role: "reviewer"
+  role_label: "Reviewer"
+  area: "Multi-Agent Systems"
+
+- venue: "AISTATS 2026"
+  name: "International Conference on Artificial Intelligence and Statistics"
+  year: 2026
+  role: "reviewer"
+  role_label: "Reviewer"
+  area: "Machine Learning"
 
 - venue: "ICSOC 2026"
   name: "International Conference on Service-Oriented Computing"
