@@ -1,3 +1,61 @@
+- id: "40"
+  pillar: "applied"
+  status: "To appear"
+  number: "[40]"
+  authors: "Sole author"
+  title: "Anchor the Head: Alignment Drift in Open-Vocabulary Segmentation"
+  venue:
+    name: "WACV 2027 (Applications Track, CORE Rank A)"
+    url: "https://wacv.thecvf.com/"
+    location: "Orlando, Florida, USA"
+    date: "January 2027"
+  tags:
+    - text: "Open-Vocabulary Segmentation"
+      class: "ai"
+    - text: "Vision-Language Models"
+      class: "nlp"
+    - text: "Calibration"
+      class: "theory"
+  links: []
+  abstract: "Open-vocabulary segmenters increasingly compose frozen foundation models and add a small correction head trained on the seen classes. We audit it on frozen SAM+CLIP masked-crop and training-free dense-CLIP stacks, holding the frozen stack, splits and supervision budget fixed within each matched comparison so the correction is the only variable. Seen-only class-specific corrections sharply reduce novel-class IoU: on a dense-CLIP stack at 14.5 mIoU on ADE20K, a residual head takes it from 15.1 to 0.1, and per-class calibrators behave the same way. The reduction is not shared by all learned corrections. We measure 45 post-hoc correction configurations on the dense-CLIP base. Across the 38 class-specific ones (13 families), novel-class retention tracks <strong>alignment drift</strong>, the distance between corrected and frozen predictions (Pearson r=-0.90, cluster-bootstrap 95% CI [-0.96,-0.74]). Varying class balance, objective, logit scale, supervision breadth or label purity does not recover it.<br><br>Distilling the head toward the frozen logits restores novel-class IoU to baseline (15.3) while improving mIoU to 15.8, tracing a monotone frontier, though at lower novel-class coverage. The class-symmetric corrections we tested preserve novel-class IoU across the observed drift range, so drift is diagnostic within the class-specific family, not a universal failure criterion. A global temperature remains the best calibrator (ECE 27.2&rarr;8.7), so calibration and novel-class retention are distinct axes. Scoped to these stacks, the evidence supports constraining class-specific heads toward the frozen predictions or making corrections class-symmetric."
+  bibtex: |
+    @inproceedings{le2027anchor,
+      author    = {Le, Xuan-Bach},
+      title     = {Anchor the Head: Alignment Drift in Open-Vocabulary Segmentation},
+      booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV 2027)},
+      year      = {2027},
+      address   = {Orlando, FL, USA}
+    }
+
+- id: "39"
+  pillar: "applied"
+  status: "To appear"
+  number: "[39]"
+  authors: "With Duy D. Nguyen & Phat T. Tran-Truong"
+  title: "SegMaFormer: A Hybrid State-Space and Transformer Model for Efficient 3D Medical Image Segmentation"
+  venue:
+    name: "WACV 2027 (Applications Track, CORE Rank A)"
+    url: "https://wacv.thecvf.com/"
+    location: "Orlando, Florida, USA"
+    date: "January 2027"
+  tags:
+    - text: "Medical Image Segmentation"
+      class: "ai"
+    - text: "State-Space Models"
+      class: "ai"
+    - text: "Vision Transformer"
+      class: "ai"
+  links: []
+  abstract: "The advent of Transformer- and Mamba-based architectures has significantly advanced 3D medical image segmentation by enabling long-range contextual modeling, a capability traditionally limited in convolutional neural networks (CNNs). However, state-of-the-art Transformer models often incur substantial computational complexity and parameter overhead, which becomes particularly prohibitive for volumetric inputs and is further exacerbated by the limited availability of annotated medical imaging data.<br><br>To address these limitations, this work introduces <strong>SegMaFormer</strong>, a lightweight stage-aware hybrid architecture that integrates Mamba, Gated Hybrid Conv-SSM (GHConv-SSM), and efficient self-attention within a hierarchical volumetric encoder. Specifically, SegMaFormer employs a Mamba block at the first high-resolution stage to capture dense spatial dependencies with reduced overhead, uses GHConv-SSM blocks at intermediate stages to adaptively fuse state-space contextual modeling with local convolutional priors, and reserves self-attention for the final low-resolution stage to refine compact semantic representations. This design is further enhanced with generalized rotary position embeddings to improve spatial awareness in 3D feature learning.<br><br>Despite its compact structure, SegMaFormer achieves competitive performance on three public benchmarks, including Synapse, BraTS, and ACDC, while using substantially fewer parameters and lower computational cost than larger Transformer and Mamba counterparts. These results demonstrate that stage-aware allocation of Mamba, gated Conv-SSM fusion, and attention provides an effective accuracy-efficiency trade-off for 3D medical image segmentation."
+  bibtex: |
+    @inproceedings{nguyen2027segmaformer,
+      author    = {Nguyen, Duy D. and Tran-Truong, Phat T. and Le, Xuan-Bach},
+      title     = {{SegMaFormer}: A Hybrid State-Space and Transformer Model for Efficient {3D} Medical Image Segmentation},
+      booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV 2027)},
+      year      = {2027},
+      address   = {Orlando, FL, USA}
+    }
+
 - id: "38"
   pillar: "agents"
   status: "To appear"
