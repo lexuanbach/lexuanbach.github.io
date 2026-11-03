@@ -10,6 +10,7 @@ tracking_id: #
 footer: yes
 footer_url: "https://github.com/lexuanbach"
 footer_text: "A website for both personal and professional purposes"
+footer_text_vi: "Trang web cá nhân và chuyên môn"
 
 sass:
     style: compressed
@@ -17,12 +18,17 @@ sass:
 
 nav:
  - name: "Home"
+   name_vi: "Trang chủ"
    link: "index"
  - name: "Students"
+   name_vi: "Sinh viên"
    link: "students"
  - name: "Services"
+   name_vi: "Học thuật"
    link: "services"
  - name: "Resume"
+   name_vi: "CV"
    link: "cv.pdf"
  - name: "Contact"
+   name_vi: "Liên hệ"
    link: "contact"

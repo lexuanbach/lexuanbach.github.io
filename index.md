@@ -799,7 +799,8 @@ function filterPillar(pillar, scroll) {
     });
     var counter = document.getElementById('filter-count');
     if (counter) {
-        counter.textContent = shown + (shown === 1 ? ' paper' : ' papers');
+        counter.querySelector('.t-en').textContent = shown + (shown === 1 ? ' paper' : ' papers');
+        counter.querySelector('.t-vi').textContent = shown + ' bài báo';
     }
     if (scroll) {
         document.getElementById('publications').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -811,12 +812,12 @@ function copyBibtex(id) {
     const button = document.getElementById('bibtex-copy-' + id);
     
     navigator.clipboard.writeText(bibtexText).then(() => {
-        const originalText = button.textContent;
-        button.textContent = '✓ Copied!';
+        const originalHtml = button.innerHTML;
+        button.textContent = document.documentElement.dataset.lang === 'vi' ? '✓ Đã sao chép!' : '✓ Copied!';
         button.classList.add('copied');
         
         setTimeout(() => {
-            button.textContent = originalText;
+            button.innerHTML = originalHtml;
             button.classList.remove('copied');
         }, 2000);
     });
@@ -827,93 +828,100 @@ function copyBibtex(id) {
     <img class="profile-picture" src="me.jpg" alt="Xuan-Bach Le">
     <div class="header-content">
         <h1>Xuan-Bach Le</h1>
-        <p class="title-line">Lecturer, Ho Chi Minh City University of Technology, Vietnam &middot; Head of the RAISE Lab</p>
-        <p class="header-honor">🎖 VNU350 Programme 2025 &mdash; Outstanding Young Scientist, VNU-HCM</p>
-        <p>I am a Lecturer at Ho Chi Minh City University of Technology, Vietnam, where I head the <a href="https://raise-website.vercel.app/" target="_blank">RAISE lab</a> &mdash; Reasoning in Artificial Intelligence and Software Engineering. I joined HCMUT through the <strong>VNU350 Programme</strong> in 2025, Vietnam National University Ho Chi Minh City&rsquo;s scheme for recruiting outstanding young scientists. Previously, I was a postdoctoral researcher at NTU Singapore under Professor <a href="https://www3.ntu.edu.sg/home/luke.ong/" target="_blank">Luke Ong</a>. Additional information about my background can be found in my <a href="cv.pdf" target="_blank">CV</a>.</p>
-        <p>I studied a Double-Degree Program in Computer Science and Pure Mathematics (<a href="courses.html" target="_blank">courses taken</a>) at NUS (2007-2012), then obtained my PhD in Computer Science from NUS (2013-2017) under <a href="https://www.comp.nus.edu.sg/~hobor/" target="_blank">Aquinas Hobor</a> with mentorship from <a href="https://anthonywlin.github.io/" target="_blank">Anthony W. Lin</a>.</p>
+        <p class="title-line"><span class="t-en">Lecturer, Ho Chi Minh City University of Technology, Vietnam &middot; Head of the RAISE Lab</span><span class="t-vi">Giảng viên, Trường Đại học Bách khoa – ĐHQG-HCM (HCMUT), Việt Nam &middot; Trưởng nhóm RAISE Lab</span></p>
+        <p class="header-honor">🎖 <span class="t-en">VNU350 Programme 2025 &mdash; Outstanding Young Scientist, VNU-HCM</span><span class="t-vi">Chương trình VNU350 năm 2025 &mdash; Nhà khoa học trẻ xuất sắc, ĐHQG-HCM</span></p>
+        <p class="t-en">I am a Lecturer at Ho Chi Minh City University of Technology, Vietnam, where I head the <a href="https://raise-website.vercel.app/" target="_blank">RAISE lab</a> &mdash; Reasoning in Artificial Intelligence and Software Engineering. I joined HCMUT through the <strong>VNU350 Programme</strong> in 2025, Vietnam National University Ho Chi Minh City&rsquo;s scheme for recruiting outstanding young scientists. Previously, I was a postdoctoral researcher at NTU Singapore under Professor <a href="https://www3.ntu.edu.sg/home/luke.ong/" target="_blank">Luke Ong</a>. Additional information about my background can be found in my <a href="cv.pdf" target="_blank">CV</a>.</p>
+        <p class="t-vi">Tôi là giảng viên tại Trường Đại học Bách khoa – ĐHQG-HCM, Việt Nam, nơi tôi phụ trách <a href="https://raise-website.vercel.app/" target="_blank">phòng thí nghiệm RAISE</a> &mdash; Reasoning in Artificial Intelligence and Software Engineering (Suy luận trong Trí tuệ nhân tạo và Kỹ thuật phần mềm). Tôi về HCMUT năm 2025 theo <strong>Chương trình VNU350</strong>, chương trình thu hút các nhà khoa học trẻ xuất sắc của Đại học Quốc gia TP. Hồ Chí Minh. Trước đó, tôi là nghiên cứu viên sau tiến sĩ tại NTU Singapore dưới sự hướng dẫn của Giáo sư <a href="https://www3.ntu.edu.sg/home/luke.ong/" target="_blank">Luke Ong</a>. Thông tin thêm về quá trình của tôi có trong <a href="cv.pdf" target="_blank">CV</a>.</p>
+        <p class="t-en">I studied a Double-Degree Program in Computer Science and Pure Mathematics (<a href="courses.html" target="_blank">courses taken</a>) at NUS (2007-2012), then obtained my PhD in Computer Science from NUS (2013-2017) under <a href="https://www.comp.nus.edu.sg/~hobor/" target="_blank">Aquinas Hobor</a> with mentorship from <a href="https://anthonywlin.github.io/" target="_blank">Anthony W. Lin</a>.</p>
+        <p class="t-vi">Tôi học chương trình song bằng Khoa học Máy tính và Toán thuần túy (<a href="courses.html" target="_blank">các môn đã học</a>) tại NUS (2007–2012), sau đó lấy bằng Tiến sĩ Khoa học Máy tính tại NUS (2013–2017) dưới sự hướng dẫn của <a href="https://www.comp.nus.edu.sg/~hobor/" target="_blank">Aquinas Hobor</a>, với sự cố vấn của <a href="https://anthonywlin.github.io/" target="_blank">Anthony W. Lin</a>.</p>
     </div>
 </div>
 
-## Research Vision
+<h2><span class="t-en">Research Vision</span><span class="t-vi">Tầm nhìn nghiên cứu</span></h2>
 
-<p class="vision-brand">Formal &amp; Reliable AI &middot; Verified AI Agents</p>
+<p class="vision-brand"><span class="t-en">Formal &amp; Reliable AI &middot; Verified AI Agents</span><span class="t-vi">AI hình thức &amp; tin cậy &middot; Tác tử AI được kiểm chứng</span></p>
 
-<p class="vision-statement">I develop methods for building AI systems that can <strong>reason</strong>, <strong>verify</strong> what they produce, and <strong>know when they are uncertain</strong>.</p>
+<p class="vision-statement"><span class="t-en">I develop methods for building AI systems that can <strong>reason</strong>, <strong>verify</strong> what they produce, and <strong>know when they are uncertain</strong>.</span><span class="t-vi">Tôi phát triển các phương pháp xây dựng hệ thống AI có thể <strong>suy luận</strong>, <strong>kiểm chứng</strong> những gì chúng tạo ra, và <strong>biết khi nào mình không chắc chắn</strong>.</span></p>
 
-<p class="vision-note">My work sits at the intersection of formal methods, large language models, and software reliability: I use logic and verification to give evidence for what learned systems claim, and I use learned systems to reach problems that classical verification cannot. Four pillars carry that agenda, and every paper below is labelled with the one it belongs to &mdash; click a pillar to see only its papers.</p>
+<p class="vision-note"><span class="t-en">My work sits at the intersection of formal methods, large language models, and software reliability: I use logic and verification to give evidence for what learned systems claim, and I use learned systems to reach problems that classical verification cannot. Four pillars carry that agenda, and every paper below is labelled with the one it belongs to &mdash; click a pillar to see only its papers.</span><span class="t-vi">Công trình của tôi nằm ở giao điểm của phương pháp hình thức, mô hình ngôn ngữ lớn và độ tin cậy phần mềm: tôi dùng logic và kiểm chứng để đưa ra bằng chứng cho những gì các hệ thống học máy khẳng định, và dùng các hệ thống học máy để giải quyết những bài toán mà kiểm chứng cổ điển không với tới. Bốn trụ cột dẫn dắt hướng nghiên cứu này, và mỗi bài báo bên dưới đều được gắn nhãn trụ cột tương ứng &mdash; nhấp vào một trụ cột để chỉ xem các bài báo của nó.</span></p>
 
 <div class="pillars">
     <a class="pillar pillar-verified" href="#publications" onclick="filterPillar('verified', true); return false;">
         <span class="pillar-index">01</span>
-        <h3>Verified AI</h3>
-        <p class="pillar-sub">Formal reasoning &middot; program synthesis &middot; verification</p>
-        <p class="pillar-desc">Logics, decision procedures and proof techniques that certify what a program &mdash; or a model &mdash; is claimed to do, from separation logic and fractional permissions to LLM-driven program analysis.</p>
-        <span class="pillar-count">{{ site.data.publications | where: "pillar", "verified" | size }} papers &rarr;</span>
+        <h3><span class="t-en">Verified AI</span><span class="t-vi">AI được kiểm chứng</span></h3>
+        <p class="pillar-sub"><span class="t-en">Formal reasoning &middot; program synthesis &middot; verification</span><span class="t-vi">Suy luận hình thức &middot; tổng hợp chương trình &middot; kiểm chứng</span></p>
+        <p class="pillar-desc"><span class="t-en">Logics, decision procedures and proof techniques that certify what a program &mdash; or a model &mdash; is claimed to do, from separation logic and fractional permissions to LLM-driven program analysis.</span><span class="t-vi">Các logic, thủ tục quyết định và kỹ thuật chứng minh nhằm chứng nhận một chương trình &mdash; hoặc một mô hình &mdash; làm đúng những gì được tuyên bố, từ logic phân tách và quyền phân số đến phân tích chương trình do LLM dẫn dắt.</span></p>
+        <span class="pillar-count"><span class="t-en">{{ site.data.publications | where: "pillar", "verified" | size }} papers &rarr;</span><span class="t-vi">{{ site.data.publications | where: "pillar", "verified" | size }} bài báo &rarr;</span></span>
     </a>
     <a class="pillar pillar-agents" href="#publications" onclick="filterPillar('agents', true); return false;">
         <span class="pillar-index">02</span>
-        <h3>Auditable AI Agents</h3>
-        <p class="pillar-sub">LLM agents &middot; RAG &middot; reliability &middot; security</p>
-        <p class="pillar-desc">Making LLM agents and retrieval pipelines accountable: auditing their traces, defending their memories and retrieval corpora, and deciding which of their outputs have earned the right to be trusted.</p>
-        <span class="pillar-count">{{ site.data.publications | where: "pillar", "agents" | size }} papers &rarr;</span>
+        <h3><span class="t-en">Auditable AI Agents</span><span class="t-vi">Tác tử AI có thể kiểm toán</span></h3>
+        <p class="pillar-sub"><span class="t-en">LLM agents &middot; RAG &middot; reliability &middot; security</span><span class="t-vi">Tác tử LLM &middot; RAG &middot; độ tin cậy &middot; an ninh</span></p>
+        <p class="pillar-desc"><span class="t-en">Making LLM agents and retrieval pipelines accountable: auditing their traces, defending their memories and retrieval corpora, and deciding which of their outputs have earned the right to be trusted.</span><span class="t-vi">Làm cho các tác tử LLM và pipeline truy hồi có trách nhiệm giải trình: kiểm toán vết thực thi, bảo vệ bộ nhớ và kho tri thức truy hồi, và quyết định đầu ra nào xứng đáng được tin cậy.</span></p>
+        <span class="pillar-count"><span class="t-en">{{ site.data.publications | where: "pillar", "agents" | size }} papers &rarr;</span><span class="t-vi">{{ site.data.publications | where: "pillar", "agents" | size }} bài báo &rarr;</span></span>
     </a>
     <a class="pillar pillar-autonomy" href="#publications" onclick="filterPillar('autonomy', true); return false;">
         <span class="pillar-index">03</span>
-        <h3>Safe Autonomous Systems</h3>
-        <p class="pillar-sub">RL &middot; robotics &middot; anomaly detection &middot; risk-aware control</p>
-        <p class="pillar-desc">Autonomy that respects a specification: reinforcement learning under temporal-logic objectives, and detecting and recovering from anomalies before an autonomous system acts on them.</p>
-        <span class="pillar-count">{{ site.data.publications | where: "pillar", "autonomy" | size }} papers &rarr;</span>
+        <h3><span class="t-en">Safe Autonomous Systems</span><span class="t-vi">Hệ thống tự hành an toàn</span></h3>
+        <p class="pillar-sub"><span class="t-en">RL &middot; robotics &middot; anomaly detection &middot; risk-aware control</span><span class="t-vi">RL &middot; robot &middot; phát hiện bất thường &middot; điều khiển nhận biết rủi ro</span></p>
+        <p class="pillar-desc"><span class="t-en">Autonomy that respects a specification: reinforcement learning under temporal-logic objectives, and detecting and recovering from anomalies before an autonomous system acts on them.</span><span class="t-vi">Tự chủ nhưng tuân thủ đặc tả: học tăng cường với mục tiêu logic thời gian, cùng việc phát hiện và phục hồi từ các bất thường trước khi một hệ thống tự hành hành động.</span></p>
+        <span class="pillar-count"><span class="t-en">{{ site.data.publications | where: "pillar", "autonomy" | size }} papers &rarr;</span><span class="t-vi">{{ site.data.publications | where: "pillar", "autonomy" | size }} bài báo &rarr;</span></span>
     </a>
     <a class="pillar pillar-quantum" href="#publications" onclick="filterPillar('quantum', true); return false;">
         <span class="pillar-index">04</span>
-        <h3>Quantum Reasoning</h3>
-        <p class="pillar-sub">Quantum programs &middot; quantum logic &middot; post-quantum security</p>
-        <p class="pillar-desc">Reasoning about quantum software when running it is not enough: separation logic for quantum state, retrieval-grounded repair of quantum programs, and the control-plane decisions that make services quantum-safe.</p>
-        <span class="pillar-count">{{ site.data.publications | where: "pillar", "quantum" | size }} papers &rarr;</span>
+        <h3><span class="t-en">Quantum Reasoning</span><span class="t-vi">Suy luận lượng tử</span></h3>
+        <p class="pillar-sub"><span class="t-en">Quantum programs &middot; quantum logic &middot; post-quantum security</span><span class="t-vi">Chương trình lượng tử &middot; logic lượng tử &middot; an ninh hậu lượng tử</span></p>
+        <p class="pillar-desc"><span class="t-en">Reasoning about quantum software when running it is not enough: separation logic for quantum state, retrieval-grounded repair of quantum programs, and the control-plane decisions that make services quantum-safe.</span><span class="t-vi">Suy luận về phần mềm lượng tử khi việc chạy thử là chưa đủ: logic phân tách cho trạng thái lượng tử, sửa chương trình lượng tử dựa trên truy hồi, và các quyết định ở mặt phẳng điều khiển giúp dịch vụ an toàn trước máy tính lượng tử.</span></p>
+        <span class="pillar-count"><span class="t-en">{{ site.data.publications | where: "pillar", "quantum" | size }} papers &rarr;</span><span class="t-vi">{{ site.data.publications | where: "pillar", "quantum" | size }} bài báo &rarr;</span></span>
     </a>
 </div>
 
 <div class="recruiting">
-    <p class="recruiting-title">Looking for motivated students</p>
-    <p>The <a href="https://raise-website.vercel.app/" target="_blank">RAISE lab</a> works on LLMs for software engineering, formal reasoning and verification, secure and trustworthy AI systems, and multilingual and responsible AI. I am looking for motivated students who want to do good research in these areas &mdash; work that is careful, honest about its limits, and worth publishing.</p>
-    <p>If that sounds like you, please <a href="contact">get in touch</a>. You can see what my <a href="students">current and former students</a> work on.</p>
+    <p class="recruiting-title"><span class="t-en">Looking for motivated students</span><span class="t-vi">Tìm kiếm sinh viên có động lực</span></p>
+    <p class="t-en">The <a href="https://raise-website.vercel.app/" target="_blank">RAISE lab</a> works on LLMs for software engineering, formal reasoning and verification, secure and trustworthy AI systems, and multilingual and responsible AI. I am looking for motivated students who want to do good research in these areas &mdash; work that is careful, honest about its limits, and worth publishing.</p>
+    <p class="t-en">If that sounds like you, please <a href="contact">get in touch</a>. You can see what my <a href="students">current and former students</a> work on.</p>
+    <p class="t-vi">Nhóm <a href="https://raise-website.vercel.app/" target="_blank">RAISE</a> nghiên cứu về LLM cho kỹ thuật phần mềm, suy luận hình thức và kiểm chứng, hệ thống AI an toàn và đáng tin cậy, và AI đa ngôn ngữ có trách nhiệm. Tôi đang tìm những sinh viên có động lực muốn làm nghiên cứu tốt trong các lĩnh vực này &mdash; công trình cẩn trọng, trung thực về giới hạn của mình và xứng đáng được công bố.</p>
+    <p class="t-vi">Nếu bạn quan tâm, hãy <a href="contact">liên hệ với tôi</a>. Bạn có thể xem <a href="students">các sinh viên hiện tại và cựu sinh viên</a> của tôi đang làm gì.</p>
 </div>
 
 
-<h2 id="talks">Invited Talks</h2>
+<h2 id="talks"><span class="t-en">Invited Talks</span><span class="t-vi">Bài giảng mời</span></h2>
 
 {% for talk in site.data.talks %}
 <div class="talk">
-    <div class="talk-title">{{ talk.title }}</div>
+    {% assign title_vi = talk.title_vi | default: talk.title %}
+    <div class="talk-title">{% include t.html en=talk.title vi=title_vi %}</div>
     <div class="talk-venue">
-        <strong>{{ talk.venue.name }}</strong>, {{ talk.venue.full_name }}, {{ talk.venue.location }} ({{ talk.venue.date }}){% if talk.note %} &middot; {{ talk.note }}{% endif %}
+        <span class="t-en"><strong>{{ talk.venue.name }}</strong>, {{ talk.venue.full_name }}, {{ talk.venue.location }} ({{ talk.venue.date }}){% if talk.note %} &middot; {{ talk.note }}{% endif %}</span>
+        <span class="t-vi"><strong>{{ talk.venue.name_vi | default: talk.venue.name }}</strong>, {{ talk.venue.full_name_vi | default: talk.venue.full_name }}, {{ talk.venue.location_vi | default: talk.venue.location }} ({% include vi-date.html d=talk.venue.date %}){% if talk.note %} &middot; {{ talk.note_vi | default: talk.note }}{% endif %}</span>
     </div>
     <div class="talk-links">
         {% for link in talk.links %}
-        <a href="{{ link.url }}" class="pub-link" target="_blank">{{ link.icon }} {{ link.type | capitalize }}</a>
+        {% assign lt = link.type | capitalize %}
+        <a href="{{ link.url }}" class="pub-link" target="_blank">{{ link.icon }} {% include term.html v=lt %}</a>
         {% endfor %}
     </div>
 </div>
 {% endfor %}
 
-<h2 id="publications">Publications</h2>
+<h2 id="publications"><span class="t-en">Publications</span><span class="t-vi">Công bố khoa học</span></h2>
 
 <div class="pub-filter">
-    <button class="filter-btn active" data-pillar="all" onclick="filterPillar('all', false)">All</button>
-    <button class="filter-btn pillar-verified" data-pillar="verified" onclick="filterPillar('verified', false)">Verified AI</button>
-    <button class="filter-btn pillar-agents" data-pillar="agents" onclick="filterPillar('agents', false)">Auditable AI Agents</button>
-    <button class="filter-btn pillar-autonomy" data-pillar="autonomy" onclick="filterPillar('autonomy', false)">Safe Autonomous Systems</button>
-    <button class="filter-btn pillar-quantum" data-pillar="quantum" onclick="filterPillar('quantum', false)">Quantum Reasoning</button>
-    <button class="filter-btn pillar-applied" data-pillar="applied" onclick="filterPillar('applied', false)">Applied &amp; Collaborative</button>
-    <span class="filter-count" id="filter-count">{{ site.data.publications | size }} papers</span>
+    <button class="filter-btn active" data-pillar="all" onclick="filterPillar('all', false)"><span class="t-en">All</span><span class="t-vi">Tất cả</span></button>
+    <button class="filter-btn pillar-verified" data-pillar="verified" onclick="filterPillar('verified', false)"><span class="t-en">Verified AI</span><span class="t-vi">AI được kiểm chứng</span></button>
+    <button class="filter-btn pillar-agents" data-pillar="agents" onclick="filterPillar('agents', false)"><span class="t-en">Auditable AI Agents</span><span class="t-vi">Tác tử AI có thể kiểm toán</span></button>
+    <button class="filter-btn pillar-autonomy" data-pillar="autonomy" onclick="filterPillar('autonomy', false)"><span class="t-en">Safe Autonomous Systems</span><span class="t-vi">Hệ thống tự hành an toàn</span></button>
+    <button class="filter-btn pillar-quantum" data-pillar="quantum" onclick="filterPillar('quantum', false)"><span class="t-en">Quantum Reasoning</span><span class="t-vi">Suy luận lượng tử</span></button>
+    <button class="filter-btn pillar-applied" data-pillar="applied" onclick="filterPillar('applied', false)"><span class="t-en">Applied &amp; Collaborative</span><span class="t-vi">Ứng dụng &amp; Hợp tác</span></button>
+    <span class="filter-count" id="filter-count"><span class="t-en">{{ site.data.publications | size }} papers</span><span class="t-vi">{{ site.data.publications | size }} bài báo</span></span>
 </div>
 
 {% for pub in site.data.publications %}
-{% case pub.pillar %}{% when 'verified' %}{% assign pillar_name = 'Verified AI' %}{% when 'agents' %}{% assign pillar_name = 'Auditable AI Agents' %}{% when 'autonomy' %}{% assign pillar_name = 'Safe Autonomous Systems' %}{% when 'quantum' %}{% assign pillar_name = 'Quantum Reasoning' %}{% else %}{% assign pillar_name = 'Applied &amp; Collaborative' %}{% endcase %}
+{% case pub.pillar %}{% when 'verified' %}{% assign pillar_name = 'Verified AI' %}{% assign pillar_name_vi = 'AI được kiểm chứng' %}{% when 'agents' %}{% assign pillar_name = 'Auditable AI Agents' %}{% assign pillar_name_vi = 'Tác tử AI có thể kiểm toán' %}{% when 'autonomy' %}{% assign pillar_name = 'Safe Autonomous Systems' %}{% assign pillar_name_vi = 'Hệ thống tự hành an toàn' %}{% when 'quantum' %}{% assign pillar_name = 'Quantum Reasoning' %}{% assign pillar_name_vi = 'Suy luận lượng tử' %}{% else %}{% assign pillar_name = 'Applied &amp; Collaborative' %}{% assign pillar_name_vi = 'Ứng dụng &amp; Hợp tác' %}{% endcase %}
 <div class="publication pillar-{{ pub.pillar }}{% if pub.is_thesis %} thesis-publication{% endif %}" data-number="{{ pub.number }}" data-pillar="{{ pub.pillar }}">
-    <div><span class="pub-pillar">{{ pillar_name }}</span></div>
+    <div><span class="pub-pillar">{% include t.html en=pillar_name vi=pillar_name_vi %}</span></div>
     {% if pub.authors != "" %}
-    <div class="publication-authors">{{ pub.authors }}</div>
+    <div class="publication-authors"><span class="t-en">{{ pub.authors }}</span><span class="t-vi">{{ pub.authors | replace: "Sole author", "Tác giả duy nhất" | replace: "With ", "Cùng với " | replace: " & ", " và " | replace: "(alphabetical)", "(theo thứ tự bảng chữ cái)" }}</span></div>
     {% endif %}
     <div class="publication-title">{{ pub.title }}</div>
     <div class="publication-venue">
@@ -928,14 +936,14 @@ function copyBibtex(id) {
         , {{ pub.venue.location }}
         {% endif %}
         {% if pub.venue.date != "" %}
-        ({{ pub.venue.date }})
+        (<span class="t-en">{{ pub.venue.date }}</span><span class="t-vi">{% include vi-date.html d=pub.venue.date %}</span>)
         {% endif %}
         {% if pub.status != "" and pub.status %}
-        <span class="pub-status">{{ pub.status }}</span>
+        <span class="pub-status">{% include term.html v=pub.status %}</span>
         {% endif %}
     </div>
     {% if pub.award != "" and pub.award %}
-    <div><span class="pub-award">🏆 {{ pub.award }}</span></div>
+    <div><span class="pub-award">🏆 {% include term.html v=pub.award %}</span></div>
     {% endif %}
     <div class="publication-tags">
         {% for tag in pub.tags %}
@@ -944,17 +952,18 @@ function copyBibtex(id) {
     </div>
     <div class="publication-links">
         {% for link in pub.links %}
-        <a href="{{ link.url }}" class="pub-link" target="_blank">{{ link.icon }} {{ link.type | capitalize }}</a>
+        {% assign lt = link.type | capitalize %}
+        <a href="{{ link.url }}" class="pub-link" target="_blank">{{ link.icon }} {% include term.html v=lt %}</a>
         {% endfor %}
         <span class="abstract-toggle" id="toggle-{{ pub.id }}" onclick="toggleAbstract('{{ pub.id }}')">
-            📖 Abstract <span class="arrow">▼</span>
+            📖 <span class="t-en">Abstract</span><span class="t-vi">Tóm tắt</span> <span class="arrow">▼</span>
         </span>
         <span class="bibtex-toggle" id="bibtex-toggle-{{ pub.id }}" onclick="toggleBibtex('{{ pub.id }}')">
             📋 BibTeX <span class="arrow">▼</span>
         </span>
         {% if pub.award_image != "" and pub.award_image %}
         <span class="award-toggle" id="award-toggle-{{ pub.id }}" onclick="toggleAward('{{ pub.id }}')">
-            🏆 Award Photo <span class="arrow">▼</span>
+            🏆 <span class="t-en">Award Photo</span><span class="t-vi">Ảnh giải thưởng</span> <span class="arrow">▼</span>
         </span>
         {% endif %}
     </div>
@@ -969,13 +978,13 @@ function copyBibtex(id) {
     {% endif %}
     <div class="abstract-content" id="abstract-{{ pub.id }}">
         <div class="abstract-text">
-            <strong>Abstract:</strong><br><br>
+            <strong><span class="t-en">Abstract:</span><span class="t-vi">Tóm tắt (bản gốc tiếng Anh):</span></strong><br><br>
             {{ pub.abstract }}
         </div>
     </div>
     <div class="bibtex-content" id="bibtex-{{ pub.id }}">
         <div class="bibtex-text">
-            <button class="bibtex-copy" id="bibtex-copy-{{ pub.id }}" onclick="copyBibtex('{{ pub.id }}')">📋 Copy</button>
+            <button class="bibtex-copy" id="bibtex-copy-{{ pub.id }}" onclick="copyBibtex('{{ pub.id }}')">📋 <span class="t-en">Copy</span><span class="t-vi">Sao chép</span></button>
             <pre id="bibtex-text-{{ pub.id }}">{{ pub.bibtex }}</pre>
         </div>
     </div>

@@ -1,33 +1,39 @@
 # Invited talks rendered by index.md
 #
-# Fields:
-#   title      Talk title (required)
-#   event      Event or conference name
-#   venue      Host institution / conference name with link target in `url`
-#   location   City, country
-#   date       Display date
-#   note       Optional extra line (session, language, ...)
+# Fields (the *_vi variants are optional; the English value is used when absent):
+#   title      Talk title (required);  title_vi for the Vietnamese view
+#   venue      name, full_name, location, date (+ name_vi, full_name_vi, location_vi)
+#              date is English ("26 May 2026"); the Vietnamese view converts the month.
+#   note       Optional extra line (session, language, ...);  note_vi
 #   links      List of {type, url, icon}
 
 - title: "Software Engineering in the Era of LLMs: From Formal Verification to Auditable Agents"
   venue:
     name: "ICEBA 2026 (Invited Talk)"
+    name_vi: "ICEBA 2026 (Bài giảng mời)"
     full_name: "The 7th International Conference on Engineering, Physics, MEMS-Biosensors and Applications"
     location: "Vung Tau, Vietnam"
+    location_vi: "Vũng Tàu, Việt Nam"
     date: "2–4 November 2026"
   note: "Session OS.6A"
+  note_vi: "Phiên OS.6A"
   links:
     - type: "slides"
       url: "/slides/ICEBA2026_invited_talk.pdf"
       icon: "📊"
 
-- title: "Vượt qua các LLM tổng quát: Xây dựng hệ thống AI đáng tin cậy, chuyên biệt cho lĩnh vực Tài chính và Pháp lý tại Việt Nam (Beyond General-Purpose LLMs: Building Trustworthy, Domain-Specific AI for Finance and Law in Vietnam)"
+- title: "Beyond General-Purpose LLMs: Building Trustworthy, Domain-Specific AI for Finance and Law in Vietnam"
+  title_vi: "Vượt qua các LLM tổng quát: Xây dựng hệ thống AI đáng tin cậy, chuyên biệt cho lĩnh vực Tài chính và Pháp lý tại Việt Nam"
   venue:
     name: "Van Lang University, School of Technology"
+    name_vi: "Trường Đại học Văn Lang, Trường Công nghệ"
     full_name: "Scientific Workshop: Applications of Artificial Intelligence in Finance and Law"
+    full_name_vi: "Hội thảo khoa học: Ứng dụng Trí tuệ nhân tạo (AI) trong Tài chính và Pháp lý"
     location: "Ho Chi Minh City, Vietnam"
+    location_vi: "TP. Hồ Chí Minh, Việt Nam"
     date: "26 May 2026"
-  note: "In Vietnamese"
+  note: "Delivered in Vietnamese"
+  note_vi: "Trình bày bằng tiếng Việt"
   links:
     - type: "slides"
       url: "/slides/VLU2026_invited_talk.pdf"

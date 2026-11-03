@@ -1,0 +1,60 @@
+# Vietnamese translations for strings that come from data files.
+#
+# The site is English by default; the nav button switches to Vietnamese.
+# Page prose is translated inline in each page (see _includes/t.html).
+# This file covers values read from _data/*.yml: it maps the exact English
+# string to its Vietnamese rendering, via _includes/term.html. A string with
+# no entry here is shown unchanged in both languages, so new data never breaks.
+# Publication titles, abstracts, venues and tags are deliberately left in English.
+
+terms:
+  # Publication links
+  "Paper": "Bài báo"
+  "Code": "Mã nguồn"
+  "Supplement": "Phụ lục"
+  "Artifact": "Artifact"
+  "Poster": "Poster"
+  "Dataset": "Bộ dữ liệu"
+  "Slides": "Slide"
+  "Tool": "Công cụ"
+  "Thesis": "Luận văn"
+
+  # Publication status and awards
+  "To appear": "Sắp xuất bản"
+  "Won Outstanding Student Paper Award": "Đạt giải Bài báo sinh viên xuất sắc"
+  "Nominated for Best Paper Award": "Được đề cử giải Bài báo xuất sắc nhất"
+  "Won Best Paper Award": "Đạt giải Bài báo xuất sắc nhất"
+
+  # Services
+  "Program Committee Member": "Thành viên Ban chương trình"
+  "Reviewer": "Phản biện"
+  "Sub-reviewer": "Phản biện phụ"
+  "External Reviewer": "Phản biện ngoài"
+  "AI Alignment Track": "Mảng AI Alignment"
+  "Datasets and Benchmarks Track": "Mảng Bộ dữ liệu và Benchmark"
+  "Artificial Intelligence": "Trí tuệ nhân tạo"
+  "Data Mining": "Khai phá dữ liệu"
+  "Logic": "Logic"
+  "Machine Learning": "Học máy"
+  "Multi-Agent Systems": "Hệ đa tác tử"
+  "Programming Languages": "Ngôn ngữ lập trình"
+  "Services Computing": "Điện toán dịch vụ"
+  "Software Engineering": "Kỹ thuật phần mềm"
+  "Theory": "Lý thuyết"
+  "Verification": "Kiểm chứng"
+
+  # Students
+  "HCMUT, Faculty of Computer Science and Engineering": "HCMUT, Khoa Khoa học và Kỹ thuật Máy tính"
+  "Visual anomaly detection and risk-aware recovery for robotic manipulation": "Phát hiện bất thường thị giác và phục hồi nhận biết rủi ro cho thao tác robot"
+  "Repository-level vulnerability detection and explainable AI for software engineering": "Phát hiện lỗ hổng ở cấp kho mã nguồn và AI có thể giải thích cho kỹ thuật phần mềm"
+  "LLM agents for static analysis and assumption validation": "Tác tử LLM cho phân tích tĩnh và kiểm chứng giả định"
+  "Poison-resilient retrieval-augmented generation and longitudinal trust mining": "RAG chống đầu độc dữ liệu và khai phá độ tin cậy theo thời gian"
+  "Hybrid retrieval-augmented generation over legal knowledge graphs": "RAG lai trên đồ thị tri thức pháp lý"
+  "Joint multi-intent detection and slot filling for Vietnamese": "Nhận diện đa ý định và điền slot đồng thời cho tiếng Việt"
+  "Uncertainty-aware forecasting and inventory optimization": "Dự báo nhận biết độ bất định và tối ưu hóa tồn kho"
+  "Depth-aware vision transformers and physics-informed learning for air-quality estimation": "Vision transformer nhận biết độ sâu và học dựa trên vật lý để ước lượng chất lượng không khí"
+  "Test-time adaptation of vision-language models for multispectral retrieval": "Thích ứng lúc kiểm thử của mô hình thị giác–ngôn ngữ cho truy hồi đa phổ"
+  "Examination room usage optimization via greedy and exact methods": "Tối ưu hóa việc sử dụng phòng thi bằng phương pháp tham lam và chính xác"
+  "Cost-aware LLM test generation with reinforcement learning": "Sinh kiểm thử bằng LLM nhận biết chi phí với học tăng cường"
+  "Agent reliability, verified data-mining discovery, and program analysis with LLMs": "Độ tin cậy của tác tử, khám phá khai phá dữ liệu được kiểm chứng, và phân tích chương trình bằng LLM"
+  "Synthetic-data auditing, agent memory privacy, and verified discovery": "Kiểm toán dữ liệu tổng hợp, quyền riêng tư của bộ nhớ tác tử, và khám phá được kiểm chứng"

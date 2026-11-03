@@ -62,6 +62,38 @@ hr {
     float: right;
 }
 
+/*
+ * Language switch (English default, Vietnamese on demand)
+ */
+
+html:not([data-lang="vi"]) .t-vi { display: none !important; }
+html[data-lang="vi"] .t-en { display: none !important; }
+
+.lang-switch {
+    margin-left: 20px;
+}
+.lang-btn {
+    background: none;
+    border: 0;
+    padding: 0 2px;
+    font: inherit;
+    font-size: 0.85em;
+    color: #999;
+    cursor: pointer;
+}
+.lang-btn:hover {
+    color: #272727;
+}
+.lang-sep {
+    color: #bbb;
+    margin: 0 3px;
+}
+html:not([data-lang="vi"]) .lang-btn[data-lang="en"],
+html[data-lang="vi"] .lang-btn[data-lang="vi"] {
+    color: #272727;
+    font-weight: bold;
+}
+
 /* Divs */
 
 .container {

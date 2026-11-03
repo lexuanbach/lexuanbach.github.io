@@ -167,8 +167,9 @@ body {
 </style>
 
 <div class="services-intro">
-    <h1>Academic Services</h1>
-    <p>I serve on program committees and review for conferences in artificial intelligence, machine learning, multi-agent systems, data mining, software engineering, programming languages, and formal verification. Earlier reviewing was done during my PhD and postdoctoral years in programming-language theory and verification; recent service follows the shift of my <a href="{{ site.baseurl }}">research</a> toward safe and reliable AI systems.</p>
+    <h1><span class="t-en">Academic Services</span><span class="t-vi">Hoạt động học thuật</span></h1>
+    <p class="t-en">I serve on program committees and review for conferences in artificial intelligence, machine learning, multi-agent systems, data mining, software engineering, programming languages, and formal verification. Earlier reviewing was done during my PhD and postdoctoral years in programming-language theory and verification; recent service follows the shift of my <a href="{{ site.baseurl }}">research</a> toward safe and reliable AI systems.</p>
+    <p class="t-vi">Tôi tham gia ban chương trình và phản biện cho các hội nghị về trí tuệ nhân tạo, học máy, hệ đa tác tử, khai phá dữ liệu, kỹ thuật phần mềm, ngôn ngữ lập trình và kiểm chứng hình thức. Các hoạt động phản biện trước đây diễn ra trong thời gian tôi làm nghiên cứu sinh và nghiên cứu sau tiến sĩ về lý thuyết ngôn ngữ lập trình và kiểm chứng; các hoạt động gần đây đi theo sự chuyển hướng của <a href="{{ site.baseurl }}">nghiên cứu</a> của tôi sang các hệ thống AI an toàn và đáng tin cậy.</p>
 </div>
 
 {% assign pc = site.data.services | where: "role", "pc" | sort: "year" | reverse %}
@@ -176,20 +177,20 @@ body {
 {% assign subreviewers = site.data.services | where: "role", "subreviewer" | sort: "year" | reverse %}
 
 <div class="service-section">
-    <h2>Program Committees</h2>
+    <h2><span class="t-en">Program Committees</span><span class="t-vi">Ban chương trình</span></h2>
 
     {% if pc.size > 0 %}
     <div class="service-group">
-        <div class="service-group-label">Program committee member <span class="service-count">{{ pc.size }}</span></div>
+        <div class="service-group-label"><span class="t-en">Program committee member</span><span class="t-vi">Thành viên Ban chương trình</span> <span class="service-count">{{ pc.size }}</span></div>
         {% for s in pc %}
         <div class="service">
             <div class="service-head">
                 <span class="service-venue">{{ s.venue }}</span>
-                {% if s.track and s.track != "" %}<span class="service-track">{{ s.track }}</span>{% endif %}
-                <span class="service-role">{{ s.role_label }}</span>
+                {% if s.track and s.track != "" %}<span class="service-track">{% include term.html v=s.track %}</span>{% endif %}
+                <span class="service-role">{% include term.html v=s.role_label %}</span>
             </div>
             <div class="service-name">{{ s.name }}</div>
-            {% if s.area and s.area != "" %}<div class="service-area">{{ s.area }}</div>{% endif %}
+            {% if s.area and s.area != "" %}<div class="service-area">{% include term.html v=s.area %}</div>{% endif %}
         </div>
         {% endfor %}
     </div>
@@ -197,20 +198,20 @@ body {
 </div>
 
 <div class="service-section">
-    <h2>Reviewing</h2>
+    <h2><span class="t-en">Reviewing</span><span class="t-vi">Phản biện</span></h2>
 
     {% if reviewers.size > 0 %}
     <div class="service-group">
-        <div class="service-group-label">Reviewer <span class="service-count">{{ reviewers.size }}</span></div>
+        <div class="service-group-label"><span class="t-en">Reviewer</span><span class="t-vi">Phản biện</span> <span class="service-count">{{ reviewers.size }}</span></div>
         {% for s in reviewers %}
         <div class="service">
             <div class="service-head">
                 <span class="service-venue">{{ s.venue }}</span>
-                {% if s.track and s.track != "" %}<span class="service-track">{{ s.track }}</span>{% endif %}
-                <span class="service-role">{{ s.role_label }}</span>
+                {% if s.track and s.track != "" %}<span class="service-track">{% include term.html v=s.track %}</span>{% endif %}
+                <span class="service-role">{% include term.html v=s.role_label %}</span>
             </div>
             <div class="service-name">{{ s.name }}</div>
-            {% if s.area and s.area != "" %}<div class="service-area">{{ s.area }}</div>{% endif %}
+            {% if s.area and s.area != "" %}<div class="service-area">{% include term.html v=s.area %}</div>{% endif %}
         </div>
         {% endfor %}
     </div>
@@ -218,16 +219,16 @@ body {
 
     {% if subreviewers.size > 0 %}
     <div class="service-group">
-        <div class="service-group-label">Sub-reviewer and external reviewer <span class="service-count">{{ subreviewers.size }}</span></div>
+        <div class="service-group-label"><span class="t-en">Sub-reviewer and external reviewer</span><span class="t-vi">Phản biện phụ và phản biện ngoài</span> <span class="service-count">{{ subreviewers.size }}</span></div>
         {% for s in subreviewers %}
         <div class="service">
             <div class="service-head">
                 <span class="service-venue">{{ s.venue }}</span>
-                {% if s.track and s.track != "" %}<span class="service-track">{{ s.track }}</span>{% endif %}
-                <span class="service-role">{{ s.role_label }}</span>
+                {% if s.track and s.track != "" %}<span class="service-track">{% include term.html v=s.track %}</span>{% endif %}
+                <span class="service-role">{% include term.html v=s.role_label %}</span>
             </div>
             <div class="service-name">{{ s.name }}</div>
-            {% if s.area and s.area != "" %}<div class="service-area">{{ s.area }}</div>{% endif %}
+            {% if s.area and s.area != "" %}<div class="service-area">{% include term.html v=s.area %}</div>{% endif %}
         </div>
         {% endfor %}
     </div>

@@ -1,0 +1,3 @@
+{%- comment -%}Bilingual text for a value from a data file; Vietnamese comes from _data/i18n.yml, falling back to the English value.{%- endcomment -%}
+{%- assign v = include.v -%}
+<span class="t-en">{{ v }}</span><span class="t-vi">{% if site.data.i18n.terms[v] %}{{ site.data.i18n.terms[v] }}{% else %}{{ v }}{% endif %}</span>

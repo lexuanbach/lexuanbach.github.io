@@ -52,6 +52,27 @@
     {% else %}
         <meta name="twitter:image" content="{{ site.profile_picture }}">
     {% endif %}
+    <script>
+        // Language: English by default; the choice is remembered (or forced with ?lang=vi).
+        (function () {
+            var lang = 'en';
+            try {
+                var q = /[?&]lang=(en|vi)(&|$)/.exec(location.search);
+                if (q) { lang = q[1]; localStorage.setItem('lang', lang); }
+                else {
+                    var saved = localStorage.getItem('lang');
+                    if (saved === 'vi' || saved === 'en') { lang = saved; }
+                }
+            } catch (e) {}
+            document.documentElement.setAttribute('data-lang', lang);
+            document.documentElement.lang = lang;
+        })();
+        function setLang(lang) {
+            document.documentElement.setAttribute('data-lang', lang);
+            document.documentElement.lang = lang;
+            try { localStorage.setItem('lang', lang); } catch (e) {}
+        }
+    </script>
 </head>
 <body>
     <div class="wrapper">
@@ -63,15 +84,18 @@
             <ul id="navlist" class="alignable pull-right navbar-ul">
                 {% for x in site.nav %}
                     {% if x.name == "Resume" %}
-                        <li class="alignable pull-left nav-list"><a target="_blank" href="{{ x.link }}">{{ x.name }}</a>
+                        <li class="alignable pull-left nav-list"><a target="_blank" href="{{ x.link }}">{% include t.html en=x.name vi=x.name_vi %}</a>
                     {% else %}
-                        <li class="alignable pull-left nav-list"><a href="{{ x.link }}">{{ x.name }}</a>
+                        <li class="alignable pull-left nav-list"><a href="{{ x.link }}">{% include t.html en=x.name vi=x.name_vi %}</a>
                     {% endif %}
                     {% if forloop.last == false %}
                         /
                     {% endif %}
                         </li>
                 {% endfor %}
+                <li class="alignable pull-left nav-list lang-switch">
+                    <button type="button" class="lang-btn" data-lang="en" onclick="setLang('en')" aria-label="English">EN</button><span class="lang-sep">|</span><button type="button" class="lang-btn" data-lang="vi" onclick="setLang('vi')" aria-label="Tiếng Việt">VI</button>
+                </li>
             </ul>
         </div>
         <div style="clear:both"></div>
@@ -85,7 +109,7 @@
                 {% if site.footer == true %}
                     <hr />
                     <p style="text-align: center; margin-bottom: 10px">
-                    <a href="{{ site.footer_url }}" style="color: black"><small>{{ site.footer_text }}</small></a>
+                    <a href="{{ site.footer_url }}" style="color: black"><small>{% include t.html en=site.footer_text vi=site.footer_text_vi %}</small></a>
                     </p>
                 {% endif %}
             </div>

@@ -232,9 +232,11 @@ body {
 </style>
 
 <div class="students-intro">
-    <h1>Students</h1>
-    <p>I head the <a href="https://raise-website.vercel.app/" target="_blank">RAISE lab</a> — Reasoning in Artificial Intelligence and Software Engineering — and supervise master's and undergraduate students at the Faculty of Computer Science and Engineering, Ho Chi Minh City University of Technology (HCMUT), VNU-HCM. Their work spans LLM agents and program analysis, retrieval-augmented generation, computer vision, and optimization — see the <a href="{{ site.baseurl }}">publication list</a> for the full record. I also work closely with research collaborators, listed at the foot of this page.</p>
-    <p><strong>I am looking for motivated students to do good research</strong> on LLMs for software engineering, formal reasoning and verification, secure and trustworthy AI systems, and multilingual and responsible AI. If you want to work on hard problems carefully and see the result through to publication, please <a href="contact">get in touch</a>.</p>
+    <h1><span class="t-en">Students</span><span class="t-vi">Sinh viên</span></h1>
+    <p class="t-en">I head the <a href="https://raise-website.vercel.app/" target="_blank">RAISE lab</a> — Reasoning in Artificial Intelligence and Software Engineering — and supervise master's and undergraduate students at the Faculty of Computer Science and Engineering, Ho Chi Minh City University of Technology (HCMUT), VNU-HCM. Their work spans LLM agents and program analysis, retrieval-augmented generation, computer vision, and optimization — see the <a href="{{ site.baseurl }}">publication list</a> for the full record. I also work closely with research collaborators, listed at the foot of this page.</p>
+    <p class="t-en"><strong>I am looking for motivated students to do good research</strong> on LLMs for software engineering, formal reasoning and verification, secure and trustworthy AI systems, and multilingual and responsible AI. If you want to work on hard problems carefully and see the result through to publication, please <a href="contact">get in touch</a>.</p>
+    <p class="t-vi">Tôi phụ trách <a href="https://raise-website.vercel.app/" target="_blank">phòng thí nghiệm RAISE</a> &mdash; Reasoning in Artificial Intelligence and Software Engineering &mdash; và hướng dẫn học viên cao học và sinh viên đại học tại Khoa Khoa học và Kỹ thuật Máy tính, Trường Đại học Bách khoa (HCMUT), ĐHQG-HCM. Công việc của các bạn trải rộng từ tác tử LLM và phân tích chương trình, sinh có truy hồi (RAG), thị giác máy tính, đến tối ưu hóa &mdash; xem <a href="{{ site.baseurl }}">danh sách công bố</a> để biết đầy đủ. Tôi cũng làm việc chặt chẽ với các cộng tác viên nghiên cứu, được liệt kê ở cuối trang.</p>
+    <p class="t-vi"><strong>Tôi đang tìm những sinh viên có động lực để làm nghiên cứu tốt</strong> về LLM cho kỹ thuật phần mềm, suy luận hình thức và kiểm chứng, hệ thống AI an toàn và đáng tin cậy, và AI đa ngôn ngữ có trách nhiệm. Nếu bạn muốn giải quyết những bài toán khó một cách cẩn thận và theo đuổi đến khi công bố kết quả, xin hãy <a href="contact">liên hệ với tôi</a>.</p>
 </div>
 
 {% assign masters = site.data.students | where: "level", "master" %}
@@ -242,12 +244,12 @@ body {
 {% assign collaborators = site.data.students | where: "level", "collaborator" %}
 
 <div class="student-section">
-    <h2>Master's Students</h2>
+    <h2><span class="t-en">Master's Students</span><span class="t-vi">Học viên cao học</span></h2>
 
     {% assign group = masters | where: "status", "current" %}
     {% if group.size > 0 %}
     <div class="student-group">
-        <div class="student-group-label">Current <span class="student-count">{{ group.size }}</span></div>
+        <div class="student-group-label"><span class="t-en">Current</span><span class="t-vi">Hiện tại</span> <span class="student-count">{{ group.size }}</span></div>
         {% for st in group %}{% include student-card.html student=st %}{% endfor %}
     </div>
     {% endif %}
@@ -255,19 +257,19 @@ body {
     {% assign group = masters | where: "status", "former" %}
     {% if group.size > 0 %}
     <div class="student-group">
-        <div class="student-group-label">Former <span class="student-count">{{ group.size }}</span></div>
+        <div class="student-group-label"><span class="t-en">Former</span><span class="t-vi">Cựu sinh viên</span> <span class="student-count">{{ group.size }}</span></div>
         {% for st in group %}{% include student-card.html student=st %}{% endfor %}
     </div>
     {% endif %}
 </div>
 
 <div class="student-section">
-    <h2>Undergraduate Students</h2>
+    <h2><span class="t-en">Undergraduate Students</span><span class="t-vi">Sinh viên đại học</span></h2>
 
     {% assign group = undergrads | where: "status", "current" %}
     {% if group.size > 0 %}
     <div class="student-group">
-        <div class="student-group-label">Current <span class="student-count">{{ group.size }}</span></div>
+        <div class="student-group-label"><span class="t-en">Current</span><span class="t-vi">Hiện tại</span> <span class="student-count">{{ group.size }}</span></div>
         {% for st in group %}{% include student-card.html student=st %}{% endfor %}
     </div>
     {% endif %}
@@ -275,18 +277,18 @@ body {
     {% assign group = undergrads | where: "status", "former" %}
     {% if group.size > 0 %}
     <div class="student-group">
-        <div class="student-group-label">Former <span class="student-count">{{ group.size }}</span></div>
+        <div class="student-group-label"><span class="t-en">Former</span><span class="t-vi">Cựu sinh viên</span> <span class="student-count">{{ group.size }}</span></div>
         {% for st in group %}{% include student-card.html student=st %}{% endfor %}
     </div>
     {% endif %}
 </div>
 
 <div class="student-section">
-    <h2>Collaborators</h2>
+    <h2><span class="t-en">Collaborators</span><span class="t-vi">Cộng tác viên</span></h2>
 
     {% if collaborators.size > 0 %}
     <div class="student-group">
-        <div class="student-group-label">Research collaborators <span class="student-count">{{ collaborators.size }}</span></div>
+        <div class="student-group-label"><span class="t-en">Research collaborators</span><span class="t-vi">Cộng tác viên nghiên cứu</span> <span class="student-count">{{ collaborators.size }}</span></div>
         {% for st in collaborators %}{% include student-card.html student=st %}{% endfor %}
     </div>
     {% endif %}
