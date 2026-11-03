@@ -302,6 +302,44 @@ h2 {
     transform: translateY(-1px);
 }
 
+/* Invited Talks */
+.talk {
+    margin-bottom: 22px;
+    padding-left: 36px;
+    position: relative;
+}
+
+.talk::before {
+    content: "\25B8";
+    position: absolute;
+    left: 8px;
+    top: 0;
+    color: var(--accent);
+}
+
+.talk-title {
+    font-weight: 600;
+    color: var(--primary);
+    font-style: italic;
+    margin-bottom: 4px;
+}
+
+.talk-venue {
+    color: var(--text-light);
+    font-size: 0.95em;
+    margin-bottom: 8px;
+}
+
+.talk-venue strong {
+    color: var(--text);
+}
+
+.talk-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
 /* Abstract & BibTeX Toggle */
 .abstract-toggle,
 .bibtex-toggle,
@@ -841,6 +879,22 @@ function copyBibtex(id) {
     <p>If that sounds like you, please <a href="contact">get in touch</a>. You can see what my <a href="students">current and former students</a> work on.</p>
 </div>
 
+
+<h2 id="talks">Invited Talks</h2>
+
+{% for talk in site.data.talks %}
+<div class="talk">
+    <div class="talk-title">{{ talk.title }}</div>
+    <div class="talk-venue">
+        <strong>{{ talk.venue.name }}</strong>, {{ talk.venue.full_name }}, {{ talk.venue.location }} ({{ talk.venue.date }}){% if talk.note %} &middot; {{ talk.note }}{% endif %}
+    </div>
+    <div class="talk-links">
+        {% for link in talk.links %}
+        <a href="{{ link.url }}" class="pub-link" target="_blank">{{ link.icon }} {{ link.type | capitalize }}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
 
 <h2 id="publications">Publications</h2>
 

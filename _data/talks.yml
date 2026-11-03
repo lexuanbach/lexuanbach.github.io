@@ -1,0 +1,34 @@
+# Invited talks rendered by index.md
+#
+# Fields:
+#   title      Talk title (required)
+#   event      Event or conference name
+#   venue      Host institution / conference name with link target in `url`
+#   location   City, country
+#   date       Display date
+#   note       Optional extra line (session, language, ...)
+#   links      List of {type, url, icon}
+
+- title: "Software Engineering in the Era of LLMs: From Formal Verification to Auditable Agents"
+  venue:
+    name: "ICEBA 2026 (Invited Talk)"
+    full_name: "The 7th International Conference on Engineering, Physics, MEMS-Biosensors and Applications"
+    location: "Vung Tau, Vietnam"
+    date: "2–4 November 2026"
+  note: "Session OS.6A"
+  links:
+    - type: "slides"
+      url: "/slides/ICEBA2026_invited_talk.pdf"
+      icon: "📊"
+
+- title: "Vượt qua các LLM tổng quát: Xây dựng hệ thống AI đáng tin cậy, chuyên biệt cho lĩnh vực Tài chính và Pháp lý tại Việt Nam (Beyond General-Purpose LLMs: Building Trustworthy, Domain-Specific AI for Finance and Law in Vietnam)"
+  venue:
+    name: "Van Lang University, School of Technology"
+    full_name: "Scientific Workshop: Applications of Artificial Intelligence in Finance and Law"
+    location: "Ho Chi Minh City, Vietnam"
+    date: "26 May 2026"
+  note: "In Vietnamese"
+  links:
+    - type: "slides"
+      url: "/slides/VLU2026_invited_talk.pdf"
+      icon: "📊"
