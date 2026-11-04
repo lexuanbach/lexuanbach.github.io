@@ -1,3 +1,128 @@
+- id: "44"
+  pillar: "applied"
+  status: "To appear"
+  number: "[44]"
+  authors: "With Phat T. Tran-Truong, Son Ha Xuan & Nghia Duong-Trung"
+  title: "Stability Across Environments, Not Resamples: Noise-Corrected Symbolic Pattern Mining"
+  venue:
+    name: "WSDM 2027 (Main Conference; acceptance rate: 15.8%)"
+    url: "https://wsdm-conference.org/2027/"
+    location: "Hong Kong"
+    date: "February 2027"
+  tags:
+    - text: "Pattern Mining"
+      class: "ai"
+    - text: "Distribution Shift"
+      class: "theory"
+    - text: "Statistical Stability"
+      class: "theory"
+  links: []
+  abstract: >-
+    Pattern mining returns human-readable rules that analysts act on outside the sample that produced them, yet real data pool heterogeneous environments — sites, months, cohorts — so a rule that wins on pooled association may encode an environment-specific shortcut; every symbolic miner that penalizes a dispersion measures it within one sample, across resamples that are exchangeable by construction, and so cannot see shift. We propose SCPM, which estimates each candidate conjunction's risk-difference contrast separately inside every environment and ranks by mean contrast minus a cross-environment dispersion penalty — corrected, because the observed spread of those estimates is largely their own sampling error, so we penalize instead the random-effects heterogeneity that survives the noise floor. Branch-and-bound returns the exact top-K ranking under an admissible bound derived for that corrected score. We evaluate on eleven public datasets (66 leave-one-environment folds) spanning clinical, e-commerce, recommendation and geographic sources, comparing twelve ranking rules over one shared candidate pool under an explicit environment-leakage protocol. All seven environment-aware criteria rank ahead of all five within-sample criteria without overlap; SCPM lowers held-out-inclusive contrast dispersion against pooled ranking on all eleven datasets and 65 of 66 folds (p=0.001), and lowers transfer error at the unseen environment on 9 of 11 (p=0.019). Removing the noise floor leaves the score far less sensitive to its weight, retaining 78% of its mean contrast at a sixfold overshoot against 57% uncorrected, and its selections are insensitive to the heterogeneity estimator. SCPM makes cross-environment stability a practical screen wherever readable rules must travel.
+  bibtex: |
+    @inproceedings{trantruong2027stability,
+      author    = {Tran-Truong, Phat T. and Ha Xuan, Son and Le, Xuan-Bach and Duong-Trung, Nghia},
+      title     = {Stability Across Environments, Not Resamples: Noise-Corrected Symbolic Pattern Mining},
+      booktitle = {Proceedings of the Twentieth ACM International Conference on Web Search and Data Mining (WSDM 2027)},
+      year      = {2027},
+      address   = {Hong Kong},
+      note      = {To appear}
+    }
+
+- id: "43"
+  pillar: "agents"
+  status: "To appear"
+  number: "[43]"
+  authors: "With Phat T. Tran-Truong, Son Ha Xuan & Duy Nguyen"
+  title: "A Selection-Aware Audit of Learned Stopping in Short-Horizon Iterative Retrieval"
+  venue:
+    name: "WSDM 2027 (Main Conference; acceptance rate: 15.8%)"
+    url: "https://wsdm-conference.org/2027/"
+    location: "Hong Kong"
+    date: "February 2027"
+  tags:
+    - text: "Iterative Retrieval"
+      class: "rag"
+    - text: "Learned Stopping"
+      class: "ai"
+    - text: "Selection-Aware Evaluation"
+      class: "theory"
+  links: []
+  abstract: >-
+    Iterative-retrieval agents must decide whether another search justifies its cost. A comparison with full search alone cannot establish useful adaptation because accuracy may saturate at a smaller fixed budget. We therefore ask whether a learned rule improves the accuracy-cost frontier formed by development-selected fixed budgets and answer repetition. Our selection-aware audit studies four logit-free signals in four-search question-answering trajectories. Future-best gain (FBG) predicts the largest later improvement on one realized continuation. We compare it with binary future improvement, current-answer error, and evidence coverage. We cross-fit each score by trajectory, freeze selection on development questions, and evaluate untouched questions at matched calls, tokens, and wall time.<br><br>
+    Across 26 core cells, we find that a simple policy Pareto-dominates guarded FBG in 15, while the guard improves the selected fixed budget in five. Neither FBG rule has a positive cellwise equal-call interval in the 18-cell matched-cost family. No learned policy with an available simultaneous analysis retains a positive max-t interval. Our hindsight oracle still improves full search in all fourteen fully instrumented cells by 4.84 exact-match points on average, localizing the gap to signal identification rather than stopping opportunity. Our current-error head orders stopped-answer risk better than random in all 18 cells, compared with 7 for FBG, yet independent question draws still change the endpoint decision. Under answer-once accounting, fixed budgets become stronger because answer-dependent rules retain prefix-generation costs. We contribute a frontier-based protocol, a cross-signal diagnosis of the gap between prediction and policy utility, and an anonymous audit artifact. In this regime, we reserve deployment claims for learned controllers that improve tuned deterministic controls at matched cost on an independent population under simultaneous inference.
+  bibtex: |
+    @inproceedings{le2027stopping,
+      author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Ha Xuan, Son and Nguyen, Duy},
+      title     = {A Selection-Aware Audit of Learned Stopping in Short-Horizon Iterative Retrieval},
+      booktitle = {Proceedings of the Twentieth ACM International Conference on Web Search and Data Mining (WSDM 2027)},
+      year      = {2027},
+      address   = {Hong Kong},
+      note      = {To appear}
+    }
+
+- id: "42"
+  pillar: "agents"
+  status: "To appear"
+  number: "[42]"
+  authors: "With Phat T. Tran-Truong, Son Ha Xuan & Duy Nguyen"
+  title: "EvidenceGraph: Measuring and Controlling Repeated Evidence in Retrieval-Augmented Verification"
+  venue:
+    name: "WSDM 2027 (Main Conference; acceptance rate: 15.8%)"
+    url: "https://wsdm-conference.org/2027/"
+    location: "Hong Kong"
+    date: "February 2027"
+  tags:
+    - text: "Retrieval-Augmented Verification"
+      class: "rag"
+    - text: "Evidence Provenance"
+      class: "ai"
+    - text: "Calibration"
+      class: "theory"
+  links: []
+  abstract: >-
+    Retrieval-augmented verifiers can mistake repeated publication for independent corroboration. We introduce EvidenceGraph, a stagewise framework that measures source lineage, controls repeated evidence, and separates retrieval, aggregation, and calibration decisions. A controlled 40-cluster intervention provides both a diagnosis and a defense. Copying one unsupported source in a fixed 20-slot context raises mean false-claim confidence by 0.339 and 0.327 on two frozen answer backbones. Collapsing passages by recorded origin holds the change below 0.001 and prevents additional false acceptances. A completed two-rater lineage audit reports kappa 0.951 on pair labels and adjusted Rand 0.983 on partitions. Our frozen estimator reaches pair F1 0.967 and cluster ARI 1.000 on constructed evidence, obtains pair F1 0.804 on the audited AVeriTeC subset, and is the strongest tested natural pair classifier overall. EvidenceGraph active selection improves accuracy by 5.7 points and reduces false acceptance by 20.9 points when redundant decoys hide useful evidence. A component study further identifies a diagonal-ridge aggregator with 93.5 percent accuracy and an argmax-preserving calibrator that reduces expected calibration error by 0.058, 0.341, and 0.096 across three natural benchmarks without changing a verdict. These gains also define the operating boundary. Across all natural pools, lineage quality falls to pair F1 0.568 and cluster ARI 0.401, while independence alone does not outperform passive ranking for gold-evidence recall. Our results establish provenance as a measurable control signal and show how to deploy it conservatively. Systems can expose common-origin structure, use redundancy controls in validated regimes, and preserve the verifier's decision boundary when transfer evidence is limited.
+  bibtex: |
+    @inproceedings{le2027evidencegraph,
+      author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Ha Xuan, Son and Nguyen, Duy},
+      title     = {{EvidenceGraph}: Measuring and Controlling Repeated Evidence in Retrieval-Augmented Verification},
+      booktitle = {Proceedings of the Twentieth ACM International Conference on Web Search and Data Mining (WSDM 2027)},
+      year      = {2027},
+      address   = {Hong Kong},
+      note      = {To appear}
+    }
+
+- id: "41"
+  pillar: "applied"
+  status: "To appear"
+  number: "[41]"
+  authors: "With Phat T. Tran-Truong, Son Ha Xuan & Duy Nguyen"
+  title: "When Do Propagation Models Beat Cascade Summaries? A Released-Signal Audit of Text-Free Misinformation Detection"
+  venue:
+    name: "WSDM 2027 (Findings; acceptance rate: 12.6%)"
+    url: "https://wsdm-conference.org/2027/"
+    location: "Hong Kong"
+    date: "February 2027"
+  tags:
+    - text: "Misinformation Detection"
+      class: "ai"
+    - text: "Graph Neural Networks"
+      class: "ai"
+    - text: "Benchmark Auditing"
+      class: "theory"
+  links: []
+  abstract: >-
+    Text-free misinformation detection often turns to propagation when article or post text is unavailable. Yet public benchmarks preserve incompatible views of propagation, and graph models are rarely tested against strong summaries of the same released information. We audit summary, tabular, and graph families across nine corpora. Four event-list releases provide timestamps and event identifiers but neither retweet edges nor stable cross-cascade identities. On these releases, no evaluated graph neural network has a multiplicity-controlled accuracy advantage over a two-layer multilayer perceptron (MLP) using seven cascade summaries. Our full diagnostic configuration also has no resolved paired advantage over this MLP. Five releases provide retweet trees. We select families on validation data for the two UPFD corpora and retain exploratory test selection for the other three. On UPFD-GossipCop, validation selection picks BiGCN-style and HistGBT, with a paired accuracy difference of 0.013 (95% CI [0.005, 0.020]). Although the interval excludes zero, the difference lies inside our 0.03 equivalence margin. Input controls further localize this gain to released profile attributes rather than attachment patterns. Across generalization tests, future-test macro-F1 falls by 0.18 to 0.27 on PolitiFact and by 0.014 to 0.083 on GossipCop, while cross-corpus transfer is weak. The audit shows how released signals can govern apparent architecture gains. We therefore propose a same-information audit protocol with validation-based selection, paired inference, multiplicity and equivalence reporting, and temporal and cross-corpus evaluation.
+  bibtex: |
+    @inproceedings{le2027propagation,
+      author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Ha Xuan, Son and Nguyen, Duy},
+      title     = {When Do Propagation Models Beat Cascade Summaries? A Released-Signal Audit of Text-Free Misinformation Detection},
+      booktitle = {Findings of the ACM International Conference on Web Search and Data Mining (WSDM 2027)},
+      year      = {2027},
+      address   = {Hong Kong},
+      note      = {To appear}
+    }
+
 - id: "40"
   pillar: "applied"
   status: "To appear"
