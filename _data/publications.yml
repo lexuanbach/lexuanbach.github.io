@@ -1,3 +1,34 @@
+- id: "45"
+  pillar: "agents"
+  status: "To appear"
+  number: "[45]"
+  authors: "With Phat T. Tran-Truong, Minh-Hieu Le, Duy Nguyen & Son Ha Xuan"
+  title: "TRAVA: A Temporal RAG Validity Audit of Knowledge Cutoffs and Evidence Support"
+  venue:
+    name: "EACL 2027 (Findings, CORE Rank A)"
+    url: "https://2027.eacl.org/"
+    location: "Athens, Greece"
+    date: "March 2027"
+  tags:
+    - text: "Temporal RAG"
+      class: "rag"
+    - text: "Knowledge Cutoffs"
+      class: "nlp"
+    - text: "Evaluation Validity"
+      class: "theory"
+  links: []
+  abstract: >-
+    Aggregate retrieval-augmented generation (RAG) scores merge answers available from pretraining with answers enabled by retrieved evidence, although these sources lead to different deployment decisions. We introduce TRAVA, a three-layer validity audit over 878 time-stamped questions. The audit separates question time, which tests the evaluation boundary, evidence time, which tests passage availability, and evidence content, which tests answer support. Each layer changes the interpretation of the aggregate score. A curve-selected boundary yields a 4.9 F1 gap for Qwen2.5-32B, while a conservative year pair reduces it to 0.2. Our pooled index serves 11.7% of contexts after their question date. A paired per-query mask changes 38.0% of ordered top-5 context sets while shifting quiz-weighted token-F1 by at most 1.9 points, with 18 of 20 intervals including zero. Retrieval gains vary most consistently with answer support. This interaction persists under temporal masking and human passage labels, making support the most stable conditioning variable we measure, in a corpus where 47.7% of questions have no answer-bearing evidence at all.
+  bibtex: |
+    @inproceedings{le2027trava,
+      author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Le, Minh Hieu and Nguyen, Duy and Ha Xuan, Son},
+      title     = {TRAVA: A Temporal RAG Validity Audit of Knowledge Cutoffs and Evidence Support},
+      booktitle = {Findings of the Association for Computational Linguistics: EACL 2027},
+      year      = {2027},
+      address   = {Athens, Greece},
+      note      = {To appear}
+    }
+
 - id: "44"
   pillar: "applied"
   status: "To appear"
