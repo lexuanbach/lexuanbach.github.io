@@ -956,7 +956,7 @@ function copyBibtex(id) {
         <a href="{{ link.url }}" class="pub-link" target="_blank">{{ link.icon }} {% include term.html v=lt %}</a>
         {% endfor %}
         <span class="abstract-toggle" id="toggle-{{ pub.id }}" onclick="toggleAbstract('{{ pub.id }}')">
-            📖 <span class="t-en">Abstract</span><span class="t-vi">Tóm tắt</span> <span class="arrow">▼</span>
+            📖 <span class="t-en">{{ pub.abstract_label | default: "Abstract" }}</span><span class="t-vi">{{ pub.abstract_label_vi | default: "Tóm tắt" }}</span> <span class="arrow">▼</span>
         </span>
         <span class="bibtex-toggle" id="bibtex-toggle-{{ pub.id }}" onclick="toggleBibtex('{{ pub.id }}')">
             📋 BibTeX <span class="arrow">▼</span>
@@ -978,7 +978,7 @@ function copyBibtex(id) {
     {% endif %}
     <div class="abstract-content" id="abstract-{{ pub.id }}">
         <div class="abstract-text">
-            <strong><span class="t-en">Abstract:</span><span class="t-vi">Tóm tắt (bản gốc tiếng Anh):</span></strong><br><br>
+            <strong><span class="t-en">{{ pub.abstract_label | default: "Abstract" }}:</span><span class="t-vi">{{ pub.abstract_label_vi | default: "Tóm tắt (bản gốc tiếng Anh)" }}:</span></strong><br><br>
             {{ pub.abstract }}
         </div>
     </div>

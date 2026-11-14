@@ -1,3 +1,77 @@
+# Rankings: ICORE2026, https://portal.core.edu.au/conf-ranks/61/ (AsiaCCS)
+# and https://portal.core.edu.au/conf-ranks/?search=KDD&by=all&source=all (KDD).
+# Acceptance figures: PC decision notices dated 13 November 2026.
+# KDD's notice reports approximately 17.8% for 1,588 valid Cycle 1 submissions;
+# this differs from the public FAQ's 19%, so the displayed figure is attributed.
+- id: "47"
+  pillar: "agents"
+  status: "To appear"
+  number: "[47]"
+  authors: "With Phat T. Tran-Truong, Son Ha Xuan & Nguyen Le Anh Duy"
+  title: "Injected Gold: How Oracle Pool Construction Inflates Citation Reranking Results"
+  venue:
+    name: "KDD 2027 (Research Track, Cycle 1; CORE/ICORE 2026 Rank A*; acceptance rate: ~17.8%, per decision notice)"
+    url: "https://kdd2027.kdd.org/"
+    location: "San Jose, California, USA"
+    date: "1–5 August 2027"
+  tags:
+    - text: "Citation Reranking"
+      class: "rag"
+    - text: "Benchmark Auditing"
+      class: "theory"
+    - text: "Evaluation Validity"
+      class: "theory"
+  links: []
+  abstract: >-
+    Citation rerankers are routinely evaluated on small candidate pools built by retrieving each query's nearest neighbours and then <em>inserting</em> the papers it cites, so that first-stage recall is one and the score measures reranking alone. We show that this construction leaves the inserted items identifiable. A cited paper is usually not among a query's nearest neighbours, so once it is spliced into that neighbourhood it sits <em>further</em> from the query than the distractors around it. Ranking each pool by <em>ascending</em> similarity in the space that built it, a rule with no parameters and no training data, reaches 0.842 MAP against 0.713 for the trained ranker we evaluate, while <em>descending</em> similarity reaches 0.063 against a measured chance line of 0.089. The rule wins on all 9 pool populations we measure (+0.129 to +0.194 MAP), in 6 candidate geometries and on two citation corpora, and its size obeys a closed form we test: the share of queries it solves exactly equals the share whose first stage retrieved no cited paper at all, to within 0.005. A decoy control settles the cause with no model involved, because a random admissible paper spliced through the identical code path is recovered at rank 1 in every one of 5705 trials. We release a standalone diagnostic that returns this verdict from a pool file, and a rank-calibrated construction on which no parameter-free rule exceeds 0.191. Re-running the study there changes what the benchmark reports. Effect sizes shrink by factors of 3.1 to 10.3 across the 3 quantities we track, and the trained ranker's lead over an off-the-shelf frozen encoder reverses, from +0.297 in its favour to +0.162 against it.
+  bibtex: |
+    @inproceedings{le2027injectedgold,
+      author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Ha Xuan, Son and Nguyen, Le Anh Duy},
+      title     = {Injected Gold: How Oracle Pool Construction Inflates Citation Reranking Results},
+      booktitle = {Proceedings of the ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD 2027)},
+      year      = {2027},
+      volume    = {1},
+      address   = {San Jose, CA, USA},
+      note      = {To appear}
+    }
+
+# AsiaCCS Cycle 1: (39 direct + 30 conditional acceptances) / 514 = 13.4%.
+# The 32 major-revision decisions are excluded. Direct acceptance alone: 7.6%.
+# The original abstract has not yet been located; this is explicitly a summary.
+- id: "46"
+  pillar: "verified"
+  status: "To appear"
+  number: "[46]"
+  authors: "With Phat T. Tran-Truong, Thanh Chi Vi & Son Ha"
+  title: "Removal Without Revocation: Bounding What a Model-Hub Takedown Cannot Reach"
+  venue:
+    name: "AsiaCCS 2027 (Cycle 1; CORE/ICORE 2026 Rank A; acceptance rate: 13.4%, 69/514 including conditional acceptances)"
+    url: "https://asiaccs2027.cityu.edu.mo/home/index.html"
+    location: "Macau, China"
+    date: "12–16 July 2027"
+  tags:
+    - text: "Model Supply-Chain Security"
+      class: "ai"
+    - text: "Model Provenance"
+      class: "theory"
+    - text: "Revocation"
+      class: "verification"
+  links: []
+  abstract_label: "Research summary"
+  abstract_label_vi: "Tóm lược nghiên cứu"
+  abstract: >-
+    Removing a model repository from a hub does not automatically remove its fine-tunes, quantizations, adapters, or other derivatives. This work studies that gap using a census of 200,000 Hugging Face models, probes of declared parent models, and archival checks. It distinguishes public unavailability from confirmed removal and examines how incomplete declared lineage limits the reach of a takedown. The paper introduces RevoKe, a mechanism that publishes signed revocation statements in an append-only log and checks model ancestry at load time against a signed lineage graph. Its coverage depends on available lineage and model digests: undeclared derivatives with changed bytes remain outside its current enforcement reach, while newly recovered lineage can extend the reach of existing statements.<br><br><em>Research summary; the full abstract will be added when available.</em>
+  bibtex: |
+    @inproceedings{trantruong2027removal,
+      author    = {Tran-Truong, Phat T. and Le, Xuan-Bach and Vi, Thanh Chi and Ha, Son},
+      title     = {Removal Without Revocation: Bounding What a Model-Hub Takedown Cannot Reach},
+      booktitle = {Proceedings of the 22nd ACM Asia Conference on Computer and Communications Security (AsiaCCS 2027)},
+      year      = {2027},
+      address   = {Macau, China},
+      note      = {To appear}
+    }
+
+
 - id: "45"
   pillar: "agents"
   status: "To appear"
