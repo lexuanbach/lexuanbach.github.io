@@ -90,12 +90,24 @@
       class: "nlp"
     - text: "Evaluation Validity"
       class: "theory"
-  links: []
+  links:
+    - type: "paper"
+      url: "/publication/EACL2027.pdf"
+      icon: "📄"
+    - type: "code"
+      url: "https://github.com/lexuanbach/TRAVA"
+      icon: "💻"
+    - type: "poster"
+      url: "/slides/EACL2027_poster.pdf"
+      icon: "📊"
+    - type: "slides"
+      url: "/slides/EACL2027_slides.pdf"
+      icon: "📊"
   abstract: >-
-    Aggregate retrieval-augmented generation (RAG) scores merge answers available from pretraining with answers enabled by retrieved evidence, although these sources lead to different deployment decisions. We introduce TRAVA, a three-layer validity audit over 878 time-stamped questions. The audit separates question time, which tests the evaluation boundary, evidence time, which tests passage availability, and evidence content, which tests answer support. Each layer changes the interpretation of the aggregate score. A curve-selected boundary yields a 4.9 F1 gap for Qwen2.5-32B, while a conservative year pair reduces it to 0.2. Our pooled index serves 11.7% of contexts after their question date. A paired per-query mask changes 38.0% of ordered top-5 context sets while shifting quiz-weighted token-F1 by at most 1.9 points, with 18 of 20 intervals including zero. Retrieval gains vary most consistently with answer support. This interaction persists under temporal masking and human passage labels, making support the most stable conditioning variable we measure, in a corpus where 47.7% of questions have no answer-bearing evidence at all.
+    A correct answer from a retrieval-augmented generation (RAG) system does not show how much retrieval helped. The model may answer without retrieval, or its evidence may have been published too late. This makes retrievers and index updates difficult to compare. We introduce <strong>TRAVA</strong>, which jointly checks question dates, evidence publication dates, and answer support in the text shown to the model. On 878 dated questions, we test different calendar splits and compare retrieval conditions on the same questions. Performance differences without retrieval depend on the calendar split and remain uncertain. Although 11.7% of retrieved passages fall outside a three-day publication grace window, excluding them changes scores averaged over weekly quizzes by at most 1.9 token-F1 points for the tested models. In contrast, restricting the index to pre-2025 documents costs about 21 F1 on questions from 2025 onward across three generators. Removing each question's linked evidence lowers scores on both sides of the boundary. Automatic labels and legacy human annotations place retrieval gains mainly where the shown text supports the answer. TRAVA connects temporal checks to measured performance effects, while keeping answer support distinct from evidence use.
   bibtex: |
     @inproceedings{le2027trava,
-      author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Le, Minh Hieu and Nguyen, Duy and Ha Xuan, Son},
+      author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Le, Minh-Hieu and Nguyen, Duy and Ha Xuan, Son},
       title     = {TRAVA: A Temporal RAG Validity Audit of Knowledge Cutoffs and Evidence Support},
       booktitle = {Findings of the Association for Computational Linguistics: EACL 2027},
       year      = {2027},
@@ -288,6 +300,7 @@
     - type: "code"
       url: "https://github.com/duydngn89/SegMaFormer"
       icon: "💻"
+
   abstract: "The advent of Transformer- and Mamba-based architectures has significantly advanced 3D medical image segmentation by enabling long-range contextual modeling, a capability traditionally limited in convolutional neural networks (CNNs). However, state-of-the-art Transformer models often incur substantial computational complexity and parameter overhead, which becomes particularly prohibitive for volumetric inputs and is further exacerbated by the limited availability of annotated medical imaging data.<br><br>To address these limitations, this work introduces <strong>SegMaFormer</strong>, a lightweight stage-aware hybrid architecture that integrates Mamba, Gated Hybrid Conv-SSM (GHConv-SSM), and efficient self-attention within a hierarchical volumetric encoder. Specifically, SegMaFormer employs a Mamba block at the first high-resolution stage to capture dense spatial dependencies with reduced overhead, uses GHConv-SSM blocks at intermediate stages to adaptively fuse state-space contextual modeling with local convolutional priors, and reserves self-attention for the final low-resolution stage to refine compact semantic representations. This design is further enhanced with generalized rotary position embeddings to improve spatial awareness in 3D feature learning.<br><br>Despite its compact structure, SegMaFormer achieves competitive performance on three public benchmarks, including BTCV, BraTS, and ACDC, while using substantially fewer parameters and lower computational cost than larger Transformer- and Mamba-based counterparts. These results demonstrate that stage-aware allocation of Mamba, gated Conv-SSM fusion, and attention provides an effective accuracy-efficiency trade-off for 3D medical image segmentation."
   bibtex: |
     @inproceedings{nguyen2027segmaformer,
@@ -455,7 +468,7 @@
   pillar: "quantum"
   status: "To appear"
   number: "[34]"
-  authors: "With Phat T. Tran-Truong, Duy Nguyen, Ngoc Khanh Tran Nguyen & Xuan Son Ha"
+  authors: "With Phat T. Tran-Truong, Duy Nguyen, Ngoc-Khanh-Tran Nguyen & Son Ha Xuan"
   title: "QuantumTrustKG: Provenance-Aware Orchestration for Quantum-Safe Microservices"
   venue:
     name: "ICSOC 2026 (Main Track, CORE Rank A, Acceptance Rate: 64/240, 27%)"
@@ -476,7 +489,7 @@
     - type: "artifact"
       url: "https://github.com/lexuanbach/quantumtrustkg"
       icon: "💻"
-  abstract: "Post-quantum migration requires a service mesh to choose cryptographic profiles as endpoint capabilities, policies, threats, and evidence freshness change. Static mesh settings and policy-as-code enforce a posture once it is chosen, but neither makes that choice for each service edge.<br><br>We present <strong>QuantumTrustKG</strong>, a provenance-aware, graph-backed control-plane framework for edge-specific selection. For each communication edge, its Quantum Trust Protocol Orchestration (<strong>QTPO</strong>) procedure removes profiles that fail a capability, policy, threat, or freshness gate, ranks the rest by cost, and blocks promotion if none is admissible. We mechanize the control-plane guarantees in Coq/Rocq and implement QTPO as a Kubernetes/Istio controller.<br><br>In a controlled comparison on 200-service meshes, QTPO records no unsafe promotions and 96.5% <em>declared-label policy compliance</em>, while service-level and opportunistic baselines promote unsafely on 3.4&ndash;13.7% of edges. On sampled production service topologies of up to 2000 services, the service-level crypto-agility and per-endpoint baselines record 37&ndash;60% and QTPO stays at zero. The compliance metric reads the same declared labels that drive the controller. It therefore evaluates control-plane decisions, with wire-level cryptographic negotiation outside its scope.<br><br><strong>Keywords:</strong> Service orchestration, Microservices, Knowledge graphs, Service mesh, Post-quantum cryptography, Crypto-agility"
+  abstract: "Post-quantum migration requires a service mesh to choose cryptographic profiles as endpoint capabilities, policies, threats, and evidence freshness change. Static mesh settings and policy-as-code enforce a posture once it is chosen, but neither makes that choice for each service edge.<br><br>We present <strong>QuantumTrustKG</strong>, a provenance-aware, graph-backed control-plane framework for edge-specific selection. For each communication edge, its Quantum Trust Protocol Orchestration (<strong>QTPO</strong>) procedure removes profiles that fail a capability, policy, threat, or freshness gate, ranks the rest by cost, and blocks promotion if none is admissible. We mechanize the control-plane guarantees in Coq/Rocq and implement QTPO as a Kubernetes/Istio controller.<br><br>In a controlled comparison on 200-service meshes, QTPO records no unsafe promotions and 96.5% <em>declared-label policy compliance</em>, while service-level and opportunistic baselines promote unsafely on 3.4&ndash;13.7% of edges. On sampled production service topologies of up to 2000 services, the service-level crypto-agility and per-endpoint baselines record 37&ndash;60% and QTPO stays at zero. The compliance metric reads the same declared labels that drive the controller. It therefore scores control-plane decisions and cannot show which cryptography is negotiated on the wire.<br><br><strong>Keywords:</strong> Service orchestration, Microservices, Knowledge graphs, Service mesh, Post-quantum cryptography, Crypto-agility"
   bibtex: |
     @inproceedings{le2026quantumtrustkg,
       author    = {Le, Xuan-Bach and Tran-Truong, Phat T. and Nguyen, Duy and Nguyen, Ngoc Khanh Tran and Ha, Xuan Son},
@@ -493,7 +506,7 @@
   pillar: "agents"
   status: "To appear"
   number: "[33]"
-  authors: "With Phat T. Tran-Truong, Duy Nguyen & Ngoc Khanh Tran Nguyen"
+  authors: "With Phat T. Tran-Truong, Duy Nguyen & Ngoc-Khanh-Tran Nguyen"
   title: "Deon: Runtime Guards for Policy-Safe Agentic Service Composition under Attack"
   venue:
     name: "ICSOC 2026 (Main Track, CORE Rank A, Acceptance Rate: 64/240, 27%)"
@@ -531,7 +544,7 @@
   pillar: "applied"
   status: "To appear"
   number: "[32]"
-  authors: "With Phat T. Tran-Truong, Duy Nguyen & Ngoc Khanh Tran Nguyen"
+  authors: "With Phat T. Tran-Truong, Duy Nguyen & Ngoc-Khanh-Tran Nguyen"
   title: "Lexi: Priority-First Service Orchestration"
   venue:
     name: "ICSOC 2026 (Main Track, CORE Rank A, Acceptance Rate: 64/240, 27%)"
